@@ -27,6 +27,15 @@ npm run convert-data
 
 This rewrites `src/data/fixtures.json` and `src/data/grounds.json` from the spreadsheet.
 
+## Running the tests
+
+The logic in `src/lib/` (distance, stats, address-period checks) has an automated test suite, using a tool called Vitest:
+
+```
+npm test          # runs the suite once
+npm run test:watch  # reruns automatically as files change
+```
+
 ## Project layout
 
 - `src/data/` — generated fixture and ground data (don't hand-edit; edit the spreadsheet and re-run `convert-data`)

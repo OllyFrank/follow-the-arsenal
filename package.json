@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "convert-data": "tsx scripts/convert-data.ts"
+    "convert-data": "tsx scripts/convert-data.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
@@ -26,6 +28,7 @@
     "tsx": "^4.23.15",
     "typescript": "~6.0.2",
     "vite": "^8.3.0",
+    "vitest": "^5.0.2",
     "xlsx": "^0.18.5"
   }
 }
