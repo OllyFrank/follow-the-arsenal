@@ -1,0 +1,1802 @@
+[
+  {
+    "groundId": "G001",
+    "ground": "Aker Stadion",
+    "alsoKnownAs": null,
+    "usedBy": "Molde",
+    "country": "Norway",
+    "latitude": 62.7342,
+    "longitude": 7.1516,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G002",
+    "ground": "Allianz Arena",
+    "alsoKnownAs": "Allianz Stadium",
+    "usedBy": "Bayern Munich",
+    "country": "Germany",
+    "latitude": 48.2188,
+    "longitude": 11.6247,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G003",
+    "ground": "Allianz Stadion",
+    "alsoKnownAs": null,
+    "usedBy": "Rapid Vienna",
+    "country": "Austria",
+    "latitude": 48.1983,
+    "longitude": 16.2665,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G004",
+    "ground": "Amex Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Brighton & Hove Albion",
+    "country": "England",
+    "latitude": 50.8616,
+    "longitude": -0.0837,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G005",
+    "ground": "Amsterdam Arena",
+    "alsoKnownAs": null,
+    "usedBy": "Ajax",
+    "country": "Netherlands",
+    "latitude": 52.3144,
+    "longitude": 4.9415,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G006",
+    "ground": "Anfield",
+    "alsoKnownAs": null,
+    "usedBy": "Liverpool",
+    "country": "England",
+    "latitude": 53.4308,
+    "longitude": -2.9608,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G007",
+    "ground": "Apostolos Nikolaidis",
+    "alsoKnownAs": "Apostolos Nikolaidis Stadium",
+    "usedBy": "Panathinaikos",
+    "country": "Greece",
+    "latitude": 37.9874,
+    "longitude": 23.7536,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G008",
+    "ground": "Aspmyra Stadion",
+    "alsoKnownAs": null,
+    "usedBy": "Bodo/Glimt",
+    "country": "Norway",
+    "latitude": 67.2766,
+    "longitude": 14.3827,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G009",
+    "ground": "Ataturk Olympic Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Besiktas",
+    "country": "Turkey",
+    "latitude": 41.0744,
+    "longitude": 28.7656,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G010",
+    "ground": "Aviva Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Dundalk",
+    "country": "Ireland",
+    "latitude": 53.3352,
+    "longitude": -6.2285,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G011",
+    "ground": "Ayresome Park",
+    "alsoKnownAs": null,
+    "usedBy": "Middlesbrough",
+    "country": "England",
+    "latitude": 54.565,
+    "longitude": -1.25,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G012",
+    "ground": "Baku Olympic Stadium",
+    "alsoKnownAs": "Olympic Stadium, Olympic Stadium (Baku)",
+    "usedBy": "(neutral), FK Qarabag",
+    "country": "Azerbaijan",
+    "latitude": 40.43,
+    "longitude": 49.9197,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G013",
+    "ground": "Balaidos",
+    "alsoKnownAs": null,
+    "usedBy": "Celta Vigo",
+    "country": "Spain",
+    "latitude": 42.2119,
+    "longitude": -8.7398,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G014",
+    "ground": "Baseball Ground",
+    "alsoKnownAs": null,
+    "usedBy": "Derby County",
+    "country": "England",
+    "latitude": 52.9121,
+    "longitude": -1.4687,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G015",
+    "ground": "BayArena",
+    "alsoKnownAs": null,
+    "usedBy": "Bayer Leverkusen",
+    "country": "Germany",
+    "latitude": 51.0383,
+    "longitude": 7.0022,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G016",
+    "ground": "Belle Vue",
+    "alsoKnownAs": null,
+    "usedBy": "Doncaster Rovers",
+    "country": "England",
+    "latitude": 53.5168,
+    "longitude": -1.1107,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G017",
+    "ground": "Bloomfield Road",
+    "alsoKnownAs": null,
+    "usedBy": "Blackpool",
+    "country": "England",
+    "latitude": 53.8047,
+    "longitude": -3.0481,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G018",
+    "ground": "Boleyn Ground",
+    "alsoKnownAs": null,
+    "usedBy": "West Ham United",
+    "country": "England",
+    "latitude": 51.5321,
+    "longitude": 0.0394,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G019",
+    "ground": "Boothferry Park",
+    "alsoKnownAs": null,
+    "usedBy": "Hull City",
+    "country": "England",
+    "latitude": 53.7358,
+    "longitude": -0.3934,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G020",
+    "ground": "Borisov Arena",
+    "alsoKnownAs": null,
+    "usedBy": "BATE Borisov",
+    "country": "Belarus",
+    "latitude": 54.2227,
+    "longitude": 28.508,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G021",
+    "ground": "Boundary Park",
+    "alsoKnownAs": null,
+    "usedBy": "Oldham Athletic",
+    "country": "England",
+    "latitude": 53.5553,
+    "longitude": -2.1285,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G022",
+    "ground": "Bramall Lane",
+    "alsoKnownAs": null,
+    "usedBy": "Sheffield United",
+    "country": "England",
+    "latitude": 53.3703,
+    "longitude": -1.4709,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G023",
+    "ground": "Brisbane Road",
+    "alsoKnownAs": null,
+    "usedBy": "Leyton Orient",
+    "country": "England",
+    "latitude": 51.5602,
+    "longitude": -0.0126,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G024",
+    "ground": "Britannia Stadium",
+    "alsoKnownAs": "Bet365 Stadium",
+    "usedBy": "Stoke City",
+    "country": "England",
+    "latitude": 52.9884,
+    "longitude": -2.1755,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G025",
+    "ground": "Brondby Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Brondby",
+    "country": "Denmark",
+    "latitude": 55.6497,
+    "longitude": 12.4186,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G026",
+    "ground": "Brunton Park",
+    "alsoKnownAs": null,
+    "usedBy": "Carlisle United",
+    "country": "England",
+    "latitude": 54.8955,
+    "longitude": -2.9136,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G027",
+    "ground": "Burnden Park",
+    "alsoKnownAs": null,
+    "usedBy": "Bolton Wanderers",
+    "country": "England",
+    "latitude": 53.5689,
+    "longitude": -2.4208,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G028",
+    "ground": "Camp Nou",
+    "alsoKnownAs": null,
+    "usedBy": "Barcelona",
+    "country": "Spain",
+    "latitude": 41.3809,
+    "longitude": 2.1228,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G029",
+    "ground": "Cardiff City Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Cardiff City",
+    "country": "Wales",
+    "latitude": 51.4728,
+    "longitude": -3.203,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G030",
+    "ground": "Carrow Road",
+    "alsoKnownAs": null,
+    "usedBy": "Norwich City",
+    "country": "England",
+    "latitude": 52.6222,
+    "longitude": 1.3092,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G031",
+    "ground": "Celtic Park",
+    "alsoKnownAs": null,
+    "usedBy": "Celtic",
+    "country": "Scotland",
+    "latitude": 55.8497,
+    "longitude": -4.2055,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G032",
+    "ground": "City Ground",
+    "alsoKnownAs": null,
+    "usedBy": "Nottingham Forest",
+    "country": "England",
+    "latitude": 52.94,
+    "longitude": -1.1328,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G033",
+    "ground": "Constant Vanden Stock",
+    "alsoKnownAs": null,
+    "usedBy": "Anderlecht",
+    "country": "Belgium",
+    "latitude": 50.8343,
+    "longitude": 4.2984,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G034",
+    "ground": "County Ground",
+    "alsoKnownAs": null,
+    "usedBy": "Swindon Town",
+    "country": "England",
+    "latitude": 51.5645,
+    "longitude": -1.7707,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G035",
+    "ground": "Craven Cottage",
+    "alsoKnownAs": null,
+    "usedBy": "Fulham",
+    "country": "England",
+    "latitude": 51.4749,
+    "longitude": -0.2217,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G036",
+    "ground": "Deepdale",
+    "alsoKnownAs": null,
+    "usedBy": "Preston North End",
+    "country": "England",
+    "latitude": 53.7722,
+    "longitude": -2.6883,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G037",
+    "ground": "Donbass Arena",
+    "alsoKnownAs": null,
+    "usedBy": "Shakhtar Donetsk",
+    "country": "Ukraine",
+    "latitude": 48.0208,
+    "longitude": 37.8097,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G038",
+    "ground": "DSB Stadion",
+    "alsoKnownAs": null,
+    "usedBy": "AZ Alkmaar",
+    "country": "Netherlands",
+    "latitude": 52.6126,
+    "longitude": 4.7424,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G039",
+    "ground": "DW Stadium",
+    "alsoKnownAs": "JJB Stadium",
+    "usedBy": "Wigan Athletic",
+    "country": "England",
+    "latitude": 53.5477,
+    "longitude": -2.6538,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G040",
+    "ground": "Elland Road",
+    "alsoKnownAs": null,
+    "usedBy": "Leeds United",
+    "country": "England",
+    "latitude": 53.7778,
+    "longitude": -1.5722,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G041",
+    "ground": "Emirates Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Arsenal",
+    "country": "England",
+    "latitude": 51.5549,
+    "longitude": -0.1084,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G042",
+    "ground": "Estadi Montilivi",
+    "alsoKnownAs": null,
+    "usedBy": "Girona",
+    "country": "Spain",
+    "latitude": 41.9612,
+    "longitude": 2.8285,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G043",
+    "ground": "Estadio D. Afonso Henriques",
+    "alsoKnownAs": "Estadio D.Afronso",
+    "usedBy": "Vitoria de Guimaraes",
+    "country": "Portugal",
+    "latitude": 41.4459,
+    "longitude": -8.3011,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G044",
+    "ground": "Estadio da Luz",
+    "alsoKnownAs": null,
+    "usedBy": "Benfica",
+    "country": "Portugal",
+    "latitude": 38.7515,
+    "longitude": -9.186,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G045",
+    "ground": "Estadio de la Ceramica",
+    "alsoKnownAs": "Estadio El Madrigal",
+    "usedBy": "Villarreal",
+    "country": "Spain",
+    "latitude": 39.9441,
+    "longitude": -0.1036,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G046",
+    "ground": "Estadio do Dragao",
+    "alsoKnownAs": "Estadio Dragao",
+    "usedBy": "FC Porto",
+    "country": "Portugal",
+    "latitude": 41.1618,
+    "longitude": -8.5837,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G047",
+    "ground": "Estadio Jose Alvalade",
+    "alsoKnownAs": null,
+    "usedBy": "Sporting CP",
+    "country": "Portugal",
+    "latitude": 38.7612,
+    "longitude": -9.1608,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G048",
+    "ground": "Estadio Municipal",
+    "alsoKnownAs": null,
+    "usedBy": "Braga",
+    "country": "Portugal",
+    "latitude": 41.5627,
+    "longitude": -8.4302,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G049",
+    "ground": "Estadio Ramon Sanchez-Pizjuan",
+    "alsoKnownAs": "Estadio Ramon-Sanchez, Ramon Sanchez",
+    "usedBy": "Sevilla",
+    "country": "Spain",
+    "latitude": 37.384,
+    "longitude": -5.9706,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G050",
+    "ground": "Estadio Riazor",
+    "alsoKnownAs": null,
+    "usedBy": "Deportivo La Coruna",
+    "country": "Spain",
+    "latitude": 43.3687,
+    "longitude": -8.4174,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G051",
+    "ground": "Etihad Stadium",
+    "alsoKnownAs": "City of Manchester",
+    "usedBy": "Manchester City",
+    "country": "England",
+    "latitude": 53.4831,
+    "longitude": -2.2004,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G052",
+    "ground": "Ewood Park",
+    "alsoKnownAs": null,
+    "usedBy": "Blackburn Rovers",
+    "country": "England",
+    "latitude": 53.7286,
+    "longitude": -2.4892,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G053",
+    "ground": "Field Mill",
+    "alsoKnownAs": null,
+    "usedBy": "Mansfield Town",
+    "country": "England",
+    "latitude": 53.1384,
+    "longitude": -1.2006,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G054",
+    "ground": "Filbert Street",
+    "alsoKnownAs": null,
+    "usedBy": "Leicester City",
+    "country": "England",
+    "latitude": 52.6245,
+    "longitude": -1.137,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G055",
+    "ground": "Fionia Park",
+    "alsoKnownAs": null,
+    "usedBy": "Odense",
+    "country": "Denmark",
+    "latitude": 55.3943,
+    "longitude": 10.3503,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G056",
+    "ground": "Fortuna Arena (Eden)",
+    "alsoKnownAs": "Fortuna Arena, Sinobo Stadium",
+    "usedBy": "Slavia Prague",
+    "country": "Czech Republic",
+    "latitude": 50.0678,
+    "longitude": 14.4714,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G057",
+    "ground": "Fratton Park",
+    "alsoKnownAs": null,
+    "usedBy": "Portsmouth",
+    "country": "England",
+    "latitude": 50.7964,
+    "longitude": -1.0639,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G058",
+    "ground": "Gander Green Lane",
+    "alsoKnownAs": null,
+    "usedBy": "Sutton United",
+    "country": "England",
+    "latitude": 51.3645,
+    "longitude": -0.1966,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G059",
+    "ground": "Gay Meadow",
+    "alsoKnownAs": null,
+    "usedBy": "Shrewsbury Town",
+    "country": "England",
+    "latitude": 52.7098,
+    "longitude": -2.749,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G060",
+    "ground": "GelreDome",
+    "alsoKnownAs": null,
+    "usedBy": "Twente Enschede",
+    "country": "Netherlands",
+    "latitude": 51.9632,
+    "longitude": 5.893,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G061",
+    "ground": "Goodison Park",
+    "alsoKnownAs": null,
+    "usedBy": "Everton",
+    "country": "England",
+    "latitude": 53.4388,
+    "longitude": -2.9663,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G062",
+    "ground": "Gtech Community Stadium",
+    "alsoKnownAs": "Brentford Community Stadium, Gtech Stadium",
+    "usedBy": "Brentford",
+    "country": "England",
+    "latitude": 51.4907,
+    "longitude": -0.2888,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G063",
+    "ground": "Highbury",
+    "alsoKnownAs": null,
+    "usedBy": "Arsenal",
+    "country": "England",
+    "latitude": 51.5578,
+    "longitude": -0.1027,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G064",
+    "ground": "Highfield Road",
+    "alsoKnownAs": null,
+    "usedBy": "Coventry City",
+    "country": "England",
+    "latitude": 52.4118,
+    "longitude": -1.4895,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G065",
+    "ground": "Hill Dickinson Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Everton",
+    "country": "England",
+    "latitude": 53.4251,
+    "longitude": -3.0019,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G066",
+    "ground": "Hillsborough",
+    "alsoKnownAs": null,
+    "usedBy": "Sheffield Wednesday",
+    "country": "England",
+    "latitude": 53.4114,
+    "longitude": -1.5006,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G067",
+    "ground": "Home Park",
+    "alsoKnownAs": null,
+    "usedBy": "Plymouth Argyle",
+    "country": "England",
+    "latitude": 50.3882,
+    "longitude": -4.1508,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G068",
+    "ground": "Huish Park",
+    "alsoKnownAs": null,
+    "usedBy": "Yeovil Town",
+    "country": "England",
+    "latitude": 50.9505,
+    "longitude": -2.6739,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G069",
+    "ground": "Jamtkraft Arena",
+    "alsoKnownAs": null,
+    "usedBy": "Ostersunds FK",
+    "country": "Sweden",
+    "latitude": 63.1906,
+    "longitude": 14.652,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G070",
+    "ground": "Jan Breydel Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Club Brugge",
+    "country": "Belgium",
+    "latitude": 51.1933,
+    "longitude": 3.1805,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G071",
+    "ground": "John Smith's Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Huddersfield Town",
+    "country": "England",
+    "latitude": 53.6543,
+    "longitude": -1.7684,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G072",
+    "ground": "Karaiskakis Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Arsenal, Olympiakos",
+    "country": "Greece",
+    "latitude": 37.9462,
+    "longitude": 23.6645,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G073",
+    "ground": "Kassam Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Oxford United",
+    "country": "England",
+    "latitude": 51.7164,
+    "longitude": -1.2081,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G074",
+    "ground": "KC Stadium",
+    "alsoKnownAs": "KCOM Stadium",
+    "usedBy": "Hull City",
+    "country": "England",
+    "latitude": 53.7462,
+    "longitude": -0.3677,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G075",
+    "ground": "Kenilworth Road",
+    "alsoKnownAs": null,
+    "usedBy": "Luton Town",
+    "country": "England",
+    "latitude": 51.8843,
+    "longitude": -0.4317,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G076",
+    "ground": "King Power Stadium",
+    "alsoKnownAs": "Walkers Stadium",
+    "usedBy": "Leicester City",
+    "country": "England",
+    "latitude": 52.6204,
+    "longitude": -1.1422,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G077",
+    "ground": "Kybunpark",
+    "alsoKnownAs": null,
+    "usedBy": "FC Zurich",
+    "country": "Switzerland",
+    "latitude": 47.4084,
+    "longitude": 9.306,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G078",
+    "ground": "Leeds Road",
+    "alsoKnownAs": null,
+    "usedBy": "Huddersfield Town",
+    "country": "England",
+    "latitude": 53.6556,
+    "longitude": -1.7661,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G079",
+    "ground": "Lerkendal Stadion",
+    "alsoKnownAs": null,
+    "usedBy": "Rosenborg",
+    "country": "Norway",
+    "latitude": 63.4128,
+    "longitude": 10.4044,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G080",
+    "ground": "Letna Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Sparta Prague",
+    "country": "Czech Republic",
+    "latitude": 50.0998,
+    "longitude": 14.416,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G081",
+    "ground": "Liberty Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Swansea City",
+    "country": "Wales",
+    "latitude": 51.6428,
+    "longitude": -3.9347,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G082",
+    "ground": "Loftus Road",
+    "alsoKnownAs": null,
+    "usedBy": "Fulham, Queens Park Rangers",
+    "country": "England",
+    "latitude": 51.5093,
+    "longitude": -0.2322,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G083",
+    "ground": "Lokomotiv Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "CSKA Moscow, Lokomotiv Moscow",
+    "country": "Russia",
+    "latitude": 55.8036,
+    "longitude": 37.7406,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G084",
+    "ground": "London Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "West Ham United",
+    "country": "England",
+    "latitude": 51.5386,
+    "longitude": -0.0166,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G085",
+    "ground": "Luzhniki Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Spartak Moscow",
+    "country": "Russia",
+    "latitude": 55.7158,
+    "longitude": 37.5537,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G086",
+    "ground": "Madejski Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Reading",
+    "country": "England",
+    "latitude": 51.4222,
+    "longitude": -0.9828,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G087",
+    "ground": "Maine Road",
+    "alsoKnownAs": null,
+    "usedBy": "Manchester City",
+    "country": "England",
+    "latitude": 53.447,
+    "longitude": -2.2226,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G088",
+    "ground": "Makario Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Omonia Nicosia",
+    "country": "Cyprus",
+    "latitude": 35.1356,
+    "longitude": 33.338,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G089",
+    "ground": "McCain Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Scarborough",
+    "country": "England",
+    "latitude": 54.2748,
+    "longitude": -0.4183,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G090",
+    "ground": "Meadow Lane",
+    "alsoKnownAs": null,
+    "usedBy": "Notts County",
+    "country": "England",
+    "latitude": 52.9425,
+    "longitude": -1.137,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G091",
+    "ground": "Mestalla",
+    "alsoKnownAs": "Mestalla Stadium",
+    "usedBy": "Valencia",
+    "country": "Spain",
+    "latitude": 39.4746,
+    "longitude": -0.3583,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G092",
+    "ground": "Metropolitano Stadium",
+    "alsoKnownAs": "Wanda Metropolitano",
+    "usedBy": "Atletico Madrid",
+    "country": "Spain",
+    "latitude": 40.4362,
+    "longitude": -3.5995,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G093",
+    "ground": "Millennium Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "(neutral)",
+    "country": "Wales",
+    "latitude": 51.4782,
+    "longitude": -3.1826,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G094",
+    "ground": "Molineux",
+    "alsoKnownAs": null,
+    "usedBy": "Wolverhampton Wanderers",
+    "country": "England",
+    "latitude": 52.5902,
+    "longitude": -2.1304,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G095",
+    "ground": "Moss Rose",
+    "alsoKnownAs": null,
+    "usedBy": "Chester City",
+    "country": "England",
+    "latitude": 53.2426,
+    "longitude": -2.1271,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G096",
+    "ground": "Mungersdorfer Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Borussia Monchengladbach",
+    "country": "Germany",
+    "latitude": 50.9335,
+    "longitude": 6.8752,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G097",
+    "ground": "Ninian Park",
+    "alsoKnownAs": null,
+    "usedBy": "Cardiff City",
+    "country": "Wales",
+    "latitude": 51.4755,
+    "longitude": -3.203,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G098",
+    "ground": "NSC Olimpiyskiy",
+    "alsoKnownAs": "Olimpiyskiy NSC, Olimpiyskiy National",
+    "usedBy": "Dynamo Kiev, Vorskla Poltava",
+    "country": "Ukraine",
+    "latitude": 50.4333,
+    "longitude": 30.5215,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G099",
+    "ground": "Oakwell",
+    "alsoKnownAs": null,
+    "usedBy": "Barnsley",
+    "country": "England",
+    "latitude": 53.5522,
+    "longitude": -1.4675,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G100",
+    "ground": "Old Trafford",
+    "alsoKnownAs": null,
+    "usedBy": "(neutral), Manchester United",
+    "country": "England",
+    "latitude": 53.4631,
+    "longitude": -2.2913,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G101",
+    "ground": "Olympiastadion",
+    "alsoKnownAs": null,
+    "usedBy": "Bayern Munich",
+    "country": "Germany",
+    "latitude": 48.1731,
+    "longitude": 11.5466,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G102",
+    "ground": "Parc des Princes",
+    "alsoKnownAs": null,
+    "usedBy": "(neutral), Paris Saint-Germain",
+    "country": "France",
+    "latitude": 48.8414,
+    "longitude": 2.253,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G103",
+    "ground": "Parken Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "(neutral)",
+    "country": "Denmark",
+    "latitude": 55.7025,
+    "longitude": 12.5723,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G104",
+    "ground": "Parkstadion",
+    "alsoKnownAs": null,
+    "usedBy": "Schalke",
+    "country": "Germany",
+    "latitude": 51.5585,
+    "longitude": 7.0712,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G105",
+    "ground": "Partizan Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Partizan Belgrade",
+    "country": "Serbia",
+    "latitude": 44.7885,
+    "longitude": 20.4594,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G106",
+    "ground": "Philips Stadion",
+    "alsoKnownAs": null,
+    "usedBy": "PSV Eindhoven",
+    "country": "Netherlands",
+    "latitude": 51.4417,
+    "longitude": 5.4674,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G107",
+    "ground": "Plough Lane",
+    "alsoKnownAs": null,
+    "usedBy": "Wimbledon",
+    "country": "England",
+    "latitude": 51.4318,
+    "longitude": -0.1857,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G108",
+    "ground": "Portman Road",
+    "alsoKnownAs": null,
+    "usedBy": "Ipswich Town",
+    "country": "England",
+    "latitude": 52.055,
+    "longitude": 1.1447,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G109",
+    "ground": "Praterstadion",
+    "alsoKnownAs": null,
+    "usedBy": "Austria Wien",
+    "country": "Austria",
+    "latitude": 48.2072,
+    "longitude": 16.4205,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G110",
+    "ground": "Pride Park",
+    "alsoKnownAs": null,
+    "usedBy": "Derby County",
+    "country": "England",
+    "latitude": 52.915,
+    "longitude": -1.4472,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G111",
+    "ground": "Puskas Arena",
+    "alsoKnownAs": null,
+    "usedBy": "(neutral)",
+    "country": "Hungary",
+    "latitude": 47.503,
+    "longitude": 19.098,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G112",
+    "ground": "Racecourse Ground",
+    "alsoKnownAs": null,
+    "usedBy": "Wrexham",
+    "country": "Wales",
+    "latitude": 53.052,
+    "longitude": -3.0045,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G113",
+    "ground": "Rajko Mitic Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Red Star Belgrade",
+    "country": "Serbia",
+    "latitude": 44.7832,
+    "longitude": 20.4648,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G114",
+    "ground": "Rasunda Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "AIK Stockholm",
+    "country": "Sweden",
+    "latitude": 59.3627,
+    "longitude": 18,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G115",
+    "ground": "Reebok Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Bolton Wanderers",
+    "country": "England",
+    "latitude": 53.5806,
+    "longitude": -2.5357,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G116",
+    "ground": "RheinEnergieStadion",
+    "alsoKnownAs": null,
+    "usedBy": "FC Köln",
+    "country": "Germany",
+    "latitude": 50.9335,
+    "longitude": 6.8752,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G117",
+    "ground": "Riverside Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Middlesbrough",
+    "country": "England",
+    "latitude": 54.5782,
+    "longitude": -1.217,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G118",
+    "ground": "Roazhon Park",
+    "alsoKnownAs": null,
+    "usedBy": "Rennes",
+    "country": "France",
+    "latitude": 48.1075,
+    "longitude": -1.7128,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G119",
+    "ground": "Roker Park",
+    "alsoKnownAs": null,
+    "usedBy": "Sunderland",
+    "country": "England",
+    "latitude": 54.9215,
+    "longitude": -1.376,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G120",
+    "ground": "San Mames",
+    "alsoKnownAs": "San Memes",
+    "usedBy": "Athletic Bilbao",
+    "country": "Spain",
+    "latitude": 43.2641,
+    "longitude": -2.9494,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G121",
+    "ground": "San Siro",
+    "alsoKnownAs": null,
+    "usedBy": "AC Milan, Inter Milan",
+    "country": "Italy",
+    "latitude": 45.4781,
+    "longitude": 9.124,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G122",
+    "ground": "Santiago Bernabeu",
+    "alsoKnownAs": null,
+    "usedBy": "Real Madrid",
+    "country": "Spain",
+    "latitude": 40.4531,
+    "longitude": -3.6883,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G123",
+    "ground": "Selhurst Park",
+    "alsoKnownAs": null,
+    "usedBy": "Charlton Athletic, Crystal Palace, Wimbledon",
+    "country": "England",
+    "latitude": 51.3983,
+    "longitude": -0.0855,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G124",
+    "ground": "Shakhtar Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Shakhtar Donetsk",
+    "country": "Ukraine",
+    "latitude": 48.0102,
+    "longitude": 37.8062,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G125",
+    "ground": "Signal Iduna Park",
+    "alsoKnownAs": "Westfalenstadion",
+    "usedBy": "Borussia Dortmund",
+    "country": "Germany",
+    "latitude": 51.4926,
+    "longitude": 7.4519,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G126",
+    "ground": "Son Moix",
+    "alsoKnownAs": null,
+    "usedBy": "Mallorca",
+    "country": "Spain",
+    "latitude": 39.59,
+    "longitude": 2.6301,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G127",
+    "ground": "Spyros Louis Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Panathinaikos",
+    "country": "Greece",
+    "latitude": 38.0362,
+    "longitude": 23.7876,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G128",
+    "ground": "St Andrews",
+    "alsoKnownAs": null,
+    "usedBy": "Birmingham City",
+    "country": "England",
+    "latitude": 52.4758,
+    "longitude": -1.8683,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G129",
+    "ground": "St Jakob-Park",
+    "alsoKnownAs": null,
+    "usedBy": "Basel",
+    "country": "Switzerland",
+    "latitude": 47.5416,
+    "longitude": 7.6203,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G130",
+    "ground": "St James' Park",
+    "alsoKnownAs": null,
+    "usedBy": "Newcastle United",
+    "country": "England",
+    "latitude": 54.9756,
+    "longitude": -1.6217,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G131",
+    "ground": "St Mary's Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Southampton",
+    "country": "England",
+    "latitude": 50.9058,
+    "longitude": -1.3911,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G132",
+    "ground": "Stade Bollaert-Delelis",
+    "alsoKnownAs": "Stade Bollaert-Delells, Stade Felix-Bollaert",
+    "usedBy": "Lens",
+    "country": "France",
+    "latitude": 50.4328,
+    "longitude": 2.815,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G133",
+    "ground": "Stade de France",
+    "alsoKnownAs": null,
+    "usedBy": "(neutral)",
+    "country": "France",
+    "latitude": 48.9245,
+    "longitude": 2.3602,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G134",
+    "ground": "Stade de Gerland",
+    "alsoKnownAs": null,
+    "usedBy": "Lyon",
+    "country": "France",
+    "latitude": 45.7238,
+    "longitude": 4.8322,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G135",
+    "ground": "Stade de L'Abbe",
+    "alsoKnownAs": null,
+    "usedBy": "Auxerre",
+    "country": "France",
+    "latitude": 47.7867,
+    "longitude": 3.5886,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G136",
+    "ground": "Stade de la Beaujoire",
+    "alsoKnownAs": null,
+    "usedBy": "Nantes",
+    "country": "France",
+    "latitude": 47.256,
+    "longitude": -1.5251,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G137",
+    "ground": "Stade de la Mosson",
+    "alsoKnownAs": null,
+    "usedBy": "Montpellier",
+    "country": "France",
+    "latitude": 43.6222,
+    "longitude": 3.8121,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G138",
+    "ground": "Stade de Suisse",
+    "alsoKnownAs": null,
+    "usedBy": "FC Thun",
+    "country": "Switzerland",
+    "latitude": 46.9632,
+    "longitude": 7.4646,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G139",
+    "ground": "Stade Louis II",
+    "alsoKnownAs": null,
+    "usedBy": "Monaco",
+    "country": "Monaco",
+    "latitude": 43.7277,
+    "longitude": 7.4156,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G140",
+    "ground": "Stade Maurice Dufrasne",
+    "alsoKnownAs": null,
+    "usedBy": "Standard Liege",
+    "country": "Belgium",
+    "latitude": 50.61,
+    "longitude": 5.5433,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G141",
+    "ground": "Stade Velodrome",
+    "alsoKnownAs": null,
+    "usedBy": "Marseille",
+    "country": "France",
+    "latitude": 43.2698,
+    "longitude": 5.3959,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G142",
+    "ground": "Stadio Artemio Franchi",
+    "alsoKnownAs": null,
+    "usedBy": "Fiorentina",
+    "country": "Italy",
+    "latitude": 43.7808,
+    "longitude": 11.2822,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G143",
+    "ground": "Stadio Atleti Azzurri d'Italia (Gewiss Stadium)",
+    "alsoKnownAs": "Stadio Atleti",
+    "usedBy": "Atalanta",
+    "country": "Italy",
+    "latitude": 45.709,
+    "longitude": 9.6809,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G144",
+    "ground": "Stadio delle Alpi",
+    "alsoKnownAs": null,
+    "usedBy": "Juventus, Torino",
+    "country": "Italy",
+    "latitude": 45.1096,
+    "longitude": 7.6412,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G145",
+    "ground": "Stadio Friuli",
+    "alsoKnownAs": null,
+    "usedBy": "Udinese",
+    "country": "Italy",
+    "latitude": 46.0816,
+    "longitude": 13.2004,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G146",
+    "ground": "Stadio Luigi Ferraris",
+    "alsoKnownAs": null,
+    "usedBy": "Sampdoria",
+    "country": "Italy",
+    "latitude": 44.4165,
+    "longitude": 8.9525,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G147",
+    "ground": "Stadio Olimpico",
+    "alsoKnownAs": null,
+    "usedBy": "Benfica, Lazio, Roma",
+    "country": "Italy",
+    "latitude": 41.934,
+    "longitude": 12.4547,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G148",
+    "ground": "Stadio San Paolo",
+    "alsoKnownAs": null,
+    "usedBy": "Napoli",
+    "country": "Italy",
+    "latitude": 40.828,
+    "longitude": 14.1931,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G149",
+    "ground": "Stadion Dynamo",
+    "alsoKnownAs": null,
+    "usedBy": "Dynamo Kiev",
+    "country": "Ukraine",
+    "latitude": 50.4505,
+    "longitude": 30.5343,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G150",
+    "ground": "Stadion Evzena",
+    "alsoKnownAs": null,
+    "usedBy": "Slavia Prague",
+    "country": "Czech Republic",
+    "latitude": 50.0808,
+    "longitude": 14.3895,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G151",
+    "ground": "Stadion Maksimir",
+    "alsoKnownAs": null,
+    "usedBy": "Dinamo Zagreb",
+    "country": "Croatia",
+    "latitude": 45.8189,
+    "longitude": 16.0182,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G152",
+    "ground": "Stadionul Steaua",
+    "alsoKnownAs": "Stadionaul Steaua",
+    "usedBy": "Steaua Bucharest",
+    "country": "Romania",
+    "latitude": 44.4101,
+    "longitude": 26.0484,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G153",
+    "ground": "Stadium of Light",
+    "alsoKnownAs": null,
+    "usedBy": "Sunderland",
+    "country": "England",
+    "latitude": 54.9146,
+    "longitude": -1.3884,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G154",
+    "ground": "Stamford Bridge",
+    "alsoKnownAs": "Stanford Bridge",
+    "usedBy": "Chelsea",
+    "country": "England",
+    "latitude": 51.4817,
+    "longitude": -0.191,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G155",
+    "ground": "Sukru Saracoglu",
+    "alsoKnownAs": "Sukru Saracoglu Stadium",
+    "usedBy": "Fenerbahce",
+    "country": "Turkey",
+    "latitude": 40.9876,
+    "longitude": 29.0369,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G156",
+    "ground": "The Dell",
+    "alsoKnownAs": null,
+    "usedBy": "Southampton",
+    "country": "England",
+    "latitude": 50.9147,
+    "longitude": -1.4115,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G157",
+    "ground": "The Den (New Den)",
+    "alsoKnownAs": "The Den",
+    "usedBy": "Millwall",
+    "country": "England",
+    "latitude": 51.4859,
+    "longitude": -0.0509,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G158",
+    "ground": "The Hawthorns",
+    "alsoKnownAs": null,
+    "usedBy": "West Bromwich Albion",
+    "country": "England",
+    "latitude": 52.509,
+    "longitude": -1.9639,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G159",
+    "ground": "The Old Den (Cold Blow Lane)",
+    "alsoKnownAs": "The Old Den",
+    "usedBy": "Millwall",
+    "country": "England",
+    "latitude": 51.4833,
+    "longitude": -0.047,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G160",
+    "ground": "The Valley",
+    "alsoKnownAs": null,
+    "usedBy": "Charlton Athletic",
+    "country": "England",
+    "latitude": 51.4865,
+    "longitude": 0.0364,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G161",
+    "ground": "Tottenham Hotspur Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "Tottenham Hotspur",
+    "country": "England",
+    "latitude": 51.6043,
+    "longitude": -0.0664,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G162",
+    "ground": "Toumba Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "PAOK Salonika",
+    "country": "Greece",
+    "latitude": 40.613,
+    "longitude": 22.9722,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G163",
+    "ground": "Turf Moor",
+    "alsoKnownAs": null,
+    "usedBy": "Burnley",
+    "country": "England",
+    "latitude": 53.789,
+    "longitude": -2.2302,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G164",
+    "ground": "Turk Telekom Arena",
+    "alsoKnownAs": null,
+    "usedBy": "Galatasaray",
+    "country": "Turkey",
+    "latitude": 41.1034,
+    "longitude": 28.9911,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G165",
+    "ground": "Vale Park",
+    "alsoKnownAs": null,
+    "usedBy": "Port Vale",
+    "country": "England",
+    "latitude": 53.0497,
+    "longitude": -2.1925,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G166",
+    "ground": "Valley Parade",
+    "alsoKnownAs": null,
+    "usedBy": "Bradford City",
+    "country": "England",
+    "latitude": 53.8045,
+    "longitude": -1.759,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G167",
+    "ground": "Vasil Levski National",
+    "alsoKnownAs": null,
+    "usedBy": "Ludogorets Razgrad",
+    "country": "Bulgaria",
+    "latitude": 42.6878,
+    "longitude": 23.335,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G168",
+    "ground": "VEB Arena",
+    "alsoKnownAs": null,
+    "usedBy": "CSKA Moscow",
+    "country": "Russia",
+    "latitude": 55.7911,
+    "longitude": 37.5596,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G169",
+    "ground": "Veltins Arena",
+    "alsoKnownAs": null,
+    "usedBy": "Schalke",
+    "country": "Germany",
+    "latitude": 51.5546,
+    "longitude": 7.0676,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G170",
+    "ground": "Vicarage Road",
+    "alsoKnownAs": null,
+    "usedBy": "Watford",
+    "country": "England",
+    "latitude": 51.65,
+    "longitude": -0.4015,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G171",
+    "ground": "Victoria Ground",
+    "alsoKnownAs": null,
+    "usedBy": "Stoke City",
+    "country": "England",
+    "latitude": 52.999,
+    "longitude": -2.179,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G172",
+    "ground": "Victoria Park",
+    "alsoKnownAs": null,
+    "usedBy": "Hartlepool United",
+    "country": "England",
+    "latitude": 54.6895,
+    "longitude": -1.2124,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G173",
+    "ground": "Villa Park",
+    "alsoKnownAs": null,
+    "usedBy": "(neutral), Aston Villa",
+    "country": "England",
+    "latitude": 52.5092,
+    "longitude": -1.8847,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G174",
+    "ground": "Vitality Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "AFC Bournemouth",
+    "country": "England",
+    "latitude": 50.7352,
+    "longitude": -1.8384,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G175",
+    "ground": "Volksparkstadion",
+    "alsoKnownAs": null,
+    "usedBy": "Hamburg",
+    "country": "Germany",
+    "latitude": 53.5872,
+    "longitude": 9.8986,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G176",
+    "ground": "Waldstadion",
+    "alsoKnownAs": null,
+    "usedBy": "Eintracht Frankfurt",
+    "country": "Germany",
+    "latitude": 50.0686,
+    "longitude": 8.6455,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G177",
+    "ground": "Wembley Stadium",
+    "alsoKnownAs": null,
+    "usedBy": "(neutral), Tottenham Hotspur",
+    "country": "England",
+    "latitude": 51.556,
+    "longitude": -0.2796,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G178",
+    "ground": "Wembley Stadium (old)",
+    "alsoKnownAs": null,
+    "usedBy": "Arsenal, (neutral)",
+    "country": "England",
+    "latitude": 51.5559,
+    "longitude": -0.2791,
+    "confidence": "Medium"
+  },
+  {
+    "groundId": "G179",
+    "ground": "Weserstadion",
+    "alsoKnownAs": null,
+    "usedBy": "Werder Bremen",
+    "country": "Germany",
+    "latitude": 53.0664,
+    "longitude": 8.8376,
+    "confidence": "High"
+  },
+  {
+    "groundId": "G180",
+    "ground": "White Hart Lane",
+    "alsoKnownAs": null,
+    "usedBy": "Tottenham Hotspur",
+    "country": "England",
+    "latitude": 51.6033,
+    "longitude": -0.0657,
+    "confidence": "Medium"
+  }
+]
