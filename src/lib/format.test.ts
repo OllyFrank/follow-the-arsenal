@@ -1,35 +1,11 @@
 import { describe, expect, it } from "vitest";
-import type { Fixture } from "../types";
 import {
   formatDateLong,
   formatDistance,
   formatFixtureScoreLine,
   googleSearchUrl,
 } from "./format";
-
-function makeFixture(overrides: Partial<Fixture> = {}): Fixture {
-  return {
-    matchId: "M0001",
-    date: "2014-05-17",
-    season: "2013/14",
-    competition: "FA Cup",
-    stage: "Final",
-    homeTeam: "Arsenal",
-    awayTeam: "Hull City",
-    opponent: "Hull City",
-    venueType: "N",
-    groundId: "G001",
-    venue: "Wembley Stadium",
-    arsenalGoals: 3,
-    opponentGoals: 2,
-    result: "W",
-    penaltyShootOut: null,
-    behindClosedDoors: false,
-    countsInRecord: true,
-    notes: null,
-    ...overrides,
-  };
-}
+import { makeFixture } from "./test-fixtures";
 
 describe("formatDateLong", () => {
   it("formats an ISO date as '<day> <Month> <year>'", () => {

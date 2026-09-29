@@ -1,60 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { Fixture, Ground, HomeAddress } from "../types";
 import { computeStats } from "./stats";
-
-let nextId = 1;
-
-function makeFixture(overrides: Partial<Fixture> = {}): Fixture {
-  const id = `M${String(nextId++).padStart(4, "0")}`;
-  return {
-    matchId: id,
-    date: "2020-01-01",
-    season: "2019/20",
-    competition: "Premier League",
-    stage: "Premier League",
-    homeTeam: "Arsenal",
-    awayTeam: "Chelsea",
-    opponent: "Chelsea",
-    venueType: "H",
-    groundId: "G001",
-    venue: "Emirates Stadium",
-    arsenalGoals: 1,
-    opponentGoals: 0,
-    result: "W",
-    penaltyShootOut: null,
-    behindClosedDoors: false,
-    countsInRecord: true,
-    notes: null,
-    ...overrides,
-  };
-}
-
-function makeGround(overrides: Partial<Ground> = {}): Ground {
-  return {
-    groundId: "G001",
-    ground: "Emirates Stadium",
-    alsoKnownAs: null,
-    usedBy: "Arsenal",
-    country: "England",
-    latitude: 51.5549,
-    longitude: -0.1084,
-    confidence: "High",
-    ...overrides,
-  };
-}
-
-function makeAddress(overrides: Partial<HomeAddress> = {}): HomeAddress {
-  return {
-    id: "addr-1",
-    label: "Home",
-    query: "N5 1BU",
-    latitude: 51.5556,
-    longitude: -0.1063,
-    fromDate: "2000-01-01",
-    toDate: null,
-    ...overrides,
-  };
-}
+import { makeAddress, makeFixture, makeGround } from "./test-fixtures";
 
 const groundA = makeGround({ groundId: "G001", ground: "Emirates Stadium" });
 const groundB = makeGround({ groundId: "G002", ground: "Old Trafford", latitude: 53.4631, longitude: -2.2913 });

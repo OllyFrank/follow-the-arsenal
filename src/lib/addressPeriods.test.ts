@@ -1,19 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { HomeAddress } from "../types";
 import { findPeriodIssues } from "./addressPeriods";
-
-function makeAddress(overrides: Partial<HomeAddress> = {}): HomeAddress {
-  return {
-    id: "addr",
-    label: "Home",
-    query: "N5 1BU",
-    latitude: 51.5,
-    longitude: -0.1,
-    fromDate: "2000-01-01",
-    toDate: "2010-01-01",
-    ...overrides,
-  };
-}
+import { makeAddress } from "./test-fixtures";
 
 describe("findPeriodIssues", () => {
   it("reports no issue for a single address", () => {
