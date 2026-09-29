@@ -320,10 +320,18 @@ function isShield(fixture: Fixture): boolean {
   return /community shield|charity shield/i.test(fixture.competition);
 }
 
+// Real Stage values are competition-prefixed ("FA Cup Final", "UEFA CL Final",
+// "FA Cup Final Replay"), never the bare "Final"/"Final Replay" — but never
+// "Semi Finals"/"Quarter Finals" either, since those are plural with a
+// following "1st/2nd Leg" or "Replay". Match on the singular "Final" as the
+// stage's last word, optionally followed by "Replay".
+function isFinalStage(stage: string): boolean {
+  return /Final(?: Replay)?$/.test(stage);
+}
+
 function computeFinals(fixtures: Fixture[], attended: Set<string>): FinalsStats {
   const finals = attendedFixtures(fixtures, attended).filter(
-    (f) =>
-      (f.stage === "Final" || f.stage === "Final Replay") && !isShield(f) && f.countsInRecord,
+    (f) => isFinalStage(f.stage) && !isShield(f) && f.countsInRecord,
   );
   const wins = finals.filter(
     (f) => f.result === "W" || (f.result === "D" && (f.penaltyShootOut ?? "").startsWith("Won")),

@@ -136,17 +136,28 @@ describe("longest gap", () => {
 });
 
 describe("finals", () => {
+  // Real Stage values are competition-prefixed, e.g. "FA Cup Final",
+  // "UEFA CL Final", "FA Cup Final Replay" — never the bare "Final".
   it("counts straight wins, penalty-shootout wins, excludes shields and voided finals", () => {
-    const straightWin = makeFixture({ stage: "Final", competition: "FA Cup", result: "W" });
+    const straightWin = makeFixture({ stage: "FA Cup Final", competition: "FA Cup", result: "W" });
     const penaltyWin = makeFixture({
-      stage: "Final",
+      stage: "League Cup Final",
       competition: "League Cup",
       result: "D",
       penaltyShootOut: "Won 4-3",
     });
-    const loss = makeFixture({ stage: "Final Replay", competition: "FA Cup", result: "L" });
-    const shield = makeFixture({ stage: "Final", competition: "FA Community Shield", result: "W" });
-    const voidedFinal = makeFixture({ stage: "Final", competition: "FA Cup", result: "W", countsInRecord: false });
+    const loss = makeFixture({ stage: "FA Cup Final Replay", competition: "FA Cup", result: "L" });
+    const shield = makeFixture({
+      stage: "FA Community Shield",
+      competition: "FA Community Shield",
+      result: "W",
+    });
+    const voidedFinal = makeFixture({
+      stage: "FA Cup Final",
+      competition: "FA Cup",
+      result: "W",
+      countsInRecord: false,
+    });
 
     const fixtures = [straightWin, penaltyWin, loss, shield, voidedFinal];
     const attended = fixtures.map((f) => f.matchId);
@@ -154,6 +165,26 @@ describe("finals", () => {
 
     expect(stats.finals.attended).toBe(3); // straightWin, penaltyWin, loss (shield and voided excluded)
     expect(stats.finals.wins).toBe(2); // straightWin, penaltyWin
+  });
+
+  it("does not mistake a semi-final or quarter-final for a final", () => {
+    const semiFinal = makeFixture({ stage: "FA Cup Semi Finals", competition: "FA Cup", result: "W" });
+    const semiFinalLeg = makeFixture({
+      stage: "League Cup Semi Finals 1st Leg",
+      competition: "League Cup",
+      result: "W",
+    });
+    const quarterFinal = makeFixture({
+      stage: "FA Cup Quarter Finals Replay",
+      competition: "FA Cup",
+      result: "W",
+    });
+
+    const fixtures = [semiFinal, semiFinalLeg, quarterFinal];
+    const attended = fixtures.map((f) => f.matchId);
+    const stats = computeStats(fixtures, [groundA], attended, [address]);
+
+    expect(stats.finals.attended).toBe(0);
   });
 });
 
