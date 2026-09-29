@@ -2,7 +2,11 @@ import { useMemo, useState } from "react";
 import type { Fixture, Ground, HomeAddress } from "../../types";
 import { computeStats } from "../../lib/stats";
 import { formatDateLong, formatDistance } from "../../lib/format";
+import { usePagination } from "../../hooks/usePagination";
 import { GroundsMap } from "./GroundsMap";
+import { PaginationControls } from "./PaginationControls";
+
+const GROUNDS_PAGE_SIZE = 10;
 
 interface Props {
   fixtures: Fixture[];
@@ -35,6 +39,8 @@ export function Dashboard({ fixtures, grounds, attendedMatchIds, addresses }: Pr
   );
 
   const dist = (km: number) => formatDistance(km, unit);
+
+  const groundsPage = usePagination(stats.grounds.rankedByVisits, GROUNDS_PAGE_SIZE);
 
   return (
     <div>
@@ -116,7 +122,7 @@ export function Dashboard({ fixtures, grounds, attendedMatchIds, addresses }: Pr
         <GroundsMap groundsWithVisits={stats.grounds.rankedByVisits} />
         <table className="stats-table">
           <tbody>
-            {stats.grounds.rankedByVisits.slice(0, 10).map(({ ground, visits }) => (
+            {groundsPage.pageItems.map(({ ground, visits }) => (
               <tr key={ground.groundId}>
                 <td>{ground.ground}</td>
                 <td>{visits}</td>
@@ -124,6 +130,11 @@ export function Dashboard({ fixtures, grounds, attendedMatchIds, addresses }: Pr
             ))}
           </tbody>
         </table>
+        <PaginationControls
+          page={groundsPage.page}
+          totalPages={groundsPage.totalPages}
+          onChange={groundsPage.setPage}
+        />
       </div>
 
       <div className="card" style={{ marginBottom: "1rem" }}>

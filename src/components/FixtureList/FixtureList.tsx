@@ -66,6 +66,9 @@ export function FixtureList({
         <button className="btn" onClick={() => onBulkSetAttendance(selectableIds, true)}>
           Select all
         </button>
+        <button className="btn" onClick={() => onBulkSetAttendance(selectableIds, false)}>
+          Untick all
+        </button>
       </div>
 
       <div className="card">

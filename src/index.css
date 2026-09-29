@@ -416,6 +416,18 @@ table.stats-table td {
   border-bottom: 1px solid var(--grey-100);
 }
 
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.pagination-label {
+  color: var(--grey-600);
+}
+
 .empty-state {
   color: var(--grey-600);
   font-size: 0.9rem;
