@@ -7,6 +7,8 @@ import type { HomeAddress } from "../../types";
 interface Props {
   onSave: (address: HomeAddress) => void;
   onCancel: () => void;
+  /** Whether an address with no end date (an ongoing "current" address) already exists. */
+  hasCurrentAddress: boolean;
 }
 
 function DraggablePin({
@@ -36,12 +38,14 @@ function DraggablePin({
   );
 }
 
-export function AddressForm({ onSave, onCancel }: Props) {
+export function AddressForm({ onSave, onCancel, hasCurrentAddress }: Props) {
   const [label, setLabel] = useState("");
   const [query, setQuery] = useState("");
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
-  const [ongoing, setOngoing] = useState(true);
+  // Only default to "current" when nothing else is already marked current —
+  // otherwise every new address would silently claim to be the current one.
+  const [ongoing, setOngoing] = useState(!hasCurrentAddress);
   const [pin, setPin] = useState<[number, number] | null>(null);
   const [searching, setSearching] = useState(false);
   const [error, setError] = useState<string | null>(null);

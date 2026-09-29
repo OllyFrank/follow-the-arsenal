@@ -13,6 +13,7 @@ export function Addresses({ addresses, onChange }: Props) {
   const [adding, setAdding] = useState(false);
 
   const issues = useMemo(() => findPeriodIssues(addresses), [addresses]);
+  const hasCurrentAddress = addresses.some((a) => a.toDate === null);
 
   function handleSave(address: HomeAddress) {
     onChange([...addresses, address]);
@@ -67,7 +68,11 @@ export function Addresses({ addresses, onChange }: Props) {
 
       {adding ? (
         <div style={{ marginTop: "1rem" }}>
-          <AddressForm onSave={handleSave} onCancel={() => setAdding(false)} />
+          <AddressForm
+            onSave={handleSave}
+            onCancel={() => setAdding(false)}
+            hasCurrentAddress={hasCurrentAddress}
+          />
         </div>
       ) : (
         <button className="btn btn-primary" style={{ marginTop: "1rem" }} onClick={() => setAdding(true)}>
