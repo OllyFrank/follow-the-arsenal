@@ -126,7 +126,7 @@ export function FixtureList({
         </div>
 
         <p className="info-note">
-          Matches save automatically — no need to hit save. They're stored only in this browser
+          Matches save automatically, no need to hit save. They're stored only in this browser
           though, so switching devices or clearing your browser data will lose them.
         </p>
       </div>
