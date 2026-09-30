@@ -157,8 +157,11 @@ a {
 
 /* --- Fixture list --- */
 
-.season-filter {
+.fixtures-toolbar {
   position: relative;
+}
+
+.season-filter {
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -466,19 +469,26 @@ a {
   padding: 0.5rem 0.75rem;
 }
 
-.season-filter .info-note {
+.fixtures-toolbar .info-note {
   position: absolute;
   top: 0;
+  bottom: 0;
   right: 0;
   width: 320px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   text-align: right;
+  box-sizing: border-box;
 }
 
 @media (max-width: 760px) {
-  .season-filter .info-note {
+  .fixtures-toolbar .info-note {
     position: static;
     width: 100%;
     text-align: left;
+    justify-content: flex-start;
   }
 }
 

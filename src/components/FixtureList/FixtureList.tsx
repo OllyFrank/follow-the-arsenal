@@ -80,52 +80,55 @@ export function FixtureList({
 
   return (
     <div>
-      <div className="season-filter">
-        <select value={season} onChange={(e) => setSeason(e.target.value)}>
-          {seasons.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
-        <select value={competition} onChange={(e) => setCompetition(e.target.value)}>
-          <option value="all">All competitions</option>
-          {competitions.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
-          ))}
-        </select>
-        <div className="unit-toggle">
-          <button
-            className={viewMode === "list" ? "active" : ""}
-            onClick={() => setViewMode("list")}
-          >
-            List
+      <div className="fixtures-toolbar">
+        <div className="season-filter">
+          <select value={season} onChange={(e) => setSeason(e.target.value)}>
+            {seasons.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+          <select value={competition} onChange={(e) => setCompetition(e.target.value)}>
+            <option value="all">All competitions</option>
+            {competitions.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+          <div className="unit-toggle">
+            <button
+              className={viewMode === "list" ? "active" : ""}
+              onClick={() => setViewMode("list")}
+            >
+              List
+            </button>
+            <button
+              className={viewMode === "grid" ? "active" : ""}
+              onClick={() => setViewMode("grid")}
+            >
+              Grid
+            </button>
+          </div>
+        </div>
+
+        <div className="bulk-actions">
+          <button className="btn" onClick={() => onBulkSetAttendance(homeIds, true)}>
+            Tick all home games
           </button>
-          <button
-            className={viewMode === "grid" ? "active" : ""}
-            onClick={() => setViewMode("grid")}
-          >
-            Grid
+          <button className="btn" onClick={() => onBulkSetAttendance(selectableIds, true)}>
+            Select all
+          </button>
+          <button className="btn" onClick={() => onBulkSetAttendance(selectableIds, false)}>
+            Untick all
           </button>
         </div>
+
         <p className="info-note">
           Matches save automatically — no need to hit save. They're stored only in this browser
           though, so switching devices or clearing your browser data will lose them.
         </p>
-      </div>
-
-      <div className="bulk-actions">
-        <button className="btn" onClick={() => onBulkSetAttendance(homeIds, true)}>
-          Tick all home games
-        </button>
-        <button className="btn" onClick={() => onBulkSetAttendance(selectableIds, true)}>
-          Select all
-        </button>
-        <button className="btn" onClick={() => onBulkSetAttendance(selectableIds, false)}>
-          Untick all
-        </button>
       </div>
 
       {viewMode === "list" ? (
