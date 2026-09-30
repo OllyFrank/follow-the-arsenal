@@ -80,11 +80,6 @@ export function FixtureList({
 
   return (
     <div>
-      <p className="info-note">
-        Matches save automatically — no need to hit save. They're stored only in this browser
-        though, so switching devices or clearing your browser data will lose them.
-      </p>
-
       <div className="season-filter">
         <select value={season} onChange={(e) => setSeason(e.target.value)}>
           {seasons.map((s) => (
@@ -115,6 +110,10 @@ export function FixtureList({
             Grid
           </button>
         </div>
+        <p className="info-note">
+          Matches save automatically — no need to hit save. They're stored only in this browser
+          though, so switching devices or clearing your browser data will lose them.
+        </p>
       </div>
 
       <div className="bulk-actions">
