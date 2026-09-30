@@ -456,6 +456,12 @@ a {
   margin-top: 0.3rem;
 }
 
+.info-note {
+  font-size: 0.8rem;
+  color: var(--grey-600);
+  margin: 0 0 0.75rem;
+}
+
 .unit-toggle {
   display: inline-flex;
   border: 1px solid var(--navy);
