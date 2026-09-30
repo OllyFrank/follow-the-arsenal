@@ -16,6 +16,12 @@ function resultLabel(fixture: Fixture): string {
   return "L";
 }
 
+function venueLabel(venueType: Fixture["venueType"]): string {
+  if (venueType === "H") return "Home";
+  if (venueType === "A") return "Away";
+  return "Neutral";
+}
+
 export function FixtureList({
   fixtures,
   groundsById,
@@ -185,7 +191,10 @@ export function FixtureList({
               >
                 <div className="fixture-card-score">{formatFixtureScoreLine(fixture)}</div>
                 <div className="fixture-card-teams" title={`${fixture.homeTeam} v ${fixture.awayTeam}`}>
-                  {fixture.homeTeam} v {fixture.awayTeam}
+                  <span className="pill badge-venue" title={venueLabel(fixture.venueType)}>
+                    {fixture.venueType}
+                  </span>
+                  <span className="fixture-card-opponent">{fixture.opponent}</span>
                 </div>
                 <div className="fixture-card-meta">
                   <span>{formatDateLong(fixture.date)}</span>

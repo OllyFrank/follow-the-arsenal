@@ -154,9 +154,10 @@ a {
 }
 
 .season-filter select {
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  padding: 0.4rem 0.6rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.6rem;
   border-radius: 6px;
   border: 1px solid var(--grey-200);
   background: var(--white);
@@ -276,12 +277,26 @@ a {
 }
 
 .fixture-card-teams {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.fixture-card-opponent {
   font-weight: 700;
   font-size: 0.8rem;
-  width: 100%;
+  min-width: 0;
+  flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.pill.badge-venue {
+  background: var(--grey-100);
+  color: var(--navy);
+  flex-shrink: 0;
 }
 
 .fixture-card-meta {
