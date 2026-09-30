@@ -153,6 +153,30 @@ export function Dashboard({ fixtures, grounds, attendedMatchIds, addresses }: Pr
         </div>
 
         <div className="card">
+          <div className="section-title">Top opponents</div>
+          <table className="stats-table">
+            <thead>
+              <tr>
+                <th>Opponent</th>
+                <th>Played</th>
+                <th>Home</th>
+                <th>Away</th>
+              </tr>
+            </thead>
+            <tbody>
+              {stats.topOpponents.slice(0, 10).map((o) => (
+                <tr key={o.opponent}>
+                  <td>{o.opponent}</td>
+                  <td>{o.played}</td>
+                  <td>{o.home}</td>
+                  <td>{o.away}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="card">
           <div className="section-title">Record</div>
           <table className="stats-table">
             <thead>
@@ -212,37 +236,13 @@ export function Dashboard({ fixtures, grounds, attendedMatchIds, addresses }: Pr
         </div>
 
         <div className="card">
-          <div className="section-title">Top opponents</div>
-          <table className="stats-table">
-            <thead>
-              <tr>
-                <th>Opponent</th>
-                <th>Played</th>
-                <th>Home</th>
-                <th>Away</th>
-              </tr>
-            </thead>
-            <tbody>
-              {stats.topOpponents.slice(0, 10).map((o) => (
-                <tr key={o.opponent}>
-                  <td>{o.opponent}</td>
-                  <td>{o.played}</td>
-                  <td>{o.home}</td>
-                  <td>{o.away}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="card">
           <div className="section-title">Biggest win &amp; loss seen</div>
           <div>
             {stats.biggestWin
               ? `Biggest win: ${fixtureLabel(stats.biggestWin.fixture)} (${stats.biggestWin.fixture.arsenalGoals}-${stats.biggestWin.fixture.opponentGoals})`
               : "No wins seen yet."}
           </div>
-          <div>
+          <div style={{ marginTop: "0.5rem" }}>
             {stats.biggestLoss
               ? `Biggest loss: ${fixtureLabel(stats.biggestLoss.fixture)} (${stats.biggestLoss.fixture.arsenalGoals}-${stats.biggestLoss.fixture.opponentGoals})`
               : "No losses seen yet."}

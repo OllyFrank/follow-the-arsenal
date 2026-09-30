@@ -38,21 +38,23 @@ export function Addresses({ addresses, onChange }: Props) {
         </div>
       )}
 
-      {adding ? (
-        <AddressForm
-          onSave={handleSave}
-          onCancel={() => setAdding(false)}
-          hasCurrentAddress={hasCurrentAddress}
-        />
-      ) : (
-        <button className="btn btn-primary" style={{ marginBottom: "1rem" }} onClick={() => setAdding(true)}>
-          Add address
-        </button>
-      )}
-
       <div className="card">
-        <div className="section-title">Home addresses</div>
-        {addresses.length === 0 && (
+        <div className="section-header">
+          <div className="section-title">Home addresses</div>
+          {!adding && (
+            <button className="btn btn-primary" onClick={() => setAdding(true)}>
+              Add address
+            </button>
+          )}
+        </div>
+        {adding && (
+          <AddressForm
+            onSave={handleSave}
+            onCancel={() => setAdding(false)}
+            hasCurrentAddress={hasCurrentAddress}
+          />
+        )}
+        {addresses.length === 0 && !adding && (
           <div className="empty-state">
             No addresses yet. Add one so distances can be calculated.
           </div>
