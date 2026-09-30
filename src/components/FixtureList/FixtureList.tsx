@@ -191,10 +191,8 @@ export function FixtureList({
               >
                 <div className="fixture-card-score">{formatFixtureScoreLine(fixture)}</div>
                 <div className="fixture-card-teams" title={`${fixture.homeTeam} v ${fixture.awayTeam}`}>
-                  <span className="pill badge-venue" title={venueLabel(fixture.venueType)}>
-                    {fixture.venueType}
-                  </span>
-                  <span className="fixture-card-opponent">{fixture.opponent}</span>
+                  {fixture.opponent}{" "}
+                  <span className="fixture-card-venue">@ {venueLabel(fixture.venueType).toLowerCase()}</span>
                 </div>
                 <div className="fixture-card-meta">
                   <span>{formatDateLong(fixture.date)}</span>
