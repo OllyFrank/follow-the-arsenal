@@ -1,9 +1,7 @@
 import { useCallback, useState } from "react";
 import type { HomeAddress } from "../types";
 import {
-  exportBackup,
   getAppState,
-  importBackup,
   saveHomeAddresses,
   setAttendance,
   setAttendanceBulk,
@@ -24,19 +22,11 @@ export function useAppState() {
     setState(saveHomeAddresses(addresses));
   }, []);
 
-  const backup = useCallback(() => exportBackup(), []);
-
-  const restore = useCallback((json: string) => {
-    setState(importBackup(json));
-  }, []);
-
   return {
     attendedMatchIds: new Set(state.attendedMatchIds),
     homeAddresses: state.homeAddresses,
     toggleAttendance,
     bulkSetAttendance,
     updateAddresses,
-    backup,
-    restore,
   };
 }

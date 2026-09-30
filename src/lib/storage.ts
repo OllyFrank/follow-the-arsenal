@@ -58,17 +58,3 @@ export function saveHomeAddresses(addresses: HomeAddress[]): AppState {
   writeState(next);
   return next;
 }
-
-export function exportBackup(): string {
-  return JSON.stringify(readState(), null, 2);
-}
-
-export function importBackup(json: string): AppState {
-  const parsed = JSON.parse(json) as AppState;
-  const next: AppState = {
-    attendedMatchIds: Array.isArray(parsed.attendedMatchIds) ? parsed.attendedMatchIds : [],
-    homeAddresses: Array.isArray(parsed.homeAddresses) ? parsed.homeAddresses : [],
-  };
-  writeState(next);
-  return next;
-}

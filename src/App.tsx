@@ -5,7 +5,6 @@ import type { Fixture, Ground } from "./types";
 import { useAppState } from "./hooks/useAppState";
 import { FixtureList } from "./components/FixtureList/FixtureList";
 import { Addresses } from "./components/Addresses/Addresses";
-import { BackupPanel } from "./components/Addresses/BackupPanel";
 import { Dashboard } from "./components/Dashboard/Dashboard";
 
 const fixtures = fixturesData as Fixture[];
@@ -21,8 +20,6 @@ function App() {
     toggleAttendance,
     bulkSetAttendance,
     updateAddresses,
-    backup,
-    restore,
   } = useAppState();
 
   const groundsById = useMemo(() => new Map(grounds.map((g) => [g.groundId, g])), []);
@@ -63,10 +60,7 @@ function App() {
           />
         )}
         {tab === "addresses" && (
-          <>
-            <Addresses addresses={homeAddresses} onChange={updateAddresses} />
-            <BackupPanel onExport={backup} onImport={restore} />
-          </>
+          <Addresses addresses={homeAddresses} onChange={updateAddresses} />
         )}
         {tab === "stats" && (
           <Dashboard

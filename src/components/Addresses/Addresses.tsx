@@ -38,6 +38,18 @@ export function Addresses({ addresses, onChange }: Props) {
         </div>
       )}
 
+      {adding ? (
+        <AddressForm
+          onSave={handleSave}
+          onCancel={() => setAdding(false)}
+          hasCurrentAddress={hasCurrentAddress}
+        />
+      ) : (
+        <button className="btn btn-primary" style={{ marginBottom: "1rem" }} onClick={() => setAdding(true)}>
+          Add address
+        </button>
+      )}
+
       <div className="card">
         <div className="section-title">Home addresses</div>
         {addresses.length === 0 && (
@@ -65,20 +77,6 @@ export function Addresses({ addresses, onChange }: Props) {
             </div>
           ))}
       </div>
-
-      {adding ? (
-        <div style={{ marginTop: "1rem" }}>
-          <AddressForm
-            onSave={handleSave}
-            onCancel={() => setAdding(false)}
-            hasCurrentAddress={hasCurrentAddress}
-          />
-        </div>
-      ) : (
-        <button className="btn btn-primary" style={{ marginTop: "1rem" }} onClick={() => setAdding(true)}>
-          Add address
-        </button>
-      )}
     </div>
   );
 }

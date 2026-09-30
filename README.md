@@ -2,7 +2,7 @@
 
 A personal app to track which Arsenal matches you've attended since 1988/89, and see stats about the games you've seen: distance travelled, grounds visited, your record, and more.
 
-Everything is stored in your browser only (no accounts, no server) — use the Backup section to export a JSON file as a safety copy.
+Everything is stored in your browser only (no accounts, no server) — see "Backing up your data" below.
 
 ## Running it
 
@@ -45,4 +45,4 @@ npm run test:watch  # reruns automatically as files change
 
 ## Backing up your data
 
-Your attendance and home addresses live in your browser's local storage, which persists across restarts but is tied to this browser on this machine. Use **Addresses → Export backup** regularly, especially before clearing browser data or switching machines. **Import backup** restores from that file.
+Your attendance and home addresses live in your browser's local storage, which persists across restarts but is tied to this browser on this machine — clearing browser data or switching machines loses it. There's no export/import feature.

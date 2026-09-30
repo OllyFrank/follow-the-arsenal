@@ -137,157 +137,159 @@ export function Dashboard({ fixtures, grounds, attendedMatchIds, addresses }: Pr
         />
       </div>
 
-      <div className="card" style={{ marginBottom: "1rem" }}>
-        <div className="section-title">Distance by season</div>
-        <table className="stats-table">
-          <tbody>
-            {stats.distance.bySeasonKm.map(({ season: s, km }) => (
-              <tr key={s}>
-                <td>{s}</td>
-                <td>{dist(km)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="card" style={{ marginBottom: "1rem" }}>
-        <div className="section-title">Record</div>
-        <table className="stats-table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>P</th>
-              <th>W</th>
-              <th>D</th>
-              <th>L</th>
-              <th>Win%</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(
-              [
-                ["Overall", stats.record.overall],
-                ["Home", stats.record.home],
-                ["Away", stats.record.away],
-              ] as const
-            ).map(([label, r]) => (
-              <tr key={label}>
-                <td>{label}</td>
-                <td>{r.played}</td>
-                <td>{r.wins}</td>
-                <td>{r.draws}</td>
-                <td>{r.losses}</td>
-                <td>{r.winPct.toFixed(0)}%</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="card" style={{ marginBottom: "1rem" }}>
-        <div className="section-title">Lucky charm?</div>
-        <table className="stats-table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>P</th>
-              <th>Win%</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Attended</td>
-              <td>{stats.luckyCharm.attended.played}</td>
-              <td>{stats.luckyCharm.attended.winPct.toFixed(0)}%</td>
-            </tr>
-            <tr>
-              <td>Missed</td>
-              <td>{stats.luckyCharm.missed.played}</td>
-              <td>{stats.luckyCharm.missed.winPct.toFixed(0)}%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div className="card" style={{ marginBottom: "1rem" }}>
-        <div className="section-title">Top opponents</div>
-        <table className="stats-table">
-          <thead>
-            <tr>
-              <th>Opponent</th>
-              <th>Played</th>
-              <th>Home</th>
-              <th>Away</th>
-            </tr>
-          </thead>
-          <tbody>
-            {stats.topOpponents.slice(0, 10).map((o) => (
-              <tr key={o.opponent}>
-                <td>{o.opponent}</td>
-                <td>{o.played}</td>
-                <td>{o.home}</td>
-                <td>{o.away}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="card" style={{ marginBottom: "1rem" }}>
-        <div className="section-title">Biggest win &amp; loss seen</div>
-        <div>
-          {stats.biggestWin
-            ? `Biggest win: ${fixtureLabel(stats.biggestWin.fixture)} (${stats.biggestWin.fixture.arsenalGoals}-${stats.biggestWin.fixture.opponentGoals})`
-            : "No wins seen yet."}
+      <div className="dashboard-grid">
+        <div className="card">
+          <div className="section-title">Distance by season</div>
+          <table className="stats-table">
+            <tbody>
+              {stats.distance.bySeasonKm.map(({ season: s, km }) => (
+                <tr key={s}>
+                  <td>{s}</td>
+                  <td>{dist(km)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <div>
-          {stats.biggestLoss
-            ? `Biggest loss: ${fixtureLabel(stats.biggestLoss.fixture)} (${stats.biggestLoss.fixture.arsenalGoals}-${stats.biggestLoss.fixture.opponentGoals})`
-            : "No losses seen yet."}
-        </div>
-      </div>
 
-      <div className="card" style={{ marginBottom: "1rem" }}>
-        <div className="section-title">Highest-scoring match seen</div>
-        <div>
-          {stats.highestScoring
-            ? `${fixtureLabel(stats.highestScoring.fixture)} (${stats.highestScoring.totalGoals} goals)`
-            : "No matches seen yet."}
+        <div className="card">
+          <div className="section-title">Record</div>
+          <table className="stats-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>P</th>
+                <th>W</th>
+                <th>D</th>
+                <th>L</th>
+                <th>Win%</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(
+                [
+                  ["Overall", stats.record.overall],
+                  ["Home", stats.record.home],
+                  ["Away", stats.record.away],
+                ] as const
+              ).map(([label, r]) => (
+                <tr key={label}>
+                  <td>{label}</td>
+                  <td>{r.played}</td>
+                  <td>{r.wins}</td>
+                  <td>{r.draws}</td>
+                  <td>{r.losses}</td>
+                  <td>{r.winPct.toFixed(0)}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </div>
 
-      <div className="card" style={{ marginBottom: "1rem" }}>
-        <div className="section-title">Longest gap between attended matches</div>
-        {stats.longestGap.before && stats.longestGap.after ? (
+        <div className="card">
+          <div className="section-title">Lucky charm?</div>
+          <table className="stats-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>P</th>
+                <th>Win%</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Attended</td>
+                <td>{stats.luckyCharm.attended.played}</td>
+                <td>{stats.luckyCharm.attended.winPct.toFixed(0)}%</td>
+              </tr>
+              <tr>
+                <td>Missed</td>
+                <td>{stats.luckyCharm.missed.played}</td>
+                <td>{stats.luckyCharm.missed.winPct.toFixed(0)}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="card">
+          <div className="section-title">Top opponents</div>
+          <table className="stats-table">
+            <thead>
+              <tr>
+                <th>Opponent</th>
+                <th>Played</th>
+                <th>Home</th>
+                <th>Away</th>
+              </tr>
+            </thead>
+            <tbody>
+              {stats.topOpponents.slice(0, 10).map((o) => (
+                <tr key={o.opponent}>
+                  <td>{o.opponent}</td>
+                  <td>{o.played}</td>
+                  <td>{o.home}</td>
+                  <td>{o.away}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="card">
+          <div className="section-title">Biggest win &amp; loss seen</div>
           <div>
-            {stats.longestGap.days} days, between {fixtureLabel(stats.longestGap.before)} and{" "}
-            {fixtureLabel(stats.longestGap.after)}
+            {stats.biggestWin
+              ? `Biggest win: ${fixtureLabel(stats.biggestWin.fixture)} (${stats.biggestWin.fixture.arsenalGoals}-${stats.biggestWin.fixture.opponentGoals})`
+              : "No wins seen yet."}
           </div>
-        ) : (
-          <div className="empty-state">Not enough attended matches yet.</div>
-        )}
-      </div>
+          <div>
+            {stats.biggestLoss
+              ? `Biggest loss: ${fixtureLabel(stats.biggestLoss.fixture)} (${stats.biggestLoss.fixture.arsenalGoals}-${stats.biggestLoss.fixture.opponentGoals})`
+              : "No losses seen yet."}
+          </div>
+        </div>
 
-      <div className="card" style={{ marginBottom: "1rem" }}>
-        <div className="section-title">Matches by competition</div>
-        <table className="stats-table">
-          <tbody>
-            {stats.byCompetition.map(({ competition, matches }) => (
-              <tr key={competition}>
-                <td>{competition}</td>
-                <td>{matches}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+        <div className="card">
+          <div className="section-title">Highest-scoring match seen</div>
+          <div>
+            {stats.highestScoring
+              ? `${fixtureLabel(stats.highestScoring.fixture)} (${stats.highestScoring.totalGoals} goals)`
+              : "No matches seen yet."}
+          </div>
+        </div>
 
-      <div className="card">
-        <div className="section-title">Finals</div>
-        <div>
-          Attended {stats.finals.attended}, won {stats.finals.wins} (
-          {stats.finals.winPct.toFixed(0)}%)
+        <div className="card">
+          <div className="section-title">Longest gap between attended matches</div>
+          {stats.longestGap.before && stats.longestGap.after ? (
+            <div>
+              {stats.longestGap.days} days, between {fixtureLabel(stats.longestGap.before)} and{" "}
+              {fixtureLabel(stats.longestGap.after)}
+            </div>
+          ) : (
+            <div className="empty-state">Not enough attended matches yet.</div>
+          )}
+        </div>
+
+        <div className="card">
+          <div className="section-title">Matches by competition</div>
+          <table className="stats-table">
+            <tbody>
+              {stats.byCompetition.map(({ competition, matches }) => (
+                <tr key={competition}>
+                  <td>{competition}</td>
+                  <td>{matches}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="card">
+          <div className="section-title">Finals</div>
+          <div>
+            Attended {stats.finals.attended}, won {stats.finals.wins} (
+            {stats.finals.winPct.toFixed(0)}%)
+          </div>
         </div>
       </div>
     </div>
