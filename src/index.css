@@ -484,9 +484,18 @@ a {
 }
 
 @media (max-width: 760px) {
+  .fixtures-toolbar .season-filter {
+    margin-bottom: 0.5rem;
+  }
+
+  .fixtures-toolbar .bulk-actions {
+    margin-bottom: 0.5rem;
+  }
+
   .fixtures-toolbar .info-note {
     position: static;
     width: 100%;
+    margin-bottom: 0.5rem;
     text-align: left;
     justify-content: flex-start;
   }
