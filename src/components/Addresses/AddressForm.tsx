@@ -9,6 +9,8 @@ interface Props {
   onCancel: () => void;
   /** Whether an address with no end date (an ongoing "current" address) already exists. */
   hasCurrentAddress: boolean;
+  /** When set, the form edits this address in place instead of creating a new one. */
+  initialAddress?: HomeAddress;
 }
 
 function DraggablePin({
@@ -38,15 +40,19 @@ function DraggablePin({
   );
 }
 
-export function AddressForm({ onSave, onCancel, hasCurrentAddress }: Props) {
-  const [label, setLabel] = useState("");
-  const [query, setQuery] = useState("");
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
+export function AddressForm({ onSave, onCancel, hasCurrentAddress, initialAddress }: Props) {
+  const [label, setLabel] = useState(initialAddress?.label ?? "");
+  const [query, setQuery] = useState(initialAddress?.query ?? "");
+  const [fromDate, setFromDate] = useState(initialAddress?.fromDate ?? "");
+  const [toDate, setToDate] = useState(initialAddress?.toDate ?? "");
   // Only default to "current" when nothing else is already marked current —
   // otherwise every new address would silently claim to be the current one.
-  const [ongoing, setOngoing] = useState(!hasCurrentAddress);
-  const [pin, setPin] = useState<[number, number] | null>(null);
+  const [ongoing, setOngoing] = useState(
+    initialAddress ? initialAddress.toDate === null : !hasCurrentAddress,
+  );
+  const [pin, setPin] = useState<[number, number] | null>(
+    initialAddress ? [initialAddress.latitude, initialAddress.longitude] : null,
+  );
   const [searching, setSearching] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -78,7 +84,7 @@ export function AddressForm({ onSave, onCancel, hasCurrentAddress }: Props) {
       return;
     }
     onSave({
-      id: crypto.randomUUID(),
+      id: initialAddress?.id ?? crypto.randomUUID(),
       label: label || query,
       query,
       latitude: pin[0],
@@ -90,7 +96,7 @@ export function AddressForm({ onSave, onCancel, hasCurrentAddress }: Props) {
 
   return (
     <div className="card" style={{ marginBottom: "1rem" }}>
-      <div className="section-title">Add home address</div>
+      <div className="section-title">{initialAddress ? "Edit home address" : "Add home address"}</div>
 
       <div className="form-row">
         <label>
@@ -152,7 +158,7 @@ export function AddressForm({ onSave, onCancel, hasCurrentAddress }: Props) {
 
       <div className="bulk-actions">
         <button className="btn btn-primary" onClick={handleSave}>
-          Save address
+          {initialAddress ? "Save changes" : "Save address"}
         </button>
         <button className="btn" onClick={onCancel}>
           Cancel

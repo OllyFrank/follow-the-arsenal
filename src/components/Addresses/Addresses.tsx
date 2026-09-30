@@ -11,13 +11,26 @@ interface Props {
 
 export function Addresses({ addresses, onChange }: Props) {
   const [adding, setAdding] = useState(false);
+  const [editingAddress, setEditingAddress] = useState<HomeAddress | null>(null);
 
   const issues = useMemo(() => findPeriodIssues(addresses), [addresses]);
-  const hasCurrentAddress = addresses.some((a) => a.toDate === null);
+  const hasCurrentAddress = addresses.some(
+    (a) => a.toDate === null && a.id !== editingAddress?.id,
+  );
 
   function handleSave(address: HomeAddress) {
-    onChange([...addresses, address]);
+    if (editingAddress) {
+      onChange(addresses.map((a) => (a.id === address.id ? address : a)));
+    } else {
+      onChange([...addresses, address]);
+    }
     setAdding(false);
+    setEditingAddress(null);
+  }
+
+  function handleCancelForm() {
+    setAdding(false);
+    setEditingAddress(null);
   }
 
   function handleDelete(id: string) {
@@ -41,17 +54,19 @@ export function Addresses({ addresses, onChange }: Props) {
       <div className="card">
         <div className="section-header">
           <div className="section-title">Home addresses</div>
-          {!adding && (
+          {!adding && !editingAddress && (
             <button className="btn btn-primary" onClick={() => setAdding(true)}>
               Add address
             </button>
           )}
         </div>
-        {adding && (
+        {(adding || editingAddress) && (
           <AddressForm
+            key={editingAddress?.id ?? "add"}
             onSave={handleSave}
-            onCancel={() => setAdding(false)}
+            onCancel={handleCancelForm}
             hasCurrentAddress={hasCurrentAddress}
+            initialAddress={editingAddress ?? undefined}
           />
         )}
         {addresses.length === 0 && !adding && (
@@ -69,13 +84,20 @@ export function Addresses({ addresses, onChange }: Props) {
                 {formatDateLong(addr.fromDate)} &rarr;{" "}
                 {addr.toDate ? formatDateLong(addr.toDate) : "present"}
               </div>
-              <button
-                className="btn btn-danger"
-                style={{ marginTop: "0.5rem" }}
-                onClick={() => handleDelete(addr.id)}
-              >
-                Remove
-              </button>
+              <div className="bulk-actions" style={{ marginTop: "0.5rem", marginBottom: 0 }}>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setEditingAddress(addr);
+                    setAdding(false);
+                  }}
+                >
+                  Edit
+                </button>
+                <button className="btn btn-danger" onClick={() => handleDelete(addr.id)}>
+                  Remove
+                </button>
+              </div>
             </div>
           ))}
       </div>
