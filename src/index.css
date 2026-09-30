@@ -286,9 +286,9 @@ a {
   overflow: hidden;
 }
 
-.fixture-card-venue {
-  font-weight: 500;
-  color: var(--grey-600);
+.pill.badge-venue {
+  background: var(--grey-100);
+  color: var(--navy);
 }
 
 .fixture-card-meta {
