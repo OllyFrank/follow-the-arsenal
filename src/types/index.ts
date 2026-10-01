@@ -52,4 +52,5 @@ export interface HomeAddress {
 export interface AppState {
   attendedMatchIds: string[];
   homeAddresses: HomeAddress[];
+  onboardingComplete: boolean;
 }

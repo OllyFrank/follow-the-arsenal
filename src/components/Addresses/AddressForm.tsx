@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
 import "../../lib/leafletIcons";
 import { geocode } from "../../lib/geocode";
 import type { HomeAddress } from "../../types";
+import { DraggablePin } from "./DraggablePin";
 
 interface Props {
   onSave: (address: HomeAddress) => void;
@@ -11,33 +12,6 @@ interface Props {
   hasCurrentAddress: boolean;
   /** When set, the form edits this address in place instead of creating a new one. */
   initialAddress?: HomeAddress;
-}
-
-function DraggablePin({
-  position,
-  onMove,
-}: {
-  position: [number, number];
-  onMove: (pos: [number, number]) => void;
-}) {
-  useMapEvents({
-    click(e) {
-      onMove([e.latlng.lat, e.latlng.lng]);
-    },
-  });
-  return (
-    <Marker
-      position={position}
-      draggable
-      eventHandlers={{
-        dragend: (e) => {
-          const marker = e.target;
-          const pos = marker.getLatLng();
-          onMove([pos.lat, pos.lng]);
-        },
-      }}
-    />
-  );
 }
 
 export function AddressForm({ onSave, onCancel, hasCurrentAddress, initialAddress }: Props) {

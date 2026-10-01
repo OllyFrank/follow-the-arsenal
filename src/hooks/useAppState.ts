@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import type { HomeAddress } from "../types";
 import {
+  completeOnboarding,
   getAppState,
   saveHomeAddresses,
   setAttendance,
@@ -22,11 +23,17 @@ export function useAppState() {
     setState(saveHomeAddresses(addresses));
   }, []);
 
+  const finishOnboarding = useCallback(() => {
+    setState(completeOnboarding());
+  }, []);
+
   return {
     attendedMatchIds: new Set(state.attendedMatchIds),
     homeAddresses: state.homeAddresses,
+    onboardingComplete: state.onboardingComplete,
     toggleAttendance,
     bulkSetAttendance,
     updateAddresses,
+    finishOnboarding,
   };
 }

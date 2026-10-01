@@ -8,14 +8,20 @@ const STORAGE_KEY = "watfa:state:v1";
 function readState(): AppState {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { attendedMatchIds: [], homeAddresses: [] };
+    if (!raw) return { attendedMatchIds: [], homeAddresses: [], onboardingComplete: false };
     const parsed = JSON.parse(raw) as AppState;
+    const attendedMatchIds = parsed.attendedMatchIds ?? [];
+    const homeAddresses = parsed.homeAddresses ?? [];
     return {
-      attendedMatchIds: parsed.attendedMatchIds ?? [],
-      homeAddresses: parsed.homeAddresses ?? [],
+      attendedMatchIds,
+      homeAddresses,
+      // Anyone with existing data got here before onboarding existed —
+      // treat them as already onboarded rather than show it retroactively.
+      onboardingComplete:
+        parsed.onboardingComplete ?? (attendedMatchIds.length > 0 || homeAddresses.length > 0),
     };
   } catch {
-    return { attendedMatchIds: [], homeAddresses: [] };
+    return { attendedMatchIds: [], homeAddresses: [], onboardingComplete: false };
   }
 }
 
@@ -55,6 +61,13 @@ export function setAttendanceBulk(matchIds: string[], attended: boolean): AppSta
 export function saveHomeAddresses(addresses: HomeAddress[]): AppState {
   const state = readState();
   const next: AppState = { ...state, homeAddresses: addresses };
+  writeState(next);
+  return next;
+}
+
+export function completeOnboarding(): AppState {
+  const state = readState();
+  const next: AppState = { ...state, onboardingComplete: true };
   writeState(next);
   return next;
 }

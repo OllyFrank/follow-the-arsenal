@@ -6,6 +6,7 @@ import { useAppState } from "./hooks/useAppState";
 import { FixtureList } from "./components/FixtureList/FixtureList";
 import { Addresses } from "./components/Addresses/Addresses";
 import { Dashboard } from "./components/Dashboard/Dashboard";
+import { Onboarding } from "./components/Onboarding/Onboarding";
 
 const fixtures = fixturesData as Fixture[];
 const grounds = groundsData as Ground[];
@@ -17,9 +18,11 @@ function App() {
   const {
     attendedMatchIds,
     homeAddresses,
+    onboardingComplete,
     toggleAttendance,
     bulkSetAttendance,
     updateAddresses,
+    finishOnboarding,
   } = useAppState();
 
   const groundsById = useMemo(() => new Map(grounds.map((g) => [g.groundId, g])), []);
@@ -28,47 +31,61 @@ function App() {
     <>
       <header className="app-header">
         <h1>We All Follow The Arsenal</h1>
-        <nav className="tabs">
-          <button
-            className={`tab${tab === "fixtures" ? " active" : ""}`}
-            onClick={() => setTab("fixtures")}
-          >
-            Fixtures
-          </button>
-          <button
-            className={`tab${tab === "addresses" ? " active" : ""}`}
-            onClick={() => setTab("addresses")}
-          >
-            Addresses
-          </button>
-          <button
-            className={`tab${tab === "stats" ? " active" : ""}`}
-            onClick={() => setTab("stats")}
-          >
-            Stats
-          </button>
-        </nav>
+        {onboardingComplete && (
+          <nav className="tabs">
+            <button
+              className={`tab${tab === "fixtures" ? " active" : ""}`}
+              onClick={() => setTab("fixtures")}
+            >
+              Fixtures
+            </button>
+            <button
+              className={`tab${tab === "addresses" ? " active" : ""}`}
+              onClick={() => setTab("addresses")}
+            >
+              Addresses
+            </button>
+            <button
+              className={`tab${tab === "stats" ? " active" : ""}`}
+              onClick={() => setTab("stats")}
+            >
+              Stats
+            </button>
+          </nav>
+        )}
       </header>
       <main className="app-main">
-        {tab === "fixtures" && (
-          <FixtureList
+        {!onboardingComplete ? (
+          <Onboarding
             fixtures={fixtures}
-            groundsById={groundsById}
-            attendedMatchIds={attendedMatchIds}
-            onToggleAttendance={toggleAttendance}
+            homeAddresses={homeAddresses}
             onBulkSetAttendance={bulkSetAttendance}
+            onUpdateAddresses={updateAddresses}
+            onComplete={finishOnboarding}
           />
-        )}
-        {tab === "addresses" && (
-          <Addresses addresses={homeAddresses} onChange={updateAddresses} />
-        )}
-        {tab === "stats" && (
-          <Dashboard
-            fixtures={fixtures}
-            grounds={grounds}
-            attendedMatchIds={attendedMatchIds}
-            addresses={homeAddresses}
-          />
+        ) : (
+          <>
+            {tab === "fixtures" && (
+              <FixtureList
+                fixtures={fixtures}
+                groundsById={groundsById}
+                attendedMatchIds={attendedMatchIds}
+                onToggleAttendance={toggleAttendance}
+                onBulkSetAttendance={bulkSetAttendance}
+              />
+            )}
+            {tab === "addresses" && (
+              <Addresses addresses={homeAddresses} onChange={updateAddresses} />
+            )}
+            {tab === "stats" && (
+              <Dashboard
+                fixtures={fixtures}
+                grounds={grounds}
+                attendedMatchIds={attendedMatchIds}
+                addresses={homeAddresses}
+              />
+            )}
+          </>
         )}
       </main>
     </>
