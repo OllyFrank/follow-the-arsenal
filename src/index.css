@@ -55,8 +55,8 @@ body {
 }
 
 body {
-  background: var(--grey-50);
-  color: var(--grey-800);
+  background: var(--ground);
+  color: var(--text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
@@ -289,32 +289,46 @@ a {
   color: var(--grey-800);
 }
 
-.pill.badge-w {
-  background: #e6f4ea;
-  color: var(--green);
+.result-chip {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
 }
 
-.pill.badge-d {
-  background: var(--grey-100);
-  color: var(--grey-600);
+.result-chip-w {
+  background: var(--win-bg);
+  color: var(--win-text);
 }
 
-.pill.badge-l {
-  background: #fdeaea;
-  color: var(--red-dark);
+.result-chip-d {
+  background: var(--draw-bg);
+  color: var(--draw-text);
+}
+
+.result-chip-l {
+  background: var(--loss-bg);
+  color: var(--loss-text);
 }
 
 /* --- Fixture list --- */
 
 .fixtures-toolbar {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .season-filter {
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  margin-bottom: 1rem;
   flex-wrap: wrap;
 }
 
@@ -328,18 +342,55 @@ a {
   background: var(--white);
 }
 
+.fixture-count {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  color: var(--navy);
+}
+
+.fixture-count-value {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.fixture-count-label {
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .bulk-actions {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 1rem;
   flex-wrap: wrap;
 }
 
+.autosave-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--text-muted);
+}
+
+.autosave-notice-extra {
+  display: none;
+}
+
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   border: 1px solid var(--navy);
   background: var(--white);
   color: var(--navy);
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 0.5rem 0.9rem;
   font-weight: 600;
   font-size: 0.85rem;
@@ -365,53 +416,181 @@ a {
   color: var(--white);
 }
 
-.fixture-row {
+.month-group {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 0.75rem;
-  padding: 0.65rem 0;
-  border-bottom: 1px solid var(--grey-100);
+  margin-bottom: 1rem;
 }
 
-.fixture-row:last-child {
-  border-bottom: none;
-}
-
-.fixture-row.disabled {
-  opacity: 0.5;
-}
-
-.fixture-main {
-  flex: 1;
-  min-width: 0;
-}
-
-.fixture-teams {
-  font-weight: 700;
-  font-size: 0.95rem;
-}
-
-.fixture-meta {
-  color: var(--grey-600);
-  font-size: 0.8rem;
-  margin-top: 0.15rem;
+.month-heading {
   display: flex;
-  gap: 0.4rem;
-  flex-wrap: wrap;
   align-items: center;
+  gap: 0.6rem;
 }
 
-.fixture-score {
+.month-heading h2 {
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.month-heading .hairline {
+  flex-grow: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.ticket-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.ticket {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.ticket.attended {
+  border-color: var(--red);
+  background: var(--red);
+}
+
+.ticket.disabled {
+  opacity: 0.55;
+}
+
+.ticket-stub {
+  flex-shrink: 0;
+  width: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--stub);
+  color: var(--navy-ink);
+  border-right: 2px dashed var(--perf);
+}
+
+.ticket.attended .ticket-stub {
+  background: var(--white);
+  color: var(--red);
+  border-right-color: var(--red);
+}
+
+.ticket-score {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
-  min-width: 3.5rem;
-  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.ticket-ha {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ticket-details {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 0.25rem 0.75rem 0.75rem;
+}
+
+.ticket-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ticket-competition {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ticket.attended .ticket-competition {
+  color: var(--white);
+}
+
+.ticket-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--navy-ink);
+}
+
+.ticket.attended .ticket-title {
+  color: var(--white);
+}
+
+.ticket-subtext {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.ticket.attended .ticket-subtext {
+  color: var(--white);
+}
+
+.ticket-flags {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
 }
 
 .remember-link {
-  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  min-height: 44px;
+  margin: -0.5rem 0 -0.85rem;
+  font-size: 0.8125rem;
   color: var(--navy);
   text-decoration: underline;
+}
+
+.ticket.attended .remember-link {
+  color: var(--white);
+}
+
+.ticket-toggle-col {
+  flex-shrink: 0;
+  width: 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.ticket-caption {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ticket.attended .ticket-caption {
+  color: var(--white);
 }
 
 .fixture-grid {
@@ -422,7 +601,7 @@ a {
 
 .fixture-card {
   background: var(--white);
-  border: 1px solid var(--grey-200);
+  border: 1px solid var(--line);
   border-radius: 10px;
   padding: 0.6rem;
   display: flex;
@@ -432,8 +611,18 @@ a {
   text-align: center;
 }
 
+.fixture-card.attended {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.fixture-card.attended .fixture-card-teams,
+.fixture-card.attended .fixture-card-score {
+  color: var(--white);
+}
+
 .fixture-card.disabled {
-  opacity: 0.5;
+  opacity: 0.55;
 }
 
 .fixture-card .attend-toggle {
@@ -461,6 +650,11 @@ a {
   color: var(--navy);
 }
 
+.fixture-card.attended .pill.badge-venue {
+  background: rgba(255, 255, 255, 0.25);
+  color: var(--white);
+}
+
 .fixture-card-meta {
   display: flex;
   align-items: center;
@@ -469,42 +663,46 @@ a {
   color: var(--grey-600);
 }
 
+.fixture-card.attended .fixture-card-meta {
+  color: rgba(255, 255, 255, 0.85);
+}
+
 .attend-toggle {
-  appearance: none;
-  width: 3.4rem;
-  height: 2rem;
-  border-radius: 999px;
-  border: 2px solid var(--grey-200);
-  background: var(--grey-100);
-  position: relative;
-  flex-shrink: 0;
-  transition: background 0.15s, border-color 0.15s;
-}
-
-.attend-toggle::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 1.5rem;
-  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   border-radius: 50%;
+  border: 2px solid var(--line-strong);
   background: var(--white);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  transition: transform 0.15s;
+  color: var(--line);
+  flex-shrink: 0;
 }
 
-.attend-toggle:checked {
-  background: var(--green);
-  border-color: var(--green);
-}
-
-.attend-toggle:checked::after {
-  transform: translateX(1.4rem);
+.attend-toggle.attended {
+  border-color: var(--white);
+  color: var(--red);
 }
 
 .attend-toggle:disabled {
   cursor: not-allowed;
+  opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+  .autosave-notice {
+    font-size: 0.875rem;
+  }
+
+  .autosave-notice-extra {
+    display: inline;
+  }
+
+  .ticket-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 0.75rem;
+  }
 }
 
 /* --- Addresses --- */

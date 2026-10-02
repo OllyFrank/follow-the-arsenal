@@ -10,6 +10,12 @@ export function formatDateLong(isoDate: string): string {
   return `${d} ${MONTHS[m - 1]} ${y}`;
 }
 
+/** "<Month> <year>", e.g. "August 2025" — for grouping fixtures by calendar month. */
+export function formatMonthYear(isoDate: string): string {
+  const [y, m] = isoDate.split("-").map(Number);
+  return `${MONTHS[m - 1]} ${y}`;
+}
+
 /** Score oriented as "home team's goals - away team's goals". */
 export function formatFixtureScoreLine(fixture: Fixture): string {
   const homeGoals = fixture.homeTeam === "Arsenal" ? fixture.arsenalGoals : fixture.opponentGoals;
