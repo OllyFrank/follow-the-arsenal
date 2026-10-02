@@ -13,20 +13,28 @@ interface Props {
   grounds: Ground[];
   attendedMatchIds: Set<string>;
   addresses: HomeAddress[];
+  unit: "mi" | "km";
+  onUnitChange: (unit: "mi" | "km") => void;
 }
 
 function fixtureLabel(fixture: Fixture): string {
   return `${fixture.homeTeam} v ${fixture.awayTeam}, ${formatDateLong(fixture.date)}`;
 }
 
-export function Dashboard({ fixtures, grounds, attendedMatchIds, addresses }: Props) {
+export function Dashboard({
+  fixtures,
+  grounds,
+  attendedMatchIds,
+  addresses,
+  unit,
+  onUnitChange,
+}: Props) {
   const seasons = useMemo(() => {
     const set = new Set(fixtures.map((f) => f.season));
     return [...set].sort();
   }, [fixtures]);
 
   const [season, setSeason] = useState<string>("all");
-  const [unit, setUnit] = useState<"mi" | "km">("mi");
 
   const scopedFixtures = useMemo(
     () => (season === "all" ? fixtures : fixtures.filter((f) => f.season === season)),
@@ -54,10 +62,10 @@ export function Dashboard({ fixtures, grounds, attendedMatchIds, addresses }: Pr
           ))}
         </select>
         <div className="unit-toggle">
-          <button className={unit === "mi" ? "active" : ""} onClick={() => setUnit("mi")}>
+          <button className={unit === "mi" ? "active" : ""} onClick={() => onUnitChange("mi")}>
             mi
           </button>
-          <button className={unit === "km" ? "active" : ""} onClick={() => setUnit("km")}>
+          <button className={unit === "km" ? "active" : ""} onClick={() => onUnitChange("km")}>
             km
           </button>
         </div>

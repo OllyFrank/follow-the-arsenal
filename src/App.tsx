@@ -3,18 +3,29 @@ import fixturesData from "./data/fixtures.json";
 import groundsData from "./data/grounds.json";
 import type { Fixture, Ground } from "./types";
 import { useAppState } from "./hooks/useAppState";
+import { computeStats } from "./lib/stats";
+import { formatDistance } from "./lib/format";
 import { FixtureList } from "./components/FixtureList/FixtureList";
 import { Addresses } from "./components/Addresses/Addresses";
 import { Dashboard } from "./components/Dashboard/Dashboard";
 import { Onboarding } from "./components/Onboarding/Onboarding";
+import { Logo } from "./components/shared/Logo";
+import { FixturesIcon, AddressesIcon, StatsIcon } from "./components/shared/NavIcons";
 
 const fixtures = fixturesData as Fixture[];
 const grounds = groundsData as Ground[];
 
 type Tab = "fixtures" | "addresses" | "stats";
 
+const TABS: { id: Tab; label: string; Icon: () => React.JSX.Element }[] = [
+  { id: "fixtures", label: "Fixtures", Icon: FixturesIcon },
+  { id: "addresses", label: "Addresses", Icon: AddressesIcon },
+  { id: "stats", label: "Stats", Icon: StatsIcon },
+];
+
 function App() {
   const [tab, setTab] = useState<Tab>("fixtures");
+  const [unit, setUnit] = useState<"mi" | "km">("mi");
   const {
     attendedMatchIds,
     homeAddresses,
@@ -27,32 +38,47 @@ function App() {
 
   const groundsById = useMemo(() => new Map(grounds.map((g) => [g.groundId, g])), []);
 
+  // All-seasons total, independent of whatever season filter the Stats tab
+  // currently has selected — the header chip always shows the full figure.
+  const totalDistanceKm = useMemo(
+    () => computeStats(fixtures, grounds, [...attendedMatchIds], homeAddresses).distance.totalKm,
+    [attendedMatchIds, homeAddresses],
+  );
+
   return (
     <>
       <header className="app-header">
-        <h1>We All Follow The Arsenal</h1>
-        {onboardingComplete && (
-          <nav className="tabs">
-            <button
-              className={`tab${tab === "fixtures" ? " active" : ""}`}
-              onClick={() => setTab("fixtures")}
-            >
-              Fixtures
-            </button>
-            <button
-              className={`tab${tab === "addresses" ? " active" : ""}`}
-              onClick={() => setTab("addresses")}
-            >
-              Addresses
-            </button>
-            <button
-              className={`tab${tab === "stats" ? " active" : ""}`}
-              onClick={() => setTab("stats")}
-            >
-              Stats
-            </button>
-          </nav>
-        )}
+        <div className="app-header-inner">
+          <span className="logo-compact">
+            <Logo variant="compact" tone="onRed" width={170} height={51} />
+          </span>
+          <span className="logo-long">
+            <Logo variant="long" tone="onRed" width={336} height={56} />
+          </span>
+
+          {onboardingComplete && (
+            <nav className="tabs" aria-label="Main">
+              {TABS.map(({ id, label, Icon }) => (
+                <button
+                  key={id}
+                  className={`tab${tab === id ? " active" : ""}`}
+                  aria-current={tab === id ? "page" : undefined}
+                  onClick={() => setTab(id)}
+                >
+                  <Icon />
+                  {label}
+                </button>
+              ))}
+            </nav>
+          )}
+
+          {onboardingComplete && (
+            <div className="mileage-chip">
+              <div className="mileage-chip-value">{formatDistance(totalDistanceKm, unit)}</div>
+              <div className="mileage-chip-label">travelled so far</div>
+            </div>
+          )}
+        </div>
       </header>
       <main className="app-main">
         {!onboardingComplete ? (
@@ -83,6 +109,8 @@ function App() {
                 grounds={grounds}
                 attendedMatchIds={attendedMatchIds}
                 addresses={homeAddresses}
+                unit={unit}
+                onUnitChange={setUnit}
               />
             )}
           </>

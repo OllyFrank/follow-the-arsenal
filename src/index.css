@@ -88,35 +88,91 @@ a {
 .app-header {
   background: var(--red);
   color: var(--white);
-  padding: 1rem 1rem 0;
+  border-bottom: 4px solid var(--gold);
 }
 
-.app-header h1 {
-  font-size: 1.25rem;
-  padding-bottom: 0.75rem;
-}
-
-.tabs {
+.app-header-inner {
   display: flex;
-  gap: 0.25rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px 10px;
+}
+
+.logo-long {
+  display: none;
+}
+
+.logo-compact {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.nav-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.mileage-chip {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: var(--navy);
+}
+
+.mileage-chip-value {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.mileage-chip-label {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+
+/* Mobile: tabs become a bottom bar fixed to the viewport */
+.tabs {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: var(--white);
+  border-top: 1px solid var(--line);
 }
 
 .tab {
-  flex: 1;
-  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 0 12px;
   border: none;
-  border-bottom: 3px solid transparent;
-  color: rgba(255, 255, 255, 0.75);
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  letter-spacing: 0.03em;
-  padding: 0.6rem 0.25rem;
+  border-top: 3px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .tab.active {
-  color: var(--white);
-  border-bottom-color: var(--gold);
+  border-top-color: var(--red);
+  color: var(--navy);
+  font-weight: 700;
 }
 
 .app-main {
@@ -125,7 +181,72 @@ a {
   max-width: 920px;
   margin: 0 auto;
   padding: 1rem;
-  padding-bottom: 3rem;
+  padding-bottom: 7rem;
+}
+
+@media (min-width: 768px) {
+  .logo-compact {
+    display: none;
+  }
+
+  .logo-long {
+    display: flex;
+  }
+
+  .app-header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    flex-wrap: wrap;
+    row-gap: 0;
+    column-gap: 32px;
+  }
+
+  .nav-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .tabs {
+    position: static;
+    display: flex;
+    gap: 4px;
+    align-self: stretch;
+    background: transparent;
+    border-top: none;
+  }
+
+  .tab {
+    flex-direction: row;
+    gap: 8px;
+    min-height: 48px;
+    padding: 0 18px;
+    border-top: none;
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
+  }
+
+  .tab.active {
+    background: var(--red-dark);
+  }
+
+  .mileage-chip {
+    margin-left: auto;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+    padding: 10px 14px;
+  }
+
+  .mileage-chip-value {
+    font-size: 1.0625rem;
+  }
+
+  .app-main {
+    padding-bottom: 3rem;
+  }
 }
 
 .card {
