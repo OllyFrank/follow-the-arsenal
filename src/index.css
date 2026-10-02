@@ -1,4 +1,5 @@
 :root {
+  /* Existing tokens — unchanged */
   --red: #db0007;
   --red-dark: #a3000c;
   --navy: #063672;
@@ -11,8 +12,35 @@
   --grey-600: #5c5c66;
   --grey-800: #2b2b33;
   --green: #1a7f37;
+
+  /* New tokens — design-handoff/HANDOFF.md */
+  --red-deep: #c40006;
+  --navy-ink: #0b1f3f;
+  --navy-line: #2a5591;
+  --navy-rule: #3d659d;
+  --navy-soft: #dbe5f4;
+  --navy-tint: #e6ecf5;
+  --gold-text: #ecd59c;
+  --ground: #f4f5f8;
+  --stub: #eef0f5;
+  --line: #c5c8d2;
+  --line-strong: #7d7d88;
+  --perf: #b4b8c4;
+  --timeline: #7d8aa5;
+  --text: #2b2b33;
+  --text-muted: #5c5c66;
+
+  /* Result chips (background / text) */
+  --win-bg: #e3f3e7;
+  --win-text: #14692d;
+  --draw-bg: #ececef;
+  --draw-text: #44444e;
+  --loss-bg: #fde4e4;
+  --loss-text: #a3000c;
+
   --font-heading: "Archivo Black", "Arial Black", Impact, sans-serif;
-  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-label: "Archivo Narrow", "Arial Narrow", sans-serif;
   color-scheme: light;
 }
 
