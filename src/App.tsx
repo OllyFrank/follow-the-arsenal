@@ -45,6 +45,18 @@ function App() {
     [attendedMatchIds, homeAddresses],
   );
 
+  if (!onboardingComplete) {
+    return (
+      <Onboarding
+        fixtures={fixtures}
+        homeAddresses={homeAddresses}
+        onBulkSetAttendance={bulkSetAttendance}
+        onUpdateAddresses={updateAddresses}
+        onComplete={finishOnboarding}
+      />
+    );
+  }
+
   return (
     <>
       <header className="app-header">
@@ -56,64 +68,46 @@ function App() {
             <Logo variant="long" tone="onRed" width={336} height={56} />
           </span>
 
-          {onboardingComplete && (
-            <nav className="tabs" aria-label="Main">
-              {TABS.map(({ id, label, Icon }) => (
-                <button
-                  key={id}
-                  className={`tab${tab === id ? " active" : ""}`}
-                  aria-current={tab === id ? "page" : undefined}
-                  onClick={() => setTab(id)}
-                >
-                  <Icon />
-                  {label}
-                </button>
-              ))}
-            </nav>
-          )}
+          <nav className="tabs" aria-label="Main">
+            {TABS.map(({ id, label, Icon }) => (
+              <button
+                key={id}
+                className={`tab${tab === id ? " active" : ""}`}
+                aria-current={tab === id ? "page" : undefined}
+                onClick={() => setTab(id)}
+              >
+                <Icon />
+                {label}
+              </button>
+            ))}
+          </nav>
 
-          {onboardingComplete && (
-            <div className="mileage-chip">
-              <div className="mileage-chip-value">{formatDistance(totalDistanceKm, unit)}</div>
-              <div className="mileage-chip-label">travelled so far</div>
-            </div>
-          )}
+          <div className="mileage-chip">
+            <div className="mileage-chip-value">{formatDistance(totalDistanceKm, unit)}</div>
+            <div className="mileage-chip-label">travelled so far</div>
+          </div>
         </div>
       </header>
       <main className="app-main">
-        {!onboardingComplete ? (
-          <Onboarding
+        {tab === "fixtures" && (
+          <FixtureList
             fixtures={fixtures}
-            homeAddresses={homeAddresses}
+            groundsById={groundsById}
+            attendedMatchIds={attendedMatchIds}
+            onToggleAttendance={toggleAttendance}
             onBulkSetAttendance={bulkSetAttendance}
-            onUpdateAddresses={updateAddresses}
-            onComplete={finishOnboarding}
           />
-        ) : (
-          <>
-            {tab === "fixtures" && (
-              <FixtureList
-                fixtures={fixtures}
-                groundsById={groundsById}
-                attendedMatchIds={attendedMatchIds}
-                onToggleAttendance={toggleAttendance}
-                onBulkSetAttendance={bulkSetAttendance}
-              />
-            )}
-            {tab === "addresses" && (
-              <Addresses addresses={homeAddresses} onChange={updateAddresses} />
-            )}
-            {tab === "stats" && (
-              <Dashboard
-                fixtures={fixtures}
-                grounds={grounds}
-                attendedMatchIds={attendedMatchIds}
-                addresses={homeAddresses}
-                unit={unit}
-                onUnitChange={setUnit}
-              />
-            )}
-          </>
+        )}
+        {tab === "addresses" && <Addresses addresses={homeAddresses} onChange={updateAddresses} />}
+        {tab === "stats" && (
+          <Dashboard
+            fixtures={fixtures}
+            grounds={grounds}
+            attendedMatchIds={attendedMatchIds}
+            addresses={homeAddresses}
+            unit={unit}
+            onUnitChange={setUnit}
+          />
         )}
       </main>
     </>
