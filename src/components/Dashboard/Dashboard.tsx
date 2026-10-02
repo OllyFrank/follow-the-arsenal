@@ -393,79 +393,86 @@ export function Dashboard({
           </table>
         </section>
 
-        <section className="card">
-          <h2 className="section-title">Biggest win &amp; loss seen</h2>
-          {stats.biggestWin ? (
+        <div className="dashboard-stack">
+          <section className="card">
+            <h2 className="section-title">Biggest win &amp; loss seen</h2>
+            {stats.biggestWin ? (
+              <div className="stat-line-pair">
+                <div className="stat-line">
+                  {stats.biggestWin.fixture.arsenalGoals}-{stats.biggestWin.fixture.opponentGoals}{" "}
+                  win
+                </div>
+                <div className="stat-subline">{fixtureLabel(stats.biggestWin.fixture)}</div>
+              </div>
+            ) : (
+              <div className="empty-state">No wins seen yet.</div>
+            )}
+            {stats.biggestLoss ? (
+              <div className="stat-line-pair" style={{ marginTop: "0.75rem" }}>
+                <div className="stat-line">
+                  {stats.biggestLoss.fixture.arsenalGoals}-{stats.biggestLoss.fixture.opponentGoals}{" "}
+                  loss
+                </div>
+                <div className="stat-subline">{fixtureLabel(stats.biggestLoss.fixture)}</div>
+              </div>
+            ) : (
+              <div className="empty-state">No losses seen yet.</div>
+            )}
+          </section>
+
+          <section className="card">
+            <h2 className="section-title">Highest-scoring match seen</h2>
+            {stats.highestScoring ? (
+              <div className="stat-line-pair">
+                <div className="stat-line">{stats.highestScoring.totalGoals} goals</div>
+                <div className="stat-subline">{fixtureLabel(stats.highestScoring.fixture)}</div>
+              </div>
+            ) : (
+              <div className="empty-state">No matches seen yet.</div>
+            )}
+          </section>
+
+          <section className="card">
+            <h2 className="section-title">Longest gap between attended matches</h2>
+            {stats.longestGap.before && stats.longestGap.after ? (
+              <div className="stat-line-pair">
+                <div className="stat-line">{stats.longestGap.days} days</div>
+                <div className="stat-subline">
+                  {fixtureLabel(stats.longestGap.before)} to {fixtureLabel(stats.longestGap.after)}
+                </div>
+              </div>
+            ) : (
+              <div className="empty-state">Not enough attended matches yet.</div>
+            )}
+          </section>
+        </div>
+
+        <div className="dashboard-stack">
+          <section className="card">
+            <h2 className="section-title">Matches by competition</h2>
+            <table className="stats-table">
+              <tbody>
+                {stats.byCompetition.map(({ competition, matches }) => (
+                  <tr key={competition}>
+                    <th scope="row">{competition}</th>
+                    <td className="num">{matches}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+
+          <section className="card">
+            <h2 className="section-title">Finals</h2>
             <div className="stat-line-pair">
               <div className="stat-line">
-                {stats.biggestWin.fixture.arsenalGoals}-{stats.biggestWin.fixture.opponentGoals} win
+                {stats.finals.wins} win{stats.finals.wins === 1 ? "" : "s"} from{" "}
+                {stats.finals.attended}
               </div>
-              <div className="stat-subline">{fixtureLabel(stats.biggestWin.fixture)}</div>
+              <div className="stat-subline">{stats.finals.winPct.toFixed(0)}% win rate</div>
             </div>
-          ) : (
-            <div className="empty-state">No wins seen yet.</div>
-          )}
-          {stats.biggestLoss ? (
-            <div className="stat-line-pair" style={{ marginTop: "0.75rem" }}>
-              <div className="stat-line">
-                {stats.biggestLoss.fixture.arsenalGoals}-{stats.biggestLoss.fixture.opponentGoals} loss
-              </div>
-              <div className="stat-subline">{fixtureLabel(stats.biggestLoss.fixture)}</div>
-            </div>
-          ) : (
-            <div className="empty-state">No losses seen yet.</div>
-          )}
-        </section>
-
-        <section className="card">
-          <h2 className="section-title">Highest-scoring match seen</h2>
-          {stats.highestScoring ? (
-            <div className="stat-line-pair">
-              <div className="stat-line">{stats.highestScoring.totalGoals} goals</div>
-              <div className="stat-subline">{fixtureLabel(stats.highestScoring.fixture)}</div>
-            </div>
-          ) : (
-            <div className="empty-state">No matches seen yet.</div>
-          )}
-        </section>
-
-        <section className="card">
-          <h2 className="section-title">Longest gap between attended matches</h2>
-          {stats.longestGap.before && stats.longestGap.after ? (
-            <div className="stat-line-pair">
-              <div className="stat-line">{stats.longestGap.days} days</div>
-              <div className="stat-subline">
-                {fixtureLabel(stats.longestGap.before)} to {fixtureLabel(stats.longestGap.after)}
-              </div>
-            </div>
-          ) : (
-            <div className="empty-state">Not enough attended matches yet.</div>
-          )}
-        </section>
-
-        <section className="card">
-          <h2 className="section-title">Matches by competition</h2>
-          <table className="stats-table">
-            <tbody>
-              {stats.byCompetition.map(({ competition, matches }) => (
-                <tr key={competition}>
-                  <th scope="row">{competition}</th>
-                  <td className="num">{matches}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
-
-        <section className="card">
-          <h2 className="section-title">Finals</h2>
-          <div className="stat-line-pair">
-            <div className="stat-line">
-              {stats.finals.wins} win{stats.finals.wins === 1 ? "" : "s"} from {stats.finals.attended}
-            </div>
-            <div className="stat-subline">{stats.finals.winPct.toFixed(0)}% win rate</div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
     </div>
   );
