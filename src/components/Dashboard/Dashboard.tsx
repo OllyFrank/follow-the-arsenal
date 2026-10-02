@@ -76,30 +76,33 @@ export function Dashboard({
 
   return (
     <div>
-      <div className="season-filter">
-        <select value={season} onChange={(e) => setSeason(e.target.value)}>
-          <option value="all">All seasons</option>
-          {seasons.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
-        <div className="unit-toggle">
-          <button
-            aria-pressed={unit === "mi"}
-            className={unit === "mi" ? "active" : ""}
-            onClick={() => onUnitChange("mi")}
-          >
-            mi
-          </button>
-          <button
-            aria-pressed={unit === "km"}
-            className={unit === "km" ? "active" : ""}
-            onClick={() => onUnitChange("km")}
-          >
-            km
-          </button>
+      <div className="stats-title-row">
+        <h1 className="page-heading">Stats</h1>
+        <div className="season-filter stats-controls">
+          <select value={season} onChange={(e) => setSeason(e.target.value)}>
+            <option value="all">All seasons</option>
+            {seasons.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+          <div className="unit-toggle">
+            <button
+              aria-pressed={unit === "mi"}
+              className={unit === "mi" ? "active" : ""}
+              onClick={() => onUnitChange("mi")}
+            >
+              mi
+            </button>
+            <button
+              aria-pressed={unit === "km"}
+              className={unit === "km" ? "active" : ""}
+              onClick={() => onUnitChange("km")}
+            >
+              km
+            </button>
+          </div>
         </div>
       </div>
 

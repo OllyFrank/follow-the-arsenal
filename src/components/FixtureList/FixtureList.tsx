@@ -109,10 +109,22 @@ export function FixtureList({
     [displayedFixtures],
   );
 
+  const countDisplay = (
+    <>
+      <span className="fixture-count-value">{attendedCount}</span>
+      <span className="fixture-count-label">attended</span>
+    </>
+  );
+
   return (
     <div>
       <div className="fixtures-toolbar">
-        <div className="season-filter">
+        <div className="fixtures-title-row">
+          <h1 className="page-heading">Fixtures</h1>
+          <div className="fixture-count fixture-count-desktop">{countDisplay}</div>
+        </div>
+
+        <div className="fixtures-filters-row">
           <select value={season} onChange={(e) => setSeason(e.target.value)}>
             {seasons.map((s) => (
               <option key={s} value={s}>
@@ -128,6 +140,7 @@ export function FixtureList({
               </option>
             ))}
           </select>
+          <div className="fixtures-row-break" />
           <div className="unit-toggle">
             <button
               className={viewMode === "list" ? "active" : ""}
@@ -144,23 +157,19 @@ export function FixtureList({
               Grid
             </button>
           </div>
-        </div>
-
-        <div className="fixture-count">
-          <span className="fixture-count-value">{attendedCount}</span>
-          <span className="fixture-count-label">attended</span>
-        </div>
-
-        <div className="bulk-actions">
-          <button className="btn" onClick={() => onBulkSetAttendance(homeIds, true)}>
-            Tick all home games
-          </button>
-          <button className="btn" onClick={() => onBulkSetAttendance(selectableIds, true)}>
-            Select all
-          </button>
-          <button className="btn" onClick={() => onBulkSetAttendance(selectableIds, false)}>
-            Untick all
-          </button>
+          <div className="fixture-count fixture-count-mobile">{countDisplay}</div>
+          <div className="fixtures-row-break" />
+          <div className="bulk-actions">
+            <button className="btn" onClick={() => onBulkSetAttendance(homeIds, true)}>
+              Tick all home games
+            </button>
+            <button className="btn" onClick={() => onBulkSetAttendance(selectableIds, true)}>
+              Select all
+            </button>
+            <button className="btn" onClick={() => onBulkSetAttendance(selectableIds, false)}>
+              Untick all
+            </button>
+          </div>
         </div>
 
         <div className="autosave-notice">
