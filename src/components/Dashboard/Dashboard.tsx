@@ -1,12 +1,16 @@
 import { useMemo, useState } from "react";
 import type { Fixture, Ground, HomeAddress } from "../../types";
 import { computeStats } from "../../lib/stats";
-import { formatDateLong, formatDistance } from "../../lib/format";
+import { formatDateLong, formatDistance, ordinal } from "../../lib/format";
+import { EARTH_CIRCUMFERENCE_KM } from "../../lib/distance";
 import { usePagination } from "../../hooks/usePagination";
+import { Globe } from "../shared/Globe";
+import { LapStamps } from "../shared/LapStamps";
 import { GroundsMap } from "./GroundsMap";
 import { PaginationControls } from "./PaginationControls";
 
 const GROUNDS_PAGE_SIZE = 10;
+const VISIBLE_SEASONS_DEFAULT = 6;
 
 interface Props {
   fixtures: Fixture[];
@@ -35,6 +39,7 @@ export function Dashboard({
   }, [fixtures]);
 
   const [season, setSeason] = useState<string>("all");
+  const [showAllSeasons, setShowAllSeasons] = useState(false);
 
   const scopedFixtures = useMemo(
     () => (season === "all" ? fixtures : fixtures.filter((f) => f.season === season)),
@@ -50,6 +55,25 @@ export function Dashboard({
 
   const groundsPage = usePagination(stats.grounds.rankedByVisits, GROUNDS_PAGE_SIZE);
 
+  const lapsOfEarth = stats.distance.lapsOfEarth;
+  const completedLaps = Math.floor(lapsOfEarth);
+  const lapFraction = lapsOfEarth - completedLaps;
+  const remainingToNextLapKm = EARTH_CIRCUMFERENCE_KM * (1 - lapFraction);
+
+  const seasonsByDistanceDesc = useMemo(
+    () => [...stats.distance.bySeasonKm].reverse(),
+    [stats.distance.bySeasonKm],
+  );
+  const maxSeasonKm = useMemo(
+    () => Math.max(0, ...stats.distance.bySeasonKm.map((s) => s.km)),
+    [stats.distance.bySeasonKm],
+  );
+  const visibleSeasons = showAllSeasons
+    ? seasonsByDistanceDesc
+    : seasonsByDistanceDesc.slice(0, VISIBLE_SEASONS_DEFAULT);
+
+  const recordBar = stats.record.overall;
+
   return (
     <div>
       <div className="season-filter">
@@ -62,10 +86,18 @@ export function Dashboard({
           ))}
         </select>
         <div className="unit-toggle">
-          <button className={unit === "mi" ? "active" : ""} onClick={() => onUnitChange("mi")}>
+          <button
+            aria-pressed={unit === "mi"}
+            className={unit === "mi" ? "active" : ""}
+            onClick={() => onUnitChange("mi")}
+          >
             mi
           </button>
-          <button className={unit === "km" ? "active" : ""} onClick={() => onUnitChange("km")}>
+          <button
+            aria-pressed={unit === "km"}
+            className={unit === "km" ? "active" : ""}
+            onClick={() => onUnitChange("km")}
+          >
             km
           </button>
         </div>
@@ -80,60 +112,246 @@ export function Dashboard({
         </div>
       )}
 
-      <div className="stats-grid">
-        <div className="stat-tile">
-          <div className="stat-value">{dist(stats.distance.totalKm)}</div>
-          <div className="stat-label">Total distance</div>
-        </div>
-        <div className="stat-tile">
-          <div className="stat-value">{stats.distance.lapsOfEarth.toFixed(2)}</div>
-          <div className="stat-label">Laps of the Earth</div>
-        </div>
-        <div className="stat-tile">
-          <div className="stat-value">{stats.grounds.totalVisited}</div>
-          <div className="stat-label">Grounds visited</div>
-        </div>
-        <div className="stat-tile">
-          <div className="stat-value">
-            {stats.record.overall.wins}-{stats.record.overall.draws}-
-            {stats.record.overall.losses}
+      <div className="stats-top">
+        <section className="stats-hero">
+          <Globe variant="navy" className="stats-hero-globe" />
+          <div className="stats-hero-label">Total distance</div>
+          <div className="stats-hero-value">
+            <span>{dist(stats.distance.totalKm).replace(new RegExp(`\\s*${unit}$`), "")}</span>
+            <span className="stats-hero-unit">{unit}</span>
           </div>
-          <div className="stat-label">Record (W-D-L)</div>
-          <div className="stat-detail">{stats.record.overall.winPct.toFixed(0)}% win rate</div>
+          <div className="stats-hero-rule" />
+          <div className="stats-hero-laps-row">
+            <div className="stats-hero-laps">
+              <span className="stats-hero-laps-value">{lapsOfEarth.toFixed(2)}</span>
+              <span>laps of the Earth</span>
+            </div>
+            <LapStamps lapsOfEarth={lapsOfEarth} />
+          </div>
+          <div className="lap-progress-track">
+            <div className="lap-progress-fill" style={{ width: `${lapFraction * 100}%` }} />
+          </div>
+          <div className="stats-hero-caption">
+            One cannon per lap. Another {dist(remainingToNextLapKm)} earns the{" "}
+            {ordinal(completedLaps + 1)}.
+          </div>
+        </section>
+
+        <div className="stats-tiles">
+          <div className="stat-tile">
+            <div className="stat-value">{stats.grounds.totalVisited}</div>
+            <div className="stat-label">Grounds visited</div>
+          </div>
+          <div className="stat-tile">
+            <div className="stat-value">{stats.goalsSeen.arsenal}</div>
+            <div className="stat-label">Arsenal goals seen</div>
+          </div>
+          <div className="stat-tile">
+            <div className="stat-value">{stats.longestUnbeatenRun.length}</div>
+            <div className="stat-label">Longest unbeaten run</div>
+          </div>
         </div>
-        <div className="stat-tile">
-          <div className="stat-value">{stats.goalsSeen.arsenal}</div>
-          <div className="stat-label">Arsenal goals seen</div>
-          <div className="stat-detail">{stats.goalsSeen.total} total goals</div>
-        </div>
-        <div className="stat-tile">
-          <div className="stat-value">{stats.longestUnbeatenRun.length}</div>
-          <div className="stat-label">Longest unbeaten run</div>
+
+        <section className="card record-card">
+          <div className="section-header">
+            <h2 className="section-title">Record</h2>
+            <div className="record-winrate">{recordBar.winPct.toFixed(0)}% win rate</div>
+          </div>
+          <div className="record-figures">
+            <div className="record-figure">
+              <div className="record-figure-value record-won">{recordBar.wins}</div>
+              <div className="record-figure-label">Won</div>
+            </div>
+            <div className="record-figure">
+              <div className="record-figure-value record-drawn">{recordBar.draws}</div>
+              <div className="record-figure-label">Drawn</div>
+            </div>
+            <div className="record-figure">
+              <div className="record-figure-value record-lost">{recordBar.losses}</div>
+              <div className="record-figure-label">Lost</div>
+            </div>
+          </div>
+          <div
+            className="record-bar"
+            role="img"
+            aria-label={`${recordBar.wins} won, ${recordBar.draws} drawn, ${recordBar.losses} lost`}
+          >
+            {recordBar.played > 0 && (
+              <>
+                <div
+                  className="record-bar-won"
+                  style={{ width: `${(recordBar.wins / recordBar.played) * 100}%` }}
+                />
+                <div
+                  className="record-bar-drawn"
+                  style={{ width: `${(recordBar.draws / recordBar.played) * 100}%` }}
+                />
+                <div className="record-bar-lost" />
+              </>
+            )}
+          </div>
+          <table className="stats-table">
+            <thead>
+              <tr>
+                <th scope="col">
+                  <span className="sr-only">Venue</span>
+                </th>
+                <th scope="col" className="num">P</th>
+                <th scope="col" className="num">W</th>
+                <th scope="col" className="num">D</th>
+                <th scope="col" className="num">L</th>
+                <th scope="col" className="num">Win%</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(
+                [
+                  ["Home", stats.record.home],
+                  ["Away", stats.record.away],
+                  ["Overall", stats.record.overall],
+                ] as const
+              ).map(([label, r]) => (
+                <tr key={label} className={label === "Overall" ? "stats-table-total" : ""}>
+                  <th scope="row">{label}</th>
+                  <td className="num">{r.played}</td>
+                  <td className="num">{r.wins}</td>
+                  <td className="num">{r.draws}</td>
+                  <td className="num">{r.losses}</td>
+                  <td className="num strong">{r.winPct.toFixed(0)}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+      <div className="stats-bottom">
+        <section className="card distance-season-section">
+          <h2 className="section-title">Distance by season</h2>
+          <div className="season-bars">
+            {visibleSeasons.map(({ season: s, km }) => (
+              <div className="season-bar-row" key={s}>
+                <div className="season-bar-label">{s}</div>
+                <div className="season-bar-track">
+                  <div
+                    className="season-bar-fill"
+                    style={{ width: maxSeasonKm === 0 ? "0%" : `${(km / maxSeasonKm) * 100}%` }}
+                  />
+                </div>
+                <div className="season-bar-value">{dist(km)}</div>
+              </div>
+            ))}
+          </div>
+          {!showAllSeasons && seasonsByDistanceDesc.length > VISIBLE_SEASONS_DEFAULT && (
+            <button className="link-button" onClick={() => setShowAllSeasons(true)}>
+              Show all {seasonsByDistanceDesc.length} seasons
+            </button>
+          )}
+        </section>
+
+        <div className="stats-side">
+          <section className="card furthest-trip-section">
+            <h2 className="section-title">Furthest single trip</h2>
+            {stats.distance.furthestTrip ? (
+              <>
+                <div className="furthest-trip-strip">
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="var(--navy)"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M4 11l8-7 8 7M6 10v10h12V10" />
+                  </svg>
+                  <div className="furthest-trip-dots" />
+                  <div className="furthest-trip-distance">
+                    {dist(stats.distance.furthestTrip.distanceKm)}
+                  </div>
+                  <div className="furthest-trip-dots" />
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="var(--red)"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" />
+                    <circle cx="12" cy="9.5" r="2.5" />
+                  </svg>
+                </div>
+                <div className="stat-line">
+                  {stats.distance.furthestTrip.fixture.homeTeam} v{" "}
+                  {stats.distance.furthestTrip.fixture.awayTeam}
+                </div>
+                <div className="stat-subline">
+                  {formatDateLong(stats.distance.furthestTrip.fixture.date)} &middot;{" "}
+                  {stats.distance.furthestTrip.ground.ground}
+                </div>
+              </>
+            ) : (
+              <div className="empty-state">No attended matches with a resolvable distance yet.</div>
+            )}
+          </section>
+
+          <section className="card lucky-charm-section">
+            <h2 className="section-title">Lucky charm?</h2>
+            <div className="stat-subline" style={{ marginTop: "-0.5rem", marginBottom: "0.25rem" }}>
+              Arsenal&apos;s win rate when you&apos;re there, and when you&apos;re not.
+            </div>
+            <div className="lucky-charm-row">
+              <div className="lucky-charm-row-head">
+                <div>
+                  Attended <span className="stat-subline-inline">&middot; {stats.luckyCharm.attended.played} matches</span>
+                </div>
+                <div className="lucky-charm-pct lucky-charm-pct-attended">
+                  {stats.luckyCharm.attended.winPct.toFixed(0)}%
+                </div>
+              </div>
+              <div className="lucky-charm-track">
+                <div
+                  className="lucky-charm-fill lucky-charm-fill-attended"
+                  style={{ width: `${stats.luckyCharm.attended.winPct}%` }}
+                />
+              </div>
+            </div>
+            <div className="lucky-charm-row">
+              <div className="lucky-charm-row-head">
+                <div>
+                  Missed <span className="stat-subline-inline">&middot; {stats.luckyCharm.missed.played} matches</span>
+                </div>
+                <div className="lucky-charm-pct lucky-charm-pct-missed">
+                  {stats.luckyCharm.missed.winPct.toFixed(0)}%
+                </div>
+              </div>
+              <div className="lucky-charm-track">
+                <div
+                  className="lucky-charm-fill lucky-charm-fill-missed"
+                  style={{ width: `${stats.luckyCharm.missed.winPct}%` }}
+                />
+              </div>
+            </div>
+          </section>
         </div>
       </div>
 
-      <div className="card" style={{ marginBottom: "1rem" }}>
-        <div className="section-title">Furthest single trip</div>
-        {stats.distance.furthestTrip ? (
-          <div>
-            {dist(stats.distance.furthestTrip.distanceKm)} &mdash;{" "}
-            {fixtureLabel(stats.distance.furthestTrip.fixture)} at{" "}
-            {stats.distance.furthestTrip.ground.ground}
-          </div>
-        ) : (
-          <div className="empty-state">No attended matches with a resolvable distance yet.</div>
-        )}
-      </div>
-
-      <div className="card" style={{ marginBottom: "1rem" }}>
-        <div className="section-title">Grounds visited</div>
+      <section className="card" style={{ marginTop: "1rem" }}>
+        <h2 className="section-title">Grounds visited</h2>
         <GroundsMap groundsWithVisits={stats.grounds.rankedByVisits} />
         <table className="stats-table">
           <tbody>
             {groundsPage.pageItems.map(({ ground, visits }) => (
               <tr key={ground.groundId}>
-                <td>{ground.ground}</td>
-                <td>{visits}</td>
+                <th scope="row">{ground.ground}</th>
+                <td className="num">{visits}</td>
               </tr>
             ))}
           </tbody>
@@ -143,162 +361,108 @@ export function Dashboard({
           totalPages={groundsPage.totalPages}
           onChange={groundsPage.setPage}
         />
-      </div>
+      </section>
 
       <div className="dashboard-grid">
-        <div className="card">
-          <div className="section-title">Distance by season</div>
-          <table className="stats-table">
-            <tbody>
-              {stats.distance.bySeasonKm.map(({ season: s, km }) => (
-                <tr key={s}>
-                  <td>{s}</td>
-                  <td>{dist(km)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="card">
-          <div className="section-title">Top opponents</div>
+        <section className="card">
+          <h2 className="section-title">Top opponents</h2>
           <table className="stats-table">
             <thead>
               <tr>
-                <th>Opponent</th>
-                <th>Played</th>
-                <th>Home</th>
-                <th>Away</th>
+                <th scope="col">
+                  <span className="sr-only">Opponent</span>
+                </th>
+                <th scope="col" className="num">P</th>
+                <th scope="col" className="num">Home</th>
+                <th scope="col" className="num">Away</th>
               </tr>
             </thead>
             <tbody>
               {stats.topOpponents.slice(0, 10).map((o) => (
                 <tr key={o.opponent}>
-                  <td>{o.opponent}</td>
-                  <td>{o.played}</td>
-                  <td>{o.home}</td>
-                  <td>{o.away}</td>
+                  <th scope="row">{o.opponent}</th>
+                  <td className="num">{o.played}</td>
+                  <td className="num">{o.home}</td>
+                  <td className="num">{o.away}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
+        </section>
 
-        <div className="card">
-          <div className="section-title">Record</div>
-          <table className="stats-table">
-            <thead>
-              <tr>
-                <th></th>
-                <th>P</th>
-                <th>W</th>
-                <th>D</th>
-                <th>L</th>
-                <th>Win%</th>
-              </tr>
-            </thead>
-            <tbody>
-              {(
-                [
-                  ["Overall", stats.record.overall],
-                  ["Home", stats.record.home],
-                  ["Away", stats.record.away],
-                ] as const
-              ).map(([label, r]) => (
-                <tr key={label}>
-                  <td>{label}</td>
-                  <td>{r.played}</td>
-                  <td>{r.wins}</td>
-                  <td>{r.draws}</td>
-                  <td>{r.losses}</td>
-                  <td>{r.winPct.toFixed(0)}%</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <section className="card">
+          <h2 className="section-title">Biggest win &amp; loss seen</h2>
+          {stats.biggestWin ? (
+            <div className="stat-line-pair">
+              <div className="stat-line">
+                {stats.biggestWin.fixture.arsenalGoals}-{stats.biggestWin.fixture.opponentGoals} win
+              </div>
+              <div className="stat-subline">{fixtureLabel(stats.biggestWin.fixture)}</div>
+            </div>
+          ) : (
+            <div className="empty-state">No wins seen yet.</div>
+          )}
+          {stats.biggestLoss ? (
+            <div className="stat-line-pair" style={{ marginTop: "0.75rem" }}>
+              <div className="stat-line">
+                {stats.biggestLoss.fixture.arsenalGoals}-{stats.biggestLoss.fixture.opponentGoals} loss
+              </div>
+              <div className="stat-subline">{fixtureLabel(stats.biggestLoss.fixture)}</div>
+            </div>
+          ) : (
+            <div className="empty-state">No losses seen yet.</div>
+          )}
+        </section>
 
-        <div className="card">
-          <div className="section-title">Lucky charm?</div>
-          <table className="stats-table">
-            <thead>
-              <tr>
-                <th></th>
-                <th>P</th>
-                <th>Win%</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Attended</td>
-                <td>{stats.luckyCharm.attended.played}</td>
-                <td>{stats.luckyCharm.attended.winPct.toFixed(0)}%</td>
-              </tr>
-              <tr>
-                <td>Missed</td>
-                <td>{stats.luckyCharm.missed.played}</td>
-                <td>{stats.luckyCharm.missed.winPct.toFixed(0)}%</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <section className="card">
+          <h2 className="section-title">Highest-scoring match seen</h2>
+          {stats.highestScoring ? (
+            <div className="stat-line-pair">
+              <div className="stat-line">{stats.highestScoring.totalGoals} goals</div>
+              <div className="stat-subline">{fixtureLabel(stats.highestScoring.fixture)}</div>
+            </div>
+          ) : (
+            <div className="empty-state">No matches seen yet.</div>
+          )}
+        </section>
 
-        <div className="card">
-          <div className="section-title">Biggest win &amp; loss seen</div>
-          <div>
-            {stats.biggestWin
-              ? `Biggest win: ${fixtureLabel(stats.biggestWin.fixture)} (${stats.biggestWin.fixture.arsenalGoals}-${stats.biggestWin.fixture.opponentGoals})`
-              : "No wins seen yet."}
-          </div>
-          <div style={{ marginTop: "0.5rem" }}>
-            {stats.biggestLoss
-              ? `Biggest loss: ${fixtureLabel(stats.biggestLoss.fixture)} (${stats.biggestLoss.fixture.arsenalGoals}-${stats.biggestLoss.fixture.opponentGoals})`
-              : "No losses seen yet."}
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="section-title">Highest-scoring match seen</div>
-          <div>
-            {stats.highestScoring
-              ? `${fixtureLabel(stats.highestScoring.fixture)} (${stats.highestScoring.totalGoals} goals)`
-              : "No matches seen yet."}
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="section-title">Longest gap between attended matches</div>
+        <section className="card">
+          <h2 className="section-title">Longest gap between attended matches</h2>
           {stats.longestGap.before && stats.longestGap.after ? (
-            <div>
-              {stats.longestGap.days} days, between {fixtureLabel(stats.longestGap.before)} and{" "}
-              {fixtureLabel(stats.longestGap.after)}
+            <div className="stat-line-pair">
+              <div className="stat-line">{stats.longestGap.days} days</div>
+              <div className="stat-subline">
+                {fixtureLabel(stats.longestGap.before)} to {fixtureLabel(stats.longestGap.after)}
+              </div>
             </div>
           ) : (
             <div className="empty-state">Not enough attended matches yet.</div>
           )}
-        </div>
+        </section>
 
-        <div className="card">
-          <div className="section-title">Matches by competition</div>
+        <section className="card">
+          <h2 className="section-title">Matches by competition</h2>
           <table className="stats-table">
             <tbody>
               {stats.byCompetition.map(({ competition, matches }) => (
                 <tr key={competition}>
-                  <td>{competition}</td>
-                  <td>{matches}</td>
+                  <th scope="row">{competition}</th>
+                  <td className="num">{matches}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
+        </section>
 
-        <div className="card">
-          <div className="section-title">Finals</div>
-          <div>
-            Attended {stats.finals.attended}, won {stats.finals.wins} (
-            {stats.finals.winPct.toFixed(0)}%)
+        <section className="card">
+          <h2 className="section-title">Finals</h2>
+          <div className="stat-line-pair">
+            <div className="stat-line">
+              {stats.finals.wins} win{stats.finals.wins === 1 ? "" : "s"} from {stats.finals.attended}
+            </div>
+            <div className="stat-subline">{stats.finals.winPct.toFixed(0)}% win rate</div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );

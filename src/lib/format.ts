@@ -34,3 +34,18 @@ export function formatDistance(km: number, unit: "mi" | "km"): string {
   const value = unit === "mi" ? km * 0.621371 : km;
   return `${value.toLocaleString(undefined, { maximumFractionDigits: 0 })} ${unit}`;
 }
+
+const ORDINAL_WORDS = [
+  "zeroth", "first", "second", "third", "fourth", "fifth",
+  "sixth", "seventh", "eighth", "ninth", "tenth",
+];
+
+/** "second", "third", ... "tenth", then falls back to "11th", "12th", etc. */
+export function ordinal(n: number): string {
+  if (n >= 0 && n < ORDINAL_WORDS.length) return ORDINAL_WORDS[n];
+  const suffix =
+    n % 10 === 1 && n % 100 !== 11 ? "st" :
+    n % 10 === 2 && n % 100 !== 12 ? "nd" :
+    n % 10 === 3 && n % 100 !== 13 ? "rd" : "th";
+  return `${n}${suffix}`;
+}

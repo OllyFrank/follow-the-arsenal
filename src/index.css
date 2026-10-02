@@ -27,6 +27,7 @@
   --line-strong: #7d7d88;
   --perf: #b4b8c4;
   --timeline: #7d8aa5;
+  --navy-faint: #7f9cc6;
   --text: #2b2b33;
   --text-muted: #5c5c66;
 
@@ -251,14 +252,17 @@ a {
 
 .card {
   background: var(--white);
-  border: 1px solid var(--grey-200);
+  border: 1px solid var(--line);
   border-radius: 10px;
   padding: 1rem;
 }
 
 .section-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-heading);
+  font-weight: 400;
   font-size: 1rem;
-  margin-bottom: 0.75rem;
+  text-transform: uppercase;
   color: var(--navy);
 }
 
@@ -333,13 +337,21 @@ a {
 }
 
 .season-filter select {
+  height: 48px;
+  box-sizing: border-box;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 0.9rem;
-  padding: 0.45rem 0.6rem;
+  font-size: 0.9375rem;
+  padding: 0 34px 0 14px;
   border-radius: 6px;
-  border: 1px solid var(--grey-200);
-  background: var(--white);
+  border: 1px solid var(--line-strong);
+  color: var(--navy-ink);
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--white)
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23063672" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>')
+    no-repeat right 12px center;
+  background-size: 18px;
 }
 
 .fixture-count {
@@ -787,101 +799,88 @@ a {
 
 /* --- Dashboard --- */
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
-  margin-bottom: 1rem;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
 }
 
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 0.75rem;
+  margin-top: 1rem;
 }
 
 .stat-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
   background: var(--white);
-  border: 1px solid var(--grey-200);
+  border: 1px solid var(--line);
   border-radius: 10px;
-  padding: 0.85rem;
+  padding: 0.9rem 0.75rem;
 }
 
-.stat-tile .stat-value {
+.stat-value {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: 1.75rem;
+  line-height: 1;
   color: var(--navy);
 }
 
-.stat-tile .stat-label {
+.stat-label {
+  font-family: var(--font-label);
   font-size: 0.75rem;
-  color: var(--grey-600);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
-  margin-top: 0.2rem;
+  color: var(--text-muted);
 }
 
-.stat-detail {
-  font-size: 0.8rem;
-  color: var(--grey-600);
-  margin-top: 0.3rem;
+.stat-line {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy-ink);
 }
 
-.info-note {
-  font-size: 0.8rem;
-  color: var(--grey-600);
-  background: var(--white);
-  border: 1px solid var(--grey-200);
-  border-radius: 8px;
-  padding: 0.5rem 0.75rem;
+.stat-subline {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--text-muted);
 }
 
-.fixtures-toolbar .info-note {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 320px;
-  margin: 0;
+.stat-subline-inline {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.stat-line-pair {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  text-align: right;
-  box-sizing: border-box;
-}
-
-@media (max-width: 760px) {
-  .fixtures-toolbar .season-filter {
-    margin-bottom: 0.5rem;
-  }
-
-  .fixtures-toolbar .bulk-actions {
-    margin-bottom: 0.5rem;
-  }
-
-  .fixtures-toolbar .info-note {
-    position: static;
-    width: 100%;
-    margin-bottom: 0.5rem;
-    text-align: left;
-    justify-content: flex-start;
-  }
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
 .unit-toggle {
   display: inline-flex;
   border: 1px solid var(--navy);
-  border-radius: 999px;
+  border-radius: 6px;
   overflow: hidden;
-  font-size: 0.75rem;
 }
 
 .unit-toggle button {
+  min-height: 44px;
+  min-width: 48px;
   border: none;
   background: var(--white);
   color: var(--navy);
-  padding: 0.3rem 0.7rem;
-  font-weight: 600;
+  padding: 0 0.9rem;
+  font-weight: 700;
+  font-size: 0.875rem;
 }
 
 .unit-toggle button.active {
@@ -892,14 +891,44 @@ a {
 table.stats-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+table.stats-table thead tr {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 table.stats-table th,
 table.stats-table td {
   text-align: left;
-  padding: 0.4rem 0.3rem;
-  border-bottom: 1px solid var(--grey-100);
+  padding: 0.6rem 0;
+}
+
+table.stats-table th[scope="row"] {
+  font-weight: 700;
+  color: var(--navy-ink);
+}
+
+table.stats-table tbody tr {
+  border-top: 1px solid var(--grey-200);
+}
+
+table.stats-table tbody tr.stats-table-total {
+  border-top: 2px solid var(--navy);
+}
+
+table.stats-table .num {
+  text-align: right;
+}
+
+table.stats-table .num.strong {
+  font-weight: 700;
 }
 
 .pagination {
@@ -915,20 +944,459 @@ table.stats-table td {
 }
 
 .empty-state {
-  color: var(--grey-600);
+  color: var(--text-muted);
   font-size: 0.9rem;
   text-align: center;
   padding: 2rem 1rem;
 }
 
-@media (max-width: 480px) {
-  .fixture-teams {
-    font-size: 0.85rem;
+.link-button {
+  align-self: flex-start;
+  min-height: 44px;
+  margin: -0.4rem 0 -0.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--navy);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Hero panel */
+
+.stats-hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 22px 20px;
+  border-radius: 12px;
+  background: var(--navy);
+  color: var(--white);
+}
+
+.stats-hero-globe {
+  position: absolute;
+  top: -50px;
+  right: -62px;
+  width: 200px;
+  height: 200px;
+}
+
+.stats-hero-label {
+  position: relative;
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+
+.stats-hero-value {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 3.75rem;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+.stats-hero-unit {
+  font-size: 1.375rem;
+  color: var(--gold-text);
+}
+
+.stats-hero-rule {
+  position: relative;
+  height: 1px;
+  margin-top: 4px;
+  background: var(--navy-rule);
+}
+
+.stats-hero-laps-row {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.stats-hero-laps {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.stats-hero-laps-value {
+  font-family: var(--font-heading);
+  font-size: 1.625rem;
+  line-height: 1;
+}
+
+.lap-stamps {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lap-stamp {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lap-stamp-complete {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.lap-stamp-progress {
+  box-sizing: border-box;
+  border: 2px dashed var(--gold-text);
+  color: var(--navy-faint);
+}
+
+.lap-stamp-multi {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lap-stamp-count {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+}
+
+.lap-progress-track {
+  position: relative;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--navy-rule);
+  overflow: hidden;
+}
+
+.lap-progress-fill {
+  height: 100%;
+  border-radius: 5px;
+  background: var(--gold);
+}
+
+.stats-hero-caption {
+  position: relative;
+  font-size: 0.84375rem;
+  line-height: 1.35;
+  color: var(--navy-soft);
+}
+
+/* Tiles row */
+
+.stats-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+/* Record card */
+
+.record-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.record-winrate {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--navy-ink);
+}
+
+.record-figures {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.record-figure {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.record-figure-value {
+  font-family: var(--font-heading);
+  font-size: 1.875rem;
+  line-height: 1;
+}
+
+.record-won {
+  color: var(--navy);
+}
+
+.record-drawn {
+  color: var(--text-muted);
+}
+
+.record-lost {
+  color: var(--red);
+}
+
+.record-figure-label {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.record-bar {
+  display: flex;
+  gap: 2px;
+  height: 10px;
+}
+
+.record-bar-won {
+  border-radius: 5px 0 0 5px;
+  background: var(--navy);
+}
+
+.record-bar-drawn {
+  background: var(--perf);
+}
+
+.record-bar-lost {
+  flex-grow: 1;
+  border-radius: 0 5px 5px 0;
+  background: var(--red);
+}
+
+/* Furthest single trip */
+
+.furthest-trip-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--navy);
+}
+
+.furthest-trip-dots {
+  flex-grow: 1;
+  height: 0;
+  border-top: 3px dotted var(--navy);
+}
+
+.furthest-trip-distance {
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  line-height: 1;
+  color: var(--text);
+}
+
+/* Distance by season */
+
+.season-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.season-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.season-bar-label {
+  flex: 0 0 56px;
+  font-family: var(--font-label);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.season-bar-track {
+  flex: 1 1 auto;
+  height: 14px;
+  border-radius: 3px;
+  background: var(--stub);
+}
+
+.season-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--navy);
+}
+
+.season-bar-value {
+  flex: 0 0 62px;
+  text-align: right;
+  font-weight: 600;
+  color: var(--navy-ink);
+}
+
+/* Lucky charm */
+
+.lucky-charm-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.lucky-charm-row + .lucky-charm-row {
+  margin-top: 12px;
+}
+
+.lucky-charm-row-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--navy-ink);
+}
+
+.lucky-charm-pct {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+}
+
+.lucky-charm-pct-attended {
+  color: var(--navy);
+}
+
+.lucky-charm-pct-missed {
+  color: var(--text-muted);
+}
+
+.lucky-charm-track {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--stub);
+}
+
+.lucky-charm-fill {
+  height: 100%;
+  border-radius: 5px;
+}
+
+.lucky-charm-fill-attended {
+  background: var(--navy);
+}
+
+.lucky-charm-fill-missed {
+  background: var(--timeline);
+}
+
+/* Top-of-page and bottom-of-page reflow groups (order set per breakpoint below) */
+
+.stats-top {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stats-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stats-side {
+  display: contents;
+}
+
+.furthest-trip-section {
+  order: 1;
+}
+
+.distance-season-section {
+  order: 2;
+}
+
+.lucky-charm-section {
+  order: 3;
+}
+
+@media (min-width: 768px) {
+  .stats-hero-value {
+    font-size: 6.5rem;
   }
-  .stat-tile .stat-value {
-    font-size: 1.2rem;
+
+  .stat-tile {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 12px;
+    padding: 20px 24px;
   }
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+
+  .stat-value {
+    font-size: 2.5rem;
+  }
+
+  .lap-stamp {
+    width: 48px;
+    height: 48px;
+  }
+
+  .stats-top {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .stats-hero {
+    flex: 1.5 1 480px;
+    min-width: 0;
+    order: 1;
+  }
+
+  .record-card {
+    flex: 1 1 360px;
+    min-width: 0;
+    order: 2;
+  }
+
+  .stats-tiles {
+    flex: 1 1 100%;
+    order: 3;
+  }
+
+  .stats-bottom {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .distance-season-section {
+    flex: 1.5 1 480px;
+    min-width: 0;
+    order: 1;
+  }
+
+  .stats-side {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1 1 360px;
+    min-width: 0;
+    order: 2;
+  }
+
+  .lucky-charm-section {
+    order: 2;
   }
 }
