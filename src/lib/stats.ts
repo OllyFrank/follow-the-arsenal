@@ -1,9 +1,10 @@
-import type { Fixture, Ground, HomeAddress, MatchResult } from "../types";
+import type { Fixture, Ground, HomeAddress, Manager, MatchResult } from "../types";
 import {
   computeDistances,
   EARTH_CIRCUMFERENCE_KM,
   type MatchDistance,
 } from "./distance";
+import { managerForDate } from "./managers";
 
 // Shared rule across every stat below: `Behind closed doors = Y` matches
 // can never be attended (enforced in the UI, defended here too). Distance
@@ -93,6 +94,10 @@ export interface GapStats {
   after: Fixture | null;
 }
 
+export interface ManagerStat extends Record {
+  manager: string;
+}
+
 export interface FinalsStats {
   attended: number;
   wins: number;
@@ -114,6 +119,7 @@ export interface Stats {
   longestGap: GapStats;
   byCompetition: { competition: string; matches: number }[];
   finals: FinalsStats;
+  byManager: ManagerStat[];
 }
 
 function daysBetween(isoA: string, isoB: string): number {
@@ -316,6 +322,24 @@ function computeByCompetition(fixtures: Fixture[], attended: Set<string>) {
     .sort((a, b) => b.matches - a.matches);
 }
 
+function computeByManager(
+  fixtures: Fixture[],
+  attended: Set<string>,
+  managers: Manager[],
+): ManagerStat[] {
+  const seen = countedFixtures(attendedFixtures(fixtures, attended));
+  const byManager = new Map<string, Fixture[]>();
+  for (const f of seen) {
+    const manager = managerForDate(f.date, managers) ?? "Unknown";
+    const list = byManager.get(manager);
+    if (list) list.push(f);
+    else byManager.set(manager, [f]);
+  }
+  return [...byManager.entries()]
+    .map(([manager, fs]) => ({ manager, ...tally(fs) }))
+    .sort((a, b) => b.played - a.played);
+}
+
 function isShield(fixture: Fixture): boolean {
   return /community shield|charity shield/i.test(fixture.competition);
 }
@@ -349,6 +373,7 @@ export function computeStats(
   grounds: Ground[],
   attendedMatchIds: string[],
   addresses: HomeAddress[],
+  managers: Manager[] = [],
 ): Stats {
   const attended = new Set(attendedMatchIds);
   const groundsById = new Map(grounds.map((g) => [g.groundId, g]));
@@ -367,5 +392,6 @@ export function computeStats(
     longestGap: computeLongestGap(fixtures, attended),
     byCompetition: computeByCompetition(fixtures, attended),
     finals: computeFinals(fixtures, attended),
+    byManager: computeByManager(fixtures, attended, managers),
   };
 }

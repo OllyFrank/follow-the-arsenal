@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import type { Fixture, Ground, HomeAddress } from "../../types";
+import type { Fixture, Ground, HomeAddress, Manager } from "../../types";
 import { computeStats } from "../../lib/stats";
 import { formatDateLong, formatDistance, ordinal } from "../../lib/format";
 import { EARTH_CIRCUMFERENCE_KM } from "../../lib/distance";
@@ -15,6 +15,7 @@ const VISIBLE_SEASONS_DEFAULT = 6;
 interface Props {
   fixtures: Fixture[];
   grounds: Ground[];
+  managers: Manager[];
   attendedMatchIds: Set<string>;
   addresses: HomeAddress[];
   unit: "mi" | "km";
@@ -28,6 +29,7 @@ function fixtureLabel(fixture: Fixture): string {
 export function Dashboard({
   fixtures,
   grounds,
+  managers,
   attendedMatchIds,
   addresses,
   unit,
@@ -47,8 +49,8 @@ export function Dashboard({
   );
 
   const stats = useMemo(
-    () => computeStats(scopedFixtures, grounds, [...attendedMatchIds], addresses),
-    [scopedFixtures, grounds, attendedMatchIds, addresses],
+    () => computeStats(scopedFixtures, grounds, [...attendedMatchIds], addresses, managers),
+    [scopedFixtures, grounds, attendedMatchIds, addresses, managers],
   );
 
   const dist = (km: number) => formatDistance(km, unit);
@@ -387,6 +389,36 @@ export function Dashboard({
                   <td className="num">{o.played}</td>
                   <td className="num">{o.home}</td>
                   <td className="num">{o.away}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+
+        <section className="card">
+          <h2 className="section-title">By manager</h2>
+          <table className="stats-table">
+            <thead>
+              <tr>
+                <th scope="col">
+                  <span className="sr-only">Manager</span>
+                </th>
+                <th scope="col" className="num">P</th>
+                <th scope="col" className="num">W</th>
+                <th scope="col" className="num">D</th>
+                <th scope="col" className="num">L</th>
+                <th scope="col" className="num">Win%</th>
+              </tr>
+            </thead>
+            <tbody>
+              {stats.byManager.map((m) => (
+                <tr key={m.manager}>
+                  <th scope="row">{m.manager}</th>
+                  <td className="num">{m.played}</td>
+                  <td className="num">{m.wins}</td>
+                  <td className="num">{m.draws}</td>
+                  <td className="num">{m.losses}</td>
+                  <td className="num strong">{m.winPct.toFixed(0)}%</td>
                 </tr>
               ))}
             </tbody>

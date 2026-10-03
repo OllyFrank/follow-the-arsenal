@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import fixturesData from "./data/fixtures.json";
 import groundsData from "./data/grounds.json";
-import type { Fixture, Ground } from "./types";
+import managersData from "./data/managers.json";
+import type { Fixture, Ground, Manager } from "./types";
 import { useAppState } from "./hooks/useAppState";
 import { computeStats } from "./lib/stats";
 import { formatDistance } from "./lib/format";
@@ -14,6 +15,7 @@ import { FixturesIcon, AddressesIcon, StatsIcon } from "./components/shared/NavI
 
 const fixtures = fixturesData as Fixture[];
 const grounds = groundsData as Ground[];
+const managers = managersData as Manager[];
 
 type Tab = "fixtures" | "addresses" | "stats";
 
@@ -103,6 +105,7 @@ function App() {
           <Dashboard
             fixtures={fixtures}
             grounds={grounds}
+            managers={managers}
             attendedMatchIds={attendedMatchIds}
             addresses={homeAddresses}
             unit={unit}

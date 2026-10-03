@@ -1,0 +1,11 @@
+[
+  { "manager": "George Graham",                "from": "1986-05-14" },
+  { "manager": "Stewart Houston (caretaker)",  "from": "1995-02-21" },
+  { "manager": "Bruce Rioch",                  "from": "1995-06-08" },
+  { "manager": "Stewart Houston (caretaker)",  "from": "1996-08-12" },
+  { "manager": "Pat Rice (caretaker)",         "from": "1996-09-13" },
+  { "manager": "Arsène Wenger",                "from": "1996-10-01" },
+  { "manager": "Unai Emery",                   "from": "2018-05-23" },
+  { "manager": "Freddie Ljungberg (interim)",  "from": "2019-11-29" },
+  { "manager": "Mikel Arteta",                 "from": "2019-12-22" }
+]

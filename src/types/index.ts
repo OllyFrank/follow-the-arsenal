@@ -36,6 +36,12 @@ export interface Ground {
   confidence: "High" | "Medium" | "Low";
 }
 
+export interface Manager {
+  manager: string;
+  /** ISO date string, inclusive. Reign runs until the next manager's `from`. */
+  from: string;
+}
+
 export interface HomeAddress {
   id: string;
   label: string;
