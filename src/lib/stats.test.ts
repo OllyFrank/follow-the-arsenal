@@ -269,7 +269,7 @@ describe("monthly attendance", () => {
     expect(stats.monthlyAttendance.find((m) => m.month === "01")?.count).toBe(0);
   });
 
-  it("appends June/July only when the scope actually has fixtures in them", () => {
+  it("appends June/July only when the scope has an attendable (non-behind-closed-doors) fixture in them", () => {
     const withoutSummer = [makeFixture({ date: "2019-08-11" })];
     const noSummer = computeStats(withoutSummer, [groundA], [], [address]);
     expect(noSummer.monthlyAttendance.map((m) => m.month)).toEqual([
@@ -287,6 +287,17 @@ describe("monthly attendance", () => {
     ]);
     expect(summerStats.monthlyAttendance.find((m) => m.month === "06")?.count).toBe(1);
     expect(summerStats.monthlyAttendance.find((m) => m.month === "07")?.count).toBe(1);
+  });
+
+  it("keeps June/July hidden when the only fixtures in them are behind closed doors", () => {
+    const bcdSummer = [
+      makeFixture({ date: "2020-06-17", behindClosedDoors: true }),
+      makeFixture({ date: "2020-07-01", behindClosedDoors: true }),
+    ];
+    const stats = computeStats(bcdSummer, [groundA], [], [address]);
+    expect(stats.monthlyAttendance.map((m) => m.month)).toEqual([
+      "08", "09", "10", "11", "12", "01", "02", "03", "04", "05",
+    ]);
   });
 
   it("counts an attended voided match, like other plain attendance stats", () => {

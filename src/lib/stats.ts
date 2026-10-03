@@ -380,9 +380,10 @@ function computeBestSeasons(fixtures: Fixture[], attended: Set<string>): BestSea
 }
 
 // The English football season runs August to May. A handful of fixtures (the
-// COVID-delayed 2019/20 run-in) land in June and July — append those months
-// only when the current scope actually has fixtures in them, rather than
-// always showing a near-empty column.
+// COVID-delayed 2019/20 run-in) land in June and July, all behind closed
+// doors — append those months only when the scope has an attendable (not
+// behind-closed-doors) fixture in them, so a column never sits permanently
+// at zero.
 const SEASON_MONTHS = ["08", "09", "10", "11", "12", "01", "02", "03", "04", "05"];
 const MONTH_LABELS: Record<string, string> = {
   "01": "Jan", "02": "Feb", "03": "Mar", "04": "Apr", "05": "May", "06": "Jun",
@@ -400,7 +401,11 @@ function computeMonthlyAttendance(
     countsByMonth.set(month, (countsByMonth.get(month) ?? 0) + 1);
   }
 
-  const extraMonths = [...new Set(fixtures.map((f) => f.date.slice(5, 7)))]
+  const extraMonths = [
+    ...new Set(
+      fixtures.filter((f) => !f.behindClosedDoors).map((f) => f.date.slice(5, 7)),
+    ),
+  ]
     .filter((m) => !SEASON_MONTHS.includes(m))
     .sort();
 
