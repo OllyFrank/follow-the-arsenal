@@ -36,7 +36,7 @@ Write a one-off script to convert the workbook to `fixtures.json` and `grounds.j
 
 ## Stats dashboard (overall, with a season filter)
 - **Distance:** total, per season, and laps of the Earth (40,075 km / 24,901 mi).
-- **Furthest single trip:** the match, the ground, and the distance.
+- **Furthest single trip:** the match, the ground, and the one-way distance (distance totals elsewhere are return-trip, but there's no breakdown shown, so the one-way figure is the more interesting number here).
 - **Grounds:** a map of grounds visited, total grounds visited (distinct Ground IDs), and grounds ranked by visits.
 - **Top opponents:** most-seen opponents, home and away combined.
 - **Record:** overall W-D-L and win %, plus home and away records (H/A from the fixture, neutral counts in overall only).
@@ -45,12 +45,15 @@ Write a one-off script to convert the workbook to `fixtures.json` and `grounds.j
 - **Highest-scoring match seen:** by total goals.
 - **Goals seen:** total goals, and Arsenal goals.
 - **Longest unbeaten run seen:** consecutive attended matches without a defeat.
-- **Longest gap:** longest gap between attended games, showing the two matches either side.
+- **Longest gap:** longest gap between attended games, measured in matches missed (not calendar days — a day-based gap is always the close season for a regular matchgoer), showing the two matches either side.
 - **Matches by competition:** a breakdown using the Competition column.
 - **Finals:** finals attended, final wins and win %. A final is a Stage of "Final" or "Final Replay". Community/Charity Shields are excluded. A final won on penalties counts as a win here, since this stat is about lifting the trophy.
 
 ## Look and feel
 Arsenal-inspired but unofficial: red (#DB0007), white, with a navy or gold accent, bold blocky sans-serif headings, and a clean, mobile-friendly layout.
+
+## Verifying changes
+Before calling any UI/frontend change done, start the dev server (`npm run dev`) and check it in Chrome using claude-in-chrome. Don't skip this because the browser has no real attendance data — seed a handful of matches into localStorage with the javascript_tool first if the check needs data to be meaningful. Pushing to `main` still needs the user's go-ahead each time; this verification step doesn't change that.
 
 ## Build order
 1. Convert the data and render the fixture list with a season filter.
