@@ -416,6 +416,10 @@ a {
   display: none;
 }
 
+.fixture-count-mobile {
+  margin-left: auto;
+}
+
 .bulk-actions {
   display: flex;
   gap: 0.5rem;
