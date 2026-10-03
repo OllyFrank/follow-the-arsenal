@@ -275,7 +275,7 @@ export function Dashboard({
                   </svg>
                   <div className="furthest-trip-dots" />
                   <div className="furthest-trip-distance">
-                    {dist(stats.distance.furthestTrip.distanceKm)}
+                    {dist(stats.distance.furthestTrip.oneWayKm)}
                   </div>
                   <div className="furthest-trip-dots" />
                   <svg

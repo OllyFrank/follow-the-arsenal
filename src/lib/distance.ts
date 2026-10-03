@@ -47,7 +47,9 @@ export interface MatchDistance {
   fixture: Fixture;
   ground: Ground;
   homeAddress: HomeAddress;
-  /** Return-trip distance in km (one-way haversine x 2). */
+  /** One-way haversine distance in km. */
+  oneWayKm: number;
+  /** Return-trip distance in km (one-way x 2). Used for all distance totals. */
   distanceKm: number;
 }
 
@@ -94,6 +96,7 @@ export function computeDistances(
       fixture,
       ground,
       homeAddress,
+      oneWayKm,
       distanceKm: oneWayKm * 2,
     });
   }
