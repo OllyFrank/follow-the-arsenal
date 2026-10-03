@@ -1075,10 +1075,10 @@ a {
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: 1fr;
   gap: 0.75rem;
   margin-top: 1rem;
-  align-items: start;
+  align-items: stretch;
 }
 
 .dashboard-stack {
@@ -2411,5 +2411,14 @@ table.stats-table .num.strong {
   /* 5. Let the hero and Record card stretch to the same height. */
   .stats-top {
     align-items: stretch;
+  }
+}
+
+@media (min-width: 768px) {
+  /* Cap the bottom stats section at 3 columns, with rows stretching
+     to a consistent height (so a stacked column, e.g. By manager +
+     Finals, doesn't look mismatched next to single cards). */
+  .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
