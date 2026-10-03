@@ -26,11 +26,35 @@ function fixtureLabel(fixture: Fixture): string {
   return `${fixture.homeTeam} v ${fixture.awayTeam}, ${formatDateLong(fixture.date)}`;
 }
 
-// Buckets a count into 5 fixed heat levels (0 = none, 1-4 = quartiles of the
-// scope's busiest month) so the ramp stays readable regardless of scale.
-function heatLevel(count: number, maxCount: number): 0 | 1 | 2 | 3 | 4 {
-  if (count === 0 || maxCount === 0) return 0;
-  return Math.min(4, Math.max(1, Math.ceil((count / maxCount) * 4))) as 1 | 2 | 3 | 4;
+// Monthly attendance heatmap: color and bar height both scale continuously
+// against the busiest month *in the current scope* (never a fixed or
+// all-time number), so the ramp always uses its full range regardless of
+// how many matches that scope actually has.
+const HEAT_TRACK_PX = 110;
+const HEAT_MIN_BAR_PX = 18;
+const HEAT_EMPTY_COLOR = "#ececef"; // var(--grey-100)
+const HEAT_LIGHT_COLOR = "#fde4e4"; // var(--loss-bg)
+const HEAT_DARK_COLOR = "#a3000c"; // var(--red-dark)
+
+function hexToRgb(hex: string): [number, number, number] {
+  const n = parseInt(hex.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+
+function monthBarColor(count: number, maxCount: number): string {
+  if (count === 0 || maxCount === 0) return HEAT_EMPTY_COLOR;
+  const t = count / maxCount;
+  const [r1, g1, b1] = hexToRgb(HEAT_LIGHT_COLOR);
+  const [r2, g2, b2] = hexToRgb(HEAT_DARK_COLOR);
+  const r = Math.round(r1 + (r2 - r1) * t);
+  const g = Math.round(g1 + (g2 - g1) * t);
+  const b = Math.round(b1 + (b2 - b1) * t);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+function monthBarHeightPx(count: number, maxCount: number): number {
+  if (count === 0 || maxCount === 0) return 6;
+  return Math.max(HEAT_MIN_BAR_PX, Math.round((count / maxCount) * HEAT_TRACK_PX));
 }
 
 export function Dashboard({
@@ -380,34 +404,26 @@ export function Dashboard({
       <section className="card" style={{ marginTop: "1rem" }}>
         <h2 className="section-title">Monthly attendance</h2>
         <div className="month-heatmap">
-          {stats.monthlyAttendance.map((m) => {
-            const level = heatLevel(m.count, maxMonthlyCount);
-            return (
-              <div className="month-heatmap-col" key={m.month}>
+          {stats.monthlyAttendance.map((m) => (
+            <div className="month-heatmap-col" key={m.month}>
+              <div className="month-heatmap-count">{m.count}</div>
+              <div className="month-heatmap-track">
                 <div
-                  className="month-heatmap-cell"
+                  className="month-heatmap-bar"
                   style={{
-                    background: `var(--heat-${level})`,
-                    color: `var(--heat-${level}-text)`,
+                    height: `${monthBarHeightPx(m.count, maxMonthlyCount)}px`,
+                    background: monthBarColor(m.count, maxMonthlyCount),
                   }}
                   title={`${m.label}: ${m.count} match${m.count === 1 ? "" : "es"} attended`}
-                >
-                  {m.count}
-                </div>
-                <div className="month-heatmap-label">{m.label}</div>
+                />
               </div>
-            );
-          })}
+              <div className="month-heatmap-label">{m.label}</div>
+            </div>
+          ))}
         </div>
         <div className="month-heatmap-legend">
           Fewer
-          {([0, 1, 2, 3, 4] as const).map((level) => (
-            <div
-              key={level}
-              className="month-heatmap-legend-swatch"
-              style={{ background: `var(--heat-${level})` }}
-            />
-          ))}
+          <div className="month-heatmap-legend-gradient" />
           More
         </div>
       </section>
