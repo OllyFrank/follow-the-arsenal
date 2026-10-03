@@ -121,17 +121,29 @@ describe("longest unbeaten run", () => {
 });
 
 describe("longest gap", () => {
-  it("finds the largest gap in days between attended matches, including voided ones", () => {
+  it("counts matches missed in between, not calendar days, so the close season doesn't dominate", () => {
+    const before = makeFixture({ date: "2020-01-01" });
+    const missedA = makeFixture({ date: "2020-01-08" });
+    const missedB = makeFixture({ date: "2020-01-15" });
+    const after = makeFixture({ date: "2020-06-01" });
+    const fixtures = [before, missedA, missedB, after];
+    const attended = [before.matchId, after.matchId];
+    const stats = computeStats(fixtures, [groundA], attended, [address]);
+
+    expect(stats.longestGap.before?.matchId).toBe(before.matchId);
+    expect(stats.longestGap.after?.matchId).toBe(after.matchId);
+    expect(stats.longestGap.matchesMissed).toBe(2);
+  });
+
+  it("includes voided matches in the gap but still counts them as a match missed if unattended", () => {
     const before = makeFixture({ date: "2020-01-01" });
     const voided = makeFixture({ date: "2020-01-05", countsInRecord: false });
     const after = makeFixture({ date: "2020-06-01" });
     const fixtures = [before, voided, after];
-    const attended = fixtures.map((f) => f.matchId);
+    const attended = [before.matchId, after.matchId];
     const stats = computeStats(fixtures, [groundA], attended, [address]);
 
-    expect(stats.longestGap.before?.matchId).toBe(voided.matchId);
-    expect(stats.longestGap.after?.matchId).toBe(after.matchId);
-    expect(stats.longestGap.days).toBe(148); // 2020-01-05 -> 2020-06-01
+    expect(stats.longestGap.matchesMissed).toBe(1);
   });
 });
 

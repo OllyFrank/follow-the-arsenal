@@ -493,7 +493,10 @@ export function Dashboard({
           <h2 className="section-title">Longest gap between attended matches</h2>
           {stats.longestGap.before && stats.longestGap.after ? (
             <div className="stat-line-pair">
-              <div className="stat-line">{stats.longestGap.days} days</div>
+              <div className="stat-line">
+                {stats.longestGap.matchesMissed}{" "}
+                {stats.longestGap.matchesMissed === 1 ? "match" : "matches"} missed
+              </div>
               <div className="stat-subline">
                 {fixtureLabel(stats.longestGap.before)} to {fixtureLabel(stats.longestGap.after)}
               </div>

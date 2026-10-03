@@ -89,7 +89,7 @@ export interface UnbeatenRunStats {
 }
 
 export interface GapStats {
-  days: number;
+  matchesMissed: number;
   before: Fixture | null;
   after: Fixture | null;
 }
@@ -120,12 +120,6 @@ export interface Stats {
   byCompetition: { competition: string; matches: number }[];
   finals: FinalsStats;
   byManager: ManagerStat[];
-}
-
-function daysBetween(isoA: string, isoB: string): number {
-  const a = new Date(isoA + "T00:00:00Z").getTime();
-  const b = new Date(isoB + "T00:00:00Z").getTime();
-  return Math.round((b - a) / (1000 * 60 * 60 * 24));
 }
 
 function computeDistanceStats(
@@ -296,16 +290,20 @@ function computeLongestUnbeatenRun(fixtures: Fixture[], attended: Set<string>): 
   return best;
 }
 
+// Measured in matches missed rather than days: a calendar-day gap is
+// dominated by the close season, which is always the "longest gap" for a
+// regular matchgoer even though no fixtures were actually missed.
 function computeLongestGap(fixtures: Fixture[], attended: Set<string>): GapStats {
-  const seen = attendedFixtures(fixtures, attended).slice().sort((a, b) =>
-    a.date.localeCompare(b.date),
-  );
+  const sorted = fixtures.slice().sort((a, b) => a.date.localeCompare(b.date));
+  const seen = sorted
+    .map((fixture, index) => ({ fixture, index }))
+    .filter(({ fixture }) => isAttended(fixture, attended));
 
-  let best: GapStats = { days: 0, before: null, after: null };
+  let best: GapStats = { matchesMissed: 0, before: null, after: null };
   for (let i = 1; i < seen.length; i++) {
-    const gap = daysBetween(seen[i - 1].date, seen[i].date);
-    if (gap > best.days) {
-      best = { days: gap, before: seen[i - 1], after: seen[i] };
+    const matchesMissed = seen[i].index - seen[i - 1].index - 1;
+    if (matchesMissed > best.matchesMissed) {
+      best = { matchesMissed, before: seen[i - 1].fixture, after: seen[i].fixture };
     }
   }
   return best;
