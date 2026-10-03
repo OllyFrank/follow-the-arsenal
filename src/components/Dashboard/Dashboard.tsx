@@ -490,6 +490,40 @@ export function Dashboard({
         </section>
 
         <section className="card">
+          <h2 className="section-title">Best seasons</h2>
+          <div className="stat-line-pair">
+            <div className="stat-line">
+              {stats.bestSeasons.attendance
+                ? `${stats.bestSeasons.attendance.value} match${
+                    stats.bestSeasons.attendance.value === 1 ? "" : "es"
+                  } — ${stats.bestSeasons.attendance.season}`
+                : "No matches seen yet."}
+            </div>
+            <div className="stat-subline">Most attended</div>
+          </div>
+          <div className="stat-line-pair" style={{ marginTop: "0.75rem" }}>
+            <div className="stat-line">
+              {stats.bestSeasons.wins
+                ? `${stats.bestSeasons.wins.value} win${
+                    stats.bestSeasons.wins.value === 1 ? "" : "s"
+                  } — ${stats.bestSeasons.wins.season}`
+                : "No wins seen yet."}
+            </div>
+            <div className="stat-subline">Most wins seen</div>
+          </div>
+          <div className="stat-line-pair" style={{ marginTop: "0.75rem" }}>
+            <div className="stat-line">
+              {stats.bestSeasons.goals
+                ? `${stats.bestSeasons.goals.value} goal${
+                    stats.bestSeasons.goals.value === 1 ? "" : "s"
+                  } — ${stats.bestSeasons.goals.season}`
+                : "No goals seen yet."}
+            </div>
+            <div className="stat-subline">Most Arsenal goals seen</div>
+          </div>
+        </section>
+
+        <section className="card">
           <h2 className="section-title">Longest gap between attended matches</h2>
           {stats.longestGap.before && stats.longestGap.after ? (
             <div className="stat-line-pair">

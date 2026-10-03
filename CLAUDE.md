@@ -48,6 +48,7 @@ Write a one-off script to convert the workbook to `fixtures.json` and `grounds.j
 - **Longest gap:** longest gap between attended games, measured in matches missed (not calendar days — a day-based gap is always the close season for a regular matchgoer), showing the two matches either side.
 - **Matches by competition:** a breakdown using the Competition column.
 - **Finals:** finals attended, final wins and win %. A final is a Stage of "Final" or "Final Replay". Community/Charity Shields are excluded. A final won on penalties counts as a win here, since this stat is about lifting the trophy.
+- **Best seasons:** three independent bests, each its own season and figure — most matches attended, most wins seen, and most Arsenal goals seen (the voided match counts toward attendance but not wins or goals, as above).
 
 ## Look and feel
 Arsenal-inspired but unofficial: red (#DB0007), white, with a navy or gold accent, bold blocky sans-serif headings, and a clean, mobile-friendly layout.

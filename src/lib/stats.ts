@@ -105,6 +105,17 @@ export interface FinalsStats {
   matches: Fixture[];
 }
 
+export interface BestSeasonStat {
+  season: string;
+  value: number;
+}
+
+export interface BestSeasonsStats {
+  attendance: BestSeasonStat | null;
+  wins: BestSeasonStat | null;
+  goals: BestSeasonStat | null;
+}
+
 export interface Stats {
   distance: DistanceStats;
   grounds: GroundStats;
@@ -120,6 +131,7 @@ export interface Stats {
   byCompetition: { competition: string; matches: number }[];
   finals: FinalsStats;
   byManager: ManagerStat[];
+  bestSeasons: BestSeasonsStats;
 }
 
 function computeDistanceStats(
@@ -338,6 +350,28 @@ function computeByManager(
     .sort((a, b) => b.played - a.played);
 }
 
+function bestSeasonBy(fixtures: Fixture[], valueOf: (f: Fixture) => number): BestSeasonStat | null {
+  const bySeasonMap = new Map<string, number>();
+  for (const f of fixtures) {
+    bySeasonMap.set(f.season, (bySeasonMap.get(f.season) ?? 0) + valueOf(f));
+  }
+  let best: BestSeasonStat | null = null;
+  for (const [season, value] of bySeasonMap) {
+    if (!best || value > best.value) best = { season, value };
+  }
+  return best;
+}
+
+function computeBestSeasons(fixtures: Fixture[], attended: Set<string>): BestSeasonsStats {
+  const seen = attendedFixtures(fixtures, attended);
+  const counted = countedFixtures(seen);
+  return {
+    attendance: bestSeasonBy(seen, () => 1),
+    wins: bestSeasonBy(counted.filter((f) => f.result === "W"), () => 1),
+    goals: bestSeasonBy(counted, (f) => f.arsenalGoals),
+  };
+}
+
 function isShield(fixture: Fixture): boolean {
   return /community shield|charity shield/i.test(fixture.competition);
 }
@@ -391,5 +425,6 @@ export function computeStats(
     byCompetition: computeByCompetition(fixtures, attended),
     finals: computeFinals(fixtures, attended),
     byManager: computeByManager(fixtures, attended, managers),
+    bestSeasons: computeBestSeasons(fixtures, attended),
   };
 }

@@ -200,6 +200,52 @@ describe("finals", () => {
   });
 });
 
+describe("best seasons", () => {
+  it("picks the season with the most matches attended, wins seen, and goals seen independently", () => {
+    const fixtures = [
+      // 2018/19: 2 attended matches, 1 win, 3 Arsenal goals
+      makeFixture({ season: "2018/19", date: "2018-08-11", result: "W", arsenalGoals: 2, opponentGoals: 0 }),
+      makeFixture({ season: "2018/19", date: "2018-08-18", result: "L", arsenalGoals: 1, opponentGoals: 2 }),
+      // 2019/20: 3 attended matches, 1 win, 1 Arsenal goal (fewer goals, but more matches/wins is still 1, so wins tie-break on first-seen)
+      makeFixture({ season: "2019/20", date: "2019-08-10", result: "W", arsenalGoals: 1, opponentGoals: 0 }),
+      makeFixture({ season: "2019/20", date: "2019-08-17", result: "D", arsenalGoals: 0, opponentGoals: 0 }),
+      makeFixture({ season: "2019/20", date: "2019-08-24", result: "D", arsenalGoals: 0, opponentGoals: 0 }),
+      // 2020/21: 1 attended match, 0 wins, 5 Arsenal goals — the standout goals season
+      makeFixture({ season: "2020/21", date: "2020-09-12", result: "D", arsenalGoals: 5, opponentGoals: 5 }),
+    ];
+    const attended = fixtures.map((f) => f.matchId);
+    const stats = computeStats(fixtures, [groundA], attended, [address]);
+
+    expect(stats.bestSeasons.attendance).toEqual({ season: "2019/20", value: 3 });
+    expect(stats.bestSeasons.wins).toEqual({ season: "2018/19", value: 1 });
+    expect(stats.bestSeasons.goals).toEqual({ season: "2020/21", value: 5 });
+  });
+
+  it("excludes voided matches from wins and goals but still counts them for attendance", () => {
+    const voided = makeFixture({
+      season: "2018/19",
+      countsInRecord: false,
+      result: "W",
+      arsenalGoals: 5,
+      opponentGoals: 0,
+    });
+    const normal = makeFixture({ season: "2019/20", result: "L", arsenalGoals: 0, opponentGoals: 1 });
+    const fixtures = [voided, normal];
+    const attended = fixtures.map((f) => f.matchId);
+    const stats = computeStats(fixtures, [groundA], attended, [address]);
+
+    expect(stats.bestSeasons.attendance).toEqual({ season: "2018/19", value: 1 });
+    expect(stats.bestSeasons.wins).toBeNull();
+    expect(stats.bestSeasons.goals).toEqual({ season: "2019/20", value: 0 });
+  });
+
+  it("is null across the board with no attended matches", () => {
+    const stats = computeStats([makeFixture()], [groundA], [], [address]);
+
+    expect(stats.bestSeasons).toEqual({ attendance: null, wins: null, goals: null });
+  });
+});
+
 describe("distance and grounds aggregation", () => {
   it("groups distance by season, sorts it, and picks the actual furthest trip", () => {
     const near = makeFixture({ date: "2020-01-01", season: "2019/20", groundId: groundA.groundId });
