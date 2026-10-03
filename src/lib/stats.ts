@@ -116,6 +116,12 @@ export interface BestSeasonsStats {
   goals: BestSeasonStat | null;
 }
 
+export interface MonthlyAttendanceStat {
+  month: string; // "08".."07", zero-padded
+  label: string; // "Aug".."Jul"
+  count: number;
+}
+
 export interface Stats {
   distance: DistanceStats;
   grounds: GroundStats;
@@ -132,6 +138,7 @@ export interface Stats {
   finals: FinalsStats;
   byManager: ManagerStat[];
   bestSeasons: BestSeasonsStats;
+  monthlyAttendance: MonthlyAttendanceStat[];
 }
 
 function computeDistanceStats(
@@ -372,6 +379,38 @@ function computeBestSeasons(fixtures: Fixture[], attended: Set<string>): BestSea
   };
 }
 
+// The English football season runs August to May. A handful of fixtures (the
+// COVID-delayed 2019/20 run-in) land in June and July — append those months
+// only when the current scope actually has fixtures in them, rather than
+// always showing a near-empty column.
+const SEASON_MONTHS = ["08", "09", "10", "11", "12", "01", "02", "03", "04", "05"];
+const MONTH_LABELS: Record<string, string> = {
+  "01": "Jan", "02": "Feb", "03": "Mar", "04": "Apr", "05": "May", "06": "Jun",
+  "07": "Jul", "08": "Aug", "09": "Sep", "10": "Oct", "11": "Nov", "12": "Dec",
+};
+
+function computeMonthlyAttendance(
+  fixtures: Fixture[],
+  attended: Set<string>,
+): MonthlyAttendanceStat[] {
+  const seen = attendedFixtures(fixtures, attended);
+  const countsByMonth = new Map<string, number>();
+  for (const f of seen) {
+    const month = f.date.slice(5, 7);
+    countsByMonth.set(month, (countsByMonth.get(month) ?? 0) + 1);
+  }
+
+  const extraMonths = [...new Set(fixtures.map((f) => f.date.slice(5, 7)))]
+    .filter((m) => !SEASON_MONTHS.includes(m))
+    .sort();
+
+  return [...SEASON_MONTHS, ...extraMonths].map((month) => ({
+    month,
+    label: MONTH_LABELS[month],
+    count: countsByMonth.get(month) ?? 0,
+  }));
+}
+
 function isShield(fixture: Fixture): boolean {
   return /community shield|charity shield/i.test(fixture.competition);
 }
@@ -426,5 +465,6 @@ export function computeStats(
     finals: computeFinals(fixtures, attended),
     byManager: computeByManager(fixtures, attended, managers),
     bestSeasons: computeBestSeasons(fixtures, attended),
+    monthlyAttendance: computeMonthlyAttendance(fixtures, attended),
   };
 }

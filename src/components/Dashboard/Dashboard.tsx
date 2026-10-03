@@ -26,6 +26,13 @@ function fixtureLabel(fixture: Fixture): string {
   return `${fixture.homeTeam} v ${fixture.awayTeam}, ${formatDateLong(fixture.date)}`;
 }
 
+// Buckets a count into 5 fixed heat levels (0 = none, 1-4 = quartiles of the
+// scope's busiest month) so the ramp stays readable regardless of scale.
+function heatLevel(count: number, maxCount: number): 0 | 1 | 2 | 3 | 4 {
+  if (count === 0 || maxCount === 0) return 0;
+  return Math.min(4, Math.max(1, Math.ceil((count / maxCount) * 4))) as 1 | 2 | 3 | 4;
+}
+
 export function Dashboard({
   fixtures,
   grounds,
@@ -75,6 +82,8 @@ export function Dashboard({
     : seasonsByDistanceDesc.slice(0, VISIBLE_SEASONS_DEFAULT);
 
   const recordBar = stats.record.overall;
+
+  const maxMonthlyCount = Math.max(0, ...stats.monthlyAttendance.map((m) => m.count));
 
   return (
     <div>
@@ -366,6 +375,41 @@ export function Dashboard({
           totalPages={groundsPage.totalPages}
           onChange={groundsPage.setPage}
         />
+      </section>
+
+      <section className="card" style={{ marginTop: "1rem" }}>
+        <h2 className="section-title">Monthly attendance</h2>
+        <div className="month-heatmap">
+          {stats.monthlyAttendance.map((m) => {
+            const level = heatLevel(m.count, maxMonthlyCount);
+            return (
+              <div className="month-heatmap-col" key={m.month}>
+                <div
+                  className="month-heatmap-cell"
+                  style={{
+                    background: `var(--heat-${level})`,
+                    color: `var(--heat-${level}-text)`,
+                  }}
+                  title={`${m.label}: ${m.count} match${m.count === 1 ? "" : "es"} attended`}
+                >
+                  {m.count}
+                </div>
+                <div className="month-heatmap-label">{m.label}</div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="month-heatmap-legend">
+          Fewer
+          {([0, 1, 2, 3, 4] as const).map((level) => (
+            <div
+              key={level}
+              className="month-heatmap-legend-swatch"
+              style={{ background: `var(--heat-${level})` }}
+            />
+          ))}
+          More
+        </div>
       </section>
 
       <div className="dashboard-grid">

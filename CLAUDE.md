@@ -49,6 +49,7 @@ Write a one-off script to convert the workbook to `fixtures.json` and `grounds.j
 - **Matches by competition:** a breakdown using the Competition column.
 - **Finals:** finals attended, final wins and win %. A final is a Stage of "Final" or "Final Replay". Community/Charity Shields are excluded. A final won on penalties counts as a win here, since this stat is about lifting the trophy.
 - **Best seasons:** three independent bests, each its own season and figure — most matches attended, most wins seen, and most Arsenal goals seen (the voided match counts toward attendance but not wins or goals, as above).
+- **Monthly attendance heatmap:** attended-match counts by calendar month, August to May. Only append June (and any later month) as a column when the current scope actually has fixtures that month, whether or not any of them are attendable — e.g. the COVID-delayed 2019/20 run-in puts fixtures in June and July, so those columns appear (reading zero, since all of them are behind closed doors).
 
 ## Look and feel
 Arsenal-inspired but unofficial: red (#DB0007), white, with a navy or gold accent, bold blocky sans-serif headings, and a clean, mobile-friendly layout.

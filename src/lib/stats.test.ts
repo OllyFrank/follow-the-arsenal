@@ -246,6 +246,56 @@ describe("best seasons", () => {
   });
 });
 
+describe("monthly attendance", () => {
+  it("counts attended matches per calendar month, in season order (Aug to May), with zero for unseen months", () => {
+    const fixtures = [
+      makeFixture({ date: "2019-08-11" }),
+      makeFixture({ date: "2019-08-18" }),
+      makeFixture({ date: "2019-12-26" }),
+      makeFixture({ date: "2020-01-01" }), // not attended
+    ];
+    const attended = [fixtures[0].matchId, fixtures[1].matchId, fixtures[2].matchId];
+    const stats = computeStats(fixtures, [groundA], attended, [address]);
+
+    expect(stats.monthlyAttendance.map((m) => m.month)).toEqual([
+      "08", "09", "10", "11", "12", "01", "02", "03", "04", "05",
+    ]);
+    expect(stats.monthlyAttendance.find((m) => m.month === "08")).toEqual({
+      month: "08",
+      label: "Aug",
+      count: 2,
+    });
+    expect(stats.monthlyAttendance.find((m) => m.month === "12")?.count).toBe(1);
+    expect(stats.monthlyAttendance.find((m) => m.month === "01")?.count).toBe(0);
+  });
+
+  it("appends June/July only when the scope actually has fixtures in them", () => {
+    const withoutSummer = [makeFixture({ date: "2019-08-11" })];
+    const noSummer = computeStats(withoutSummer, [groundA], [], [address]);
+    expect(noSummer.monthlyAttendance.map((m) => m.month)).toEqual([
+      "08", "09", "10", "11", "12", "01", "02", "03", "04", "05",
+    ]);
+
+    const withSummer = [
+      makeFixture({ date: "2020-06-17" }),
+      makeFixture({ date: "2020-07-01" }),
+    ];
+    const attended = withSummer.map((f) => f.matchId);
+    const summerStats = computeStats(withSummer, [groundA], attended, [address]);
+    expect(summerStats.monthlyAttendance.map((m) => m.month)).toEqual([
+      "08", "09", "10", "11", "12", "01", "02", "03", "04", "05", "06", "07",
+    ]);
+    expect(summerStats.monthlyAttendance.find((m) => m.month === "06")?.count).toBe(1);
+    expect(summerStats.monthlyAttendance.find((m) => m.month === "07")?.count).toBe(1);
+  });
+
+  it("counts an attended voided match, like other plain attendance stats", () => {
+    const voided = makeFixture({ date: "2019-08-11", countsInRecord: false });
+    const stats = computeStats([voided], [groundA], [voided.matchId], [address]);
+    expect(stats.monthlyAttendance.find((m) => m.month === "08")?.count).toBe(1);
+  });
+});
+
 describe("distance and grounds aggregation", () => {
   it("groups distance by season, sorts it, and picks the actual furthest trip", () => {
     const near = makeFixture({ date: "2020-01-01", season: "2019/20", groundId: groundA.groundId });

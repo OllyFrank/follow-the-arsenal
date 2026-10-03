@@ -39,6 +39,18 @@
   --loss-bg: #fde4e4;
   --loss-text: #a3000c;
 
+  /* Monthly attendance heatmap — sequential red ramp, none to most. */
+  --heat-0: var(--grey-100);
+  --heat-1: var(--loss-bg);
+  --heat-2: #ec7275;
+  --heat-3: var(--red);
+  --heat-4: var(--red-dark);
+  --heat-0-text: var(--text);
+  --heat-1-text: var(--text);
+  --heat-2-text: var(--text);
+  --heat-3-text: var(--white);
+  --heat-4-text: var(--white);
+
   --font-heading: "Archivo Black", "Arial Black", Impact, sans-serif;
   --font-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-label: "Archivo Narrow", "Arial Narrow", sans-serif;
@@ -1073,6 +1085,55 @@ a {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+}
+
+.month-heatmap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(56px, 1fr));
+  gap: 0.6rem;
+}
+
+.month-heatmap-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.month-heatmap-cell {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+}
+
+.month-heatmap-label {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.month-heatmap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  margin-top: 0.9rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.month-heatmap-legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
 }
 
 .dashboard-grid {
