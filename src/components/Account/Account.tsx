@@ -23,8 +23,13 @@ export function Account() {
     try {
       await signInWithMagicLink(email);
       setStatus("sent");
-    } catch {
-      setError("Couldn't send the link. Check the email address and try again.");
+    } catch (err) {
+      const status = err instanceof Object && "status" in err ? err.status : null;
+      setError(
+        status === 429
+          ? "Too many sign-in emails sent recently — wait a bit and try again."
+          : "Couldn't send the link. Check the email address and try again.",
+      );
       setStatus("idle");
     }
   }
