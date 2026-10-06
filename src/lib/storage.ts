@@ -71,3 +71,13 @@ export function completeOnboarding(): AppState {
   writeState(next);
   return next;
 }
+
+// Called after a successful guest-data upload to Supabase (step 4 of
+// docs/ACCOUNTS_PLAN.md). Keeps onboardingComplete as-is — clearing guest
+// data shouldn't send someone back through onboarding.
+export function clearGuestData(): AppState {
+  const state = readState();
+  const next: AppState = { ...state, attendedMatchIds: [], homeAddresses: [] };
+  writeState(next);
+  return next;
+}

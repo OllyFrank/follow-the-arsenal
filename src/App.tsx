@@ -14,6 +14,7 @@ import { Dashboard } from "./components/Dashboard/Dashboard";
 import { Onboarding } from "./components/Onboarding/Onboarding";
 import { Logo } from "./components/shared/Logo";
 import { Account } from "./components/Account/Account";
+import { GuestDataMigrationPrompt } from "./components/Account/GuestDataMigrationPrompt";
 import { FixturesIcon, AddressesIcon, StatsIcon } from "./components/shared/NavIcons";
 
 const fixtures = fixturesData as Fixture[];
@@ -44,6 +45,13 @@ function App() {
   const { attendedMatchIds, homeAddresses, toggleAttendance, bulkSetAttendance, updateAddresses } =
     signedIn ? cloudState : guestState;
   const { onboardingComplete, finishOnboarding } = guestState;
+
+  // Step 4: offer to upload this device's guest data once, per app load,
+  // the first time there's both a session and some guest data to offer.
+  const [migrationDismissed, setMigrationDismissed] = useState(false);
+  const hasGuestData = guestState.attendedMatchIds.size > 0 || guestState.homeAddresses.length > 0;
+  const showMigrationPrompt =
+    signedIn && cloudState.loaded && hasGuestData && !migrationDismissed;
 
   const groundsById = useMemo(() => new Map(grounds.map((g) => [g.groundId, g])), []);
 
@@ -76,6 +84,18 @@ function App() {
 
   return (
     <>
+      {showMigrationPrompt && (
+        <GuestDataMigrationPrompt
+          guestMatchIds={guestState.attendedMatchIds}
+          guestAddresses={guestState.homeAddresses}
+          cloudMatchIds={cloudState.attendedMatchIds}
+          cloudAddresses={cloudState.homeAddresses}
+          onBulkSetAttendance={cloudState.bulkSetAttendance}
+          onUpdateAddresses={cloudState.updateAddresses}
+          onClearGuestData={guestState.clearData}
+          onDismiss={() => setMigrationDismissed(true)}
+        />
+      )}
       <header className="app-header">
         <div className="app-header-inner">
           <span className="logo-compact">
