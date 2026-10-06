@@ -4,6 +4,8 @@ import groundsData from "./data/grounds.json";
 import managersData from "./data/managers.json";
 import type { Fixture, Ground, Manager } from "./types";
 import { useAppState } from "./hooks/useAppState";
+import { useAuth } from "./hooks/useAuth";
+import { useCloudAppState } from "./hooks/useCloudAppState";
 import { computeStats } from "./lib/stats";
 import { formatDistance } from "./lib/format";
 import { FixtureList } from "./components/FixtureList/FixtureList";
@@ -29,15 +31,19 @@ const TABS: { id: Tab; label: string; Icon: () => React.JSX.Element }[] = [
 function App() {
   const [tab, setTab] = useState<Tab>("fixtures");
   const [unit, setUnit] = useState<"mi" | "km">("mi");
-  const {
-    attendedMatchIds,
-    homeAddresses,
-    onboardingComplete,
-    toggleAttendance,
-    bulkSetAttendance,
-    updateAddresses,
-    finishOnboarding,
-  } = useAppState();
+
+  const auth = useAuth();
+  const guestState = useAppState();
+  const cloudState = useCloudAppState(auth.user?.id ?? null);
+
+  // Guest mode is untouched: signed out, nothing here changes. Signed in,
+  // Supabase is the source of truth for attendance and addresses — but
+  // onboarding-seen is a per-device flag, not user data, so it (and
+  // finishing it) always goes through the local guest state regardless.
+  const signedIn = auth.user !== null;
+  const { attendedMatchIds, homeAddresses, toggleAttendance, bulkSetAttendance, updateAddresses } =
+    signedIn ? cloudState : guestState;
+  const { onboardingComplete, finishOnboarding } = guestState;
 
   const groundsById = useMemo(() => new Map(grounds.map((g) => [g.groundId, g])), []);
 
@@ -47,6 +53,14 @@ function App() {
     () => computeStats(fixtures, grounds, [...attendedMatchIds], homeAddresses).distance.totalKm,
     [attendedMatchIds, homeAddresses],
   );
+
+  if (auth.loading || (signedIn && !cloudState.loaded)) {
+    return (
+      <div className="app-loading">
+        <p>Loading…</p>
+      </div>
+    );
+  }
 
   if (!onboardingComplete) {
     return (
@@ -90,7 +104,12 @@ function App() {
             <div className="mileage-chip-label">travelled so far</div>
           </div>
 
-          <Account />
+          <Account
+            user={auth.user}
+            loading={auth.loading}
+            signInWithMagicLink={auth.signInWithMagicLink}
+            signOut={auth.signOut}
+          />
         </div>
       </header>
       <main className="app-main">

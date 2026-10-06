@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
+import type { User } from "@supabase/supabase-js";
 import { AccountIcon } from "../shared/NavIcons";
 
 type SendStatus = "idle" | "sending" | "sent";
 
-export function Account() {
-  const { user, loading, signInWithMagicLink, signOut } = useAuth();
+interface Props {
+  user: User | null;
+  loading: boolean;
+  signInWithMagicLink: (email: string) => Promise<void>;
+  signOut: () => Promise<void>;
+}
+
+export function Account({ user, loading, signInWithMagicLink, signOut }: Props) {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<SendStatus>("idle");

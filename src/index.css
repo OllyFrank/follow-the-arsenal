@@ -186,6 +186,16 @@ a {
   padding-bottom: 7rem;
 }
 
+.app-loading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-family: var(--font-label);
+  font-size: 0.9rem;
+}
+
 @media (min-width: 768px) {
   .logo-compact {
     display: none;
