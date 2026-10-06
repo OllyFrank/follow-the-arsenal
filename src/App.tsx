@@ -11,6 +11,7 @@ import { Addresses } from "./components/Addresses/Addresses";
 import { Dashboard } from "./components/Dashboard/Dashboard";
 import { Onboarding } from "./components/Onboarding/Onboarding";
 import { Logo } from "./components/shared/Logo";
+import { Account } from "./components/Account/Account";
 import { FixturesIcon, AddressesIcon, StatsIcon } from "./components/shared/NavIcons";
 
 const fixtures = fixturesData as Fixture[];
@@ -88,6 +89,8 @@ function App() {
             <div className="mileage-chip-value">{formatDistance(totalDistanceKm, unit)}</div>
             <div className="mileage-chip-label">travelled so far</div>
           </div>
+
+          <Account />
         </div>
       </header>
       <main className="app-main">

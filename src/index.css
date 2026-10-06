@@ -944,6 +944,40 @@ a {
   color: var(--text-muted);
 }
 
+.account-trigger {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-trigger:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(11, 31, 63, 0.6);
+}
+
+.modal-panel {
+  width: 100%;
+  max-width: 360px;
+}
+
 .add-earlier-button {
   flex: 1 1 auto;
   display: flex;
