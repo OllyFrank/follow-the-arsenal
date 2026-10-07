@@ -42,3 +42,11 @@ export function AccountIcon() {
     </svg>
   );
 }
+
+export function CloseIcon() {
+  return (
+    <svg {...commonProps} className="nav-icon" width="18" height="18">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  );
+}

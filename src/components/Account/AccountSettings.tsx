@@ -15,7 +15,6 @@ interface Props {
   fixtures: Fixture[];
   signInWithMagicLink: (email: string) => Promise<void>;
   signOut: () => Promise<void>;
-  onClose: () => void;
   onAccountDeleted: () => void;
 }
 
@@ -28,7 +27,6 @@ export function AccountSettings({
   fixtures,
   signInWithMagicLink,
   signOut,
-  onClose,
   onAccountDeleted,
 }: Props) {
   const [step, setStep] = useState<Step>("main");
@@ -155,7 +153,7 @@ export function AccountSettings({
     <>
       <p className="stat-subline">Signed in as {user.email}</p>
 
-      <div className="form-row" style={{ marginTop: "0.6rem" }}>
+      <div className="form-row" style={{ marginTop: "0.6rem", alignItems: "flex-end" }}>
         <label>
           Distance units
           <select value={unit} onChange={(e) => onUnitChange(e.target.value as "mi" | "km")}>
@@ -163,24 +161,18 @@ export function AccountSettings({
             <option value="km">Kilometres</option>
           </select>
         </label>
-      </div>
-
-      <div className="bulk-actions" style={{ marginTop: "0.75rem" }}>
         <button className="btn" onClick={handleDownloadData}>
           Download my data
         </button>
       </div>
 
-      <div className="bulk-actions" style={{ marginTop: "0.75rem" }}>
+      <div className="bulk-actions bulk-actions-end" style={{ marginTop: "0.75rem" }}>
         <button className="btn" onClick={signOut}>
           Sign out
         </button>
-        <button className="btn" onClick={onClose}>
-          Close
-        </button>
       </div>
 
-      <div className="bulk-actions" style={{ marginTop: "0.75rem" }}>
+      <div className="bulk-actions bulk-actions-end" style={{ marginTop: "0.75rem" }}>
         <button className="btn btn-danger" onClick={handleDeleteClick}>
           Delete my account
         </button>

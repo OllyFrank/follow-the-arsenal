@@ -986,6 +986,32 @@ a {
 .modal-panel {
   width: 100%;
   max-width: 360px;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  background: var(--grey-100);
+  color: var(--navy);
+}
+
+.bulk-actions-end {
+  justify-content: flex-end;
 }
 
 .add-earlier-button {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import type { Fixture, HomeAddress } from "../../types";
-import { AccountIcon } from "../shared/NavIcons";
+import { AccountIcon, CloseIcon } from "../shared/NavIcons";
 import { AccountSettings } from "./AccountSettings";
 
 type SendStatus = "idle" | "sending" | "sent";
@@ -79,23 +79,21 @@ export function Account({
       {open && (
         <div className="modal-backdrop" onClick={close}>
           <div className="card modal-panel" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className="modal-close"
+              aria-label="Close"
+              onClick={() => {
+                setJustDeleted(false);
+                close();
+              }}
+            >
+              <CloseIcon />
+            </button>
             <div className="section-title">Account</div>
 
             {justDeleted ? (
-              <>
-                <p className="stat-subline">Your account and data have been deleted.</p>
-                <div className="bulk-actions" style={{ marginTop: "0.75rem" }}>
-                  <button
-                    className="btn"
-                    onClick={() => {
-                      setJustDeleted(false);
-                      close();
-                    }}
-                  >
-                    Close
-                  </button>
-                </div>
-              </>
+              <p className="stat-subline">Your account and data have been deleted.</p>
             ) : user ? (
               <AccountSettings
                 user={user}
@@ -106,20 +104,12 @@ export function Account({
                 fixtures={fixtures}
                 signInWithMagicLink={signInWithMagicLink}
                 signOut={handleSignOut}
-                onClose={close}
                 onAccountDeleted={() => setJustDeleted(true)}
               />
             ) : status === "sent" ? (
-              <>
-                <p className="stat-subline">
-                  Check your email for a sign-in link — it'll sign you in on this device.
-                </p>
-                <div className="bulk-actions" style={{ marginTop: "0.75rem" }}>
-                  <button className="btn" onClick={close}>
-                    Close
-                  </button>
-                </div>
-              </>
+              <p className="stat-subline">
+                Check your email for a sign-in link — it'll sign you in on this device.
+              </p>
             ) : (
               <>
                 <p className="stat-subline">
@@ -149,9 +139,6 @@ export function Account({
                     disabled={status === "sending" || email.trim() === ""}
                   >
                     {status === "sending" ? "Sending..." : "Send magic link"}
-                  </button>
-                  <button className="btn" onClick={close}>
-                    Cancel
                   </button>
                 </div>
               </>
