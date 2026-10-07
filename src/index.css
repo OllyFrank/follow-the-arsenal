@@ -186,6 +186,11 @@ a {
   padding-bottom: 7rem;
 }
 
+.app-footer {
+  padding: 1rem 1rem 7rem;
+  text-align: center;
+}
+
 .app-loading {
   flex: 1;
   display: flex;

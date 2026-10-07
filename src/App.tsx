@@ -7,6 +7,7 @@ import { useAppState } from "./hooks/useAppState";
 import { useAuth } from "./hooks/useAuth";
 import { useCloudAppState } from "./hooks/useCloudAppState";
 import { useCloudUnits } from "./hooks/useCloudUnits";
+import { useCloudConsent } from "./hooks/useCloudConsent";
 import { computeStats } from "./lib/stats";
 import { formatDistance } from "./lib/format";
 import { FixtureList } from "./components/FixtureList/FixtureList";
@@ -16,6 +17,8 @@ import { Onboarding } from "./components/Onboarding/Onboarding";
 import { Logo } from "./components/shared/Logo";
 import { Account } from "./components/Account/Account";
 import { GuestDataMigrationPrompt } from "./components/Account/GuestDataMigrationPrompt";
+import { ConsentGate } from "./components/Account/ConsentGate";
+import { PrivacyNotice } from "./components/Privacy/PrivacyNotice";
 import { FixturesIcon, AddressesIcon, StatsIcon } from "./components/shared/NavIcons";
 
 const fixtures = fixturesData as Fixture[];
@@ -38,6 +41,8 @@ function App() {
   const guestState = useAppState();
   const cloudState = useCloudAppState(auth.user?.id ?? null);
   const cloudUnits = useCloudUnits(auth.user?.id ?? null);
+  const cloudConsent = useCloudConsent(auth.user?.id ?? null);
+  const [showPrivacy, setShowPrivacy] = useState(false);
 
   // Guest mode is untouched: signed out, nothing here changes. Signed in,
   // Supabase is the source of truth for attendance, addresses and units —
@@ -66,11 +71,28 @@ function App() {
     [attendedMatchIds, homeAddresses],
   );
 
-  if (auth.loading || (signedIn && (!cloudState.loaded || !cloudUnits.loaded))) {
+  if (
+    auth.loading ||
+    (signedIn && (!cloudState.loaded || !cloudUnits.loaded || !cloudConsent.loaded))
+  ) {
     return (
       <div className="app-loading">
         <p>Loading…</p>
       </div>
+    );
+  }
+
+  if (showPrivacy) {
+    return <PrivacyNotice onBack={() => setShowPrivacy(false)} />;
+  }
+
+  if (signedIn && cloudConsent.needsConsent) {
+    return (
+      <ConsentGate
+        onAccept={cloudConsent.accept}
+        onReadPrivacyNotice={() => setShowPrivacy(true)}
+        onSignOut={auth.signOut}
+      />
     );
   }
 
@@ -164,6 +186,11 @@ function App() {
           />
         )}
       </main>
+      <footer className="app-footer">
+        <button type="button" className="link-button" onClick={() => setShowPrivacy(true)}>
+          Privacy notice
+        </button>
+      </footer>
     </>
   );
 }
