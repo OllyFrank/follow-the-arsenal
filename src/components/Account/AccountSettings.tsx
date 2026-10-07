@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import type { Fixture, HomeAddress } from "../../types";
 import { deleteAccount, needsReauth } from "../../lib/cloudAccount";
-import { buildExportPayload, downloadJson } from "../../lib/exportData";
+import { buildExportPayload, downloadExportCsvs } from "../../lib/exportData";
 
 type Step = "main" | "reauth" | "warning" | "deleting" | "error";
 
@@ -51,7 +51,7 @@ export function AccountSettings({
       attendedMatchIds,
       fixtures,
     );
-    downloadJson("we-all-follow-the-arsenal-data.json", payload);
+    downloadExportCsvs(payload);
   }
 
   function handleDeleteClick() {
@@ -156,7 +156,11 @@ export function AccountSettings({
       <div className="form-row" style={{ marginTop: "0.6rem", alignItems: "flex-end" }}>
         <label>
           Distance units
-          <select value={unit} onChange={(e) => onUnitChange(e.target.value as "mi" | "km")}>
+          <select
+            value={unit}
+            onChange={(e) => onUnitChange(e.target.value as "mi" | "km")}
+            style={{ height: "44px" }}
+          >
             <option value="mi">Miles</option>
             <option value="km">Kilometres</option>
           </select>
@@ -167,14 +171,11 @@ export function AccountSettings({
       </div>
 
       <div className="bulk-actions bulk-actions-end" style={{ marginTop: "0.75rem" }}>
-        <button className="btn" onClick={signOut}>
-          Sign out
-        </button>
-      </div>
-
-      <div className="bulk-actions bulk-actions-end" style={{ marginTop: "0.75rem" }}>
         <button className="btn btn-danger" onClick={handleDeleteClick}>
           Delete my account
+        </button>
+        <button className="btn" onClick={signOut}>
+          Sign out
         </button>
       </div>
     </>

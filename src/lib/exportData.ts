@@ -15,8 +15,8 @@ export interface ExportPayload {
   attendedMatches: ExportedMatch[];
 }
 
-// docs/ACCOUNTS_PLAN.md step 5: a JSON export the user can build entirely
-// from their own already-loaded data, with no server round-trip.
+// docs/ACCOUNTS_PLAN.md step 5: an export the user can build entirely from
+// their own already-loaded data, with no server round-trip.
 export function buildExportPayload(
   email: string,
   units: "mi" | "km",
@@ -42,12 +42,48 @@ export function buildExportPayload(
   };
 }
 
-export function downloadJson(filename: string, data: unknown): void {
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+type CsvRow = Record<string, string | number | null>;
+
+function escapeCsvField(value: string): string {
+  return /[",\n]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
+}
+
+// CSV over JSON for this export: it opens directly in Excel/Sheets with no
+// fuss, which is what most people actually want from "download my data".
+export function toCsv(rows: CsvRow[]): string {
+  if (rows.length === 0) return "";
+  const headers = Object.keys(rows[0]);
+  const lines = [headers.join(",")];
+  for (const row of rows) {
+    lines.push(headers.map((h) => escapeCsvField(String(row[h] ?? ""))).join(","));
+  }
+  return lines.join("\n");
+}
+
+export function downloadCsv(filename: string, rows: CsvRow[]): void {
+  const blob = new Blob([toCsv(rows)], { type: "text/csv" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
   a.download = filename;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+// Profile, addresses and attended matches don't share columns, so a single
+// CSV can't hold all three — three small, flat files instead.
+export function downloadExportCsvs(payload: ExportPayload): void {
+  downloadCsv("arsenal-profile.csv", [payload.profile]);
+  downloadCsv(
+    "arsenal-addresses.csv",
+    payload.addresses.map((a) => ({
+      label: a.label,
+      postcode: a.query,
+      latitude: a.latitude,
+      longitude: a.longitude,
+      fromDate: a.fromDate,
+      toDate: a.toDate,
+    })),
+  );
+  downloadCsv("arsenal-attended-matches.csv", payload.attendedMatches);
 }
