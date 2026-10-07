@@ -6,6 +6,7 @@ import type { Fixture, Ground, Manager } from "./types";
 import { useAppState } from "./hooks/useAppState";
 import { useAuth } from "./hooks/useAuth";
 import { useCloudAppState } from "./hooks/useCloudAppState";
+import { useCloudUnits } from "./hooks/useCloudUnits";
 import { computeStats } from "./lib/stats";
 import { formatDistance } from "./lib/format";
 import { FixtureList } from "./components/FixtureList/FixtureList";
@@ -31,20 +32,23 @@ const TABS: { id: Tab; label: string; Icon: () => React.JSX.Element }[] = [
 
 function App() {
   const [tab, setTab] = useState<Tab>("fixtures");
-  const [unit, setUnit] = useState<"mi" | "km">("mi");
+  const [guestUnit, setGuestUnit] = useState<"mi" | "km">("mi");
 
   const auth = useAuth();
   const guestState = useAppState();
   const cloudState = useCloudAppState(auth.user?.id ?? null);
+  const cloudUnits = useCloudUnits(auth.user?.id ?? null);
 
   // Guest mode is untouched: signed out, nothing here changes. Signed in,
-  // Supabase is the source of truth for attendance and addresses — but
-  // onboarding-seen is a per-device flag, not user data, so it (and
+  // Supabase is the source of truth for attendance, addresses and units —
+  // but onboarding-seen is a per-device flag, not user data, so it (and
   // finishing it) always goes through the local guest state regardless.
   const signedIn = auth.user !== null;
   const { attendedMatchIds, homeAddresses, toggleAttendance, bulkSetAttendance, updateAddresses } =
     signedIn ? cloudState : guestState;
   const { onboardingComplete, finishOnboarding } = guestState;
+  const unit = signedIn ? cloudUnits.unit : guestUnit;
+  const setUnit = signedIn ? cloudUnits.setUnit : setGuestUnit;
 
   // Step 4: offer to upload this device's guest data once, per app load,
   // the first time there's both a session and some guest data to offer.
@@ -62,7 +66,7 @@ function App() {
     [attendedMatchIds, homeAddresses],
   );
 
-  if (auth.loading || (signedIn && !cloudState.loaded)) {
+  if (auth.loading || (signedIn && (!cloudState.loaded || !cloudUnits.loaded))) {
     return (
       <div className="app-loading">
         <p>Loading…</p>
@@ -129,6 +133,11 @@ function App() {
             loading={auth.loading}
             signInWithMagicLink={auth.signInWithMagicLink}
             signOut={auth.signOut}
+            unit={unit}
+            onUnitChange={setUnit}
+            attendedMatchIds={attendedMatchIds}
+            homeAddresses={homeAddresses}
+            fixtures={fixtures}
           />
         </div>
       </header>

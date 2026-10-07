@@ -1,6 +1,8 @@
 import { useState } from "react";
 import type { User } from "@supabase/supabase-js";
+import type { Fixture, HomeAddress } from "../../types";
 import { AccountIcon } from "../shared/NavIcons";
+import { AccountSettings } from "./AccountSettings";
 
 type SendStatus = "idle" | "sending" | "sent";
 
@@ -9,13 +11,29 @@ interface Props {
   loading: boolean;
   signInWithMagicLink: (email: string) => Promise<void>;
   signOut: () => Promise<void>;
+  unit: "mi" | "km";
+  onUnitChange: (unit: "mi" | "km") => void;
+  attendedMatchIds: Set<string>;
+  homeAddresses: HomeAddress[];
+  fixtures: Fixture[];
 }
 
-export function Account({ user, loading, signInWithMagicLink, signOut }: Props) {
+export function Account({
+  user,
+  loading,
+  signInWithMagicLink,
+  signOut,
+  unit,
+  onUnitChange,
+  attendedMatchIds,
+  homeAddresses,
+  fixtures,
+}: Props) {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<SendStatus>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [justDeleted, setJustDeleted] = useState(false);
 
   function close() {
     setOpen(false);
@@ -63,18 +81,34 @@ export function Account({ user, loading, signInWithMagicLink, signOut }: Props) 
           <div className="card modal-panel" onClick={(e) => e.stopPropagation()}>
             <div className="section-title">Account</div>
 
-            {user ? (
+            {justDeleted ? (
               <>
-                <p className="stat-subline">Signed in as {user.email}</p>
+                <p className="stat-subline">Your account and data have been deleted.</p>
                 <div className="bulk-actions" style={{ marginTop: "0.75rem" }}>
-                  <button className="btn" onClick={handleSignOut}>
-                    Sign out
-                  </button>
-                  <button className="btn" onClick={close}>
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      setJustDeleted(false);
+                      close();
+                    }}
+                  >
                     Close
                   </button>
                 </div>
               </>
+            ) : user ? (
+              <AccountSettings
+                user={user}
+                unit={unit}
+                onUnitChange={onUnitChange}
+                attendedMatchIds={attendedMatchIds}
+                homeAddresses={homeAddresses}
+                fixtures={fixtures}
+                signInWithMagicLink={signInWithMagicLink}
+                signOut={handleSignOut}
+                onClose={close}
+                onAccountDeleted={() => setJustDeleted(true)}
+              />
             ) : status === "sent" ? (
               <>
                 <p className="stat-subline">
