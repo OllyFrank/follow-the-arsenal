@@ -186,6 +186,21 @@ a {
   padding-bottom: 7rem;
 }
 
+.app-footer {
+  padding: 1rem 1rem 7rem;
+  text-align: center;
+}
+
+.app-loading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-family: var(--font-label);
+  font-size: 0.9rem;
+}
+
 @media (min-width: 768px) {
   .logo-compact {
     display: none;
@@ -942,6 +957,66 @@ a {
 
 .icon-button-muted {
   color: var(--text-muted);
+}
+
+.account-trigger {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-trigger:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(11, 31, 63, 0.6);
+}
+
+.modal-panel {
+  width: 100%;
+  max-width: 360px;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  background: var(--grey-100);
+  color: var(--navy);
+}
+
+.bulk-actions-end {
+  justify-content: flex-end;
 }
 
 .add-earlier-button {

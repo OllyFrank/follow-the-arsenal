@@ -385,8 +385,8 @@ function computeBestSeasons(fixtures: Fixture[], attended: Set<string>): BestSea
 // behind-closed-doors) fixture in them, so a column never sits permanently
 // at zero.
 const SEASON_MONTHS = ["08", "09", "10", "11", "12", "01", "02", "03", "04", "05"];
-// globalThis.Record: this file's own `Record` interface (W/D/L stats,
-// defined above) shadows the built-in generic utility type of the same name.
+// globalThis.Record: this file's own `Record` interface (W/D/L stats, above)
+// shadows the built-in generic utility type of the same name.
 const MONTH_LABELS: globalThis.Record<string, string> = {
   "01": "Jan", "02": "Feb", "03": "Mar", "04": "Apr", "05": "May", "06": "Jun",
   "07": "Jul", "08": "Aug", "09": "Sep", "10": "Oct", "11": "Nov", "12": "Dec",

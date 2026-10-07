@@ -33,3 +33,20 @@ export function StatsIcon() {
     </svg>
   );
 }
+
+export function AccountIcon() {
+  return (
+    <svg {...commonProps}>
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" />
+    </svg>
+  );
+}
+
+export function CloseIcon() {
+  return (
+    <svg {...commonProps} className="nav-icon" width="18" height="18">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  );
+}
