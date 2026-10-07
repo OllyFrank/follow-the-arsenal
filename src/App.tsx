@@ -16,9 +16,11 @@ import { Dashboard } from "./components/Dashboard/Dashboard";
 import { Onboarding } from "./components/Onboarding/Onboarding";
 import { Logo } from "./components/shared/Logo";
 import { Account } from "./components/Account/Account";
+import { AccountComingSoon } from "./components/Account/AccountComingSoon";
 import { GuestDataMigrationPrompt } from "./components/Account/GuestDataMigrationPrompt";
 import { ConsentGate } from "./components/Account/ConsentGate";
 import { PrivacyNotice } from "./components/Privacy/PrivacyNotice";
+import { ACCOUNTS_ENABLED } from "./lib/featureFlags";
 import { FixturesIcon, AddressesIcon, StatsIcon } from "./components/shared/NavIcons";
 
 const fixtures = fixturesData as Fixture[];
@@ -150,17 +152,21 @@ function App() {
             <div className="mileage-chip-label">travelled so far</div>
           </div>
 
-          <Account
-            user={auth.user}
-            loading={auth.loading}
-            signInWithMagicLink={auth.signInWithMagicLink}
-            signOut={auth.signOut}
-            unit={unit}
-            onUnitChange={setUnit}
-            attendedMatchIds={attendedMatchIds}
-            homeAddresses={homeAddresses}
-            fixtures={fixtures}
-          />
+          {ACCOUNTS_ENABLED ? (
+            <Account
+              user={auth.user}
+              loading={auth.loading}
+              signInWithMagicLink={auth.signInWithMagicLink}
+              signOut={auth.signOut}
+              unit={unit}
+              onUnitChange={setUnit}
+              attendedMatchIds={attendedMatchIds}
+              homeAddresses={homeAddresses}
+              fixtures={fixtures}
+            />
+          ) : (
+            <AccountComingSoon />
+          )}
         </div>
       </header>
       <main className="app-main">

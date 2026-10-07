@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "../lib/supabaseClient";
+import { ACCOUNTS_ENABLED } from "../lib/featureFlags";
 
 export function useAuth() {
   const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(ACCOUNTS_ENABLED);
 
   useEffect(() => {
+    if (!ACCOUNTS_ENABLED) return;
+
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setLoading(false);
