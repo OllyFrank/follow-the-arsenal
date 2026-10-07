@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { acceptConsent, fetchConsentStatus, type ConsentStatus } from "../lib/cloudProfile";
-import { needsConsent, PRIVACY_NOTICE_VERSION } from "../lib/privacyNotice";
+import { acceptConsent, fetchConsentStatus } from "../lib/cloudProfile";
+import { needsConsent, PRIVACY_NOTICE_VERSION, type ConsentStatus } from "../lib/privacyNotice";
 
 export function useCloudConsent(userId: string | null) {
   const [status, setStatus] = useState<ConsentStatus | null>(null);

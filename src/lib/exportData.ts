@@ -42,17 +42,18 @@ export function buildExportPayload(
   };
 }
 
-type CsvRow = Record<string, string | number | null>;
-
 function escapeCsvField(value: string): string {
   return /[",\n]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
 }
 
+// Generic over any plain row shape (rather than a Record<string, ...> param)
+// so a concrete interface like ExportedMatch — which has no index signature
+// of its own — can be passed straight in.
 // CSV over JSON for this export: it opens directly in Excel/Sheets with no
 // fuss, which is what most people actually want from "download my data".
-export function toCsv(rows: CsvRow[]): string {
+export function toCsv<T extends object>(rows: readonly T[]): string {
   if (rows.length === 0) return "";
-  const headers = Object.keys(rows[0]);
+  const headers = Object.keys(rows[0]) as (keyof T)[];
   const lines = [headers.join(",")];
   for (const row of rows) {
     lines.push(headers.map((h) => escapeCsvField(String(row[h] ?? ""))).join(","));
@@ -60,7 +61,7 @@ export function toCsv(rows: CsvRow[]): string {
   return lines.join("\n");
 }
 
-export function downloadCsv(filename: string, rows: CsvRow[]): void {
+export function downloadCsv<T extends object>(filename: string, rows: readonly T[]): void {
   const blob = new Blob([toCsv(rows)], { type: "text/csv" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
