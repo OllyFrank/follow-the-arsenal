@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Fixture, Ground } from "../../types";
 import { formatDateLong, formatFixtureScoreLine, formatMonthYear, googleSearchUrl } from "../../lib/format";
 import { AttendToggle } from "../shared/AttendToggle";
@@ -10,6 +10,11 @@ interface Props {
   attendedMatchIds: Set<string>;
   onToggleAttendance: (matchId: string, attended: boolean) => void;
   onBulkSetAttendance: (matchIds: string[], attended: boolean) => void;
+  /** Opponent to pre-filter by, e.g. arriving from the Derby Days "No derbies
+   * ticked yet" link. Read once on mount — change it via a remount (this
+   * component already unmounts whenever the Fixtures tab isn't active). */
+  initialOpponent?: string | null;
+  onInitialOpponentConsumed?: () => void;
 }
 
 function resultLabel(fixture: Fixture): string {
@@ -52,6 +57,8 @@ export function FixtureList({
   attendedMatchIds,
   onToggleAttendance,
   onBulkSetAttendance,
+  initialOpponent = null,
+  onInitialOpponentConsumed,
 }: Props) {
   const seasons = useMemo(() => {
     const set = new Set(fixtures.map((f) => f.season));
@@ -61,6 +68,22 @@ export function FixtureList({
   const [season, setSeason] = useState(() => seasons[seasons.length - 1] ?? "");
   const [competition, setCompetition] = useState("all");
   const [viewMode, setViewMode] = useState<"list" | "grid">("list");
+  // An opponent filter spans every season at once (there's no "all seasons"
+  // option otherwise, by design — see CLAUDE.md), so it's independent of the
+  // season/competition selects above rather than layered on top of them.
+  const [opponent, setOpponent] = useState<string | null>(initialOpponent);
+
+  // Only ever meant to run once, against the mount-time value: this
+  // component remounts fresh every time the Fixtures tab becomes active.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (initialOpponent) onInitialOpponentConsumed?.();
+  }, []);
+
+  const opponents = useMemo(() => {
+    const set = new Set(fixtures.map((f) => f.opponent));
+    return [...set].sort();
+  }, [fixtures]);
 
   // A competition selected in one season may not exist in another (e.g. the
   // Champions League isn't played every year), so reset it when the season
@@ -82,13 +105,12 @@ export function FixtureList({
     return [...set].sort();
   }, [seasonFixtures]);
 
-  const displayedFixtures = useMemo(
-    () =>
-      competition === "all"
-        ? seasonFixtures
-        : seasonFixtures.filter((f) => f.competition === competition),
-    [seasonFixtures, competition],
-  );
+  const displayedFixtures = useMemo(() => {
+    if (opponent) return fixtures.filter((f) => f.opponent === opponent);
+    return competition === "all"
+      ? seasonFixtures
+      : seasonFixtures.filter((f) => f.competition === competition);
+  }, [fixtures, seasonFixtures, competition, opponent]);
 
   const monthGroups = useMemo(() => groupByMonth(displayedFixtures), [displayedFixtures]);
 
@@ -125,21 +147,42 @@ export function FixtureList({
         </div>
 
         <div className="fixtures-filters-row">
-          <select value={season} onChange={(e) => setSeason(e.target.value)}>
-            {seasons.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
-          <select value={competition} onChange={(e) => setCompetition(e.target.value)}>
-            <option value="all">All competitions</option>
-            {competitions.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
+          {opponent ? (
+            <div className="opponent-filter-banner">
+              <span>
+                Every meeting with <strong>{opponent}</strong>
+              </span>
+              <button className="link-button" onClick={() => setOpponent(null)}>
+                Clear, show by season
+              </button>
+            </div>
+          ) : (
+            <>
+              <select value={season} onChange={(e) => setSeason(e.target.value)}>
+                {seasons.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </select>
+              <select value={competition} onChange={(e) => setCompetition(e.target.value)}>
+                <option value="all">All competitions</option>
+                {competitions.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
+              <select value="all" onChange={(e) => setOpponent(e.target.value)}>
+                <option value="all">Filter by opponent…</option>
+                {opponents.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>
+            </>
+          )}
           <div className="fixtures-row-break" />
           <div className="unit-toggle">
             <button

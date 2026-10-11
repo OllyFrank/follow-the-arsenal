@@ -16,6 +16,10 @@ export function formatMonthYear(isoDate: string): string {
   return `${MONTHS[m - 1]} ${y}`;
 }
 
+export function fixtureLabel(fixture: Fixture): string {
+  return `${fixture.homeTeam} v ${fixture.awayTeam}, ${formatDateLong(fixture.date)}`;
+}
+
 /** Score oriented as "home team's goals - away team's goals". */
 export function formatFixtureScoreLine(fixture: Fixture): string {
   const homeGoals = fixture.homeTeam === "Arsenal" ? fixture.arsenalGoals : fixture.opponentGoals;

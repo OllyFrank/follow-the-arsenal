@@ -1,13 +1,16 @@
 import { useMemo, useState } from "react";
 import type { Fixture, Ground, HomeAddress, Manager } from "../../types";
 import { computeStats } from "../../lib/stats";
-import { formatDateLong, formatDistance, ordinal } from "../../lib/format";
+import { computeDerbyStats } from "../../lib/derbyStats";
+import { badgeReference } from "../../lib/badgeReference";
+import { fixtureLabel, formatDateLong, formatDistance, ordinal } from "../../lib/format";
 import { EARTH_CIRCUMFERENCE_KM } from "../../lib/distance";
 import { usePagination } from "../../hooks/usePagination";
 import { Globe } from "../shared/Globe";
 import { LapStamps } from "../shared/LapStamps";
 import { GroundsMap } from "./GroundsMap";
 import { PaginationControls } from "./PaginationControls";
+import { DerbyCard } from "./DerbyCard";
 
 const GROUNDS_PAGE_SIZE = 10;
 const VISIBLE_SEASONS_DEFAULT = 6;
@@ -20,10 +23,7 @@ interface Props {
   addresses: HomeAddress[];
   unit: "mi" | "km";
   onUnitChange: (unit: "mi" | "km") => void;
-}
-
-function fixtureLabel(fixture: Fixture): string {
-  return `${fixture.homeTeam} v ${fixture.awayTeam}, ${formatDateLong(fixture.date)}`;
+  onViewFixtures: (opponent?: string) => void;
 }
 
 // Monthly attendance heatmap: color and bar height both scale continuously
@@ -65,6 +65,7 @@ export function Dashboard({
   addresses,
   unit,
   onUnitChange,
+  onViewFixtures,
 }: Props) {
   const seasons = useMemo(() => {
     const set = new Set(fixtures.map((f) => f.season));
@@ -87,6 +88,32 @@ export function Dashboard({
   const dist = (km: number) => formatDistance(km, unit);
 
   const groundsPage = usePagination(stats.grounds.rankedByVisits, GROUNDS_PAGE_SIZE);
+
+  const groundsById = useMemo(() => new Map(grounds.map((g) => [g.groundId, g])), [grounds]);
+
+  // Derby Days has its own pair of season filters, independent of the
+  // dashboard-wide one above (BADGES_PLAN.md: "Each has a season filter
+  // consistent with the rest of the Stats page").
+  const [northLondonSeason, setNorthLondonSeason] = useState<string>("all");
+  const [londonSeason, setLondonSeason] = useState<string>("all");
+
+  const northLondonFixtures = useMemo(
+    () => (northLondonSeason === "all" ? fixtures : fixtures.filter((f) => f.season === northLondonSeason)),
+    [fixtures, northLondonSeason],
+  );
+  const londonFixtures = useMemo(
+    () => (londonSeason === "all" ? fixtures : fixtures.filter((f) => f.season === londonSeason)),
+    [fixtures, londonSeason],
+  );
+
+  const northLondonDerby = useMemo(
+    () => computeDerbyStats(northLondonFixtures, attendedMatchIds).northLondon,
+    [northLondonFixtures, attendedMatchIds],
+  );
+  const londonDerby = useMemo(
+    () => computeDerbyStats(londonFixtures, attendedMatchIds).london,
+    [londonFixtures, attendedMatchIds],
+  );
 
   const lapsOfEarth = stats.distance.lapsOfEarth;
   const completedLaps = Math.floor(lapsOfEarth);
@@ -380,6 +407,33 @@ export function Dashboard({
           </section>
         </div>
       </div>
+
+      <section style={{ marginTop: "1rem" }}>
+        <h2 className="page-subheading">Derby Days</h2>
+        <div className="derby-grid">
+          <DerbyCard
+            title="North London Derbies"
+            seasons={seasons}
+            season={northLondonSeason}
+            onSeasonChange={setNorthLondonSeason}
+            stats={northLondonDerby}
+            firstDerby={northLondonDerby.firstDerby}
+            firstDerbyLabel="North London derby"
+            groundsById={groundsById}
+            opponentForEmptyState={badgeReference.northLondonDerbyOpponent}
+            onViewFixtures={onViewFixtures}
+          />
+          <DerbyCard
+            title="London Derbies"
+            seasons={seasons}
+            season={londonSeason}
+            onSeasonChange={setLondonSeason}
+            stats={londonDerby}
+            groundsById={groundsById}
+            onViewFixtures={onViewFixtures}
+          />
+        </div>
+      </section>
 
       <section className="card" style={{ marginTop: "1rem" }}>
         <h2 className="section-title">Grounds visited</h2>

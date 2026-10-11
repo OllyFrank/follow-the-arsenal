@@ -428,6 +428,23 @@ a {
   height: 0;
 }
 
+.opponent-filter-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  background: var(--grey-100);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  color: var(--navy-ink);
+}
+
+.opponent-filter-banner .link-button {
+  margin: 0;
+  align-self: auto;
+}
+
 .fixture-count-desktop {
   display: none;
 }
@@ -1218,6 +1235,47 @@ a {
   gap: 0.75rem;
   margin-top: 1rem;
   align-items: stretch;
+}
+
+.page-subheading {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.derby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.derby-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.derby-first {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.derby-first-link {
+  text-decoration: none;
+}
+
+.derby-first-link:hover {
+  text-decoration: underline;
+}
+
+.derby-sub-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
 }
 
 .dashboard-stack {
@@ -2558,6 +2616,14 @@ table.stats-table .num.strong {
      to a consistent height (so a stacked column, e.g. By manager +
      Finals, doesn't look mismatched next to single cards). */
   .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .derby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .derby-sub-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }

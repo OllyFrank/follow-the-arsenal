@@ -38,6 +38,14 @@ const TABS: { id: Tab; label: string; Icon: () => React.JSX.Element }[] = [
 function App() {
   const [tab, setTab] = useState<Tab>("fixtures");
   const [guestUnit, setGuestUnit] = useState<"mi" | "km">("mi");
+  // Set by a Derby Days empty-state link ("No derbies ticked yet") to land on
+  // the Fixtures tab pre-filtered to that opponent. Read once by FixtureList
+  // on mount, then cleared so a later manual tab switch starts unfiltered.
+  const [pendingFixtureOpponent, setPendingFixtureOpponent] = useState<string | null>(null);
+  const viewFixtures = (opponent?: string) => {
+    setPendingFixtureOpponent(opponent ?? null);
+    setTab("fixtures");
+  };
 
   const auth = useAuth();
   const guestState = useAppState();
@@ -177,6 +185,8 @@ function App() {
             attendedMatchIds={attendedMatchIds}
             onToggleAttendance={toggleAttendance}
             onBulkSetAttendance={bulkSetAttendance}
+            initialOpponent={pendingFixtureOpponent}
+            onInitialOpponentConsumed={() => setPendingFixtureOpponent(null)}
           />
         )}
         {tab === "addresses" && <Addresses addresses={homeAddresses} onChange={updateAddresses} />}
@@ -189,6 +199,7 @@ function App() {
             addresses={homeAddresses}
             unit={unit}
             onUnitChange={setUnit}
+            onViewFixtures={viewFixtures}
           />
         )}
       </main>

@@ -1,0 +1,302 @@
+[
+  {
+    "number": 1,
+    "matchId": "M0045",
+    "date": "1989-05-26",
+    "opponent": "Liverpool",
+    "match": "Liverpool 0-2 Arsenal",
+    "era": "Graham",
+    "why": "Title won at Anfield",
+    "tier": "gold"
+  },
+  {
+    "number": 2,
+    "matchId": "M0243",
+    "date": "1993-04-18",
+    "opponent": "Sheffield Wednesday",
+    "match": "Arsenal 2-1 Sheffield Wednesday",
+    "era": "Graham",
+    "why": "Coca-Cola Cup final",
+    "tier": "silver"
+  },
+  {
+    "number": 3,
+    "matchId": "M0239",
+    "date": "1993-04-04",
+    "opponent": "Tottenham Hotspur",
+    "match": "Arsenal 1-0 Tottenham Hotspur",
+    "era": "Graham",
+    "why": "FA Cup semi-final at Wembley",
+    "tier": "silver"
+  },
+  {
+    "number": 4,
+    "matchId": "M0251",
+    "date": "1993-05-20",
+    "opponent": "Sheffield Wednesday",
+    "match": "Arsenal 2-1 Sheffield Wednesday",
+    "era": "Graham",
+    "why": "FA Cup final replay, cup double",
+    "tier": "silver"
+  },
+  {
+    "number": 5,
+    "matchId": "M0310",
+    "date": "1994-05-04",
+    "opponent": "Parma",
+    "match": "Parma 0-1 Arsenal",
+    "era": "Graham",
+    "why": "Cup Winners' Cup final",
+    "tier": "gold"
+  },
+  {
+    "number": 6,
+    "matchId": "M0368",
+    "date": "1995-04-20",
+    "opponent": "Sampdoria",
+    "match": "Sampdoria 3-2 Arsenal",
+    "era": "Graham",
+    "why": "Cup Winners' Cup semi-final, won on penalties",
+    "tier": "bronze"
+  },
+  {
+    "number": 7,
+    "matchId": "M0516",
+    "date": "1998-05-03",
+    "opponent": "Everton",
+    "match": "Arsenal 4-0 Everton",
+    "era": "Early Wenger",
+    "why": "Title won at Highbury",
+    "tier": "gold"
+  },
+  {
+    "number": 8,
+    "matchId": "M0519",
+    "date": "1998-05-16",
+    "opponent": "Newcastle United",
+    "match": "Arsenal 2-0 Newcastle United",
+    "era": "Early Wenger",
+    "why": "FA Cup final, the Double",
+    "tier": "gold"
+  },
+  {
+    "number": 9,
+    "matchId": "M0749",
+    "date": "2002-05-04",
+    "opponent": "Chelsea",
+    "match": "Arsenal 2-0 Chelsea",
+    "era": "Early Wenger",
+    "why": "FA Cup final",
+    "tier": "silver"
+  },
+  {
+    "number": 10,
+    "matchId": "M0750",
+    "date": "2002-05-08",
+    "opponent": "Manchester United",
+    "match": "Manchester United 0-1 Arsenal",
+    "era": "Early Wenger",
+    "why": "Double clinched at Old Trafford",
+    "tier": "gold"
+  },
+  {
+    "number": 11,
+    "matchId": "M0830",
+    "date": "2003-11-25",
+    "opponent": "Inter Milan",
+    "match": "Inter Milan 1-5 Arsenal",
+    "era": "Invincibles",
+    "why": "San Siro",
+    "tier": "bronze"
+  },
+  {
+    "number": 12,
+    "matchId": "M0862",
+    "date": "2004-04-09",
+    "opponent": "Liverpool",
+    "match": "Arsenal 4-2 Liverpool",
+    "era": "Invincibles",
+    "why": "Henry hat-trick",
+    "tier": "bronze"
+  },
+  {
+    "number": 13,
+    "matchId": "M0865",
+    "date": "2004-04-25",
+    "opponent": "Tottenham Hotspur",
+    "match": "Tottenham Hotspur 2-2 Arsenal",
+    "era": "Invincibles",
+    "why": "Title won at the Lane",
+    "tier": "gold"
+  },
+  {
+    "number": 14,
+    "matchId": "M0869",
+    "date": "2004-05-15",
+    "opponent": "Leicester City",
+    "match": "Arsenal 2-1 Leicester City",
+    "era": "Invincibles",
+    "why": "Unbeaten season completed",
+    "tier": "silver"
+  },
+  {
+    "number": 15,
+    "matchId": "M0889",
+    "date": "2004-11-13",
+    "opponent": "Tottenham Hotspur",
+    "match": "Tottenham Hotspur 4-5 Arsenal",
+    "era": "Late Wenger",
+    "why": "Nine-goal derby",
+    "tier": "bronze"
+  },
+  {
+    "number": 16,
+    "matchId": "M0926",
+    "date": "2005-05-21",
+    "opponent": "Manchester United",
+    "match": "Arsenal 0-0 Manchester United",
+    "era": "Late Wenger",
+    "why": "FA Cup final, won on penalties",
+    "tier": "gold"
+  },
+  {
+    "number": 17,
+    "matchId": "M0967",
+    "date": "2006-02-21",
+    "opponent": "Real Madrid",
+    "match": "Real Madrid 0-1 Arsenal",
+    "era": "Late Wenger",
+    "why": "Henry at the Bernabéu",
+    "tier": "silver"
+  },
+  {
+    "number": 18,
+    "matchId": "M0981",
+    "date": "2006-04-25",
+    "opponent": "Villarreal",
+    "match": "Villarreal 0-0 Arsenal",
+    "era": "Late Wenger",
+    "why": "Qualified for first Champions League final",
+    "tier": "silver"
+  },
+  {
+    "number": 19,
+    "matchId": "M0984",
+    "date": "2006-05-07",
+    "opponent": "Wigan Athletic",
+    "match": "Arsenal 4-2 Wigan Athletic",
+    "era": "Late Wenger",
+    "why": "Highbury farewell",
+    "tier": "bronze"
+  },
+  {
+    "number": 20,
+    "matchId": "M1090",
+    "date": "2008-03-04",
+    "opponent": "AC Milan",
+    "match": "AC Milan 0-2 Arsenal",
+    "era": "Late Wenger",
+    "why": "San Siro",
+    "tier": "bronze"
+  },
+  {
+    "number": 21,
+    "matchId": "M1259",
+    "date": "2011-02-16",
+    "opponent": "Barcelona",
+    "match": "Arsenal 2-1 Barcelona",
+    "era": "Late Wenger",
+    "why": "Champions League last 16",
+    "tier": "bronze"
+  },
+  {
+    "number": 22,
+    "matchId": "M1317",
+    "date": "2012-02-26",
+    "opponent": "Tottenham Hotspur",
+    "match": "Arsenal 5-2 Tottenham Hotspur",
+    "era": "Late Wenger",
+    "why": "From 0-2 down",
+    "tier": "bronze"
+  },
+  {
+    "number": 23,
+    "matchId": "M1348",
+    "date": "2012-11-17",
+    "opponent": "Tottenham Hotspur",
+    "match": "Arsenal 5-2 Tottenham Hotspur",
+    "era": "Late Wenger",
+    "why": "It happened again!",
+    "tier": "bronze"
+  },
+  {
+    "number": 24,
+    "matchId": "M1439",
+    "date": "2014-05-17",
+    "opponent": "Hull City",
+    "match": "Arsenal 3-2 Hull City",
+    "era": "Late Wenger",
+    "why": "FA Cup final, trophy drought ends",
+    "tier": "gold"
+  },
+  {
+    "number": 25,
+    "matchId": "M1495",
+    "date": "2015-05-30",
+    "opponent": "Aston Villa",
+    "match": "Arsenal 4-0 Aston Villa",
+    "era": "Late Wenger",
+    "why": "FA Cup final",
+    "tier": "silver"
+  },
+  {
+    "number": 26,
+    "matchId": "M1604",
+    "date": "2017-05-27",
+    "opponent": "Chelsea",
+    "match": "Arsenal 2-1 Chelsea",
+    "era": "Late Wenger",
+    "why": "FA Cup final",
+    "tier": "gold"
+  },
+  {
+    "number": 27,
+    "matchId": "M1914",
+    "date": "2023-03-04",
+    "opponent": "AFC Bournemouth",
+    "match": "Arsenal 3-2 AFC Bournemouth",
+    "era": "Arteta",
+    "why": "0-2 down, 97th-minute winner",
+    "tier": "bronze"
+  },
+  {
+    "number": 28,
+    "matchId": "M2028",
+    "date": "2025-04-08",
+    "opponent": "Real Madrid",
+    "match": "Arsenal 3-0 Real Madrid",
+    "era": "Arteta",
+    "why": "Champions League quarter-final",
+    "tier": "silver"
+  },
+  {
+    "number": 29,
+    "matchId": "M2030",
+    "date": "2025-04-16",
+    "opponent": "Real Madrid",
+    "match": "Real Madrid 1-2 Arsenal",
+    "era": "Arteta",
+    "why": "Champions League quarter-final",
+    "tier": "silver"
+  },
+  {
+    "number": 30,
+    "matchId": "M2100",
+    "date": "2026-05-24",
+    "opponent": "Crystal Palace",
+    "match": "Crystal Palace 1-2 Arsenal",
+    "era": "Arteta",
+    "why": "Lifted the title",
+    "tier": "gold"
+  }
+]
