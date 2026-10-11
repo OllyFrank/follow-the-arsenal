@@ -11,11 +11,16 @@ import { managerForDate } from "./managers";
 // and grounds stats include `Counts in record = N` (the one voided match);
 // every result- or score-based stat excludes it.
 
-// Exported so other scoped breakdowns (e.g. Derby Days) can reuse the same
-// attendance/record-eligibility rules and result-based helpers below, rather
-// than reinterpreting them against a filtered fixture list of their own.
+// Exported so other scoped breakdowns (e.g. Derby Days, the badge engine)
+// can reuse the same attendance/record-eligibility rules and result-based
+// helpers below, rather than reinterpreting them against a filtered fixture
+// list of their own.
+export function isAttendable(fixture: Fixture): boolean {
+  return !fixture.behindClosedDoors;
+}
+
 export function isAttended(fixture: Fixture, attended: Set<string>): boolean {
-  return attended.has(fixture.matchId) && !fixture.behindClosedDoors;
+  return attended.has(fixture.matchId) && isAttendable(fixture);
 }
 
 export function attendedFixtures(fixtures: Fixture[], attended: Set<string>): Fixture[] {

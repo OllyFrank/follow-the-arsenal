@@ -75,9 +75,9 @@ export function FixtureList({
 
   // Only ever meant to run once, against the mount-time value: this
   // component remounts fresh every time the Fixtures tab becomes active.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (initialOpponent) onInitialOpponentConsumed?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const opponents = useMemo(() => {
