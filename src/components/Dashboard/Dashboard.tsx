@@ -394,7 +394,6 @@ export function Dashboard({
       </div>
 
       <section style={{ marginTop: "1rem" }}>
-        <h2 className="page-subheading">Derby Days</h2>
         <div className="derby-grid">
           <DerbyCard
             title="North London Derbies"

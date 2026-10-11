@@ -55,7 +55,7 @@ export function DerbyCard({
             </div>
           )}
 
-          <div className="record-figures">
+          <div className="record-figures derby-record-figures">
             <div className="record-figure">
               <div className="record-figure-value record-won">{record.wins}</div>
               <div className="record-figure-label">Won</div>
@@ -124,6 +124,10 @@ export function DerbyCard({
             </div>
           </div>
 
+          <div className="derby-lucky-charm-heading">
+            <div className="stat-line">Lucky charm?</div>
+            <div className="stat-subline">Win rate when you&apos;re there, and when you&apos;re not.</div>
+          </div>
           <div className="lucky-charm-row">
             <div className="lucky-charm-row-head">
               <div>
