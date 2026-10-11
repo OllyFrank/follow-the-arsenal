@@ -16,6 +16,17 @@ export function formatMonthYear(isoDate: string): string {
   return `${MONTHS[m - 1]} ${y}`;
 }
 
+const SHORT_MONTHS = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+/** "27 Nov 2007" — the badge logbook's compact date format. */
+export function formatDateShort(isoDate: string): string {
+  const [y, m, d] = isoDate.split("-").map(Number);
+  return `${d} ${SHORT_MONTHS[m - 1]} ${y}`;
+}
+
 export function fixtureLabel(fixture: Fixture): string {
   return `${fixture.homeTeam} v ${fixture.awayTeam}, ${formatDateLong(fixture.date)}`;
 }
@@ -25,6 +36,12 @@ export function formatFixtureScoreLine(fixture: Fixture): string {
   const homeGoals = fixture.homeTeam === "Arsenal" ? fixture.arsenalGoals : fixture.opponentGoals;
   const awayGoals = fixture.awayTeam === "Arsenal" ? fixture.arsenalGoals : fixture.opponentGoals;
   return `${homeGoals}-${awayGoals}`;
+}
+
+/** "Sevilla 3-1 Arsenal" — home team first, as in the fixture list, for the
+ * badge logbook's match lines. */
+export function matchScoreLine(fixture: Fixture): string {
+  return `${fixture.homeTeam} ${formatFixtureScoreLine(fixture)} ${fixture.awayTeam}`;
 }
 
 export function googleSearchUrl(fixture: Fixture): string {

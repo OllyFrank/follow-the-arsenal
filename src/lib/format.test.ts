@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
   formatDateLong,
+  formatDateShort,
   formatDistance,
   formatFixtureScoreLine,
   googleSearchUrl,
+  matchScoreLine,
 } from "./format";
 import { makeFixture } from "./test-fixtures";
 
@@ -14,6 +16,24 @@ describe("formatDateLong", () => {
 
   it("does not zero-pad the day", () => {
     expect(formatDateLong("2014-05-01")).toBe("1 May 2014");
+  });
+});
+
+describe("formatDateShort", () => {
+  it("formats an ISO date as '<day> <Mon> <year>'", () => {
+    expect(formatDateShort("2007-11-27")).toBe("27 Nov 2007");
+  });
+});
+
+describe("matchScoreLine", () => {
+  it("puts the home team first with the score between the teams", () => {
+    const fixture = makeFixture({
+      homeTeam: "Sevilla",
+      awayTeam: "Arsenal",
+      arsenalGoals: 1,
+      opponentGoals: 3,
+    });
+    expect(matchScoreLine(fixture)).toBe("Sevilla 3-1 Arsenal");
   });
 });
 
