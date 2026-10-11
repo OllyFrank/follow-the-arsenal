@@ -1030,16 +1030,6 @@
     "confidence": "High"
   },
   {
-    "groundId": "G104",
-    "ground": "Parkstadion",
-    "alsoKnownAs": null,
-    "usedBy": "Schalke",
-    "country": "Germany",
-    "latitude": 51.5585,
-    "longitude": 7.0712,
-    "confidence": "Medium"
-  },
-  {
     "groundId": "G105",
     "ground": "Partizan Stadium",
     "alsoKnownAs": null,

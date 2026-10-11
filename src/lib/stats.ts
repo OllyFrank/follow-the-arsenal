@@ -11,15 +11,18 @@ import { managerForDate } from "./managers";
 // and grounds stats include `Counts in record = N` (the one voided match);
 // every result- or score-based stat excludes it.
 
-function isAttended(fixture: Fixture, attended: Set<string>): boolean {
+// Exported so other scoped breakdowns (e.g. Derby Days) can reuse the same
+// attendance/record-eligibility rules and result-based helpers below, rather
+// than reinterpreting them against a filtered fixture list of their own.
+export function isAttended(fixture: Fixture, attended: Set<string>): boolean {
   return attended.has(fixture.matchId) && !fixture.behindClosedDoors;
 }
 
-function attendedFixtures(fixtures: Fixture[], attended: Set<string>): Fixture[] {
+export function attendedFixtures(fixtures: Fixture[], attended: Set<string>): Fixture[] {
   return fixtures.filter((f) => isAttended(f, attended));
 }
 
-function countedFixtures(fixtures: Fixture[]): Fixture[] {
+export function countedFixtures(fixtures: Fixture[]): Fixture[] {
   return fixtures.filter((f) => f.countsInRecord);
 }
 
@@ -31,7 +34,7 @@ export interface Record {
   winPct: number;
 }
 
-function tally(fixtures: Fixture[]): Record {
+export function tally(fixtures: Fixture[]): Record {
   const wins = fixtures.filter((f) => f.result === "W").length;
   const draws = fixtures.filter((f) => f.result === "D").length;
   const losses = fixtures.filter((f) => f.result === "L").length;
@@ -229,14 +232,14 @@ function computeRecordStats(fixtures: Fixture[], attended: Set<string>): RecordS
   };
 }
 
-function computeLuckyCharmStats(fixtures: Fixture[], attended: Set<string>): LuckyCharmStats {
+export function computeLuckyCharmStats(fixtures: Fixture[], attended: Set<string>): LuckyCharmStats {
   const eligible = countedFixtures(fixtures.filter((f) => !f.behindClosedDoors));
   const attendedOnes = eligible.filter((f) => attended.has(f.matchId));
   const missedOnes = eligible.filter((f) => !attended.has(f.matchId));
   return { attended: tally(attendedOnes), missed: tally(missedOnes) };
 }
 
-function computeBiggestMargin(
+export function computeBiggestMargin(
   fixtures: Fixture[],
   attended: Set<string>,
   result: MatchResult,
@@ -287,7 +290,7 @@ function computeGoalsSeen(fixtures: Fixture[], attended: Set<string>) {
   );
 }
 
-function computeLongestUnbeatenRun(fixtures: Fixture[], attended: Set<string>): UnbeatenRunStats {
+export function computeLongestUnbeatenRun(fixtures: Fixture[], attended: Set<string>): UnbeatenRunStats {
   const seen = countedFixtures(attendedFixtures(fixtures, attended)).slice().sort((a, b) =>
     a.date.localeCompare(b.date),
   );
@@ -313,7 +316,12 @@ function computeLongestUnbeatenRun(fixtures: Fixture[], attended: Set<string>): 
 // dominated by the close season, which is always the "longest gap" for a
 // regular matchgoer even though no fixtures were actually missed.
 function computeLongestGap(fixtures: Fixture[], attended: Set<string>): GapStats {
-  const sorted = fixtures.slice().sort((a, b) => a.date.localeCompare(b.date));
+  // Behind-closed-doors matches are ignored as if they hadn't been played, so
+  // they must not inflate "matches missed" between two attended games either.
+  const sorted = fixtures
+    .filter((f) => !f.behindClosedDoors)
+    .slice()
+    .sort((a, b) => a.date.localeCompare(b.date));
   const seen = sorted
     .map((fixture, index) => ({ fixture, index }))
     .filter(({ fixture }) => isAttended(fixture, attended));
