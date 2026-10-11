@@ -6,6 +6,7 @@ import { useLogbookPage } from "../../hooks/useLogbookPage";
 import { BadgeCard } from "./BadgeCard";
 import { LogbookJumpLinks, LogbookTabs } from "./LogbookNav";
 import { LogbookPage } from "./LogbookPage";
+import { SeasonSweepCard, SeasonSweepEmptySlot } from "./SeasonSweepCard";
 
 interface Props {
   fixtures: Fixture[];
@@ -81,6 +82,13 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
             {cardFor("longevity")}
             {cardFor("homeComforts")}
             {cardFor("awayTraveller")}
+            {badges.attendance.seasonSweep.length === 0 ? (
+              <SeasonSweepEmptySlot />
+            ) : (
+              badges.attendance.seasonSweep.map((sweep) => (
+                <SeasonSweepCard key={sweep.season} sweep={sweep} onOpenDetail={() => {}} />
+              ))
+            )}
           </div>
         </LogbookPage>
 

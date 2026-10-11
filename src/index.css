@@ -3192,6 +3192,62 @@ table.stats-table .num.strong {
   color: var(--text-muted);
 }
 
+/* Season Sweep: a bespoke red/gold prestige card, not a tier material. */
+
+.season-sweep-card {
+  background: linear-gradient(135deg, #6e0007 0%, #db0007 35%, #f6dc8e 50%, #db0007 65%, #6e0007 100%);
+}
+
+.season-sweep-inner {
+  background: var(--red);
+  color: var(--white);
+}
+
+.season-sweep-inner .badge-set {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.season-sweep-chip {
+  background: var(--navy);
+}
+
+.season-sweep-pennant {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0 6px;
+}
+
+.season-sweep-season {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  line-height: 1.05;
+  color: var(--white);
+}
+
+.season-sweep-count {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.season-sweep-reached {
+  border-top-color: rgba(255, 255, 255, 0.6);
+}
+
+.season-sweep-card .badge-reached-label,
+.season-sweep-card .badge-reached-match,
+.season-sweep-card .badge-reached-date {
+  color: var(--white);
+}
+
+.season-sweep-footer {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+
 @media (min-width: 768px) {
   .badges-h1 {
     font-size: 32px;
