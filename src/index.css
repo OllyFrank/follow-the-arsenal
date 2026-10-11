@@ -3248,6 +3248,258 @@ table.stats-table .num.strong {
   color: var(--gold-text);
 }
 
+/* Grounds page: Old & New / The Premier League, only badges once complete */
+
+.double-width {
+  grid-column: span 2;
+  height: auto;
+}
+
+.badge-space {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 2px dashed var(--perf);
+  border-radius: 14px;
+  background: #f7f8fb;
+  font-family: var(--font-body);
+  text-align: left;
+  cursor: pointer;
+}
+
+.badge-space-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.badge-space-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #e3e6ee;
+  color: #9aa3ad;
+}
+
+.badge-space-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.badge-space-title {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #44444e;
+}
+
+.badge-space-subtitle {
+  font-family: var(--font-label);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.badge-space-desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #44444e;
+}
+
+.old-and-new-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.old-and-new-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.old-and-new-checklist li.checked {
+  color: var(--navy-ink);
+  font-weight: 700;
+}
+
+.old-and-new-check {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--perf);
+  border-radius: 50%;
+  font-size: 12px;
+  color: var(--white);
+}
+
+.checked .old-and-new-check {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+.old-and-new-check-detail {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.premier-league-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.premier-league-progress-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 14px;
+}
+
+.premier-league-progress-count {
+  font-weight: 700;
+  color: var(--navy-ink);
+}
+
+.premier-league-progress-togo {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  color: var(--navy);
+}
+
+.premier-league-progress-track {
+  height: 8px;
+  border-radius: 4px;
+  background: #e3e6ee;
+}
+
+.premier-league-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--navy);
+}
+
+.premier-league-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.premier-league-pill {
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: #e9ecf2;
+  font-size: 12.5px;
+  color: var(--text);
+}
+
+.premier-league-season {
+  padding: 6px 10px 0;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 26px;
+  line-height: 1.1;
+  color: var(--navy-ink);
+}
+
+.premier-league-reached {
+  padding: 10px 12px 12px;
+}
+
+/* Complete-set cards (gold): Old & New collected, The Premier League collected */
+
+.badge-complete-set {
+  height: auto;
+  background: linear-gradient(135deg, #8a6414 0%, #f6dc8e 42%, #c99b3f 58%, #8a6414 100%);
+}
+
+.badge-complete-chip {
+  background: #8a6414;
+}
+
+.badge-complete-title {
+  padding: 6px 10px 0;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 19px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--navy-ink);
+}
+
+.badge-complete-footer {
+  padding: 9px 10px;
+  background: var(--navy);
+  color: var(--gold-text);
+  text-align: center;
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.old-and-new-halves {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  padding: 10px 12px 12px;
+}
+
+.old-and-new-half {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: center;
+}
+
+.old-and-new-art {
+  height: 76px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #0e2f5c;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.old-and-new-match {
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--navy-ink);
+}
+
+.old-and-new-date {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.old-and-new-arrow {
+  padding-top: 28px;
+  color: #8a6414;
+}
+
 @media (min-width: 768px) {
   .badges-h1 {
     font-size: 32px;

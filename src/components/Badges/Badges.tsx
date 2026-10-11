@@ -7,6 +7,9 @@ import { BadgeCard } from "./BadgeCard";
 import { LogbookJumpLinks, LogbookTabs } from "./LogbookNav";
 import { LogbookPage } from "./LogbookPage";
 import { SeasonSweepCard, SeasonSweepEmptySlot } from "./SeasonSweepCard";
+import { OldAndNewCard } from "./OldAndNewCard";
+import { PremierLeagueCard } from "./PremierLeagueCard";
+import { badgeReference } from "../../lib/badgeReference";
 
 interface Props {
   fixtures: Fixture[];
@@ -103,6 +106,12 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
           <div className="badge-grid">
             {cardFor("groundHopper")}
             {cardFor("ghostGrounds")}
+            <OldAndNewCard badge={badges.grounds.oldAndNew} onOpenDetail={() => {}} />
+            <PremierLeagueCard
+              badge={badges.grounds.premierLeague}
+              season={badgeReference.premierLeague.season}
+              onOpenDetail={() => {}}
+            />
           </div>
         </LogbookPage>
 
