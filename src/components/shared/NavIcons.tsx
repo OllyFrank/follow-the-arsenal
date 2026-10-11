@@ -34,6 +34,14 @@ export function StatsIcon() {
   );
 }
 
+export function BadgesIcon() {
+  return (
+    <svg {...commonProps}>
+      <path d="M12 2l2.6 6.6L21 9.3l-5 4.7 1.3 7-5.3-3.6L6.7 21 8 14 3 9.3l6.4-.7L12 2z" />
+    </svg>
+  );
+}
+
 export function AccountIcon() {
   return (
     <svg {...commonProps}>

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { computeBadges } from "./badges";
+import { computeBadges, countEarnedBadges } from "./badges";
 import { badgeReference } from "./badgeReference";
 import fixturesData from "../data/fixtures.json";
 import groundsData from "../data/grounds.json";
@@ -16,6 +16,10 @@ const attendableMatchIds = fixtures.filter((f) => !f.behindClosedDoors).map((f) 
 
 describe("nothing ticked", () => {
   const badges = computeBadges(fixtures, groundCountryById, new Set());
+
+  it("earns zero badges", () => {
+    expect(countEarnedBadges(badges)).toBe(0);
+  });
 
   it("leaves every tiered badge locked at zero progress", () => {
     expect(badges.attendance.loyalSupporter.locked).toBe(true);
@@ -45,13 +49,18 @@ describe("nothing ticked", () => {
 describe("every attendable match ticked", () => {
   const badges = computeBadges(fixtures, groundCountryById, new Set(attendableMatchIds));
 
+  it("earns 8 tiered badges + 37 season sweeps + Old & New + 27 + 12 + 30 unlocks, but not The Premier League", () => {
+    expect(countEarnedBadges(badges)).toBe(8 + 37 + 1 + 27 + 12 + 30);
+  });
+
   it("Loyal Supporter reaches 1,500 (legendary)", () => {
     expect(badges.attendance.loyalSupporter.tierLabel).toBe("1,500");
     expect(badges.attendance.loyalSupporter.legendary).toBe(true);
   });
 
-  it("Goals Galore reaches 3,000", () => {
+  it("Goals Galore reaches 3,000 (legendary)", () => {
     expect(badges.attendance.goalsGalore.tierLabel).toBe("3,000");
+    expect(badges.attendance.goalsGalore.legendary).toBe(true);
   });
 
   it("Longevity, Home Comforts and Away Traveller all reach 'Every season'", () => {

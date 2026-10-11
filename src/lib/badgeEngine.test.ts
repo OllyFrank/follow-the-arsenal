@@ -34,6 +34,11 @@ describe("computeCumulativeBadge", () => {
     expect(badge.tierLabel).toBe("3");
     expect(badge.legendary).toBe(true);
     expect(badge.earningMatch?.matchId).toBe(c.matchId);
+    expect(badge.tiersReached.map((t) => [t.label, t.earningMatch.matchId])).toEqual([
+      ["1", a.matchId],
+      ["2", b.matchId],
+      ["3", c.matchId],
+    ]);
   });
 
   it("drops a tier and reassigns the earning match to the next qualifying event when the top one is removed", () => {

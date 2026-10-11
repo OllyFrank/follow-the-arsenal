@@ -75,7 +75,7 @@ function computeGoalsGalore(fixtures: Fixture[], attended: Set<string>): BadgePr
       { label: "500", threshold: 500 },
       { label: "1,000", threshold: 1000 },
       { label: "2,000", threshold: 2000 },
-      { label: "3,000", threshold: 3000 },
+      { label: "3,000", threshold: 3000, legendary: true },
     ]),
   );
 }
@@ -414,6 +414,22 @@ function computeWitnessToHistory(fixtures: Fixture[], attended: Set<string>): Wi
 
 // ---- Aggregator ----
 
+export type BadgeId =
+  | "loyalSupporter"
+  | "goalsGalore"
+  | "longevity"
+  | "homeComforts"
+  | "awayTraveller"
+  | "seasonSweep"
+  | "groundHopper"
+  | "premierLeague"
+  | "ghostGrounds"
+  | "oldAndNew"
+  | "europeanTours"
+  | "passportStamps"
+  | "cathedralsOfFootball"
+  | "witnessToHistory";
+
 export interface BadgeResults {
   attendance: {
     loyalSupporter: BadgeProgress;
@@ -464,4 +480,30 @@ export function computeBadges(
     },
     witnessToHistory: computeWitnessToHistory(fixtures, attended),
   };
+}
+
+/** Total badges earned, for the Badges tab header ("23 badges"): one per
+ * tiered badge reached (any tier, not per tier), plus one per swept season,
+ * unlocked single badge, and unlocked per-item badge (country/stadium/
+ * greatest match). */
+export function countEarnedBadges(results: BadgeResults): number {
+  const tiered = [
+    results.attendance.loyalSupporter,
+    results.attendance.goalsGalore,
+    results.attendance.longevity,
+    results.attendance.homeComforts,
+    results.attendance.awayTraveller,
+    results.grounds.groundHopper,
+    results.grounds.ghostGrounds,
+    results.europe.europeanTours,
+  ];
+  return (
+    tiered.filter((b) => !b.locked).length +
+    results.attendance.seasonSweep.length +
+    (results.grounds.premierLeague.unlocked ? 1 : 0) +
+    (results.grounds.oldAndNew.unlocked ? 1 : 0) +
+    results.europe.passportStamps.filter((p) => p.unlocked).length +
+    results.europe.cathedralsOfFootball.filter((c) => c.unlocked).length +
+    results.witnessToHistory.filter((w) => w.unlocked).length
+  );
 }

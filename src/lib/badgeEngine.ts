@@ -10,6 +10,13 @@ export interface BadgeTierDef {
   legendary?: boolean;
 }
 
+export interface ReachedTier {
+  label: string;
+  threshold: number;
+  legendary: boolean;
+  earningMatch: Fixture;
+}
+
 export interface BadgeProgress {
   tierIndex: number | null;
   tierLabel: string | null;
@@ -19,6 +26,13 @@ export interface BadgeProgress {
   nextThreshold: number | null;
   nextLabel: string | null;
   locked: boolean;
+  /** Every tier reached so far, in order, each with the match that reached
+   * it — for a card's detail view ("every tier, with the date each was
+   * reached"), not just the highest one shown on the card face. */
+  tiersReached: ReachedTier[];
+  /** All tiers this badge can reach, highest last — for a detail view and
+   * for mapping tierIndex onto the bronze/silver/gold/platinum ramp. */
+  allTiers: BadgeTierDef[];
 }
 
 function finishTiers(
@@ -32,6 +46,14 @@ function finishTiers(
   }
   const reached = tierIndex === null ? null : tiers[tierIndex];
   const next = tierIndex === null ? (tiers[0] ?? null) : (tiers[tierIndex + 1] ?? null);
+  const tiersReached: ReachedTier[] = tiers
+    .filter((t) => crossedAt.has(t.threshold))
+    .map((t) => ({
+      label: t.label,
+      threshold: t.threshold,
+      legendary: !!t.legendary,
+      earningMatch: crossedAt.get(t.threshold)!,
+    }));
   return {
     tierIndex,
     tierLabel: reached?.label ?? null,
@@ -41,6 +63,8 @@ function finishTiers(
     nextThreshold: next?.threshold ?? null,
     nextLabel: next?.label ?? null,
     locked: tierIndex === null,
+    tiersReached,
+    allTiers: tiers,
   };
 }
 

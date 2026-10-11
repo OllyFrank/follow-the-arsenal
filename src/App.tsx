@@ -13,6 +13,7 @@ import { formatDistance } from "./lib/format";
 import { FixtureList } from "./components/FixtureList/FixtureList";
 import { Addresses } from "./components/Addresses/Addresses";
 import { Dashboard } from "./components/Dashboard/Dashboard";
+import { Badges } from "./components/Badges/Badges";
 import { Onboarding } from "./components/Onboarding/Onboarding";
 import { Logo } from "./components/shared/Logo";
 import { Account } from "./components/Account/Account";
@@ -21,18 +22,19 @@ import { GuestDataMigrationPrompt } from "./components/Account/GuestDataMigratio
 import { ConsentGate } from "./components/Account/ConsentGate";
 import { PrivacyNotice } from "./components/Privacy/PrivacyNotice";
 import { ACCOUNTS_ENABLED } from "./lib/featureFlags";
-import { FixturesIcon, AddressesIcon, StatsIcon } from "./components/shared/NavIcons";
+import { FixturesIcon, AddressesIcon, StatsIcon, BadgesIcon } from "./components/shared/NavIcons";
 
 const fixtures = fixturesData as Fixture[];
 const grounds = groundsData as Ground[];
 const managers = managersData as Manager[];
 
-type Tab = "fixtures" | "addresses" | "stats";
+type Tab = "fixtures" | "addresses" | "stats" | "badges";
 
 const TABS: { id: Tab; label: string; Icon: () => React.JSX.Element }[] = [
   { id: "fixtures", label: "Fixtures", Icon: FixturesIcon },
   { id: "addresses", label: "Addresses", Icon: AddressesIcon },
   { id: "stats", label: "Stats", Icon: StatsIcon },
+  { id: "badges", label: "Badges", Icon: BadgesIcon },
 ];
 
 function App() {
@@ -201,6 +203,9 @@ function App() {
             onUnitChange={setUnit}
             onViewFixtures={viewFixtures}
           />
+        )}
+        {tab === "badges" && (
+          <Badges fixtures={fixtures} grounds={grounds} attendedMatchIds={attendedMatchIds} />
         )}
       </main>
       <footer className="app-footer">

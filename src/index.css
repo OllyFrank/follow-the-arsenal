@@ -39,6 +39,17 @@
   --loss-bg: #fde4e4;
   --loss-text: #a3000c;
 
+  /* Badge tiers */
+  --bronze: #a9672f;
+  --bronze-bg: #f5ebe0;
+  --silver: #74798a;
+  --silver-bg: #eceef2;
+  --gold-bg: #faf2e0;
+  --platinum: #5b7291;
+  --platinum-bg: #e8edf4;
+  --legendary-start: #c99b3f;
+  --legendary-end: #a3000c;
+
 
   --font-heading: "Archivo Black", "Arial Black", Impact, sans-serif;
   --font-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -149,7 +160,7 @@ a {
   bottom: 0;
   z-index: 10;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   background: var(--white);
   border-top: 1px solid var(--line);
 }
@@ -2626,4 +2637,389 @@ table.stats-table .num.strong {
   .derby-sub-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .badges-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .unlock-grid-card,
+  .season-sweep-card {
+    grid-column: 1 / -1;
+  }
+
+  .witness-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- Badges tab --- */
+
+.badges-earned-chip {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+}
+
+.badges-earned-value {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+.badges-earned-label {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badges-section {
+  margin-top: 1.5rem;
+}
+
+.badges-section:first-of-type {
+  margin-top: 0.5rem;
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.badge-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--grey-200);
+  border-radius: 10px;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.badge-card:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+
+.badge-tier-bronze {
+  border-left-color: var(--bronze);
+}
+.badge-tier-silver {
+  border-left-color: var(--silver);
+}
+.badge-tier-gold {
+  border-left-color: var(--gold);
+}
+.badge-tier-platinum {
+  border-left-color: var(--platinum);
+}
+.badge-tier-legendary {
+  border-left-width: 4px;
+  border-left-color: transparent;
+  border-image: linear-gradient(180deg, var(--legendary-start), var(--legendary-end)) 1;
+  background: linear-gradient(135deg, var(--gold-bg) 0%, var(--white) 55%);
+}
+
+.badge-card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.badge-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--navy-tint);
+  color: var(--navy);
+}
+
+.badge-tier-bronze .badge-icon {
+  background: var(--bronze-bg);
+  color: var(--bronze);
+}
+.badge-tier-silver .badge-icon {
+  background: var(--silver-bg);
+  color: var(--silver);
+}
+.badge-tier-gold .badge-icon {
+  background: var(--gold-bg);
+  color: var(--gold);
+}
+.badge-tier-platinum .badge-icon {
+  background: var(--platinum-bg);
+  color: var(--platinum);
+}
+.badge-tier-legendary .badge-icon {
+  background: linear-gradient(135deg, var(--legendary-start), var(--legendary-end));
+  color: var(--white);
+}
+
+.badge-icon-svg {
+  width: 22px;
+  height: 22px;
+}
+
+.badge-card-info {
+  min-width: 0;
+}
+
+.badge-card-name {
+  font-weight: 700;
+  color: var(--navy-ink);
+  font-size: 0.9375rem;
+}
+
+.badge-card-status {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.badge-card-earned {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--navy);
+  text-decoration: none;
+  margin-bottom: 0.6rem;
+}
+
+.badge-card-earned:hover {
+  text-decoration: underline;
+}
+
+.badge-progress-track {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--stub);
+  overflow: hidden;
+}
+
+.badge-progress-fill {
+  height: 100%;
+  background: var(--navy);
+  border-radius: 4px;
+}
+
+.badge-tier-legendary .badge-progress-fill {
+  background: linear-gradient(90deg, var(--legendary-start), var(--legendary-end));
+}
+
+.badge-progress-label {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.badge-detail {
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+  cursor: default;
+}
+
+.badge-detail-rule {
+  margin: 0 0 0.6rem;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.badge-detail-tiers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.badge-detail-tiers li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.badge-detail-tier-reached {
+  color: var(--navy-ink);
+  font-weight: 600;
+}
+
+.badge-detail-tier-locked {
+  color: var(--text-muted);
+}
+
+/* Season Sweep */
+
+.season-sweep-card {
+  cursor: default;
+}
+
+.season-sweep-list {
+  list-style: none;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.season-sweep-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.season-sweep-season {
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--navy-ink);
+}
+
+.season-sweep-link {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.season-sweep-link:hover {
+  text-decoration: underline;
+}
+
+/* Passport Stamps / Cathedrals of Football */
+
+.unlock-grid-card {
+  cursor: default;
+}
+
+.unlock-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.unlock-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.unlock-chip-passport {
+  border: 1.5px dashed var(--line-strong);
+  border-radius: 4px;
+}
+
+.unlock-chip-cathedral {
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+
+.unlock-chip-earned {
+  background: var(--gold-bg);
+  border-color: var(--gold);
+  color: var(--navy-ink);
+}
+
+.unlock-chip-locked {
+  background: var(--grey-50);
+  color: var(--grey-400);
+}
+
+/* Witness to History */
+
+.witness-summary {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--navy-ink);
+  margin-bottom: 0.75rem;
+}
+
+.witness-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+}
+
+.witness-ticket {
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--grey-200);
+  border-radius: 8px;
+  padding: 0.75rem;
+  text-decoration: none;
+  position: relative;
+}
+
+.witness-ticket.witness-ticket-gold {
+  border-left-color: var(--gold);
+}
+.witness-ticket.witness-ticket-silver {
+  border-left-color: var(--silver);
+}
+.witness-ticket.witness-ticket-bronze {
+  border-left-color: var(--bronze);
+}
+
+.witness-ticket-locked {
+  opacity: 0.5;
+}
+
+.witness-ticket-tier {
+  display: inline-flex;
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  margin-bottom: 0.4rem;
+}
+
+.witness-ticket-tier-gold {
+  background: var(--gold-bg);
+  color: var(--bronze);
+}
+
+.witness-ticket-tier-silver {
+  background: var(--silver-bg);
+  color: var(--silver);
+}
+
+.witness-ticket-tier-bronze {
+  background: var(--bronze-bg);
+  color: var(--bronze);
+}
+
+.witness-ticket-match {
+  font-weight: 700;
+  color: var(--navy-ink);
+  font-size: 0.9375rem;
+}
+
+.witness-ticket-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0.15rem 0 0.4rem;
+}
+
+.witness-ticket-why {
+  font-size: 0.8125rem;
+  color: var(--text);
 }
