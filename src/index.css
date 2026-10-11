@@ -2968,3 +2968,279 @@ table.stats-table .num.strong {
   text-transform: uppercase;
   color: var(--gold-text);
 }
+
+/* --- Logbook shell: header, tabs/jump-links, ruled pages --- */
+
+.badges-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.badges-header-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.badges-eyebrow {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.badges-h1 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.badges-header-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.badges-collected {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-right: 8px;
+  color: var(--navy);
+}
+
+.badges-collected-value {
+  font-family: var(--font-heading);
+  font-size: 30px;
+  line-height: 1;
+}
+
+.badges-collected-label {
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Mobile tabs */
+
+.badges-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: end;
+  gap: 4px;
+}
+
+.badges-tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 7px 2px 8px;
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+  background: #e6e9f0;
+  color: #44444e;
+  text-decoration: none;
+}
+
+.badges-tab-active {
+  z-index: 1;
+  margin-bottom: -1px;
+  padding: 8px 2px 9px;
+  border-top: 3px solid var(--red);
+  border-bottom: 1px solid var(--white);
+  background: var(--white);
+  color: var(--navy);
+}
+
+.badges-tab-label {
+  font-family: var(--font-label);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.badges-tab-count {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* Desktop jump links */
+
+.badges-jumplinks {
+  display: none;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badges-jumplink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--navy);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.badges-jumplink-count {
+  font-family: var(--font-heading);
+}
+
+/* Ruled pages */
+
+.badges-pages {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.badges-page {
+  display: none;
+  position: relative;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px 10px 20px 18px;
+  border: 1px solid var(--line);
+  border-radius: 0 0 12px 12px;
+  background-color: var(--white);
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 31px, #eef1f6 31px, #eef1f6 32px);
+}
+
+.badges-page[data-active] {
+  display: flex;
+}
+
+.badges-page-margin {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 8px;
+  width: 2px;
+  background: #f3c4c6;
+}
+
+.badges-page-meta {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.badges-page-meta-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.badges-page-number {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.badges-page-heading {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 21px;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.badges-page-desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.badges-page-count {
+  flex-shrink: 0;
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+@media (min-width: 768px) {
+  .badges-h1 {
+    font-size: 32px;
+  }
+
+  .badges-collected {
+    gap: 8px;
+  }
+
+  .badges-collected-value {
+    font-size: 36px;
+  }
+
+  .badges-collected-label {
+    font-size: 14px;
+  }
+
+  .badges-tabs {
+    display: none;
+  }
+
+  .badges-jumplinks {
+    display: flex;
+  }
+
+  .badges-page {
+    display: flex;
+    padding: 24px 28px 28px 40px;
+    border-radius: 14px;
+    gap: 20px;
+  }
+
+  .badges-page-margin {
+    left: 22px;
+  }
+
+  .badges-page-number {
+    font-size: 12px;
+  }
+
+  .badges-page-heading {
+    font-size: 24px;
+  }
+
+  .badges-page-desc {
+    font-size: 15px;
+  }
+
+  .badges-page-count {
+    font-size: 13px;
+  }
+}
