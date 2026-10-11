@@ -20,6 +20,7 @@ export interface DerbyRecord extends Record {
 
 export interface DerbySectionStats {
   attendedCount: number;
+  firstDerby: Fixture | null;
   record: DerbyRecord;
   biggestWin: MarginMatch | null;
   biggestLoss: MarginMatch | null;
@@ -28,7 +29,7 @@ export interface DerbySectionStats {
 }
 
 export interface DerbyStats {
-  northLondon: DerbySectionStats & { firstDerby: Fixture | null };
+  northLondon: DerbySectionStats;
   london: DerbySectionStats;
 }
 
@@ -50,6 +51,7 @@ function firstAttended(fixtures: Fixture[], attended: Set<string>): Fixture | nu
 function computeSection(fixtures: Fixture[], attended: Set<string>): DerbySectionStats {
   return {
     attendedCount: attendedFixtures(fixtures, attended).length,
+    firstDerby: firstAttended(fixtures, attended),
     record: computeDerbyRecord(fixtures, attended),
     biggestWin: computeBiggestMargin(fixtures, attended, "W"),
     biggestLoss: computeBiggestMargin(fixtures, attended, "L"),
@@ -66,10 +68,7 @@ export function computeDerbyStats(fixtures: Fixture[], attended: Set<string>): D
   const londonFixtures = fixtures.filter((f) => londonClubs.has(f.opponent));
 
   return {
-    northLondon: {
-      ...computeSection(northLondonFixtures, attended),
-      firstDerby: firstAttended(northLondonFixtures, attended),
-    },
+    northLondon: computeSection(northLondonFixtures, attended),
     london: computeSection(londonFixtures, attended),
   };
 }

@@ -91,29 +91,14 @@ export function Dashboard({
 
   const groundsById = useMemo(() => new Map(grounds.map((g) => [g.groundId, g])), [grounds]);
 
-  // Derby Days has its own pair of season filters, independent of the
-  // dashboard-wide one above (BADGES_PLAN.md: "Each has a season filter
-  // consistent with the rest of the Stats page").
-  const [northLondonSeason, setNorthLondonSeason] = useState<string>("all");
-  const [londonSeason, setLondonSeason] = useState<string>("all");
-
-  const northLondonFixtures = useMemo(
-    () => (northLondonSeason === "all" ? fixtures : fixtures.filter((f) => f.season === northLondonSeason)),
-    [fixtures, northLondonSeason],
+  // Derby Days uses the same season-scoped fixtures as the rest of the
+  // Stats page — no separate filter of its own.
+  const derbyStats = useMemo(
+    () => computeDerbyStats(scopedFixtures, attendedMatchIds),
+    [scopedFixtures, attendedMatchIds],
   );
-  const londonFixtures = useMemo(
-    () => (londonSeason === "all" ? fixtures : fixtures.filter((f) => f.season === londonSeason)),
-    [fixtures, londonSeason],
-  );
-
-  const northLondonDerby = useMemo(
-    () => computeDerbyStats(northLondonFixtures, attendedMatchIds).northLondon,
-    [northLondonFixtures, attendedMatchIds],
-  );
-  const londonDerby = useMemo(
-    () => computeDerbyStats(londonFixtures, attendedMatchIds).london,
-    [londonFixtures, attendedMatchIds],
-  );
+  const northLondonDerby = derbyStats.northLondon;
+  const londonDerby = derbyStats.london;
 
   const lapsOfEarth = stats.distance.lapsOfEarth;
   const completedLaps = Math.floor(lapsOfEarth);
@@ -413,11 +398,7 @@ export function Dashboard({
         <div className="derby-grid">
           <DerbyCard
             title="North London Derbies"
-            seasons={seasons}
-            season={northLondonSeason}
-            onSeasonChange={setNorthLondonSeason}
             stats={northLondonDerby}
-            firstDerby={northLondonDerby.firstDerby}
             firstDerbyLabel="North London derby"
             groundsById={groundsById}
             opponentForEmptyState={badgeReference.northLondonDerbyOpponent}
@@ -425,10 +406,8 @@ export function Dashboard({
           />
           <DerbyCard
             title="London Derbies"
-            seasons={seasons}
-            season={londonSeason}
-            onSeasonChange={setLondonSeason}
             stats={londonDerby}
+            firstDerbyLabel="London derby"
             groundsById={groundsById}
             onViewFixtures={onViewFixtures}
           />

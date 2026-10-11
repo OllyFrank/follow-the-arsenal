@@ -80,4 +80,15 @@ describe("london derby", () => {
     expect(stats.london.attendedCount).toBe(0);
     expect(stats.london.record.played).toBe(0);
   });
+
+  it("finds the first attended London derby by date, across any londonClubs opponent", () => {
+    const laterChelsea = makeFixture({ opponent: "Chelsea", date: "2010-01-01" });
+    const earlierSpurs = makeFixture({ opponent: "Tottenham Hotspur", date: "2000-01-01" });
+    const stats = computeDerbyStats(
+      [laterChelsea, earlierSpurs],
+      new Set([laterChelsea.matchId, earlierSpurs.matchId]),
+    );
+
+    expect(stats.london.firstDerby?.matchId).toBe(earlierSpurs.matchId);
+  });
 });
