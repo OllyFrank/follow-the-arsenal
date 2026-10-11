@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { computeBadges, countEarnedBadges } from "./badges";
+import { computeBadges, countEarnedBadges, countEarnedBySection } from "./badges";
 import { badgeReference } from "./badgeReference";
 import fixturesData from "../data/fixtures.json";
 import groundsData from "../data/grounds.json";
@@ -19,6 +19,12 @@ describe("nothing ticked", () => {
 
   it("earns zero badges", () => {
     expect(countEarnedBadges(badges)).toBe(0);
+    expect(countEarnedBySection(badges)).toEqual({
+      attendance: 0,
+      grounds: 0,
+      europe: 0,
+      history: 0,
+    });
   });
 
   it("leaves every tiered badge locked at zero progress", () => {
@@ -51,6 +57,12 @@ describe("every attendable match ticked", () => {
 
   it("earns 8 tiered badges + 37 season sweeps + Old & New + 27 + 12 + 30 unlocks, but not The Premier League", () => {
     expect(countEarnedBadges(badges)).toBe(8 + 37 + 1 + 27 + 12 + 30);
+    expect(countEarnedBySection(badges)).toEqual({
+      attendance: 5 + 37,
+      grounds: 2 + 1,
+      europe: 1 + 27 + 12,
+      history: 30,
+    });
   });
 
   it("Loyal Supporter reaches 1,500 (legendary)", () => {
@@ -73,6 +85,11 @@ describe("every attendable match ticked", () => {
     const seasons = badges.attendance.seasonSweep.map((s) => s.season);
     expect(seasons).toHaveLength(37);
     expect(seasons).not.toContain("2020/21");
+  });
+
+  it("Season Sweep carries the attendable match count for each swept season", () => {
+    const opener = badges.attendance.seasonSweep.find((s) => s.season === "1988/89");
+    expect(opener?.attendableCount).toBe(45);
   });
 
   it("all 27 ghost grounds, 27 passport stamps and 12 cathedrals are earned", () => {

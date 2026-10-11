@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tier colour options</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&amp;family=Archivo+Black&amp;family=Archivo+Narrow:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 1376px; height: 1440px; box-sizing: border-box; padding: 24px; display: flex; flex-direction: column; gap: 32px; background: #f4f5f8; font-family: Archivo, system-ui, sans-serif; color: #0b1f3f">
+<sc-for list="{{ options }}" as="o" hint-placeholder-count="3">
+<div style="display: flex; align-items: center; gap: 24px; height: 324px">
+<div style="flex: 0 0 220px; display: flex; flex-direction: column; gap: 6px">
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #5c5c66">{{ o.tag }}</div>
+<div style="font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-size: 22px; line-height: 1.1; text-transform: uppercase; color: #063672">{{ o.name }}</div>
+</div>
+<div style="flex: 0 0 688px; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0">
+<sc-for list="{{ o.ladder }}" as="t" hint-placeholder-count="8">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: {{ t.opacity }}">
+<div style="width: 58px; height: 58px; border-radius: 50%; background: {{ t.frame }}; display: flex; align-items: center; justify-content: center; outline: {{ t.ring }}; outline-offset: 4px">
+<div style="width: 44px; height: 44px; border-radius: 50%; background: {{ t.accent }}; color: #ffffff; display: flex; align-items: center; justify-content: center; font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-size: 16px">{{ t.step }}</div>
+</div>
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #2b2b33">{{ t.label }}</div>
+</div>
+</sc-for>
+</div>
+<div style="flex: 0 0 170px">
+<dc-import name="BadgeCard" tier="{{ o.cardA }}" icon="ball" set="Step 5" title="Goals Galore" milestone="500" unit="goals seen" match="Arsenal 7-0 Slavia Prague" date="23 Oct 2007" togo="142" togo-unit="goals" next="1,000" hint-size="170px,324px"></dc-import>
+</div>
+<div style="flex: 0 0 170px">
+<dc-import name="BadgeCard" tier="{{ o.cardB }}" icon="ball" set="Step 6" title="Goals Galore" milestone="1,000" unit="goals seen" match="[Earning match]" date="[Date]" togo="[N]" togo-unit="goals" next="2,000" hint-size="170px,324px"></dc-import>
+</div>
+</div>
+</sc-for>
+<div style="display: flex; align-items: center; gap: 24px; height: 324px">
+<div style="flex: 0 0 220px; display: flex; flex-direction: column; gap: 6px">
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #5c5c66">Side by side</div>
+<div style="font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-size: 22px; line-height: 1.1; text-transform: uppercase; color: #063672">The three reds</div>
+</div>
+<div style="flex: 0 0 170px">
+<dc-import name="BadgeCard" tier="ruby" icon="ball" set="Ruby" title="Goals Galore" milestone="1,000" unit="goals seen" match="[Earning match]" date="[Date]" togo="[N]" togo-unit="goals" next="2,000" hint-size="170px,324px"></dc-import>
+</div>
+<div style="flex: 0 0 170px">
+<dc-import name="BadgeCard" tier="legendary" icon="ball" set="Top tier" title="Goals Galore" milestone="3,000" unit="goals seen" match="[Earning match]" date="[Date]" togo="" togo-unit="goals" next="" hint-size="170px,324px"></dc-import>
+</div>
+<div style="flex: 0 0 170px; box-sizing: border-box; height: 324px; padding: 5px; border-radius: 14px; background: linear-gradient(135deg, #6e0007 0%, #db0007 35%, #f6dc8e 50%, #db0007 65%, #6e0007 100%); display: flex">
+<div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; border-radius: 10px; background: #db0007; color: #ffffff; overflow: hidden">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; padding: 9px 9px 0">
+<div style="padding: 2px 7px; border-radius: 4px; background: #063672; font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 11px; font-weight: 700; line-height: 1.25; letter-spacing: 0.12em; text-transform: uppercase">Prestige</div>
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase">Attendance</div>
+</div>
+<div style="display: flex; justify-content: center; padding: 12px 0 6px">
+<svg aria-hidden="true" viewBox="0 0 120 64" width="96" height="52">
+<path d="M12 6V60" stroke="#f6dc8e" stroke-width="3" stroke-linecap="round"></path>
+<path d="M14 8H110L14 52Z" fill="#ffffff" stroke="#f6dc8e" stroke-width="2" stroke-linejoin="round"></path>
+<path d="M14 8H110" stroke="#063672" stroke-width="5"></path>
+<text x="22" y="30" font-size="13" fill="#db0007" style="font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif">SWEPT</text>
+</svg>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0 10px; text-align: center">
+<div style="font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-size: 13.5px; line-height: 1.1; text-transform: uppercase">Season Sweep</div>
+<div style="font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-size: 26px; line-height: 1.05">2003/04</div>
+<div style="font-size: 12px; font-weight: 600">All 59 matches</div>
+</div>
+<div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; gap: 1px; margin: 8px 10px 0; padding-top: 7px; border-top: 1px dashed rgba(255, 255, 255, 0.6); text-align: center">
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase">Completed at</div>
+<div style="font-size: 12px; font-weight: 700; line-height: 1.3">Arsenal 2-1 Leicester City</div>
+<div style="font-size: 11.5px; line-height: 1.3">15 May 2004</div>
+</div>
+<div style="margin-top: 8px; padding: 8px 10px; min-height: 30px; display: flex; align-items: center; justify-content: center; background: #063672; font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #ecd59c; text-align: center">One per season swept</div>
+</div>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1376,"height":1440}}'>
+class Component extends DCLogic {
+renderVals() {
+var M = {
+bronze: ['linear-gradient(135deg, #6e4119 0%, #e0a971 42%, #9a6533 58%, #6e4119 100%)', '#8a5a2b', 'Bronze'],
+silver: ['linear-gradient(135deg, #66717d 0%, #f1f3f6 42%, #a7b0ba 58%, #66717d 100%)', '#5f6b78', 'Silver'],
+gold: ['linear-gradient(135deg, #8a6414 0%, #f6dc8e 42%, #c99b3f 58%, #8a6414 100%)', '#8a6414', 'Gold'],
+platinum: ['linear-gradient(135deg, #3e5874 0%, #e9f0f7 42%, #9fb3c8 58%, #3e5874 100%)', '#3e5874', 'Platinum'],
+emerald: ['linear-gradient(135deg, #0f5132 0%, #8fdcb2 42%, #2e8b57 58%, #0f5132 100%)', '#14663e', 'Emerald'],
+amethyst: ['linear-gradient(135deg, #3f2266 0%, #d3b8f2 42%, #7a4fb5 58%, #3f2266 100%)', '#5e3796', 'Amethyst'],
+sapphire: ['linear-gradient(135deg, #0c2461 0%, #9db9f5 42%, #2449a8 58%, #0c2461 100%)', '#1d3f94', 'Sapphire'],
+ruby: ['linear-gradient(135deg, #3d0510 0%, #e0718a 42%, #8a1026 58%, #3d0510 100%)', '#7a0f22', 'Ruby'],
+onyx: ['linear-gradient(135deg, #0b0b0e 0%, #74747c 42%, #2a2a30 58%, #0b0b0e 100%)', '#1f1f24', 'Onyx'],
+diamond: ['linear-gradient(135deg, #2a6f86 0%, #f2fbff 35%, #bfe8f5 50%, #f2fbff 62%, #2a6f86 100%)', '#24647a', 'Diamond'],
+legendary: ['linear-gradient(135deg, #6e0007 0%, #db0007 30%, #f6dc8e 50%, #db0007 70%, #6e0007 100%)', '#a3000c', 'Legendary']
+};
+function ladder(keys, fresh) {
+return keys.map(function (k, i) {
+var isNew = fresh.indexOf(k) !== -1;
+return { frame: M[k][0], accent: M[k][1], label: M[k][2], step: i < 7 ? String(i + 1) : '★', ring: isNew ? '2px solid #063672' : '2px solid transparent', opacity: 1 };
+});
+}
+return {
+options: [
+{ tag: 'Option A', name: 'Sapphire & Ruby', ladder: ladder(['bronze', 'silver', 'gold', 'platinum', 'sapphire', 'ruby', 'diamond', 'legendary'], ['sapphire', 'ruby']), cardA: 'sapphire', cardB: 'ruby' },
+{ tag: 'Option B', name: 'Ruby & Onyx', ladder: ladder(['bronze', 'silver', 'gold', 'platinum', 'ruby', 'onyx', 'diamond', 'legendary'], ['ruby', 'onyx']), cardA: 'ruby', cardB: 'onyx' },
+{ tag: 'Current', name: 'Emerald & Amethyst', ladder: ladder(['bronze', 'silver', 'gold', 'platinum', 'emerald', 'amethyst', 'diamond', 'legendary'], []), cardA: 'emerald', cardB: 'amethyst' }
+]
+};
+}
+}
+</script>
+</body>
+</html>

@@ -142,51 +142,63 @@
   "cathedralsOfFootball": [
     {
       "groundId": "G028",
-      "ground": "Camp Nou"
+      "ground": "Camp Nou",
+      "city": "Barcelona"
     },
     {
       "groundId": "G122",
-      "ground": "Santiago Bernabeu"
+      "ground": "Santiago Bernabeu",
+      "city": "Madrid"
     },
     {
       "groundId": "G092",
-      "ground": "Metropolitano Stadium"
+      "ground": "Metropolitano Stadium",
+      "city": "Madrid"
     },
     {
       "groundId": "G121",
-      "ground": "San Siro"
+      "ground": "San Siro",
+      "city": "Milan"
     },
     {
       "groundId": "G147",
-      "ground": "Stadio Olimpico"
+      "ground": "Stadio Olimpico",
+      "city": "Rome"
     },
     {
       "groundId": "G002",
-      "ground": "Allianz Arena"
+      "ground": "Allianz Arena",
+      "city": "Munich"
     },
     {
       "groundId": "G125",
-      "ground": "Signal Iduna Park"
+      "ground": "Signal Iduna Park",
+      "city": "Dortmund"
     },
     {
       "groundId": "G133",
-      "ground": "Stade de France"
+      "ground": "Stade de France",
+      "city": "Saint-Denis"
     },
     {
       "groundId": "G102",
-      "ground": "Parc des Princes"
+      "ground": "Parc des Princes",
+      "city": "Paris"
     },
     {
       "groundId": "G005",
-      "ground": "Amsterdam Arena"
+      "ground": "Amsterdam Arena",
+      "city": "Amsterdam"
     },
     {
       "groundId": "G046",
-      "ground": "Estadio do Dragao"
+      "ground": "Estadio do Dragao",
+      "city": "Porto"
     },
     {
       "groundId": "G031",
-      "ground": "Celtic Park"
+      "ground": "Celtic Park",
+      "city": "Glasgow"
     }
   ],
   "oldAndNew": {

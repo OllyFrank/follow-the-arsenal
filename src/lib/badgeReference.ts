@@ -5,6 +5,10 @@ export interface GroundReference {
   ground: string;
 }
 
+export interface CathedralReference extends GroundReference {
+  city: string;
+}
+
 export interface PremierLeagueClub {
   club: string;
   groundId: string | null;
@@ -18,7 +22,7 @@ export interface BadgeReference {
   leagueCompetitions: string[];
   europeanCompetitions: string[];
   ghostGrounds: GroundReference[];
-  cathedralsOfFootball: GroundReference[];
+  cathedralsOfFootball: CathedralReference[];
   oldAndNew: { lastAtHighbury: string; firstAtEmirates: string };
   premierLeague: { season: string; clubs: PremierLeagueClub[] };
 }

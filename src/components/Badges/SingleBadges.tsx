@@ -10,7 +10,7 @@ import { BadgeIcon } from "./BadgeIcons";
 
 export function PremierLeagueCard({ badge }: { badge: PremierLeagueBadge }) {
   const [expanded, setExpanded] = useState(false);
-  const color = tierColor(badge.unlocked ? 0 : null, 1, true);
+  const color = tierColor(badge.unlocked ? 0 : null, true);
   const pct = (badge.visitedCount / badge.totalCount) * 100;
 
   return (
@@ -73,7 +73,7 @@ export function PremierLeagueCard({ badge }: { badge: PremierLeagueBadge }) {
 
 export function OldAndNewCard({ badge }: { badge: OldAndNewBadge }) {
   const [expanded, setExpanded] = useState(false);
-  const color = tierColor(badge.unlocked ? 0 : null, 1, true);
+  const color = tierColor(badge.unlocked ? 0 : null, true);
   const attendedCount = badge.matches.filter((m) => m.attended).length;
 
   return (

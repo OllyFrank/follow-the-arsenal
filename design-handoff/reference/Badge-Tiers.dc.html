@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Badge card tiers</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&amp;family=Archivo+Black&amp;family=Archivo+Narrow:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 1706px; height: 372px; box-sizing: border-box; padding: 24px; display: flex; gap: 16px; background: #f4f5f8; font-family: Archivo, system-ui, sans-serif; color: #0b1f3f">
+<div style="flex: 0 0 170px">
+<dc-import name="BadgeCard" tier="bronze" icon="ball" set="Tier 1" title="Goals Galore" milestone="1" unit="goal seen" match="Arsenal 1-2 Leeds United" date="21 Aug 2001" togo="49" togo-unit="goals" next="50" hint-size="170px,324px"></dc-import>
+</div>
+<div style="flex: 0 0 170px">
+<dc-import name="BadgeCard" tier="silver" icon="ball" set="Tier 2" title="Goals Galore" milestone="50" unit="goals seen" match="Arsenal 4-1 Fulham" date="23 Feb 2002" togo="50" togo-unit="goals" next="100" hint-size="170px,324px"></dc-import>
+</div>
+<div style="flex: 0 0 170px">
+<dc-import name="BadgeCard" tier="gold" icon="ball" set="Tier 3" title="Goals Galore" milestone="100" unit="goals seen" match="Arsenal 2-0 Middlesbrough" date="21 Dec 2002" togo="150" togo-unit="goals" next="250" hint-size="170px,324px"></dc-import>
+</div>
+<div style="flex: 0 0 170px">
+<dc-import name="BadgeCard" tier="platinum" icon="ball" set="Tier 4" title="Goals Galore" milestone="250" unit="goals seen" match="Arsenal 5-3 Middlesbrough" date="22 Aug 2004" togo="250" togo-unit="goals" next="500" hint-size="170px,324px"></dc-import>
+</div>
+<div style="flex: 0 0 170px">
+<dc-import name="BadgeCard" tier="ruby" icon="ball" set="Tier 5" title="Goals Galore" milestone="500" unit="goals seen" match="Arsenal 7-0 Slavia Prague" date="23 Oct 2007" togo="142" togo-unit="goals" next="1,000" hint-size="170px,324px"></dc-import>
+</div>
+<div style="flex: 0 0 170px">
+<dc-import name="BadgeCard" tier="onyx" icon="ball" set="Tier 6" title="Goals Galore" milestone="1,000" unit="goals seen" match="[Earning match]" date="[Date]" togo="[N]" togo-unit="goals" next="2,000" hint-size="170px,324px"></dc-import>
+</div>
+<div style="flex: 0 0 170px">
+<dc-import name="BadgeCard" tier="diamond" icon="ball" set="Tier 7" title="Goals Galore" milestone="2,000" unit="goals seen" match="[Earning match]" date="[Date]" togo="[N]" togo-unit="goals" next="3,000" hint-size="170px,324px"></dc-import>
+</div>
+<div style="flex: 0 0 170px">
+<dc-import name="BadgeCard" tier="legendary" icon="ball" set="Top tier" title="Goals Galore" milestone="3,000" unit="goals seen" match="[Earning match]" date="[Date]" togo="" togo-unit="goals" next="" hint-size="170px,324px"></dc-import>
+</div>
+<div style="flex: 0 0 170px">
+<dc-import name="BadgeCard" tier="empty" icon="coach" set="Not started" title="Away Traveller" milestone="0" unit="seasons of 10+ aways" match="10 away games in one season" date="earns the first badge" togo="1" togo-unit="season" next="1" hint-size="170px,324px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1706,"height":372}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

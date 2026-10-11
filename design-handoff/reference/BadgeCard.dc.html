@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Badge card</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&amp;family=Archivo+Black&amp;family=Archivo+Narrow:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="box-sizing: border-box; width: 100%; height: 324px; padding: {{ pad }}; border-radius: 14px; border: {{ rootBorder }}; background: {{ frame }}; display: flex; font-family: Archivo, system-ui, sans-serif; color: #0b1f3f">
+<div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; border-radius: 10px; background: {{ inner }}; overflow: hidden">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; padding: 9px 9px 0">
+<div style="flex-shrink: 0; padding: 2px 7px; border-radius: 4px; background: {{ accent }}; color: #ffffff; font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 11px; font-weight: 700; line-height: 1.25; letter-spacing: 0.12em; text-transform: uppercase">{{ tierLabel }}</div>
+<div style="min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #5c5c66">{{ set }}</div>
+</div>
+<div style="display: flex; justify-content: center; padding: 10px 0 6px">
+<div style="width: 58px; height: 58px; border-radius: 50%; background: {{ ring }}; display: flex; align-items: center; justify-content: center">
+<div style="width: 45px; height: 45px; border-radius: 50%; background: {{ accent }}; color: #ffffff; display: flex; align-items: center; justify-content: center">
+<sc-if value="{{ iconTicket }}" hint-placeholder-val="{{ true }}">
+<svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V6h18v3a3 3 0 0 0 0 6v3H3v-3a3 3 0 0 0 0-6z"></path><path d="M14 6v12" stroke-dasharray="2 2.5"></path></svg>
+</sc-if>
+<sc-if value="{{ iconBall }}" hint-placeholder-val="{{ false }}">
+<svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5l4 2.9-1.5 4.7h-5L8 10.4z"></path><path d="M12 3v4.5M20.5 9.5l-4.5.9M17.5 19.5l-3-4.4M6.5 19.5l3-4.4M3.5 9.5l4.5.9"></path></svg>
+</sc-if>
+<sc-if value="{{ iconHourglass }}" hint-placeholder-val="{{ false }}">
+<svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12M6 21h12"></path><path d="M8 3c0 6 8 5 8 9s-8 3-8 9M16 3c0 6-8 5-8 9s8 3 8 9"></path></svg>
+</sc-if>
+<sc-if value="{{ iconHome }}" hint-placeholder-val="{{ false }}">
+<svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7M6 10v10h12V10"></path><path d="M10 20v-5h4v5"></path></svg>
+</sc-if>
+<sc-if value="{{ iconCoach }}" hint-placeholder-val="{{ false }}">
+<svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="2"></rect><path d="M3 11h18M8 5v6M16 5v6M7 17v2M17 17v2"></path></svg>
+</sc-if>
+<sc-if value="{{ iconStadium }}" hint-placeholder-val="{{ false }}">
+<svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="9" rx="9" ry="3.5"></ellipse><path d="M3 9v6c0 2 4 3.5 9 3.5s9-1.5 9-3.5V9"></path><path d="M8 12.2v5.6M12 12.5v6M16 12.2v5.6"></path></svg>
+</sc-if>
+<sc-if value="{{ iconGhost }}" hint-placeholder-val="{{ false }}">
+<svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V10a6 6 0 0 1 12 0v10l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5z"></path><circle cx="10" cy="10.5" r="1" fill="currentColor" stroke="none"></circle><circle cx="14" cy="10.5" r="1" fill="currentColor" stroke="none"></circle></svg>
+</sc-if>
+<sc-if value="{{ iconPlane }}" hint-placeholder-val="{{ false }}">
+<svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c1 0 1.6 1 1.6 2.5v4.6l7.4 4.2v2l-7.4-2.2v4.6l2.4 1.8v1.7L12 20.6l-4 1.1v-1.7l2.4-1.8v-4.6L3 15.8v-2l7.4-4.2V5c0-1.5.6-2.5 1.6-2.5z"></path></svg>
+</sc-if>
+</div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 0 10px; text-align: center">
+<div style="font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-size: 13.5px; line-height: 1.1; text-transform: uppercase; text-wrap: balance; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">{{ name }}</div>
+<div style="font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-size: {{ numberSize }}; line-height: 1.05; color: {{ numberColor }}">{{ milestone }}</div>
+<div style="max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 11.5px; font-weight: 600; line-height: 1.2; color: #5c5c66">{{ unit }}</div>
+</div>
+<div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; gap: 1px; margin: 8px 10px 0; padding-top: 7px; border-top: 1px dashed #c5c8d2; text-align: center">
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #5c5c66">{{ reachedLabel }}</div>
+<div style="font-size: 12px; font-weight: 700; line-height: 1.3; color: #0b1f3f; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">{{ match }}</div>
+<div style="font-size: 11.5px; line-height: 1.3; color: #5c5c66">{{ date }}</div>
+</div>
+<div style="flex-shrink: 0; margin-top: 8px; padding: 8px 10px; background: {{ footBg }}; color: #ffffff; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 30px">
+<sc-if value="{{ hasNext }}" hint-placeholder-val="{{ true }}">
+<div style="font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-size: 20px; line-height: 1">{{ togo }}</div>
+<div style="display: flex; flex-direction: column; gap: 1px; font-size: 11px; line-height: 1.2; text-align: left">
+<div style="font-weight: 600">{{ togoUnit }} to go</div>
+<div style="color: #ecd59c">Next: {{ next }}</div>
+</div>
+</sc-if>
+<sc-if value="{{ isTop }}" hint-placeholder-val="{{ false }}">
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ecd59c">Top of the ladder</div>
+</sc-if>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"tier":{"editor":"enum","options":["bronze","silver","gold","platinum","emerald","amethyst","sapphire","ruby","onyx","diamond","legendary","empty"],"default":"platinum"},"icon":{"editor":"enum","options":["ticket","ball","hourglass","home","coach","stadium","ghost","plane"],"default":"ticket"},"set":{"editor":"text","default":"Attendance"},"title":{"editor":"text","default":"Loyal Supporter"},"milestone":{"editor":"text","default":"250"},"unit":{"editor":"text","default":"matches"},"match":{"editor":"text","default":"Sevilla 3-1 Arsenal"},"date":{"editor":"text","default":"27 Nov 2007"},"togo":{"editor":"text","default":"85"},"togoUnit":{"editor":"text","default":"matches"},"next":{"editor":"text","default":"500"},"$preview":{"width":180,"height":324}}'>
+class Component extends DCLogic {
+renderVals() {
+var p = this.props;
+var tiers = {
+bronze: { frame: 'linear-gradient(135deg, #6e4119 0%, #e0a971 42%, #9a6533 58%, #6e4119 100%)', accent: '#8a5a2b', label: 'Bronze' },
+silver: { frame: 'linear-gradient(135deg, #66717d 0%, #f1f3f6 42%, #a7b0ba 58%, #66717d 100%)', accent: '#5f6b78', label: 'Silver' },
+gold: { frame: 'linear-gradient(135deg, #8a6414 0%, #f6dc8e 42%, #c99b3f 58%, #8a6414 100%)', accent: '#8a6414', label: 'Gold' },
+platinum: { frame: 'linear-gradient(135deg, #3e5874 0%, #e9f0f7 42%, #9fb3c8 58%, #3e5874 100%)', accent: '#3e5874', label: 'Platinum' },
+emerald: { frame: 'linear-gradient(135deg, #0f5132 0%, #8fdcb2 42%, #2e8b57 58%, #0f5132 100%)', accent: '#14663e', label: 'Emerald' },
+amethyst: { frame: 'linear-gradient(135deg, #3f2266 0%, #d3b8f2 42%, #7a4fb5 58%, #3f2266 100%)', accent: '#5e3796', label: 'Amethyst' },
+sapphire: { frame: 'linear-gradient(135deg, #0c2461 0%, #9db9f5 42%, #2449a8 58%, #0c2461 100%)', accent: '#1d3f94', label: 'Sapphire' },
+ruby: { frame: 'linear-gradient(135deg, #3d0510 0%, #e0718a 42%, #8a1026 58%, #3d0510 100%)', accent: '#7a0f22', label: 'Ruby' },
+onyx: { frame: 'linear-gradient(135deg, #0b0b0e 0%, #74747c 42%, #2a2a30 58%, #0b0b0e 100%)', accent: '#1f1f24', label: 'Onyx' },
+diamond: { frame: 'linear-gradient(135deg, #2a6f86 0%, #f2fbff 35%, #bfe8f5 50%, #f2fbff 62%, #2a6f86 100%)', accent: '#24647a', label: 'Diamond' },
+legendary: { frame: 'linear-gradient(135deg, #6e0007 0%, #db0007 30%, #f6dc8e 50%, #db0007 70%, #6e0007 100%)', accent: '#a3000c', label: 'Legendary' },
+empty: { frame: '#f7f8fb', accent: '#9aa3ad', label: 'Not yet' }
+};
+var key = p.tier || 'platinum';
+var t = tiers[key] || tiers.platinum;
+var isEmpty = key === 'empty';
+var icon = p.icon || 'ticket';
+var togo = p.togo == null ? '85' : String(p.togo);
+var milestone = p.milestone == null ? '250' : String(p.milestone);
+return {
+frame: t.frame,
+ring: isEmpty ? '#e3e6ee' : t.frame,
+accent: t.accent,
+tierLabel: t.label,
+pad: isEmpty ? '3px' : '5px',
+rootBorder: isEmpty ? '2px dashed #b4b8c4' : '0 solid transparent',
+inner: isEmpty ? 'transparent' : '#ffffff',
+numberColor: isEmpty ? '#9aa3ad' : (key === 'legendary' ? '#a3000c' : '#063672'),
+numberSize: milestone.length > 6 ? '20px' : '28px',
+footBg: isEmpty ? '#5c5c66' : '#063672',
+reachedLabel: isEmpty ? 'Not yet earned' : 'Reached at',
+set: p.set == null ? 'Attendance' : p.set,
+name: p.title == null ? 'Loyal Supporter' : p.title,
+milestone: milestone,
+unit: p.unit == null ? 'matches' : p.unit,
+match: p.match == null ? 'Sevilla 3-1 Arsenal' : p.match,
+date: p.date == null ? '27 Nov 2007' : p.date,
+togo: togo,
+togoUnit: p.togoUnit == null ? 'matches' : p.togoUnit,
+next: p.next == null ? '500' : p.next,
+hasNext: togo !== '',
+isTop: togo === '',
+iconTicket: icon === 'ticket',
+iconBall: icon === 'ball',
+iconHourglass: icon === 'hourglass',
+iconHome: icon === 'home',
+iconCoach: icon === 'coach',
+iconStadium: icon === 'stadium',
+iconGhost: icon === 'ghost',
+iconPlane: icon === 'plane'
+};
+}
+}
+</script>
+</body>
+</html>

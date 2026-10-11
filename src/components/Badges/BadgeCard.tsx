@@ -15,7 +15,7 @@ interface Props {
 
 export function BadgeCard({ id, name, rule, unitLabel, progress }: Props) {
   const [expanded, setExpanded] = useState(false);
-  const color = tierColor(progress.tierIndex, progress.allTiers.length, progress.legendary);
+  const color = tierColor(progress.tierIndex, progress.legendary);
   const pct =
     progress.nextThreshold === null
       ? 100

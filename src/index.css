@@ -54,6 +54,7 @@
   --font-heading: "Archivo Black", "Arial Black", Impact, sans-serif;
   --font-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-label: "Archivo Narrow", "Arial Narrow", sans-serif;
+  --font-script: "Kaushan Script", cursive;
   color-scheme: light;
 }
 

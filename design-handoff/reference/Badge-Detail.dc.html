@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Badge detail – Loyal Supporter</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&amp;family=Archivo+Black&amp;family=Archivo+Narrow:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#063672}a:hover{color:#04214a}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #f4f5f8; color: #2b2b33; font-family: Archivo, system-ui, sans-serif">
+<div style="height: 77px; background: #db0007; border-bottom: 4px solid #c99b3f; box-sizing: border-box"></div>
+<div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(11, 31, 63, 0.62)"></div>
+<div role="dialog" aria-labelledby="det-h" style="position: absolute; top: 84px; left: 0; right: 0; bottom: 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; padding: 10px 20px 20px; border-radius: 20px 20px 0 0; background: #ffffff">
+<div style="align-self: center; width: 40px; height: 5px; border-radius: 3px; background: #c5c8d2"></div>
+<a href="Badges-Attendance.dc.html" aria-label="Close" style="position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #063672">
+<svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</a>
+<div style="display: flex; align-items: center; gap: 14px; padding-right: 40px">
+<div style="flex-shrink: 0; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #3e5874 0%, #e9f0f7 42%, #9fb3c8 58%, #3e5874 100%); display: flex; align-items: center; justify-content: center">
+<div style="width: 50px; height: 50px; border-radius: 50%; background: #3e5874; color: #ffffff; display: flex; align-items: center; justify-content: center">
+<svg aria-hidden="true" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V6h18v3a3 3 0 0 0 0 6v3H3v-3a3 3 0 0 0 0-6z"></path><path d="M14 6v12" stroke-dasharray="2 2.5"></path></svg>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #5c5c66">Attendance · Platinum</div>
+<h2 id="det-h" style="margin: 0; font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-weight: 400; font-size: 22px; line-height: 1.05; text-transform: uppercase; color: #063672">Loyal Supporter</h2>
+<div style="font-size: 14px; color: #2b2b33">415 matches attended</div>
+</div>
+</div>
+<div style="padding: 10px 12px; border-radius: 8px; background: #f4f5f8; font-size: 14px; line-height: 1.4; color: #44444e">Every match you’ve ticked as attended.</div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border-radius: 12px; background: #063672; color: #ffffff">
+<div style="display: flex; align-items: baseline; gap: 10px">
+<div style="font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-size: 34px; line-height: 1">85</div>
+<div style="font-size: 15px; line-height: 1.3">matches until your <strong style="color: #ecd59c">500</strong> badge (Ruby)</div>
+</div>
+<div style="height: 8px; border-radius: 4px; background: #2a5591"><div style="width: 66%; height: 100%; border-radius: 4px; background: #c99b3f"></div></div>
+</div>
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #5c5c66">Every tier</div>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<sc-for list="{{ tiers }}" as="t" hint-placeholder-count="7">
+<li style="display: flex; align-items: center; gap: 12px; min-height: 56px">
+<div style="flex-shrink: 0; width: 36px; height: 36px; box-sizing: border-box; border-radius: 50%; background: {{ t.medal }}; border: {{ t.medalBorder }}"></div>
+<div style="flex: 0 0 82px; display: flex; flex-direction: column; gap: 1px">
+<div style="font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-size: 16px; line-height: 1.1; color: {{ t.numColor }}">{{ t.threshold }}</div>
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #5c5c66">{{ t.label }}</div>
+</div>
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 1px">
+<div style="font-size: 13px; font-weight: 700; line-height: 1.3; color: {{ t.lineColor }}">{{ t.line1 }}</div>
+<div style="font-size: 12px; line-height: 1.3; color: #5c5c66">{{ t.line2 }}</div>
+</div>
+<sc-if value="{{ t.current }}" hint-placeholder-val="{{ false }}">
+<div style="flex-shrink: 0; padding: 3px 8px; border-radius: 4px; background: #3e5874; color: #ffffff; font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase">Your badge</div>
+</sc-if>
+</li>
+</sc-for>
+</ol>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+var g = {
+bronze: 'linear-gradient(135deg, #6e4119 0%, #e0a971 42%, #9a6533 58%, #6e4119 100%)',
+silver: 'linear-gradient(135deg, #66717d 0%, #f1f3f6 42%, #a7b0ba 58%, #66717d 100%)',
+gold: 'linear-gradient(135deg, #8a6414 0%, #f6dc8e 42%, #c99b3f 58%, #8a6414 100%)',
+platinum: 'linear-gradient(135deg, #3e5874 0%, #e9f0f7 42%, #9fb3c8 58%, #3e5874 100%)',
+ruby: 'linear-gradient(135deg, #3d0510 0%, #e0718a 42%, #8a1026 58%, #3d0510 100%)',
+onyx: 'linear-gradient(135deg, #0b0b0e 0%, #74747c 42%, #2a2a30 58%, #0b0b0e 100%)',
+legendary: 'linear-gradient(135deg, #6e0007 0%, #db0007 30%, #f6dc8e 50%, #db0007 70%, #6e0007 100%)'
+};
+var rows = [
+['1', 'Bronze', 'bronze', true, 'Arsenal 1-2 Leeds United', '21 Aug 2001', false],
+['50', 'Silver', 'silver', true, 'Farnborough Town 1-5 Arsenal', '25 Jan 2003 · FA Cup, at Highbury', false],
+['100', 'Gold', 'gold', true, 'Chelsea 1-2 Arsenal', '21 Feb 2004', false],
+['250', 'Platinum', 'platinum', true, 'Sevilla 3-1 Arsenal', '27 Nov 2007', true],
+['500', 'Ruby', 'ruby', false, '85 to go', 'Your next badge', false],
+['1,000', 'Onyx', 'onyx', false, '585 to go', 'Not reached yet', false],
+['1,500', 'Legendary', 'legendary', false, '1,085 to go', 'Top of the ladder', false]
+];
+return {
+tiers: rows.map(function (r) {
+var reached = r[3];
+return {
+threshold: r[0],
+label: r[1],
+medal: reached ? g[r[2]] : '#ffffff',
+medalBorder: reached ? '0 solid transparent' : '2px dashed #b4b8c4',
+numColor: reached ? '#063672' : '#5c5c66',
+line1: r[4],
+line2: r[5],
+lineColor: reached ? '#0b1f3f' : '#063672',
+current: r[6]
+};
+})
+};
+}
+}
+</script>
+</body>
+</html>

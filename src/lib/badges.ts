@@ -8,7 +8,7 @@ import {
   type BadgeTierDef,
   type UnlockItem,
 } from "./badgeEngine";
-import { badgeReference, type GroundReference } from "./badgeReference";
+import { badgeReference, type CathedralReference } from "./badgeReference";
 import greatestMatchesData from "../data/greatest_matches.json";
 
 const byDate = (a: Fixture, b: Fixture) => a.date.localeCompare(b.date);
@@ -22,6 +22,8 @@ function tiers(defs: { label: string; threshold: number; legendary?: boolean }[]
 export interface SeasonSweepResult {
   season: string;
   earningMatch: Fixture;
+  /** Attendable matches that season — "All {attendableCount} matches". */
+  attendableCount: number;
 }
 
 /** Every season with at least one attendable fixture: the shared "every
@@ -174,7 +176,13 @@ function computeSeasonSweep(fixtures: Fixture[], attended: Set<string>): SeasonS
     const required = seasonFixtures.filter(isAttendable).sort(byDate);
     if (required.length === 0) continue;
     const allAttended = required.every((f) => attended.has(f.matchId));
-    if (allAttended) results.push({ season, earningMatch: required[required.length - 1] });
+    if (allAttended) {
+      results.push({
+        season,
+        earningMatch: required[required.length - 1],
+        attendableCount: required.length,
+      });
+    }
   }
   return results.sort((a, b) => a.season.localeCompare(b.season));
 }
@@ -361,7 +369,7 @@ function computePassportStamps(
 function computeCathedralsOfFootball(
   fixtures: Fixture[],
   attended: Set<string>,
-): UnlockItem<GroundReference>[] {
+): UnlockItem<CathedralReference>[] {
   const cathedralIds = new Set(badgeReference.cathedralsOfFootball.map((g) => g.groundId));
   const events = attendedFixtures(fixtures, attended)
     .filter((f) => cathedralIds.has(f.groundId))
@@ -448,7 +456,7 @@ export interface BadgeResults {
   europe: {
     europeanTours: BadgeProgress;
     passportStamps: UnlockItem<{ country: string }>[];
-    cathedralsOfFootball: UnlockItem<GroundReference>[];
+    cathedralsOfFootball: UnlockItem<CathedralReference>[];
   };
   witnessToHistory: WitnessEntry[];
 }
@@ -506,4 +514,38 @@ export function countEarnedBadges(results: BadgeResults): number {
     results.europe.cathedralsOfFootball.filter((c) => c.unlocked).length +
     results.witnessToHistory.filter((w) => w.unlocked).length
   );
+}
+
+export interface BadgeCountsBySection {
+  attendance: number;
+  grounds: number;
+  europe: number;
+  history: number;
+}
+
+/** Same counting rules as countEarnedBadges, split per logbook page — for
+ * the mobile tab badges and desktop jump-link pill counts. */
+export function countEarnedBySection(results: BadgeResults): BadgeCountsBySection {
+  const attendance =
+    [
+      results.attendance.loyalSupporter,
+      results.attendance.goalsGalore,
+      results.attendance.longevity,
+      results.attendance.homeComforts,
+      results.attendance.awayTraveller,
+    ].filter((b) => !b.locked).length + results.attendance.seasonSweep.length;
+
+  const grounds =
+    [results.grounds.groundHopper, results.grounds.ghostGrounds].filter((b) => !b.locked).length +
+    (results.grounds.oldAndNew.unlocked ? 1 : 0) +
+    (results.grounds.premierLeague.unlocked ? 1 : 0);
+
+  const europe =
+    (results.europe.europeanTours.locked ? 0 : 1) +
+    results.europe.passportStamps.filter((p) => p.unlocked).length +
+    results.europe.cathedralsOfFootball.filter((c) => c.unlocked).length;
+
+  const history = results.witnessToHistory.filter((w) => w.unlocked).length;
+
+  return { attendance, grounds, europe, history };
 }
