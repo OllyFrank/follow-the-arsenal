@@ -157,26 +157,28 @@ function App() {
             ))}
           </nav>
 
-          <div className="mileage-chip">
-            <div className="mileage-chip-value">{formatDistance(totalDistanceKm, unit)}</div>
-            <div className="mileage-chip-label">travelled so far</div>
-          </div>
+          <div className="header-right">
+            <div className="mileage-chip">
+              <div className="mileage-chip-value">{formatDistance(totalDistanceKm, unit)}</div>
+              <div className="mileage-chip-label">travelled so far</div>
+            </div>
 
-          {ACCOUNTS_ENABLED ? (
-            <Account
-              user={auth.user}
-              loading={auth.loading}
-              signInWithMagicLink={auth.signInWithMagicLink}
-              signOut={auth.signOut}
-              unit={unit}
-              onUnitChange={setUnit}
-              attendedMatchIds={attendedMatchIds}
-              homeAddresses={homeAddresses}
-              fixtures={fixtures}
-            />
-          ) : (
-            <AccountComingSoon />
-          )}
+            {ACCOUNTS_ENABLED ? (
+              <Account
+                user={auth.user}
+                loading={auth.loading}
+                signInWithMagicLink={auth.signInWithMagicLink}
+                signOut={auth.signOut}
+                unit={unit}
+                onUnitChange={setUnit}
+                attendedMatchIds={attendedMatchIds}
+                homeAddresses={homeAddresses}
+                fixtures={fixtures}
+              />
+            ) : (
+              <AccountComingSoon />
+            )}
+          </div>
         </div>
       </header>
       <main className="app-main">

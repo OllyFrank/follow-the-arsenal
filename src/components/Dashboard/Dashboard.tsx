@@ -13,7 +13,7 @@ import { PaginationControls } from "./PaginationControls";
 import { DerbyCard } from "./DerbyCard";
 
 const GROUNDS_PAGE_SIZE = 10;
-const VISIBLE_SEASONS_DEFAULT = 6;
+const VISIBLE_SEASONS_DEFAULT = 8;
 
 interface Props {
   fixtures: Fixture[];
@@ -292,9 +292,12 @@ export function Dashboard({
               </div>
             ))}
           </div>
-          {!showAllSeasons && seasonsByDistanceDesc.length > VISIBLE_SEASONS_DEFAULT && (
-            <button className="link-button" onClick={() => setShowAllSeasons(true)}>
-              Show all {seasonsByDistanceDesc.length} seasons
+          {seasonsByDistanceDesc.length > VISIBLE_SEASONS_DEFAULT && (
+            <button
+              className="link-button"
+              onClick={() => setShowAllSeasons((v) => !v)}
+            >
+              {showAllSeasons ? "Show fewer seasons" : `Show all ${seasonsByDistanceDesc.length} seasons`}
             </button>
           )}
         </section>

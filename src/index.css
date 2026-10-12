@@ -127,6 +127,12 @@ a {
   height: 22px;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .mileage-chip {
   flex-shrink: 0;
   display: flex;
@@ -214,21 +220,13 @@ a {
 }
 
 @media (min-width: 768px) {
-  .logo-compact {
-    display: none;
-  }
-
-  .logo-long {
-    display: flex;
-  }
-
   .app-header-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 32px;
+    padding: 0 24px;
     flex-wrap: wrap;
-    row-gap: 0;
-    column-gap: 32px;
+    row-gap: 6px;
+    column-gap: 20px;
   }
 
   .nav-icon {
@@ -247,22 +245,26 @@ a {
 
   .tab {
     flex-direction: row;
-    gap: 8px;
+    gap: 6px;
     min-height: 48px;
-    padding: 0 18px;
+    padding: 0 12px;
     border-top: none;
     color: var(--white);
     font-family: var(--font-heading);
     font-size: 0.8125rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
   }
 
   .tab.active {
     background: var(--red-dark);
   }
 
-  .mileage-chip {
+  .header-right {
     margin-left: auto;
+    gap: 14px;
+  }
+
+  .mileage-chip {
     flex-direction: row;
     align-items: baseline;
     gap: 8px;
@@ -277,6 +279,19 @@ a {
     max-width: 1200px;
     padding: 2rem;
     padding-bottom: 3rem;
+  }
+}
+
+/* The full wordmark only once there's comfortable room for it; the compact
+   mark holds the fort through the tablet/narrow-desktop range where four
+   tabs + the mileage chip + the account icon are already tight for space. */
+@media (min-width: 1100px) {
+  .logo-compact {
+    display: none;
+  }
+
+  .logo-long {
+    display: flex;
   }
 }
 
@@ -1753,7 +1768,9 @@ table.stats-table .num.strong {
 }
 
 .season-bar-value {
-  flex: 0 0 62px;
+  flex: 0 0 auto;
+  min-width: 62px;
+  white-space: nowrap;
   text-align: right;
   font-weight: 600;
   color: var(--navy-ink);
@@ -2651,6 +2668,23 @@ table.stats-table .num.strong {
   /* 5. Let the hero and Record card stretch to the same height. */
   .stats-top {
     align-items: stretch;
+  }
+
+  /* 7. Let Distance by season stretch to match the Furthest trip +
+     Lucky charm column it sits beside, instead of sizing to its own
+     (shorter, capped-at-8) row count. */
+  .stats-bottom {
+    align-items: stretch;
+  }
+
+  .distance-season-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .season-bars {
+    flex: 1 1 auto;
+    justify-content: space-between;
   }
 }
 
