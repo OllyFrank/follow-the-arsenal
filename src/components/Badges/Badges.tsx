@@ -11,8 +11,10 @@ import { OldAndNewCard } from "./OldAndNewCard";
 import { PremierLeagueCard } from "./PremierLeagueCard";
 import { PassportCover, PassportStamps } from "./Passport";
 import { StadiumCard } from "./StadiumCard";
+import { WitnessTicket } from "./WitnessTicket";
+import { WitnessSummary } from "./WitnessSummary";
 import { badgeReference } from "../../lib/badgeReference";
-import { collectedInOrder } from "../../lib/badgeDisplay";
+import { collectedInOrder, witnessToHistoryEntries } from "../../lib/badgeDisplay";
 
 interface Props {
   fixtures: Fixture[];
@@ -48,6 +50,7 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
     return <BadgeCard key={id} config={config} progress={progressFor[id]} onOpenDetail={() => {}} />;
   };
 
+  const witnessEntries = witnessToHistoryEntries(badges.witnessToHistory);
   const collectedCathedrals = collectedInOrder(badges.europe.cathedralsOfFootball);
   const lockedCathedrals = badges.europe.cathedralsOfFootball.filter((c) => !c.unlocked);
   const stampCount = badges.europe.passportStamps.filter((p) => p.unlocked).length;
@@ -196,7 +199,20 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
           count={bySection.history}
           active={activePage === "his"}
         >
-          <div className="badge-grid" />
+          {witnessEntries.length === 0 ? (
+            <div className="empty-state">
+              No famous matches in the book yet. Tick one of the greats and it will appear here.
+            </div>
+          ) : (
+            <>
+              <WitnessSummary entries={witnessEntries} />
+              <div className="witness-grid">
+                {witnessEntries.map((entry) => (
+                  <WitnessTicket key={entry.greatestMatch.matchId} entry={entry} />
+                ))}
+              </div>
+            </>
+          )}
         </LogbookPage>
       </div>
     </div>
