@@ -1,4 +1,5 @@
 import type { Fixture } from "../types";
+import { shortTeamName } from "./teamShortNames";
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
@@ -39,9 +40,10 @@ export function formatFixtureScoreLine(fixture: Fixture): string {
 }
 
 /** "Sevilla 3-1 Arsenal" — home team first, as in the fixture list, for the
- * badge logbook's match lines. */
+ * badge logbook's match lines. Long club names are shortened (see
+ * teamShortNames.ts) so a single row never needs more than one line. */
 export function matchScoreLine(fixture: Fixture): string {
-  return `${fixture.homeTeam} ${formatFixtureScoreLine(fixture)} ${fixture.awayTeam}`;
+  return `${shortTeamName(fixture.homeTeam)} ${formatFixtureScoreLine(fixture)} ${shortTeamName(fixture.awayTeam)}`;
 }
 
 /** "matches" -> "match", "seasons" -> "season" when the count is 1 —

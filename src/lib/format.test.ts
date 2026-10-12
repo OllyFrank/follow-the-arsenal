@@ -48,6 +48,16 @@ describe("matchScoreLine", () => {
     });
     expect(matchScoreLine(fixture)).toBe("Sevilla 3-1 Arsenal");
   });
+
+  it("shortens a long club name so the line stays one row in the logbook", () => {
+    const fixture = makeFixture({
+      homeTeam: "Arsenal",
+      awayTeam: "Wolverhampton Wanderers",
+      arsenalGoals: 1,
+      opponentGoals: 0,
+    });
+    expect(matchScoreLine(fixture)).toBe("Arsenal 1-0 Wolves");
+  });
 });
 
 describe("formatFixtureScoreLine", () => {
