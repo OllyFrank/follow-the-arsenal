@@ -3,6 +3,7 @@ import type { BadgeProgress } from "../../lib/badgeEngine";
 import { tierColor } from "../../lib/badgeTierColor";
 import { formatDateShort, matchScoreLine, singularize } from "../../lib/format";
 import { BadgeIcon } from "./BadgeIcons";
+import { BadgeNameText } from "./BadgeNameText";
 
 interface Props {
   config: TieredBadgeConfig;
@@ -48,7 +49,9 @@ export function BadgeCard({ config, progress, onOpenDetail, interactive = true }
           </div>
         </div>
         <div className="badge-name-block">
-          <div className="badge-name">{name}</div>
+          <div className="badge-name">
+            <BadgeNameText name={name} />
+          </div>
           <div className={`badge-milestone${milestone.length > 6 ? " badge-milestone-long" : ""}`}>
             {milestone}
           </div>

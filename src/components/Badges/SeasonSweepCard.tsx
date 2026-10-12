@@ -1,5 +1,6 @@
 import type { SeasonSweepResult } from "../../lib/badges";
 import { matchScoreLine, formatDateShort } from "../../lib/format";
+import { BadgeNameText } from "./BadgeNameText";
 
 function SweptPennant() {
   return (
@@ -31,7 +32,9 @@ export function SeasonSweepCard({ sweep, onOpenDetail }: { sweep: SeasonSweepRes
           <SweptPennant />
         </div>
         <div className="badge-name-block">
-          <div className="badge-name">Ever Present</div>
+          <div className="badge-name">
+            <BadgeNameText name="Ever Present" />
+          </div>
           <div className="badge-milestone season-sweep-season">{sweep.season}</div>
           <div className="season-sweep-count">All {sweep.attendableCount} matches</div>
         </div>
@@ -65,7 +68,9 @@ export function SeasonSweepEmptySlot() {
           </div>
         </div>
         <div className="badge-name-block">
-          <div className="badge-name">Ever Present</div>
+          <div className="badge-name">
+            <BadgeNameText name="Ever Present" />
+          </div>
         </div>
         <div className="badge-reached-block">
           <div className="badge-reached-label">Not yet earned</div>
