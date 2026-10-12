@@ -9,7 +9,10 @@ import { LogbookPage } from "./LogbookPage";
 import { SeasonSweepCard, SeasonSweepEmptySlot } from "./SeasonSweepCard";
 import { OldAndNewCard } from "./OldAndNewCard";
 import { PremierLeagueCard } from "./PremierLeagueCard";
+import { PassportCover, PassportStamps } from "./Passport";
+import { StadiumCard } from "./StadiumCard";
 import { badgeReference } from "../../lib/badgeReference";
+import { collectedInOrder } from "../../lib/badgeDisplay";
 
 interface Props {
   fixtures: Fixture[];
@@ -44,6 +47,10 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
     const config = TIERED_BADGES.find((c) => c.id === id)!;
     return <BadgeCard key={id} config={config} progress={progressFor[id]} onOpenDetail={() => {}} />;
   };
+
+  const collectedCathedrals = collectedInOrder(badges.europe.cathedralsOfFootball);
+  const lockedCathedrals = badges.europe.cathedralsOfFootball.filter((c) => !c.unlocked);
+  const stampCount = badges.europe.passportStamps.filter((p) => p.unlocked).length;
 
   const counts = {
     att: bySection.attendance,
@@ -123,7 +130,62 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
           count={bySection.europe}
           active={activePage === "eur"}
         >
-          <div className="badge-grid">{cardFor("europeanTours")}</div>
+          <div className="badge-grid">
+            {cardFor("europeanTours")}
+            <PassportCover countryCount={stampCount} />
+          </div>
+
+          <div className="badges-subsection">
+            <div className="badges-subsection-head">
+              <h3 className="badges-subsection-title">Passport stamps</h3>
+              <div className="badges-subsection-count">
+                {stampCount} {stampCount === 1 ? "stamp" : "stamps"}
+              </div>
+            </div>
+            <p className="badges-subsection-desc">
+              One stamp for every country where you&apos;ve seen Arsenal play in Europe.
+            </p>
+            <PassportStamps countries={badges.europe.passportStamps} />
+          </div>
+
+          <div className="badges-subsection">
+            <div className="badges-subsection-head">
+              <h3 className="badges-subsection-title">Cathedrals of football</h3>
+              <div className="badges-subsection-count">
+                {collectedCathedrals.length} <span>of {badges.europe.cathedralsOfFootball.length}</span>
+              </div>
+            </div>
+            <p className="badges-subsection-desc">
+              A card for each of Europe&apos;s great stadiums you&apos;ve been to, in any competition.
+            </p>
+            <div className="badge-grid">
+              {collectedCathedrals.map((c) => (
+                <StadiumCard
+                  key={c.item.groundId}
+                  item={c.item}
+                  country={groundCountryById.get(c.item.groundId) ?? ""}
+                  earningMatch={c.earningMatch}
+                  onOpenDetail={() => {}}
+                />
+              ))}
+            </div>
+            {lockedCathedrals.length > 0 && (
+              <>
+                <div className="badges-subsection-subhead">Spaces still to fill &middot; {lockedCathedrals.length}</div>
+                <div className="badge-grid">
+                  {lockedCathedrals.map((c) => (
+                    <StadiumCard
+                      key={c.item.groundId}
+                      item={c.item}
+                      country={groundCountryById.get(c.item.groundId) ?? ""}
+                      earningMatch={null}
+                      onOpenDetail={() => {}}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
         </LogbookPage>
 
         <LogbookPage

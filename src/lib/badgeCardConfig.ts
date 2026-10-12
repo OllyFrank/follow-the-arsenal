@@ -1,5 +1,35 @@
 import type { BadgeIconId } from "../components/Badges/BadgeIcons";
 
+export type StadiumArtId =
+  | "sansiro"
+  | "amsterdam"
+  | "bernabeu"
+  | "stadedefrance"
+  | "dragao"
+  | "olimpico"
+  | "campnou"
+  | "metropolitano"
+  | "allianz"
+  | "signaliduna"
+  | "parcdesprinces"
+  | "celticpark";
+
+/** Maps each cathedral's groundId (badge_reference.json) to its art key. */
+export const STADIUM_ART_BY_GROUND: Record<string, StadiumArtId> = {
+  G121: "sansiro",
+  G005: "amsterdam",
+  G122: "bernabeu",
+  G133: "stadedefrance",
+  G046: "dragao",
+  G147: "olimpico",
+  G028: "campnou",
+  G092: "metropolitano",
+  G002: "allianz",
+  G125: "signaliduna",
+  G102: "parcdesprinces",
+  G031: "celticpark",
+};
+
 export type TieredBadgeId =
   | "loyalSupporter"
   | "goalsGalore"

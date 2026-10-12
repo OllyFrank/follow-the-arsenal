@@ -3500,6 +3500,347 @@ table.stats-table .num.strong {
   color: #8a6414;
 }
 
+/* Europe page: subsection headings shared by Passport stamps / Cathedrals */
+
+.badges-subsection {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.badges-subsection-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.badges-subsection-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.badges-subsection-count {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  color: var(--navy);
+}
+
+.badges-subsection-count span {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.badges-subsection-desc {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.badges-subsection-subhead {
+  font-family: var(--font-label);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Passport cover */
+
+.passport-cover {
+  box-sizing: border-box;
+  height: 324px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 12px 18px;
+  border-left: 7px solid #04142e;
+  border-radius: 10px 14px 14px 10px;
+  background: var(--navy-ink);
+  color: var(--gold-text);
+  text-align: center;
+}
+
+.passport-cover-title {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.passport-cover-tagline {
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.passport-cover-count {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.passport-cover-count-value {
+  font-family: var(--font-heading);
+  font-size: 34px;
+  line-height: 1;
+}
+
+.passport-cover-count-label {
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+/* Visa page + stamps */
+
+.passport-page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 12px 16px;
+  border: 1px solid #d6dccf;
+  border-radius: 12px;
+  background-color: #f3f6f0;
+  background-image: repeating-linear-gradient(45deg, rgba(6, 54, 114, 0.035) 0, rgba(6, 54, 114, 0.035) 2px, transparent 2px, transparent 9px);
+}
+
+.passport-page-head {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b7466;
+}
+
+.passport-desktop-only {
+  display: none;
+}
+
+.passport-stamp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 10px;
+}
+
+.passport-stamp {
+  box-sizing: border-box;
+  justify-self: center;
+  width: 100%;
+  height: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px;
+  border: 3px double;
+  text-align: center;
+  opacity: 0.9;
+}
+
+.passport-stamp-rectangle {
+  border-radius: 8px;
+}
+
+.passport-stamp-circle {
+  width: 88px;
+  border-radius: 50%;
+}
+
+.passport-stamp-oval {
+  border-radius: 50% / 42%;
+}
+
+.passport-stamp-country {
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.passport-stamp-date {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  line-height: 1.1;
+}
+
+.passport-stamp-opp {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.passport-page-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.passport-page-controls button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.passport-page-controls button:disabled {
+  opacity: 0.4;
+}
+
+.passport-page-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.passport-page-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--perf);
+}
+
+.passport-page-dots span.passport-page-dot-active {
+  background: var(--navy);
+}
+
+/* Cathedrals of Football */
+
+.stadium-card {
+  height: 270px;
+}
+
+.stadium-card-collected {
+  background: linear-gradient(135deg, #04214a 0%, #2a5591 45%, #c99b3f 50%, #2a5591 55%, #063672 100%);
+}
+
+.stadium-card.badge-tier-locked {
+  height: auto;
+  min-height: 60px;
+  padding: 8px;
+  justify-content: center;
+  text-align: center;
+}
+
+.stadium-card-inner {
+  overflow: hidden;
+}
+
+.stadium-art-panel {
+  position: relative;
+  flex-shrink: 0;
+  height: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0e2f5c;
+}
+
+.badge-tier-locked .stadium-art-panel {
+  display: none;
+}
+
+.stadium-name-block {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 10px 0;
+  text-align: center;
+}
+
+.stadium-name {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--navy-ink);
+}
+
+.stadium-name-locked {
+  color: #44444e;
+}
+
+.stadium-place {
+  font-family: var(--font-label);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.stadium-reached {
+  flex-grow: 0;
+  margin: 8px 10px 10px;
+}
+
+.badge-tier-locked .stadium-reached {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .stadium-card.badge-tier-locked .badge-card-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stadium-card.badge-tier-locked .stadium-name-block {
+    padding: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .passport-desktop-only {
+    display: flex;
+  }
+
+  .passport-stamp:not(.passport-stamp-current) {
+    display: none;
+  }
+
+  .stadium-card.badge-tier-locked {
+    height: 270px;
+  }
+
+  .badge-tier-locked .stadium-art-panel {
+    display: flex;
+    background: #e9ecf2;
+  }
+
+  .badge-tier-locked .stadium-reached {
+    display: flex;
+  }
+}
+
 @media (min-width: 768px) {
   .badges-h1 {
     font-size: 32px;
