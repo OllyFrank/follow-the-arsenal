@@ -44,9 +44,12 @@ export function matchScoreLine(fixture: Fixture): string {
   return `${fixture.homeTeam} ${formatFixtureScoreLine(fixture)} ${fixture.awayTeam}`;
 }
 
-/** "matches" -> "match" when the count is 1 — design-handoff/BADGES.md:
- * "Use the singular unit when it is 1 ('1 season to go')." */
+/** "matches" -> "match", "seasons" -> "season" when the count is 1 —
+ * design-handoff/BADGES.md: "Use the singular unit when it is 1 ('1 season
+ * to go')." Strips "-es" after a sibilant ("matches", "passes") rather
+ * than just the trailing "s", which would otherwise leave "matche". */
 export function singularize(unit: string): string {
+  if (/[cs]hes$|[sxz]es$/.test(unit)) return unit.slice(0, -2);
   return unit.endsWith("s") ? unit.slice(0, -1) : unit;
 }
 

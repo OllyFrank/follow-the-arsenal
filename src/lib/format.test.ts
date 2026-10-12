@@ -6,6 +6,7 @@ import {
   formatFixtureScoreLine,
   googleSearchUrl,
   matchScoreLine,
+  singularize,
 } from "./format";
 import { makeFixture } from "./test-fixtures";
 
@@ -22,6 +23,18 @@ describe("formatDateLong", () => {
 describe("formatDateShort", () => {
   it("formats an ISO date as '<day> <Mon> <year>'", () => {
     expect(formatDateShort("2007-11-27")).toBe("27 Nov 2007");
+  });
+});
+
+describe("singularize", () => {
+  it("strips a trailing 's'", () => {
+    expect(singularize("seasons")).toBe("season");
+    expect(singularize("goals")).toBe("goal");
+    expect(singularize("grounds")).toBe("ground");
+  });
+
+  it("strips '-es' after a sibilant, not just the trailing 's'", () => {
+    expect(singularize("matches")).toBe("match");
   });
 });
 
