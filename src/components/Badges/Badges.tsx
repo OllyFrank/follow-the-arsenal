@@ -1,7 +1,8 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import type { Fixture, Ground } from "../../types";
 import { computeBadges, countEarnedBadges, countEarnedBySection } from "../../lib/badges";
-import { TIERED_BADGES } from "../../lib/badgeCardConfig";
+import type { BadgeProgress } from "../../lib/badgeEngine";
+import { TIERED_BADGES, type TieredBadgeConfig } from "../../lib/badgeCardConfig";
 import { useLogbookPage } from "../../hooks/useLogbookPage";
 import { BadgeCard } from "./BadgeCard";
 import { LogbookJumpLinks, LogbookTabs } from "./LogbookNav";
@@ -13,8 +14,16 @@ import { PassportCover, PassportStamps } from "./Passport";
 import { StadiumCard } from "./StadiumCard";
 import { WitnessTicket } from "./WitnessTicket";
 import { WitnessSummary } from "./WitnessSummary";
+import { Modal } from "./Modal";
+import { TieredBadgeDetail } from "./TieredBadgeDetail";
+import { SimpleBadgeDetail, type SimpleDetailRow } from "./SimpleBadgeDetail";
 import { badgeReference } from "../../lib/badgeReference";
 import { collectedInOrder, witnessToHistoryEntries } from "../../lib/badgeDisplay";
+import { formatDateShort, matchScoreLine } from "../../lib/format";
+
+type DetailSelection =
+  | { kind: "tiered"; config: TieredBadgeConfig; progress: BadgeProgress }
+  | { kind: "simple"; category: string; name: string; rule: string; rows: SimpleDetailRow[] };
 
 interface Props {
   fixtures: Fixture[];
@@ -33,6 +42,7 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
   const total = countEarnedBadges(badges);
   const bySection = countEarnedBySection(badges);
   const activePage = useLogbookPage();
+  const [detail, setDetail] = useState<DetailSelection | null>(null);
 
   const progressFor = {
     loyalSupporter: badges.attendance.loyalSupporter,
@@ -47,7 +57,15 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
 
   const cardFor = (id: keyof typeof progressFor) => {
     const config = TIERED_BADGES.find((c) => c.id === id)!;
-    return <BadgeCard key={id} config={config} progress={progressFor[id]} onOpenDetail={() => {}} />;
+    const progress = progressFor[id];
+    return (
+      <BadgeCard
+        key={id}
+        config={config}
+        progress={progress}
+        onOpenDetail={() => setDetail({ kind: "tiered", config, progress })}
+      />
+    );
   };
 
   const witnessEntries = witnessToHistoryEntries(badges.witnessToHistory);
@@ -99,7 +117,26 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
               <SeasonSweepEmptySlot />
             ) : (
               badges.attendance.seasonSweep.map((sweep) => (
-                <SeasonSweepCard key={sweep.season} sweep={sweep} onOpenDetail={() => {}} />
+                <SeasonSweepCard
+                  key={sweep.season}
+                  sweep={sweep}
+                  onOpenDetail={() =>
+                    setDetail({
+                      kind: "simple",
+                      category: "Attendance",
+                      name: `Season Sweep — ${sweep.season}`,
+                      rule: "Attend every attendable match in a season.",
+                      rows: [
+                        {
+                          key: sweep.season,
+                          label: "Completed at",
+                          value: `${matchScoreLine(sweep.earningMatch)} · ${formatDateShort(sweep.earningMatch.date)}`,
+                          done: true,
+                        },
+                      ],
+                    })
+                  }
+                />
               ))
             )}
           </div>
@@ -116,11 +153,42 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
           <div className="badge-grid">
             {cardFor("groundHopper")}
             {cardFor("ghostGrounds")}
-            <OldAndNewCard badge={badges.grounds.oldAndNew} onOpenDetail={() => {}} />
+            <OldAndNewCard
+              badge={badges.grounds.oldAndNew}
+              onOpenDetail={() =>
+                setDetail({
+                  kind: "simple",
+                  category: "Grounds",
+                  name: "Old & New",
+                  rule: "Attended both the last match at Highbury and the first competitive match at the Emirates.",
+                  rows: badges.grounds.oldAndNew.matches.map((m) => ({
+                    key: m.label,
+                    label: m.label,
+                    value: m.fixture ? `${matchScoreLine(m.fixture)} · ${formatDateShort(m.fixture.date)}` : "Not yet",
+                    done: m.attended,
+                  })),
+                })
+              }
+            />
             <PremierLeagueCard
               badge={badges.grounds.premierLeague}
               season={badgeReference.premierLeague.season}
-              onOpenDetail={() => {}}
+              onOpenDetail={() =>
+                setDetail({
+                  kind: "simple",
+                  category: "Grounds",
+                  name: "The Premier League",
+                  rule: `Visit the home ground of every club in the ${badgeReference.premierLeague.season} Premier League.`,
+                  rows: badges.grounds.premierLeague.allClubs.map((c) => ({
+                    key: c.club,
+                    label: c.club,
+                    value: c.earningMatch
+                      ? `${matchScoreLine(c.earningMatch)} · ${formatDateShort(c.earningMatch.date)}`
+                      : (c.note ?? "Not yet"),
+                    done: c.visited,
+                  })),
+                })
+              }
             />
           </div>
         </LogbookPage>
@@ -148,7 +216,25 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
             <p className="badges-subsection-desc">
               One stamp for every country where you&apos;ve seen Arsenal play in Europe.
             </p>
-            <PassportStamps countries={badges.europe.passportStamps} />
+            <PassportStamps
+              countries={badges.europe.passportStamps}
+              onOpenDetail={(country, earningMatch) =>
+                setDetail({
+                  kind: "simple",
+                  category: "Europe & countries",
+                  name: country,
+                  rule: "One stamp for every country where you've seen Arsenal play in Europe.",
+                  rows: [
+                    {
+                      key: country,
+                      label: "First seen",
+                      value: `${matchScoreLine(earningMatch)} · ${formatDateShort(earningMatch.date)}`,
+                      done: true,
+                    },
+                  ],
+                })
+              }
+            />
           </div>
 
           <div className="badges-subsection">
@@ -168,7 +254,22 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
                   item={c.item}
                   country={groundCountryById.get(c.item.groundId) ?? ""}
                   earningMatch={c.earningMatch}
-                  onOpenDetail={() => {}}
+                  onOpenDetail={() =>
+                    setDetail({
+                      kind: "simple",
+                      category: "Europe & countries",
+                      name: c.item.ground,
+                      rule: "A card for each of Europe's great stadiums you've been to, in any competition.",
+                      rows: [
+                        {
+                          key: c.item.groundId,
+                          label: "First visit",
+                          value: `${matchScoreLine(c.earningMatch)} · ${formatDateShort(c.earningMatch.date)}`,
+                          done: true,
+                        },
+                      ],
+                    })
+                  }
                 />
               ))}
             </div>
@@ -182,7 +283,17 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
                       item={c.item}
                       country={groundCountryById.get(c.item.groundId) ?? ""}
                       earningMatch={null}
-                      onOpenDetail={() => {}}
+                      onOpenDetail={() =>
+                        setDetail({
+                          kind: "simple",
+                          category: "Europe & countries",
+                          name: c.item.ground,
+                          rule: "A card for each of Europe's great stadiums you've been to, in any competition.",
+                          rows: [
+                            { key: c.item.groundId, label: "Not yet visited", value: "Tick a match there to collect it.", done: false },
+                          ],
+                        })
+                      }
                     />
                   ))}
                 </div>
@@ -208,13 +319,42 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
               <WitnessSummary entries={witnessEntries} />
               <div className="witness-grid">
                 {witnessEntries.map((entry) => (
-                  <WitnessTicket key={entry.greatestMatch.matchId} entry={entry} />
+                  <WitnessTicket
+                    key={entry.greatestMatch.matchId}
+                    entry={entry}
+                    onOpenDetail={() =>
+                      setDetail({
+                        kind: "simple",
+                        category: `Witness to history · ${entry.greatestMatch.tier[0].toUpperCase()}${entry.greatestMatch.tier.slice(1)}`,
+                        name: entry.greatestMatch.match,
+                        rule: entry.greatestMatch.why,
+                        rows: [
+                          {
+                            key: entry.greatestMatch.matchId,
+                            label: `${formatDateShort(entry.greatestMatch.date)} · ${entry.fixture.competition}`,
+                            value: entry.fixture.venue,
+                            done: true,
+                          },
+                        ],
+                      })
+                    }
+                  />
                 ))}
               </div>
             </>
           )}
         </LogbookPage>
       </div>
+
+      {detail && (
+        <Modal titleId="badge-detail-title" onClose={() => setDetail(null)}>
+          {detail.kind === "tiered" ? (
+            <TieredBadgeDetail config={detail.config} progress={detail.progress} />
+          ) : (
+            <SimpleBadgeDetail category={detail.category} name={detail.name} rule={detail.rule} rows={detail.rows} />
+          )}
+        </Modal>
+      )}
     </div>
   );
 }

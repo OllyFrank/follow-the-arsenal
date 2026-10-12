@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { Fixture } from "../../types";
 import type { UnlockItem } from "../../lib/badgeEngine";
 import { collectedInOrder, stampStyle } from "../../lib/badgeDisplay";
 import { formatDateShort } from "../../lib/format";
@@ -36,7 +37,12 @@ export function PassportCover({ countryCount }: { countryCount: number }) {
   );
 }
 
-export function PassportStamps({ countries }: { countries: UnlockItem<{ country: string }>[] }) {
+interface PassportStampsProps {
+  countries: UnlockItem<{ country: string }>[];
+  onOpenDetail: (country: string, earningMatch: Fixture) => void;
+}
+
+export function PassportStamps({ countries, onOpenDetail }: PassportStampsProps) {
   const stamps = collectedInOrder(countries);
   const pageCount = Math.max(1, Math.ceil(stamps.length / STAMPS_PER_PAGE));
   const [page, setPage] = useState(() => pageCount - 1); // opens on the last page
@@ -67,7 +73,8 @@ export function PassportStamps({ countries }: { countries: UnlockItem<{ country:
           const style = stampStyle(stamp.position, stamp.item.country);
           const stampPage = Math.floor((stamp.position - 1) / STAMPS_PER_PAGE);
           return (
-            <div
+            <button
+              type="button"
               key={stamp.item.country}
               data-page={stampPage}
               className={`passport-stamp passport-stamp-${style.shape}${stampPage === page ? " passport-stamp-current" : ""}`}
@@ -76,11 +83,12 @@ export function PassportStamps({ countries }: { countries: UnlockItem<{ country:
                 color: style.ink,
                 transform: `rotate(${style.angleDeg}deg)`,
               }}
+              onClick={() => onOpenDetail(stamp.item.country, stamp.earningMatch)}
             >
               <div className="passport-stamp-country">{stamp.item.country}</div>
               <div className="passport-stamp-date">{formatDateShort(stamp.earningMatch.date).toUpperCase()}</div>
               <div className="passport-stamp-opp">v {stamp.earningMatch.opponent}</div>
-            </div>
+            </button>
           );
         })}
       </div>

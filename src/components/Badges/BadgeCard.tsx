@@ -1,20 +1,19 @@
 import type { TieredBadgeConfig } from "../../lib/badgeCardConfig";
 import type { BadgeProgress } from "../../lib/badgeEngine";
 import { tierColor } from "../../lib/badgeTierColor";
-import { formatDateShort, matchScoreLine } from "../../lib/format";
+import { formatDateShort, matchScoreLine, singularize } from "../../lib/format";
 import { BadgeIcon } from "./BadgeIcons";
 
 interface Props {
   config: TieredBadgeConfig;
   progress: BadgeProgress;
   onOpenDetail: () => void;
+  /** false for the badge's own card shown inside its own detail view, where
+   * it's a static display, not a second way to open the same dialog. */
+  interactive?: boolean;
 }
 
-function singularize(unit: string): string {
-  return unit.endsWith("s") ? unit.slice(0, -1) : unit;
-}
-
-export function BadgeCard({ config, progress, onOpenDetail }: Props) {
+export function BadgeCard({ config, progress, onOpenDetail, interactive = true }: Props) {
   const { name, set, icon, unit, countdownUnit, rule } = config;
   const material = tierColor(progress.tierIndex, progress.legendary);
   const locked = progress.locked;
@@ -27,11 +26,13 @@ export function BadgeCard({ config, progress, onOpenDetail }: Props) {
         toGo === null ? "" : `, ${toGo} to the next badge`
       }`;
 
+  const Tag = interactive ? "button" : "div";
+
   return (
-    <button
-      type="button"
+    <Tag
+      type={interactive ? "button" : undefined}
       className={`badge-card badge-tier-${material}`}
-      onClick={onOpenDetail}
+      onClick={interactive ? onOpenDetail : undefined}
       aria-label={accessibleName}
     >
       <div className="badge-card-inner">
@@ -83,6 +84,6 @@ export function BadgeCard({ config, progress, onOpenDetail }: Props) {
           )}
         </div>
       </div>
-    </button>
+    </Tag>
   );
 }

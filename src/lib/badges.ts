@@ -220,6 +220,10 @@ export interface PremierLeagueBadge {
   visitedCount: number;
   totalCount: number;
   missingClubs: PremierLeagueClubStatus[];
+  /** Every club, visited or not — for the detail view ("every club with
+   * its first-visit match or 'not yet'"). missingClubs stays as its own
+   * field since the card face only needs the unvisited ones. */
+  allClubs: PremierLeagueClubStatus[];
 }
 
 function computePremierLeague(fixtures: Fixture[], attended: Set<string>): PremierLeagueBadge {
@@ -260,6 +264,7 @@ function computePremierLeague(fixtures: Fixture[], attended: Set<string>): Premi
     visitedCount: statuses.length - missingClubs.length,
     totalCount: statuses.length,
     missingClubs,
+    allClubs: statuses,
   };
 }
 

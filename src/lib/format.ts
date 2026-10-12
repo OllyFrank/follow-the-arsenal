@@ -44,6 +44,12 @@ export function matchScoreLine(fixture: Fixture): string {
   return `${fixture.homeTeam} ${formatFixtureScoreLine(fixture)} ${fixture.awayTeam}`;
 }
 
+/** "matches" -> "match" when the count is 1 — design-handoff/BADGES.md:
+ * "Use the singular unit when it is 1 ('1 season to go')." */
+export function singularize(unit: string): string {
+  return unit.endsWith("s") ? unit.slice(0, -1) : unit;
+}
+
 export function googleSearchUrl(fixture: Fixture): string {
   const query = `${fixture.homeTeam} v ${fixture.awayTeam} ${formatDateLong(fixture.date)} ${formatFixtureScoreLine(fixture)}`;
   const url = new URL("https://www.google.com/search");

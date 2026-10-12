@@ -1,6 +1,6 @@
 import type { AttendedWitnessEntry } from "../../lib/badgeDisplay";
 import type { GreatestMatchTier } from "../../lib/badges";
-import { formatDateShort, googleSearchUrl } from "../../lib/format";
+import { formatDateShort } from "../../lib/format";
 
 const TIER_LABEL: Record<GreatestMatchTier, string> = { gold: "Gold", silver: "Silver", bronze: "Bronze" };
 
@@ -17,14 +17,13 @@ function MedalIcon({ tier }: { tier: GreatestMatchTier }) {
   );
 }
 
-export function WitnessTicket({ entry }: { entry: AttendedWitnessEntry }) {
+export function WitnessTicket({ entry, onOpenDetail }: { entry: AttendedWitnessEntry; onOpenDetail: () => void }) {
   const { greatestMatch, fixture } = entry;
   return (
-    <a
+    <button
+      type="button"
       className={`witness-ticket witness-ticket-${greatestMatch.tier}`}
-      href={googleSearchUrl(fixture)}
-      target="_blank"
-      rel="noreferrer"
+      onClick={onOpenDetail}
     >
       <div className={`witness-ticket-shine witness-ticket-shine-${greatestMatch.tier}`} />
       <div className={`witness-ticket-stub witness-ticket-stub-${greatestMatch.tier}`}>
@@ -39,6 +38,6 @@ export function WitnessTicket({ entry }: { entry: AttendedWitnessEntry }) {
         <div className="witness-ticket-why">{greatestMatch.why}</div>
         <div className="witness-ticket-venue">{fixture.venue}</div>
       </div>
-    </a>
+    </button>
   );
 }

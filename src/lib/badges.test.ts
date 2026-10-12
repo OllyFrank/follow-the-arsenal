@@ -114,6 +114,11 @@ describe("every attendable match ticked", () => {
     expect(coventry?.note).toBe("not yet in the fixture list");
   });
 
+  it("allClubs lists every club, visited and missing alike", () => {
+    expect(badges.grounds.premierLeague.allClubs).toHaveLength(20);
+    expect(badges.grounds.premierLeague.allClubs.filter((c) => c.visited)).toHaveLength(19);
+  });
+
   it("Old & New is earned", () => {
     expect(badges.grounds.oldAndNew.unlocked).toBe(true);
   });
