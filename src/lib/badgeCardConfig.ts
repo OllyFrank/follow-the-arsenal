@@ -78,7 +78,7 @@ export const TIERED_BADGES: TieredBadgeConfig[] = [
   },
   {
     id: "longevity",
-    name: "Longevity",
+    name: "Through Thick and Thin",
     set: "Attendance",
     icon: "hourglass",
     unit: "seasons",

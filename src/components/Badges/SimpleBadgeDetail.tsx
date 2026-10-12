@@ -12,7 +12,7 @@ interface Props {
   rows: SimpleDetailRow[];
 }
 
-/** The simpler detail for Season Sweep, Old & New, The Premier League,
+/** The simpler detail for Ever Present, Old & New, The Premier League,
  * stamps, stadiums and tickets — "the rule and the matches involved"
  * (design-handoff/BADGES.md), reusing the tiered detail's row list look
  * without the medals or countdown banner. */

@@ -124,7 +124,7 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
                     setDetail({
                       kind: "simple",
                       category: "Attendance",
-                      name: `Season Sweep — ${sweep.season}`,
+                      name: `Ever Present — ${sweep.season}`,
                       rule: "Attend every attendable match in a season.",
                       rows: [
                         {

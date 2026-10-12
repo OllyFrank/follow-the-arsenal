@@ -20,7 +20,7 @@ export function SeasonSweepCard({ sweep, onOpenDetail }: { sweep: SeasonSweepRes
       type="button"
       className="badge-card season-sweep-card"
       onClick={onOpenDetail}
-      aria-label={`Season Sweep, ${sweep.season}, completed at ${matchScoreLine(sweep.earningMatch)}`}
+      aria-label={`Ever Present, ${sweep.season}, completed at ${matchScoreLine(sweep.earningMatch)}`}
     >
       <div className="badge-card-inner season-sweep-inner">
         <div className="badge-card-toprow">
@@ -31,7 +31,7 @@ export function SeasonSweepCard({ sweep, onOpenDetail }: { sweep: SeasonSweepRes
           <SweptPennant />
         </div>
         <div className="badge-name-block">
-          <div className="badge-name">Season Sweep</div>
+          <div className="badge-name">Ever Present</div>
           <div className="badge-milestone season-sweep-season">{sweep.season}</div>
           <div className="season-sweep-count">All {sweep.attendableCount} matches</div>
         </div>
@@ -65,7 +65,7 @@ export function SeasonSweepEmptySlot() {
           </div>
         </div>
         <div className="badge-name-block">
-          <div className="badge-name">Season Sweep</div>
+          <div className="badge-name">Ever Present</div>
         </div>
         <div className="badge-reached-block">
           <div className="badge-reached-label">Not yet earned</div>
