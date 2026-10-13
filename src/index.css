@@ -3544,6 +3544,10 @@ table.stats-table .num.strong {
   gap: 10px;
 }
 
+.passport-stamps-subsection {
+  grid-column: 1 / -1;
+}
+
 .badges-subsection-head {
   display: flex;
   justify-content: space-between;
@@ -3855,6 +3859,28 @@ table.stats-table .num.strong {
 
   .passport-stamp-grid {
     grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  /* Visa page sits beside the passport cover, matching its height, per
+   * the brief ("the visa page is a fixed-height page, the same height
+   * as the cover beside it") — narrower than the full-width mobile
+   * layout, so the stamp shapes shrink a little to still fit six across. */
+  .passport-stamps-subsection {
+    grid-column: span 4;
+    min-width: 0;
+  }
+
+  .passport-page {
+    height: 324px;
+    overflow: hidden;
+  }
+
+  .passport-stamp {
+    height: 76px;
+  }
+
+  .passport-stamp-circle {
+    width: 76px;
   }
 
   .stadium-card.badge-tier-locked {

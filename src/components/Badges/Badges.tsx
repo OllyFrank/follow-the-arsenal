@@ -204,37 +204,37 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
           <div className="badge-grid">
             {cardFor("europeanTours")}
             <PassportCover countryCount={stampCount} />
-          </div>
 
-          <div className="badges-subsection">
-            <div className="badges-subsection-head">
-              <h3 className="badges-subsection-title">Passport stamps</h3>
-              <div className="badges-subsection-count">
-                {stampCount} {stampCount === 1 ? "stamp" : "stamps"}
+            <div className="badges-subsection passport-stamps-subsection">
+              <div className="badges-subsection-head">
+                <h3 className="badges-subsection-title">Passport stamps</h3>
+                <div className="badges-subsection-count">
+                  {stampCount} {stampCount === 1 ? "stamp" : "stamps"}
+                </div>
               </div>
+              <p className="badges-subsection-desc">
+                One stamp for every country where you&apos;ve seen Arsenal play in Europe.
+              </p>
+              <PassportStamps
+                countries={badges.europe.passportStamps}
+                onOpenDetail={(country, earningMatch) =>
+                  setDetail({
+                    kind: "simple",
+                    category: "Europe & countries",
+                    name: country,
+                    rule: "One stamp for every country where you've seen Arsenal play in Europe.",
+                    rows: [
+                      {
+                        key: country,
+                        label: "First seen",
+                        value: `${matchScoreLine(earningMatch)} · ${formatDateShort(earningMatch.date)}`,
+                        done: true,
+                      },
+                    ],
+                  })
+                }
+              />
             </div>
-            <p className="badges-subsection-desc">
-              One stamp for every country where you&apos;ve seen Arsenal play in Europe.
-            </p>
-            <PassportStamps
-              countries={badges.europe.passportStamps}
-              onOpenDetail={(country, earningMatch) =>
-                setDetail({
-                  kind: "simple",
-                  category: "Europe & countries",
-                  name: country,
-                  rule: "One stamp for every country where you've seen Arsenal play in Europe.",
-                  rows: [
-                    {
-                      key: country,
-                      label: "First seen",
-                      value: `${matchScoreLine(earningMatch)} · ${formatDateShort(earningMatch.date)}`,
-                      done: true,
-                    },
-                  ],
-                })
-              }
-            />
           </div>
 
           <div className="badges-subsection">
