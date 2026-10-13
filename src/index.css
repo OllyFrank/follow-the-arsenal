@@ -3878,15 +3878,35 @@ table.stats-table .num.strong {
   .passport-page {
     flex: 1 1 auto;
     min-height: 0;
+    padding: 12px 10px 12px;
+    gap: 8px;
     overflow: hidden;
   }
 
+  /* A touch bigger than the available height would naturally allow, to
+   * give a long country name (e.g. "Switzerland") enough room to wrap
+   * to two lines without its corners poking outside the circle's curve
+   * — the padding/gap trims above free up the vertical space this
+   * needs within the fixed 324px page. */
   .passport-stamp {
-    height: 76px;
+    height: 82px;
   }
 
   .passport-stamp-circle {
-    width: 76px;
+    width: 82px;
+  }
+
+  /* The country name sits in the top line, where a circle is at its
+   * narrowest — a touch smaller and tighter than the rectangle/oval
+   * sizing so an 11-character name ("Switzerland", "Netherlands")
+   * clears the curve instead of touching it. */
+  .passport-stamp-circle .passport-stamp-country {
+    font-size: 9.5px;
+    letter-spacing: 0.03em;
+  }
+
+  .passport-page-controls button {
+    min-height: 32px;
   }
 
   .stadium-card.badge-tier-locked {
