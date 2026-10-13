@@ -3896,13 +3896,18 @@ table.stats-table .num.strong {
     width: 82px;
   }
 
-  /* The country name sits in the top line, where a circle is at its
-   * narrowest — a touch smaller and tighter than the rectangle/oval
-   * sizing so an 11-character name ("Switzerland", "Netherlands")
-   * clears the curve instead of touching it. */
+  /* The country name (top line) and "v {opponent}" (bottom line) sit
+   * where a circle is at its narrowest — a touch smaller and tighter
+   * than the rectangle/oval sizing so a long name ("Switzerland",
+   * "v Fenerbahce") clears the curve instead of overlapping it. */
   .passport-stamp-circle .passport-stamp-country {
     font-size: 9.5px;
     letter-spacing: 0.03em;
+  }
+
+  .passport-stamp-circle .passport-stamp-opp {
+    font-size: 8.5px;
+    letter-spacing: 0.02em;
   }
 
   .passport-page-controls button {
