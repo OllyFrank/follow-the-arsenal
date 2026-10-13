@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Passport stamp inks</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&amp;family=Archivo+Black&amp;family=Archivo+Narrow:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 960px; height: 240px; box-sizing: border-box; padding: 24px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; background-color: #f3f6f0; background-image: repeating-linear-gradient(45deg, rgba(6, 54, 114, 0.035) 0, rgba(6, 54, 114, 0.035) 2px, transparent 2px, transparent 9px); font-family: Archivo, system-ui, sans-serif; color: #0b1f3f">
+<sc-for list="{{ inks }}" as="k" hint-placeholder-count="6">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px">
+<div style="box-sizing: border-box; width: {{ k.w }}; height: 96px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 4px; border: 3px {{ k.style }} {{ k.ink }}; border-radius: {{ k.radius }}; color: {{ k.ink }}; transform: rotate({{ k.rot }}deg); text-align: center; opacity: {{ k.opacity }}">
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase">{{ k.top }}</div>
+<div style="font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-size: 12px">{{ k.mid }}</div>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center">
+<div style="font-size: 14px; font-weight: 700; color: #0b1f3f">{{ k.name }}</div>
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5c5c66">{{ k.hex }}</div>
+<div style="font-size: 12px; color: #44444e">{{ k.order }}</div>
+</div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":960,"height":240}}'>
+class Component extends DCLogic {
+renderVals() {
+var rows = [
+['Post-box red', '#b3121b', '1st, 6th, 11th…', '8px', '100%', -4, 'Stamp 1', 'Rectangle', 'double', 1],
+['Royal blue', '#1f4f8f', '2nd, 7th, 12th…', '50%', '96px', 5, 'Stamp 2', 'Circle', 'double', 1],
+['Bottle green', '#2e6b3f', '3rd, 8th, 13th…', '50% / 42%', '100%', -3, 'Stamp 3', 'Oval', 'double', 1],
+['Violet', '#6b3a8f', '4th, 9th, 14th…', '8px', '100%', 3, 'Stamp 4', 'Rectangle', 'double', 1],
+['Sepia', '#8a5a14', '5th, 10th, 15th…', '50%', '96px', -6, 'Stamp 5', 'Circle', 'double', 1],
+['Next: 14th', '#6b3a8f', 'Violet · circle · 3°', '50%', '96px', 3, 'Your next', 'stamp', 'dashed', 0.6]
+];
+return {
+inks: rows.map(function (r) {
+return { name: r[0], ink: r[1], hex: r[0] === 'Next: 14th' ? '' : r[1], order: r[2], radius: r[3], w: r[4], rot: r[5], top: r[6], mid: r[7], style: r[8], opacity: r[9] };
+})
+};
+}
+}
+</script>
+</body>
+</html>

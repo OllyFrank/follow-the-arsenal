@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Witness to History ticket</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&amp;family=Archivo+Black&amp;family=Archivo+Narrow:wght@500;600;700&amp;family=Kaushan+Script&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="box-sizing: border-box; width: 100%; min-height: 116px; display: flex; border-radius: 10px; border: 1px solid {{ edge }}; background: #ffffff; overflow: hidden; font-family: Archivo, system-ui, sans-serif; color: #0b1f3f">
+<div style="flex-shrink: 0; width: 6px; background: {{ shine }}"></div>
+<div style="flex-shrink: 0; width: 72px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: {{ accent }}; color: #ffffff; border-right: 2px dashed {{ edge }}">
+<svg aria-hidden="true" viewBox="0 0 32 32" width="34" height="34">
+<path d="M10 2h5l3 9h-5zM22 2h-5l-3 9h5z" fill="#ffffff" opacity="0.85"></path>
+<circle cx="16" cy="20" r="10" fill="{{ metal }}" stroke="#ffffff" stroke-width="1.5"></circle>
+<path d="M16 14.5l1.7 3.5 3.8.5-2.8 2.6.7 3.8-3.4-1.8-3.4 1.8.7-3.8-2.8-2.6 3.8-.5z" fill="{{ accent }}"></path>
+</svg>
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase">{{ tierLabel }}</div>
+</div>
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 3px; padding: 10px 12px 10px 14px">
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #5c5c66">{{ date }} · {{ comp }}</div>
+<div style="font-size: 15px; font-weight: 700; line-height: 1.25; color: #0b1f3f">{{ match }}</div>
+<div style="font-family: 'Kaushan Script', 'Brush Script MT', cursive; font-size: 16px; line-height: 1.25; color: #063672">{{ why }}</div>
+<div style="font-size: 12px; line-height: 1.3; color: #5c5c66">{{ venue }}</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"tier":{"editor":"enum","options":["gold","silver","bronze"],"default":"gold"},"date":{"editor":"text","default":"25 Apr 2004"},"comp":{"editor":"text","default":"Premier League"},"match":{"editor":"text","default":"Tottenham Hotspur 2-2 Arsenal"},"why":{"editor":"text","default":"Title won at the Lane"},"venue":{"editor":"text","default":"White Hart Lane"},"$preview":{"width":360,"height":118}}'>
+class Component extends DCLogic {
+renderVals() {
+var p = this.props;
+var tiers = {
+gold: { accent: '#8a6414', metal: '#f6dc8e', edge: '#e2c47a', shine: 'linear-gradient(180deg, #8a6414, #f6dc8e, #c99b3f, #8a6414)', label: 'Gold' },
+silver: { accent: '#5f6b78', metal: '#e3e7ec', edge: '#c3cad2', shine: 'linear-gradient(180deg, #66717d, #f1f3f6, #a7b0ba, #66717d)', label: 'Silver' },
+bronze: { accent: '#8a5a2b', metal: '#e0a971', edge: '#d9b08a', shine: 'linear-gradient(180deg, #6e4119, #e0a971, #9a6533, #6e4119)', label: 'Bronze' }
+};
+var t = tiers[p.tier] || tiers.gold;
+return {
+accent: t.accent,
+metal: t.metal,
+edge: t.edge,
+shine: t.shine,
+tierLabel: t.label,
+date: p.date == null ? '25 Apr 2004' : p.date,
+comp: p.comp == null ? 'Premier League' : p.comp,
+match: p.match == null ? 'Tottenham Hotspur 2-2 Arsenal' : p.match,
+why: p.why == null ? 'Title won at the Lane' : p.why,
+venue: p.venue == null ? 'White Hart Lane' : p.venue
+};
+}
+}
+</script>
+</body>
+</html>

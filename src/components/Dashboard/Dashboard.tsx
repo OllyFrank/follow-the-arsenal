@@ -1,16 +1,19 @@
 import { useMemo, useState } from "react";
 import type { Fixture, Ground, HomeAddress, Manager } from "../../types";
 import { computeStats } from "../../lib/stats";
-import { formatDateLong, formatDistance, ordinal } from "../../lib/format";
+import { computeDerbyStats } from "../../lib/derbyStats";
+import { badgeReference } from "../../lib/badgeReference";
+import { fixtureLabel, formatDateLong, formatDistance, ordinal } from "../../lib/format";
 import { EARTH_CIRCUMFERENCE_KM } from "../../lib/distance";
 import { usePagination } from "../../hooks/usePagination";
 import { Globe } from "../shared/Globe";
 import { LapStamps } from "../shared/LapStamps";
 import { GroundsMap } from "./GroundsMap";
 import { PaginationControls } from "./PaginationControls";
+import { DerbyCard } from "./DerbyCard";
 
 const GROUNDS_PAGE_SIZE = 10;
-const VISIBLE_SEASONS_DEFAULT = 6;
+const VISIBLE_SEASONS_DEFAULT = 8;
 
 interface Props {
   fixtures: Fixture[];
@@ -20,10 +23,7 @@ interface Props {
   addresses: HomeAddress[];
   unit: "mi" | "km";
   onUnitChange: (unit: "mi" | "km") => void;
-}
-
-function fixtureLabel(fixture: Fixture): string {
-  return `${fixture.homeTeam} v ${fixture.awayTeam}, ${formatDateLong(fixture.date)}`;
+  onViewFixtures: (opponent?: string) => void;
 }
 
 // Monthly attendance heatmap: color and bar height both scale continuously
@@ -65,6 +65,7 @@ export function Dashboard({
   addresses,
   unit,
   onUnitChange,
+  onViewFixtures,
 }: Props) {
   const seasons = useMemo(() => {
     const set = new Set(fixtures.map((f) => f.season));
@@ -87,6 +88,17 @@ export function Dashboard({
   const dist = (km: number) => formatDistance(km, unit);
 
   const groundsPage = usePagination(stats.grounds.rankedByVisits, GROUNDS_PAGE_SIZE);
+
+  const groundsById = useMemo(() => new Map(grounds.map((g) => [g.groundId, g])), [grounds]);
+
+  // Derby Days uses the same season-scoped fixtures as the rest of the
+  // Stats page — no separate filter of its own.
+  const derbyStats = useMemo(
+    () => computeDerbyStats(scopedFixtures, attendedMatchIds),
+    [scopedFixtures, attendedMatchIds],
+  );
+  const northLondonDerby = derbyStats.northLondon;
+  const londonDerby = derbyStats.london;
 
   const lapsOfEarth = stats.distance.lapsOfEarth;
   const completedLaps = Math.floor(lapsOfEarth);
@@ -280,9 +292,12 @@ export function Dashboard({
               </div>
             ))}
           </div>
-          {!showAllSeasons && seasonsByDistanceDesc.length > VISIBLE_SEASONS_DEFAULT && (
-            <button className="link-button" onClick={() => setShowAllSeasons(true)}>
-              Show all {seasonsByDistanceDesc.length} seasons
+          {seasonsByDistanceDesc.length > VISIBLE_SEASONS_DEFAULT && (
+            <button
+              className="link-button"
+              onClick={() => setShowAllSeasons((v) => !v)}
+            >
+              {showAllSeasons ? "Show fewer seasons" : `Show all ${seasonsByDistanceDesc.length} seasons`}
             </button>
           )}
         </section>
@@ -380,6 +395,26 @@ export function Dashboard({
           </section>
         </div>
       </div>
+
+      <section style={{ marginTop: "1rem" }}>
+        <div className="derby-grid">
+          <DerbyCard
+            title="North London Derbies"
+            stats={northLondonDerby}
+            firstDerbyLabel="North London derby"
+            groundsById={groundsById}
+            opponentForEmptyState={badgeReference.northLondonDerbyOpponent}
+            onViewFixtures={onViewFixtures}
+          />
+          <DerbyCard
+            title="London Derbies"
+            stats={londonDerby}
+            firstDerbyLabel="London derby"
+            groundsById={groundsById}
+            onViewFixtures={onViewFixtures}
+          />
+        </div>
+      </section>
 
       <section className="card" style={{ marginTop: "1rem" }}>
         <h2 className="section-title">Grounds visited</h2>

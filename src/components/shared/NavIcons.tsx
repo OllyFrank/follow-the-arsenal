@@ -34,6 +34,15 @@ export function StatsIcon() {
   );
 }
 
+export function BadgesIcon() {
+  return (
+    <svg {...commonProps}>
+      <circle cx="12" cy="15" r="6" />
+      <path d="M8.6 10.1L6 3h4l2 4.5L14 3h4l-2.6 7.1" />
+    </svg>
+  );
+}
+
 export function AccountIcon() {
   return (
     <svg {...commonProps}>

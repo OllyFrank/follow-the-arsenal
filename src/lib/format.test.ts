@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
   formatDateLong,
+  formatDateShort,
   formatDistance,
   formatFixtureScoreLine,
   googleSearchUrl,
+  matchScoreLine,
+  singularize,
 } from "./format";
 import { makeFixture } from "./test-fixtures";
 
@@ -14,6 +17,56 @@ describe("formatDateLong", () => {
 
   it("does not zero-pad the day", () => {
     expect(formatDateLong("2014-05-01")).toBe("1 May 2014");
+  });
+});
+
+describe("formatDateShort", () => {
+  it("formats an ISO date as '<day> <Mon> <year>'", () => {
+    expect(formatDateShort("2007-11-27")).toBe("27 Nov 2007");
+  });
+});
+
+describe("singularize", () => {
+  it("strips a trailing 's'", () => {
+    expect(singularize("seasons")).toBe("season");
+    expect(singularize("goals")).toBe("goal");
+    expect(singularize("grounds")).toBe("ground");
+  });
+
+  it("strips '-es' after a sibilant, not just the trailing 's'", () => {
+    expect(singularize("matches")).toBe("match");
+  });
+});
+
+describe("matchScoreLine", () => {
+  it("puts the home team first with the score between the teams", () => {
+    const fixture = makeFixture({
+      homeTeam: "Sevilla",
+      awayTeam: "Arsenal",
+      arsenalGoals: 1,
+      opponentGoals: 3,
+    });
+    expect(matchScoreLine(fixture)).toBe("Sevilla 3-1 Arsenal");
+  });
+
+  it("shortens a long club name so the line stays one row in the logbook", () => {
+    const fixture = makeFixture({
+      homeTeam: "Arsenal",
+      awayTeam: "Wolverhampton Wanderers",
+      arsenalGoals: 1,
+      opponentGoals: 0,
+    });
+    expect(matchScoreLine(fixture)).toBe("Arsenal 1-0 Wolves");
+  });
+
+  it("shortens Bayern Munich so a cathedral card's match line stays one line", () => {
+    const fixture = makeFixture({
+      homeTeam: "Bayern Munich",
+      awayTeam: "Arsenal",
+      arsenalGoals: 2,
+      opponentGoals: 0,
+    });
+    expect(matchScoreLine(fixture)).toBe("Bayern 0-2 Arsenal");
   });
 });
 

@@ -13,6 +13,7 @@ import { formatDistance } from "./lib/format";
 import { FixtureList } from "./components/FixtureList/FixtureList";
 import { Addresses } from "./components/Addresses/Addresses";
 import { Dashboard } from "./components/Dashboard/Dashboard";
+import { Badges } from "./components/Badges/Badges";
 import { Onboarding } from "./components/Onboarding/Onboarding";
 import { Logo } from "./components/shared/Logo";
 import { Account } from "./components/Account/Account";
@@ -21,23 +22,32 @@ import { GuestDataMigrationPrompt } from "./components/Account/GuestDataMigratio
 import { ConsentGate } from "./components/Account/ConsentGate";
 import { PrivacyNotice } from "./components/Privacy/PrivacyNotice";
 import { ACCOUNTS_ENABLED } from "./lib/featureFlags";
-import { FixturesIcon, AddressesIcon, StatsIcon } from "./components/shared/NavIcons";
+import { FixturesIcon, AddressesIcon, StatsIcon, BadgesIcon } from "./components/shared/NavIcons";
 
 const fixtures = fixturesData as Fixture[];
 const grounds = groundsData as Ground[];
 const managers = managersData as Manager[];
 
-type Tab = "fixtures" | "addresses" | "stats";
+type Tab = "fixtures" | "addresses" | "stats" | "badges";
 
 const TABS: { id: Tab; label: string; Icon: () => React.JSX.Element }[] = [
   { id: "fixtures", label: "Fixtures", Icon: FixturesIcon },
   { id: "addresses", label: "Addresses", Icon: AddressesIcon },
   { id: "stats", label: "Stats", Icon: StatsIcon },
+  { id: "badges", label: "Badges", Icon: BadgesIcon },
 ];
 
 function App() {
   const [tab, setTab] = useState<Tab>("fixtures");
   const [guestUnit, setGuestUnit] = useState<"mi" | "km">("mi");
+  // Set by a Derby Days empty-state link ("No derbies ticked yet") to land on
+  // the Fixtures tab pre-filtered to that opponent. Read once by FixtureList
+  // on mount, then cleared so a later manual tab switch starts unfiltered.
+  const [pendingFixtureOpponent, setPendingFixtureOpponent] = useState<string | null>(null);
+  const viewFixtures = (opponent?: string) => {
+    setPendingFixtureOpponent(opponent ?? null);
+    setTab("fixtures");
+  };
 
   const auth = useAuth();
   const guestState = useAppState();
@@ -147,26 +157,28 @@ function App() {
             ))}
           </nav>
 
-          <div className="mileage-chip">
-            <div className="mileage-chip-value">{formatDistance(totalDistanceKm, unit)}</div>
-            <div className="mileage-chip-label">travelled so far</div>
-          </div>
+          <div className="header-right">
+            <div className="mileage-chip">
+              <div className="mileage-chip-value">{formatDistance(totalDistanceKm, unit)}</div>
+              <div className="mileage-chip-label">travelled so far</div>
+            </div>
 
-          {ACCOUNTS_ENABLED ? (
-            <Account
-              user={auth.user}
-              loading={auth.loading}
-              signInWithMagicLink={auth.signInWithMagicLink}
-              signOut={auth.signOut}
-              unit={unit}
-              onUnitChange={setUnit}
-              attendedMatchIds={attendedMatchIds}
-              homeAddresses={homeAddresses}
-              fixtures={fixtures}
-            />
-          ) : (
-            <AccountComingSoon />
-          )}
+            {ACCOUNTS_ENABLED ? (
+              <Account
+                user={auth.user}
+                loading={auth.loading}
+                signInWithMagicLink={auth.signInWithMagicLink}
+                signOut={auth.signOut}
+                unit={unit}
+                onUnitChange={setUnit}
+                attendedMatchIds={attendedMatchIds}
+                homeAddresses={homeAddresses}
+                fixtures={fixtures}
+              />
+            ) : (
+              <AccountComingSoon />
+            )}
+          </div>
         </div>
       </header>
       <main className="app-main">
@@ -177,6 +189,8 @@ function App() {
             attendedMatchIds={attendedMatchIds}
             onToggleAttendance={toggleAttendance}
             onBulkSetAttendance={bulkSetAttendance}
+            initialOpponent={pendingFixtureOpponent}
+            onInitialOpponentConsumed={() => setPendingFixtureOpponent(null)}
           />
         )}
         {tab === "addresses" && <Addresses addresses={homeAddresses} onChange={updateAddresses} />}
@@ -189,7 +203,11 @@ function App() {
             addresses={homeAddresses}
             unit={unit}
             onUnitChange={setUnit}
+            onViewFixtures={viewFixtures}
           />
+        )}
+        {tab === "badges" && (
+          <Badges fixtures={fixtures} grounds={grounds} attendedMatchIds={attendedMatchIds} />
         )}
       </main>
       <footer className="app-footer">

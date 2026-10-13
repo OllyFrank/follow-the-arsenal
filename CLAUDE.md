@@ -12,11 +12,11 @@ Vite + React + TypeScript. Leaflet with OpenStreetMap tiles for maps. State save
 ## Data (source: `We_All_Follow_The_Arsenal_Data.xlsx`)
 Write a one-off script to convert the workbook to `fixtures.json` and `grounds.json`, bundled with the app.
 - **Fixtures (2,101 rows):** Match ID, Date, Season, Competition, Stage, Home team, Away team, Opponent, H/A/N, Ground ID, Venue, Arsenal goals, Opponent goals, Result (W/D/L), Penalty shoot-out, Behind closed doors (Y), Counts in record (Y/N), Notes.
-- **Grounds (180 rows):** Ground ID, Ground, Also known as, Used by, Country, Latitude, Longitude, Confidence.
+- **Grounds (179 rows):** Ground ID, Ground, Also known as, Used by, Country, Latitude, Longitude, Confidence.
 - **Season** is a stored field. Never derive it from the date (2019/20 ran into August 2020).
 - **Result** already treats penalty shoot-outs as draws. The shoot-out column is for display only.
-- **Behind closed doors** matches cannot be marked as attended.
-- **Counts in record = N** (the voided 1999 Sheffield United game) can be attended and counts for distance and grounds, but is excluded from every result- or score-based stat.
+- **Behind closed doors** matches cannot be marked as attended. The 71 such matches run from 17 June 2020 to 23 May 2021 (the end of 2019/20 and all of 2020/21) and are ignored by every stat and badge, as if they hadn't been played: they never count, never break or extend a streak, and are left out of the "missed" side of every lucky charm. **Attendable** = not behind closed doors.
+- **Counts in record = N** (the voided 1999 Sheffield United game) can be attended and counts for distance, grounds, countries and seasons, but is excluded from every result-, score- or goal-based stat.
 
 ## User inputs
 1. **Home addresses:** one or more, each with a *from* and *to* date. UK postcodes are looked up via postcodes.io (which also handles discontinued postcodes). Anything else goes through OpenStreetMap Nominatim. Show a draggable map pin to confirm, then store the lat/long. Warn about gaps or overlaps between periods.

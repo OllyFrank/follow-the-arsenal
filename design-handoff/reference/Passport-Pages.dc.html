@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Desktop passport – pages</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&amp;family=Archivo+Black&amp;family=Archivo+Narrow:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 1000px; height: 372px; box-sizing: border-box; padding: 24px; display: flex; gap: 16px; background: #ffffff; font-family: Archivo, system-ui, sans-serif; color: #0b1f3f">
+<div style="flex: 0 0 150px; box-sizing: border-box; height: 324px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 20px 12px 18px; border-radius: 10px 14px 14px 10px; border-left: 7px solid #04142e; background: #0b1f3f; color: #e9c877; text-align: center">
+<div style="font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-size: 13px; line-height: 1.25; letter-spacing: 0.06em; text-transform: uppercase">Gooners'<br>passport</div>
+<svg aria-hidden="true" viewBox="0 0 64 64" width="66" height="66" fill="none" stroke="#e9c877" stroke-width="2">
+<circle cx="32" cy="32" r="22"></circle>
+<ellipse cx="32" cy="32" rx="9" ry="22"></ellipse>
+<path d="M10 32H54M14 21H50M14 43H50"></path>
+<ellipse cx="32" cy="32" rx="30" ry="9" transform="rotate(-24 32 32)" stroke-dasharray="1 5" stroke-linecap="round"></ellipse>
+</svg>
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase">Over land and sea</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<div style="font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-size: 34px; line-height: 1">17</div>
+<div style="font-size: 12px; line-height: 1.3">countries stamped</div>
+</div>
+</div>
+<div style="flex: 1 1 auto; min-width: 0; box-sizing: border-box; height: 324px; display: flex; flex-direction: column; gap: 12px; padding: 14px 14px 12px; border: 1px solid #d6dccf; border-radius: 12px; background-color: #f3f6f0; background-image: repeating-linear-gradient(45deg, rgba(6, 54, 114, 0.035) 0, rgba(6, 54, 114, 0.035) 2px, transparent 2px, transparent 9px)">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+<h3 style="margin: 0; font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-weight: 400; font-size: 16px; text-transform: uppercase; color: #063672">Passport stamps</h3>
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #6b7466">Visas · Entries · Page {{ pageNum }} of 2</div>
+</div>
+<div style="flex-grow: 1; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); grid-auto-rows: 88px; gap: 12px 10px; align-content: start">
+<sc-for list="{{ stamps }}" as="s" hint-placeholder-count="14">
+<div style="box-sizing: border-box; justify-self: center; width: {{ s.w }}; height: 88px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 4px; border: 3px {{ s.style }} {{ s.ink }}; border-radius: {{ s.radius }}; color: {{ s.ink }}; transform: rotate({{ s.rot }}deg); text-align: center; opacity: {{ s.opacity }}">
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 11px; font-weight: 700; line-height: 1.1; letter-spacing: 0.06em; text-transform: uppercase">{{ s.country }}</div>
+<div style="font-family: 'Archivo Black', 'Arial Black', Impact, sans-serif; font-size: 11px; line-height: 1.1">{{ s.date }}</div>
+<div style="font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif; font-size: 9.5px; font-weight: 600; line-height: 1.15; letter-spacing: 0.04em; text-transform: uppercase">{{ s.opp }}</div>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<button type="button" onClick="{{ prev }}" aria-disabled="{{ prevDisabled }}" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; border: 1px solid #c5c8d2; border-radius: 6px; background: #ffffff; color: {{ prevColor }}; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer">
+<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>
+Previous page</button>
+<div style="display: flex; gap: 6px" aria-hidden="true">
+<div style="width: 8px; height: 8px; border-radius: 50%; background: {{ dot1 }}"></div>
+<div style="width: 8px; height: 8px; border-radius: 50%; background: {{ dot2 }}"></div>
+</div>
+<button type="button" onClick="{{ next }}" aria-disabled="{{ nextDisabled }}" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; border: 1px solid #c5c8d2; border-radius: 6px; background: #ffffff; color: {{ nextColor }}; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Next page
+<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1000,"height":372}}'>
+class Component extends DCLogic {
+renderVals() {
+var self = this;
+var page = (this.state && this.state.page) || 2;
+var inks = ['#b3121b', '#1f4f8f', '#2e6b3f', '#6b3a8f', '#8a5a14'];
+var shapes = ['8px', '50%', '50% / 42%'];
+var angles = [-4, 5, -3, 3, -6, 2, -2, 4, -5, 6];
+var real = [
+['Russia', '30 SEP 2003', 'v Lokomotiv Moscow'], ['Ukraine', '21 OCT 2003', 'v Dynamo Kiev'], ['Italy', '25 NOV 2003', 'v Inter Milan'],
+['Spain', '24 FEB 2004', 'v Celta Vigo'], ['Norway', '29 SEP 2004', 'v Rosenborg'], ['Greece', '20 OCT 2004', 'v Panathinaikos'],
+['Netherlands', '24 NOV 2004', 'v PSV Eindhoven'], ['Germany', '22 FEB 2005', 'v Bayern Munich'], ['Czech Republic', '18 OCT 2005', 'v Sparta Prague'],
+['Switzerland', '22 NOV 2005', 'v FC Thun'], ['France', '17 MAY 2006', 'v Barcelona'], ['Croatia', '8 AUG 2006', 'v Dinamo Zagreb'],
+['Portugal', '6 DEC 2006', 'v FC Porto']
+];
+var all = real.slice();
+for (var n = 14; n <= 17; n++) all.push(['[Country ' + n + ']', '[Date]', 'v [Opponent]']);
+var stamps = all.map(function (r, i) {
+var shape = shapes[i % 3];
+if (shape === '50%' && r[0].length > 11) shape = '8px';
+return { country: r[0], date: r[1], opp: r[2], ink: inks[i % 5], radius: shape, w: shape === '50%' ? '88px' : '100%', rot: angles[i % 10], style: i >= 13 ? 'dashed' : 'double', opacity: i >= 13 ? 0.7 : 0.9 };
+});
+var shown = page === 1 ? stamps.slice(0, 14) : stamps.slice(14, 28);
+return {
+pageNum: page,
+stamps: shown,
+prev: function () { self.setState({ page: 1 }); },
+next: function () { self.setState({ page: 2 }); },
+prevDisabled: page === 1 ? 'true' : 'false',
+nextDisabled: page === 2 ? 'true' : 'false',
+prevColor: page === 1 ? '#9aa3ad' : '#063672',
+nextColor: page === 2 ? '#9aa3ad' : '#063672',
+dot1: page === 1 ? '#063672' : '#c5c8d2',
+dot2: page === 2 ? '#063672' : '#c5c8d2'
+};
+}
+}
+</script>
+</body>
+</html>

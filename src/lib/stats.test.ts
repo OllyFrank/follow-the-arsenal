@@ -145,6 +145,18 @@ describe("longest gap", () => {
 
     expect(stats.longestGap.matchesMissed).toBe(1);
   });
+
+  it("leaves behind-closed-doors matches out of the gap entirely, as if they hadn't been played", () => {
+    const before = makeFixture({ date: "2020-06-01" });
+    const bcdA = makeFixture({ date: "2020-06-17", behindClosedDoors: true });
+    const bcdB = makeFixture({ date: "2020-07-26", behindClosedDoors: true });
+    const after = makeFixture({ date: "2021-08-14" });
+    const fixtures = [before, bcdA, bcdB, after];
+    const attended = [before.matchId, after.matchId];
+    const stats = computeStats(fixtures, [groundA], attended, [address]);
+
+    expect(stats.longestGap.matchesMissed).toBe(0);
+  });
 });
 
 describe("finals", () => {

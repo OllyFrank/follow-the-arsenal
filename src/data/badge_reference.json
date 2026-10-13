@@ -1,0 +1,333 @@
+{
+  "_note": "Reference data for the Badges tab. IDs match We_All_Follow_The_Arsenal_Data.xlsx; look each one up by name in grounds.json / fixtures.json and stop if any ID does not match.",
+  "londonClubs": [
+    "Chelsea",
+    "Tottenham Hotspur",
+    "West Ham United",
+    "Fulham",
+    "Brentford",
+    "Crystal Palace",
+    "Millwall",
+    "Queens Park Rangers",
+    "Charlton Athletic",
+    "Leyton Orient",
+    "Bromley",
+    "AFC Wimbledon",
+    "Wimbledon",
+    "Barnet"
+  ],
+  "northLondonDerbyOpponent": "Tottenham Hotspur",
+  "leagueCompetitions": [
+    "Premier League",
+    "League Division One"
+  ],
+  "europeanCompetitions": [
+    "UEFA Champions League",
+    "UEFA Europa League",
+    "UEFA Cup",
+    "UEFA European Cup Winners Cup",
+    "European Cup",
+    "UEFA Super Cup"
+  ],
+  "ghostGrounds": [
+    {
+      "groundId": "G011",
+      "ground": "Ayresome Park"
+    },
+    {
+      "groundId": "G014",
+      "ground": "Baseball Ground"
+    },
+    {
+      "groundId": "G016",
+      "ground": "Belle Vue"
+    },
+    {
+      "groundId": "G018",
+      "ground": "Boleyn Ground"
+    },
+    {
+      "groundId": "G019",
+      "ground": "Boothferry Park"
+    },
+    {
+      "groundId": "G027",
+      "ground": "Burnden Park"
+    },
+    {
+      "groundId": "G044",
+      "ground": "Estadio da Luz"
+    },
+    {
+      "groundId": "G054",
+      "ground": "Filbert Street"
+    },
+    {
+      "groundId": "G059",
+      "ground": "Gay Meadow"
+    },
+    {
+      "groundId": "G061",
+      "ground": "Goodison Park"
+    },
+    {
+      "groundId": "G063",
+      "ground": "Highbury"
+    },
+    {
+      "groundId": "G064",
+      "ground": "Highfield Road"
+    },
+    {
+      "groundId": "G078",
+      "ground": "Leeds Road"
+    },
+    {
+      "groundId": "G087",
+      "ground": "Maine Road"
+    },
+    {
+      "groundId": "G089",
+      "ground": "McCain Stadium"
+    },
+    {
+      "groundId": "G096",
+      "ground": "Mungersdorfer Stadium"
+    },
+    {
+      "groundId": "G097",
+      "ground": "Ninian Park"
+    },
+    {
+      "groundId": "G107",
+      "ground": "Plough Lane"
+    },
+    {
+      "groundId": "G114",
+      "ground": "Rasunda Stadium"
+    },
+    {
+      "groundId": "G119",
+      "ground": "Roker Park"
+    },
+    {
+      "groundId": "G144",
+      "ground": "Stadio delle Alpi"
+    },
+    {
+      "groundId": "G152",
+      "ground": "Stadionul Steaua"
+    },
+    {
+      "groundId": "G156",
+      "ground": "The Dell"
+    },
+    {
+      "groundId": "G159",
+      "ground": "The Old Den (Cold Blow Lane)"
+    },
+    {
+      "groundId": "G171",
+      "ground": "Victoria Ground"
+    },
+    {
+      "groundId": "G178",
+      "ground": "Wembley Stadium (old)"
+    },
+    {
+      "groundId": "G180",
+      "ground": "White Hart Lane"
+    }
+  ],
+  "cathedralsOfFootball": [
+    {
+      "groundId": "G028",
+      "ground": "Camp Nou",
+      "city": "Barcelona"
+    },
+    {
+      "groundId": "G122",
+      "ground": "Santiago Bernabeu",
+      "city": "Madrid"
+    },
+    {
+      "groundId": "G092",
+      "ground": "Metropolitano Stadium",
+      "city": "Madrid"
+    },
+    {
+      "groundId": "G121",
+      "ground": "San Siro",
+      "city": "Milan"
+    },
+    {
+      "groundId": "G147",
+      "ground": "Stadio Olimpico",
+      "city": "Rome"
+    },
+    {
+      "groundId": "G002",
+      "ground": "Allianz Arena",
+      "city": "Munich"
+    },
+    {
+      "groundId": "G125",
+      "ground": "Signal Iduna Park",
+      "city": "Dortmund"
+    },
+    {
+      "groundId": "G133",
+      "ground": "Stade de France",
+      "city": "Saint-Denis"
+    },
+    {
+      "groundId": "G102",
+      "ground": "Parc des Princes",
+      "city": "Paris"
+    },
+    {
+      "groundId": "G005",
+      "ground": "Amsterdam Arena",
+      "city": "Amsterdam"
+    },
+    {
+      "groundId": "G046",
+      "ground": "Estadio do Dragao",
+      "city": "Porto"
+    },
+    {
+      "groundId": "G031",
+      "ground": "Celtic Park",
+      "city": "Glasgow"
+    }
+  ],
+  "oldAndNew": {
+    "lastAtHighbury": "M0984",
+    "firstAtEmirates": "M0987"
+  },
+  "premierLeague": {
+    "season": "2026/27",
+    "clubs": [
+      {
+        "club": "Arsenal",
+        "groundId": "G041",
+        "ground": "Emirates Stadium",
+        "inData": true
+      },
+      {
+        "club": "Aston Villa",
+        "groundId": "G173",
+        "ground": "Villa Park",
+        "inData": true
+      },
+      {
+        "club": "AFC Bournemouth",
+        "groundId": "G174",
+        "ground": "Vitality Stadium",
+        "inData": true
+      },
+      {
+        "club": "Brentford",
+        "groundId": "G062",
+        "ground": "Gtech Community Stadium",
+        "inData": true
+      },
+      {
+        "club": "Brighton & Hove Albion",
+        "groundId": "G004",
+        "ground": "Amex Stadium",
+        "inData": true
+      },
+      {
+        "club": "Chelsea",
+        "groundId": "G154",
+        "ground": "Stamford Bridge",
+        "inData": true
+      },
+      {
+        "club": "Coventry City",
+        "groundId": null,
+        "ground": "Coventry Building Society Arena",
+        "inData": false
+      },
+      {
+        "club": "Crystal Palace",
+        "groundId": "G123",
+        "ground": "Selhurst Park",
+        "inData": true
+      },
+      {
+        "club": "Everton",
+        "groundId": "G065",
+        "ground": "Hill Dickinson Stadium",
+        "inData": true
+      },
+      {
+        "club": "Fulham",
+        "groundId": "G035",
+        "ground": "Craven Cottage",
+        "inData": true
+      },
+      {
+        "club": "Hull City",
+        "groundId": "G074",
+        "ground": "KC Stadium",
+        "inData": true
+      },
+      {
+        "club": "Ipswich Town",
+        "groundId": "G108",
+        "ground": "Portman Road",
+        "inData": true
+      },
+      {
+        "club": "Leeds United",
+        "groundId": "G040",
+        "ground": "Elland Road",
+        "inData": true
+      },
+      {
+        "club": "Liverpool",
+        "groundId": "G006",
+        "ground": "Anfield",
+        "inData": true
+      },
+      {
+        "club": "Manchester City",
+        "groundId": "G051",
+        "ground": "Etihad Stadium",
+        "inData": true
+      },
+      {
+        "club": "Manchester United",
+        "groundId": "G100",
+        "ground": "Old Trafford",
+        "inData": true
+      },
+      {
+        "club": "Newcastle United",
+        "groundId": "G130",
+        "ground": "St James' Park",
+        "inData": true
+      },
+      {
+        "club": "Nottingham Forest",
+        "groundId": "G032",
+        "ground": "City Ground",
+        "inData": true
+      },
+      {
+        "club": "Sunderland",
+        "groundId": "G153",
+        "ground": "Stadium of Light",
+        "inData": true
+      },
+      {
+        "club": "Tottenham Hotspur",
+        "groundId": "G161",
+        "ground": "Tottenham Hotspur Stadium",
+        "inData": true
+      }
+    ]
+  }
+}

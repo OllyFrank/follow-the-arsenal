@@ -1,4 +1,5 @@
 import type { Fixture } from "../types";
+import { shortTeamName } from "./teamShortNames";
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
@@ -16,11 +17,42 @@ export function formatMonthYear(isoDate: string): string {
   return `${MONTHS[m - 1]} ${y}`;
 }
 
+const SHORT_MONTHS = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+/** "27 Nov 2007" — the badge logbook's compact date format. */
+export function formatDateShort(isoDate: string): string {
+  const [y, m, d] = isoDate.split("-").map(Number);
+  return `${d} ${SHORT_MONTHS[m - 1]} ${y}`;
+}
+
+export function fixtureLabel(fixture: Fixture): string {
+  return `${fixture.homeTeam} v ${fixture.awayTeam}, ${formatDateLong(fixture.date)}`;
+}
+
 /** Score oriented as "home team's goals - away team's goals". */
 export function formatFixtureScoreLine(fixture: Fixture): string {
   const homeGoals = fixture.homeTeam === "Arsenal" ? fixture.arsenalGoals : fixture.opponentGoals;
   const awayGoals = fixture.awayTeam === "Arsenal" ? fixture.arsenalGoals : fixture.opponentGoals;
   return `${homeGoals}-${awayGoals}`;
+}
+
+/** "Sevilla 3-1 Arsenal" — home team first, as in the fixture list, for the
+ * badge logbook's match lines. Long club names are shortened (see
+ * teamShortNames.ts) so a single row never needs more than one line. */
+export function matchScoreLine(fixture: Fixture): string {
+  return `${shortTeamName(fixture.homeTeam)} ${formatFixtureScoreLine(fixture)} ${shortTeamName(fixture.awayTeam)}`;
+}
+
+/** "matches" -> "match", "seasons" -> "season" when the count is 1 —
+ * design-handoff/BADGES.md: "Use the singular unit when it is 1 ('1 season
+ * to go')." Strips "-es" after a sibilant ("matches", "passes") rather
+ * than just the trailing "s", which would otherwise leave "matche". */
+export function singularize(unit: string): string {
+  if (/[cs]hes$|[sxz]es$/.test(unit)) return unit.slice(0, -2);
+  return unit.endsWith("s") ? unit.slice(0, -1) : unit;
 }
 
 export function googleSearchUrl(fixture: Fixture): string {

@@ -39,10 +39,22 @@
   --loss-bg: #fde4e4;
   --loss-text: #a3000c;
 
+  /* Badge tiers */
+  --bronze: #a9672f;
+  --bronze-bg: #f5ebe0;
+  --silver: #74798a;
+  --silver-bg: #eceef2;
+  --gold-bg: #faf2e0;
+  --platinum: #5b7291;
+  --platinum-bg: #e8edf4;
+  --legendary-start: #c99b3f;
+  --legendary-end: #a3000c;
+
 
   --font-heading: "Archivo Black", "Arial Black", Impact, sans-serif;
   --font-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-label: "Archivo Narrow", "Arial Narrow", sans-serif;
+  --font-script: "Kaushan Script", cursive;
   color-scheme: light;
 }
 
@@ -115,6 +127,12 @@ a {
   height: 22px;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .mileage-chip {
   flex-shrink: 0;
   display: flex;
@@ -149,7 +167,7 @@ a {
   bottom: 0;
   z-index: 10;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   background: var(--white);
   border-top: 1px solid var(--line);
 }
@@ -202,21 +220,13 @@ a {
 }
 
 @media (min-width: 768px) {
-  .logo-compact {
-    display: none;
-  }
-
-  .logo-long {
-    display: flex;
-  }
-
   .app-header-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 32px;
+    padding: 0 24px;
     flex-wrap: wrap;
-    row-gap: 0;
-    column-gap: 32px;
+    row-gap: 6px;
+    column-gap: 20px;
   }
 
   .nav-icon {
@@ -235,22 +245,26 @@ a {
 
   .tab {
     flex-direction: row;
-    gap: 8px;
+    gap: 6px;
     min-height: 48px;
-    padding: 0 18px;
+    padding: 0 12px;
     border-top: none;
     color: var(--white);
     font-family: var(--font-heading);
     font-size: 0.8125rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
   }
 
   .tab.active {
     background: var(--red-dark);
   }
 
-  .mileage-chip {
+  .header-right {
     margin-left: auto;
+    gap: 14px;
+  }
+
+  .mileage-chip {
     flex-direction: row;
     align-items: baseline;
     gap: 8px;
@@ -265,6 +279,19 @@ a {
     max-width: 1200px;
     padding: 2rem;
     padding-bottom: 3rem;
+  }
+}
+
+/* The full wordmark only once there's comfortable room for it; the compact
+   mark holds the fort through the tablet/narrow-desktop range where four
+   tabs + the mileage chip + the account icon are already tight for space. */
+@media (min-width: 1100px) {
+  .logo-compact {
+    display: none;
+  }
+
+  .logo-long {
+    display: flex;
   }
 }
 
@@ -426,6 +453,23 @@ a {
 .fixtures-row-break {
   flex-basis: 100%;
   height: 0;
+}
+
+.opponent-filter-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  background: var(--grey-100);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  color: var(--navy-ink);
+}
+
+.opponent-filter-banner .link-button {
+  margin: 0;
+  align-self: auto;
 }
 
 .fixture-count-desktop {
@@ -1220,6 +1264,78 @@ a {
   align-items: stretch;
 }
 
+.page-subheading {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.derby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.derby-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.derby-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.derby-first {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+  gap: 0.3rem;
+}
+
+.derby-first-link {
+  text-decoration: none;
+}
+
+.derby-first-link:hover {
+  text-decoration: underline;
+}
+
+.derby-record-figures {
+  text-align: center;
+}
+
+.derby-record-figures .record-figure {
+  align-items: center;
+}
+
+.derby-headline-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 0.5rem;
+}
+
+.derby-sub-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+  margin-top: 0.75rem;
+}
+
+.derby-sub-grid .stat-line-pair {
+  gap: 0.3rem;
+}
+
+.derby-lucky-charm-heading {
+  margin-top: 0.25rem;
+}
+
 .dashboard-stack {
   display: flex;
   flex-direction: column;
@@ -1652,7 +1768,9 @@ table.stats-table .num.strong {
 }
 
 .season-bar-value {
-  flex: 0 0 62px;
+  flex: 0 0 auto;
+  min-width: 62px;
+  white-space: nowrap;
   text-align: right;
   font-weight: 600;
   color: var(--navy-ink);
@@ -2551,6 +2669,23 @@ table.stats-table .num.strong {
   .stats-top {
     align-items: stretch;
   }
+
+  /* 7. Let Distance by season stretch to match the Furthest trip +
+     Lucky charm column it sits beside, instead of sizing to its own
+     (shorter, capped-at-8) row count. */
+  .stats-bottom {
+    align-items: stretch;
+  }
+
+  .distance-season-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .season-bars {
+    flex: 1 1 auto;
+    justify-content: space-between;
+  }
 }
 
 @media (min-width: 768px) {
@@ -2559,5 +2694,1878 @@ table.stats-table .num.strong {
      Finals, doesn't look mismatched next to single cards). */
   .dashboard-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .derby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .derby-sub-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- Badges logbook --- */
+/* Tier materials: design-handoff/BADGES.md "Tier colour scale". Each class
+   sets --frame (the card border and emblem ring) and --accent (chip,
+   emblem disc) for the whole card subtree below. */
+
+.badge-tier-bronze {
+  --frame: linear-gradient(135deg, #6e4119 0%, #e0a971 42%, #9a6533 58%, #6e4119 100%);
+  --accent: #8a5a2b;
+}
+.badge-tier-silver {
+  --frame: linear-gradient(135deg, #66717d 0%, #f1f3f6 42%, #a7b0ba 58%, #66717d 100%);
+  --accent: #5f6b78;
+}
+.badge-tier-gold {
+  --frame: linear-gradient(135deg, #8a6414 0%, #f6dc8e 42%, #c99b3f 58%, #8a6414 100%);
+  --accent: #8a6414;
+}
+.badge-tier-platinum {
+  --frame: linear-gradient(135deg, #3e5874 0%, #e9f0f7 42%, #9fb3c8 58%, #3e5874 100%);
+  --accent: #3e5874;
+}
+.badge-tier-ruby {
+  --frame: linear-gradient(135deg, #3d0510 0%, #e0718a 42%, #8a1026 58%, #3d0510 100%);
+  --accent: #7a0f22;
+}
+.badge-tier-onyx {
+  --frame: linear-gradient(135deg, #0b0b0e 0%, #74747c 42%, #2a2a30 58%, #0b0b0e 100%);
+  --accent: #1f1f24;
+}
+.badge-tier-diamond {
+  --frame: linear-gradient(135deg, #2a6f86 0%, #f2fbff 35%, #bfe8f5 50%, #f2fbff 62%, #2a6f86 100%);
+  --accent: #24647a;
+}
+.badge-tier-legendary {
+  --frame: linear-gradient(135deg, #6e0007 0%, #db0007 30%, #f6dc8e 50%, #db0007 70%, #6e0007 100%);
+  --accent: #a3000c;
+}
+.badge-tier-locked {
+  --frame: #f7f8fb;
+  --accent: #9aa3ad;
+}
+
+/* Temporary flat grid while the logbook page shell (tabs, ruled pages) is
+   built out task by task — replaced once the real pages land. */
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+@media (min-width: 768px) {
+  .badge-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}
+
+.badge-card {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  height: 324px;
+  padding: 5px;
+  border: 0 solid transparent;
+  border-radius: 14px;
+  background: var(--frame);
+  font-family: var(--font-body);
+  color: var(--navy-ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.badge-tier-locked.badge-card {
+  padding: 3px;
+  border: 2px dashed var(--perf);
+}
+
+.badge-card:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+
+.badge-card-inner {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--white);
+}
+
+.badge-tier-locked .badge-card-inner {
+  background: transparent;
+}
+
+.badge-card-toprow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 9px 9px 0;
+}
+
+.badge-chip {
+  flex-shrink: 0;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: var(--white);
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.badge-set {
+  overflow: hidden;
+  min-width: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.badge-emblem-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 6px;
+}
+
+.badge-emblem-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--frame);
+}
+
+.badge-tier-locked .badge-emblem-ring {
+  background: #e3e6ee;
+}
+
+.badge-emblem-disc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--white);
+}
+
+.badge-name-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.badge-name {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  min-height: calc(1.1em * 2);
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.badge-milestone {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  line-height: 1.05;
+  color: var(--navy);
+}
+
+.badge-milestone-long {
+  font-size: 20px;
+}
+
+.badge-tier-legendary .badge-milestone {
+  color: var(--red-dark);
+}
+
+.badge-tier-locked .badge-milestone {
+  color: #9aa3ad;
+}
+
+.badge-unit {
+  overflow: hidden;
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-muted);
+}
+
+.badge-reached-block {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  gap: 1px;
+  margin: 8px 10px 0;
+  padding-top: 7px;
+  border-top: 1px dashed var(--line);
+  text-align: center;
+}
+
+.badge-reached-label {
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.badge-reached-match {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--navy-ink);
+}
+
+.badge-reached-date {
+  font-size: 11.5px;
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+
+.badge-footer {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 30px;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: var(--navy);
+  color: var(--white);
+}
+
+.badge-tier-locked .badge-footer {
+  background: var(--text-muted);
+}
+
+.badge-footer-number {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.badge-footer-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  text-align: left;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.badge-footer-text > div:first-child {
+  font-weight: 600;
+}
+
+.badge-footer-next {
+  color: var(--gold-text);
+}
+
+.badge-footer-top {
+  font-family: var(--font-label);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+
+/* --- Logbook shell: header, tabs/jump-links, ruled pages --- */
+
+.badges-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.badges-header-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.badges-eyebrow {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.badges-h1 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.badges-header-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.badges-collected {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-right: 8px;
+  color: var(--navy);
+}
+
+.badges-collected-value {
+  font-family: var(--font-heading);
+  font-size: 30px;
+  line-height: 1;
+}
+
+.badges-collected-label {
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Mobile tabs */
+
+.badges-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: end;
+  gap: 4px;
+}
+
+.badges-tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 7px 2px 8px;
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+  background: #e6e9f0;
+  color: #44444e;
+  text-decoration: none;
+}
+
+.badges-tab-active {
+  z-index: 1;
+  margin-bottom: -1px;
+  padding: 8px 2px 9px;
+  border-top: 3px solid var(--red);
+  border-bottom: 1px solid var(--white);
+  background: var(--white);
+  color: var(--navy);
+}
+
+.badges-tab-label {
+  font-family: var(--font-label);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.badges-tab-count {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* Desktop jump links */
+
+.badges-jumplinks {
+  display: none;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badges-jumplink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--navy);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.badges-jumplink-count {
+  font-family: var(--font-heading);
+}
+
+/* Ruled pages */
+
+.badges-pages {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.badges-page {
+  display: none;
+  position: relative;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px 10px 20px 18px;
+  border: 1px solid var(--line);
+  border-radius: 0 0 12px 12px;
+  background-color: var(--white);
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 31px, #eef1f6 31px, #eef1f6 32px);
+}
+
+.badges-page[data-active] {
+  display: flex;
+}
+
+.badges-page-margin {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 8px;
+  width: 2px;
+  background: #f3c4c6;
+}
+
+.badges-page-meta {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.badges-page-meta-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.badges-page-number {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.badges-page-heading {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 21px;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.badges-page-desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.badges-page-count {
+  flex-shrink: 0;
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Season Sweep: a bespoke red/gold prestige card, not a tier material. */
+
+.season-sweep-card {
+  background: linear-gradient(135deg, #6e0007 0%, #db0007 35%, #f6dc8e 50%, #db0007 65%, #6e0007 100%);
+}
+
+.season-sweep-inner {
+  background: var(--red);
+  color: var(--white);
+}
+
+.season-sweep-inner .badge-set {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.season-sweep-chip {
+  background: var(--navy);
+}
+
+.season-sweep-pennant {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0 6px;
+}
+
+.season-sweep-season {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  line-height: 1.05;
+  color: var(--white);
+}
+
+.season-sweep-count {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.season-sweep-reached {
+  border-top-color: rgba(255, 255, 255, 0.6);
+}
+
+.season-sweep-card .badge-reached-label,
+.season-sweep-card .badge-reached-match,
+.season-sweep-card .badge-reached-date {
+  color: var(--white);
+}
+
+.season-sweep-footer {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+
+/* Grounds page: Old & New / The Premier League, only badges once complete */
+
+.double-width {
+  grid-column: span 2;
+  height: auto;
+}
+
+.badge-space {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 2px dashed var(--perf);
+  border-radius: 14px;
+  background: #f7f8fb;
+  font-family: var(--font-body);
+  text-align: left;
+  cursor: pointer;
+}
+
+.badge-space-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.badge-space-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #e3e6ee;
+  color: #9aa3ad;
+}
+
+.badge-space-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.badge-space-title {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #44444e;
+}
+
+.badge-space-subtitle {
+  font-family: var(--font-label);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.badge-space-desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #44444e;
+}
+
+.old-and-new-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.old-and-new-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.old-and-new-checklist li.checked {
+  color: var(--navy-ink);
+  font-weight: 700;
+}
+
+.old-and-new-check {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--perf);
+  border-radius: 50%;
+  font-size: 12px;
+  color: var(--white);
+}
+
+.checked .old-and-new-check {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+.old-and-new-check-detail {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.premier-league-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.premier-league-progress-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 14px;
+}
+
+.premier-league-progress-count {
+  font-weight: 700;
+  color: var(--navy-ink);
+}
+
+.premier-league-progress-togo {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  color: var(--navy);
+}
+
+.premier-league-progress-track {
+  height: 8px;
+  border-radius: 4px;
+  background: #e3e6ee;
+}
+
+.premier-league-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--navy);
+}
+
+.premier-league-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.premier-league-pill {
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: #e9ecf2;
+  font-size: 12.5px;
+  color: var(--text);
+}
+
+.premier-league-season {
+  padding: 6px 10px 0;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 26px;
+  line-height: 1.1;
+  color: var(--navy-ink);
+}
+
+.premier-league-reached {
+  padding: 10px 12px 12px;
+}
+
+/* Complete-set cards (gold): Old & New collected, The Premier League collected */
+
+.badge-complete-set {
+  height: auto;
+  background: linear-gradient(135deg, #8a6414 0%, #f6dc8e 42%, #c99b3f 58%, #8a6414 100%);
+}
+
+.badge-complete-chip {
+  background: #8a6414;
+}
+
+.badge-complete-title {
+  padding: 6px 10px 0;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 19px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--navy-ink);
+}
+
+.badge-complete-footer {
+  padding: 9px 10px;
+  background: var(--navy);
+  color: var(--gold-text);
+  text-align: center;
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.old-and-new-halves {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  padding: 10px 12px 12px;
+}
+
+.old-and-new-half {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: center;
+}
+
+.old-and-new-art {
+  height: 76px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #0e2f5c;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.old-and-new-match {
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--navy-ink);
+}
+
+.old-and-new-date {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.old-and-new-arrow {
+  padding-top: 28px;
+  color: #8a6414;
+}
+
+/* Europe page: subsection headings shared by Passport stamps / Cathedrals */
+
+.badges-subsection {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.passport-stamps-subsection {
+  grid-column: 1 / -1;
+}
+
+.badges-subsection-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.badges-subsection-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.badges-subsection-count {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  color: var(--navy);
+}
+
+.badges-subsection-count span {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.badges-subsection-desc {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+/* Passport cover */
+
+.passport-cover {
+  box-sizing: border-box;
+  height: 324px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 12px 18px;
+  border-left: 7px solid #04142e;
+  border-radius: 10px 14px 14px 10px;
+  background: var(--navy-ink);
+  color: var(--gold-text);
+  text-align: center;
+}
+
+.passport-cover-title {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.passport-cover-tagline {
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.passport-cover-count {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.passport-cover-count-value {
+  font-family: var(--font-heading);
+  font-size: 34px;
+  line-height: 1;
+}
+
+.passport-cover-count-label {
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+/* Visa page + stamps */
+
+.passport-page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 12px 16px;
+  border: 1px solid #d6dccf;
+  border-radius: 12px;
+  background-color: #f3f6f0;
+  background-image: repeating-linear-gradient(45deg, rgba(6, 54, 114, 0.035) 0, rgba(6, 54, 114, 0.035) 2px, transparent 2px, transparent 9px);
+}
+
+.passport-page-head {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b7466;
+}
+
+.passport-desktop-only {
+  display: none;
+}
+
+.passport-stamp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 10px;
+}
+
+.passport-stamp {
+  box-sizing: border-box;
+  justify-self: center;
+  width: 100%;
+  height: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px;
+  border: 3px double;
+  text-align: center;
+  opacity: 0.9;
+}
+
+.passport-stamp-rectangle {
+  border-radius: 8px;
+}
+
+.passport-stamp-circle {
+  width: 88px;
+  border-radius: 50%;
+}
+
+.passport-stamp-oval {
+  border-radius: 50% / 42%;
+}
+
+.passport-stamp-country {
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.passport-stamp-date {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  line-height: 1.1;
+}
+
+.passport-stamp-opp {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.passport-page-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.passport-page-controls button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.passport-page-controls button:disabled {
+  opacity: 0.4;
+}
+
+.passport-page-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.passport-page-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--perf);
+}
+
+.passport-page-dots span.passport-page-dot-active {
+  background: var(--navy);
+}
+
+/* Cathedrals of Football */
+
+.stadium-card {
+  height: 270px;
+}
+
+.stadium-card-collected {
+  background: linear-gradient(135deg, #04214a 0%, #2a5591 45%, #c99b3f 50%, #2a5591 55%, #063672 100%);
+}
+
+.stadium-card.badge-tier-locked {
+  height: auto;
+  min-height: 60px;
+  padding: 8px;
+  justify-content: center;
+  text-align: center;
+}
+
+.stadium-card-inner {
+  overflow: hidden;
+}
+
+.stadium-art-panel {
+  position: relative;
+  flex-shrink: 0;
+  height: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0e2f5c;
+}
+
+.badge-tier-locked .stadium-art-panel {
+  display: none;
+}
+
+.stadium-name-block {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 10px 0;
+  text-align: center;
+}
+
+.stadium-name {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--navy-ink);
+}
+
+.stadium-name-locked {
+  color: #44444e;
+}
+
+.stadium-place {
+  font-family: var(--font-label);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.stadium-reached {
+  flex-grow: 0;
+  margin: 8px 10px 10px;
+}
+
+.badge-tier-locked .stadium-reached {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .stadium-card.badge-tier-locked .badge-card-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stadium-card.badge-tier-locked .stadium-name-block {
+    padding: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .passport-desktop-only {
+    display: flex;
+  }
+
+  .passport-stamp:not(.passport-stamp-current) {
+    display: none;
+  }
+
+  .passport-stamp-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  /* Visa page sits beside the passport cover, matching its height, per
+   * the brief ("the visa page is a fixed-height page, the same height
+   * as the cover beside it") — narrower than the full-width mobile
+   * layout, so the stamp shapes shrink a little to still fit six across.
+   * The subsection itself (not just .passport-page) is pinned to the
+   * cover's 324px, since the "Passport stamps" heading and count sit
+   * above the page within the same subsection; .passport-page then
+   * flexes to fill whatever's left under them. */
+  .passport-stamps-subsection {
+    grid-column: span 4;
+    min-width: 0;
+    height: 324px;
+  }
+
+  .passport-page {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 12px 10px 12px;
+    gap: 8px;
+    overflow: hidden;
+  }
+
+  /* A touch bigger than the available height would naturally allow, to
+   * give a long country name (e.g. "Switzerland") enough room to wrap
+   * to two lines without its corners poking outside the circle's curve
+   * — the padding/gap trims above free up the vertical space this
+   * needs within the fixed 324px page. */
+  .passport-stamp {
+    height: 82px;
+  }
+
+  .passport-stamp-circle {
+    width: 82px;
+  }
+
+  /* The country name (top line) and "v {opponent}" (bottom line) sit
+   * where a circle is at its narrowest — a touch smaller and tighter
+   * than the rectangle/oval sizing so a long name ("Switzerland",
+   * "v Fenerbahce") clears the curve instead of overlapping it. */
+  .passport-stamp-circle .passport-stamp-country {
+    font-size: 9.5px;
+    letter-spacing: 0.03em;
+  }
+
+  .passport-stamp-circle .passport-stamp-opp {
+    font-size: 8.5px;
+    letter-spacing: 0.02em;
+  }
+
+  .passport-page-controls button {
+    min-height: 32px;
+  }
+
+  .stadium-card.badge-tier-locked {
+    height: 270px;
+  }
+
+  .badge-tier-locked .stadium-art-panel {
+    display: flex;
+    background: #e9ecf2;
+  }
+
+  .badge-tier-locked .stadium-reached {
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .badges-h1 {
+    font-size: 32px;
+  }
+
+  .badges-collected {
+    gap: 8px;
+  }
+
+  .badges-collected-value {
+    font-size: 36px;
+  }
+
+  .badges-collected-label {
+    font-size: 14px;
+  }
+
+  .badges-tabs {
+    display: none;
+  }
+
+  .badges-jumplinks {
+    display: flex;
+  }
+
+  .badges-page {
+    display: flex;
+    padding: 24px 28px 28px 40px;
+    border-radius: 14px;
+    gap: 20px;
+  }
+
+  .badges-page-margin {
+    left: 22px;
+  }
+
+  .badges-page-number {
+    font-size: 12px;
+  }
+
+  .badges-page-heading {
+    font-size: 24px;
+  }
+
+  .badges-page-desc {
+    font-size: 15px;
+  }
+
+  .badges-page-count {
+    font-size: 13px;
+  }
+}
+
+/* Witness to History */
+
+.witness-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.witness-summary-chip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px 5px 6px;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy-ink);
+}
+
+.witness-summary-chip-gold {
+  border-color: #e2c47a;
+}
+.witness-summary-chip-silver {
+  border-color: #c3cad2;
+}
+.witness-summary-chip-bronze {
+  border-color: #d9b08a;
+}
+
+.witness-summary-disc {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.witness-summary-disc-gold {
+  background: linear-gradient(135deg, #8a6414, #f6dc8e, #c99b3f);
+}
+.witness-summary-disc-silver {
+  background: linear-gradient(135deg, #66717d, #f1f3f6, #a7b0ba);
+}
+.witness-summary-disc-bronze {
+  background: linear-gradient(135deg, #6e4119, #e0a971, #9a6533);
+}
+
+.witness-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.witness-ticket {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 116px;
+  display: flex;
+  border-radius: 10px;
+  border: 1px solid;
+  background: var(--white);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--navy-ink);
+}
+
+.witness-ticket-gold {
+  border-color: #e2c47a;
+}
+.witness-ticket-silver {
+  border-color: #c3cad2;
+}
+.witness-ticket-bronze {
+  border-color: #d9b08a;
+}
+
+.witness-ticket-shine {
+  flex-shrink: 0;
+  width: 6px;
+}
+
+.witness-ticket-shine-gold {
+  background: linear-gradient(180deg, #8a6414, #f6dc8e, #c99b3f, #8a6414);
+}
+.witness-ticket-shine-silver {
+  background: linear-gradient(180deg, #66717d, #f1f3f6, #a7b0ba, #66717d);
+}
+.witness-ticket-shine-bronze {
+  background: linear-gradient(180deg, #6e4119, #e0a971, #9a6533, #6e4119);
+}
+
+.witness-ticket-stub {
+  flex-shrink: 0;
+  width: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--white);
+  border-right: 2px dashed;
+}
+
+.witness-ticket-stub-gold {
+  background: #8a6414;
+  border-right-color: #e2c47a;
+}
+.witness-ticket-stub-silver {
+  background: #5f6b78;
+  border-right-color: #c3cad2;
+}
+.witness-ticket-stub-bronze {
+  background: #8a5a2b;
+  border-right-color: #d9b08a;
+}
+
+.witness-medal-metal-gold {
+  fill: #f6dc8e;
+}
+.witness-medal-metal-silver {
+  fill: #e3e7ec;
+}
+.witness-medal-metal-bronze {
+  fill: #e0a971;
+}
+
+.witness-medal-star-gold {
+  fill: #8a6414;
+}
+.witness-medal-star-silver {
+  fill: #5f6b78;
+}
+.witness-medal-star-bronze {
+  fill: #8a5a2b;
+}
+
+.witness-ticket-tier-label {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.witness-ticket-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 12px 10px 14px;
+}
+
+.witness-ticket-meta {
+  font-family: var(--font-label);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.witness-ticket-match {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--navy-ink);
+}
+
+.witness-ticket-why {
+  font-family: var(--font-script);
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--navy);
+}
+
+.witness-ticket-venue {
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+
+/* Badge detail — mobile bottom sheet / desktop centred dialog, over a navy
+ * scrim. reference/Badge-Detail.dc.html and Desktop-Badge-Detail.dc.html. */
+.badge-modal-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(11, 31, 63, 0.62);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.badge-modal {
+  position: relative;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 10px 20px 24px;
+  border-radius: 20px 20px 0 0;
+  background: #ffffff;
+  outline: none;
+}
+
+.badge-modal-handle {
+  flex-shrink: 0;
+  align-self: center;
+  width: 40px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--perf);
+}
+
+.badge-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--navy);
+  cursor: pointer;
+}
+
+.badge-modal-close:hover {
+  background: var(--ground);
+}
+
+.badge-detail-left {
+  display: none;
+}
+
+.badge-detail-left .badge-card {
+  cursor: default;
+}
+
+.badge-detail-right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.badge-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-right: 40px;
+}
+
+.badge-detail-emblem {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--frame);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-detail-emblem-disc {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-detail-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.badge-detail-eyebrow {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.badge-detail-name {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.badge-detail-count {
+  font-size: 14px;
+  color: var(--draw-text);
+}
+
+.badge-detail-rule {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--ground);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--draw-text);
+}
+
+.badge-detail-rule-mobile {
+  display: block;
+}
+
+.badge-detail-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--navy);
+  color: #ffffff;
+}
+
+.badge-detail-banner-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.badge-detail-banner-number {
+  font-family: var(--font-heading);
+  font-size: 34px;
+  line-height: 1;
+}
+
+.badge-detail-banner-text {
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.badge-detail-banner-text strong {
+  color: var(--gold-text);
+}
+
+.badge-detail-banner-track {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--navy-line);
+}
+
+.badge-detail-banner-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--gold);
+}
+
+.badge-detail-banner-top-text {
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.badge-detail-tiers-label {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.badge-detail-tiers {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.badge-detail-tier-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+}
+
+.badge-detail-tier-row-simple {
+  min-height: 44px;
+  border-bottom: 1px solid var(--line);
+}
+
+.badge-detail-tier-row-simple:last-child {
+  border-bottom: none;
+}
+
+.badge-detail-medal {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: var(--frame);
+}
+
+.badge-detail-medal-unreached {
+  background: #ffffff;
+  border: 2px dashed var(--perf);
+}
+
+.badge-detail-tier-threshold {
+  flex: 0 0 82px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.badge-detail-tier-number {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  line-height: 1.1;
+  color: var(--navy);
+}
+
+.badge-detail-tier-number-unreached {
+  color: var(--text-muted);
+}
+
+.badge-detail-tier-material {
+  font-family: var(--font-label);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.badge-detail-tier-lines {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.badge-detail-tier-line1 {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--navy);
+}
+
+.badge-detail-tier-line1-reached {
+  color: var(--navy-ink);
+}
+
+.badge-detail-tier-line2 {
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+
+.badge-detail-your-badge {
+  flex-shrink: 0;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #ffffff;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.badge-detail-simple {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.badge-detail-simple-titles {
+  padding-right: 40px;
+}
+
+@media (min-width: 768px) {
+  .witness-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+  }
+
+  .badge-modal-scrim {
+    align-items: center;
+  }
+
+  .badge-modal {
+    width: 780px;
+    max-width: calc(100vw - 48px);
+    max-height: 85vh;
+    flex-direction: row;
+    gap: 28px;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(4, 20, 46, 0.35);
+  }
+
+  .badge-modal-handle {
+    display: none;
+  }
+
+  .badge-modal .badge-detail-simple {
+    flex: 1 1 auto;
+  }
+
+  .badge-detail-left {
+    flex: 0 0 210px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .badge-detail-right {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 16px;
+  }
+
+  .badge-detail-rule-mobile {
+    display: none;
+  }
+
+  .badge-detail-header {
+    padding-right: 0;
+  }
+
+  .badge-detail-name {
+    font-size: 28px;
+  }
+
+  .badge-detail-tier-row {
+    gap: 14px;
+    min-height: 52px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .badge-detail-tier-row:last-child {
+    border-bottom: none;
+  }
+
+  .badge-detail-medal {
+    width: 34px;
+    height: 34px;
+  }
+
+  .badge-detail-tier-threshold {
+    flex: 0 0 96px;
+  }
+
+  .badge-detail-tier-lines {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 2px 10px;
+  }
+
+  .badge-detail-tier-line1 {
+    flex: 1 1 auto;
+    font-size: 14px;
+  }
+
+  .badge-detail-tier-line2 {
+    flex-shrink: 0;
+    font-size: 13px;
   }
 }
