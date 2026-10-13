@@ -198,7 +198,6 @@ function computeGroundHopper(fixtures: Fixture[], attended: Set<string>): BadgeP
 export interface PremierLeagueClubStatus {
   club: string;
   ground: string;
-  note: string | null;
   visited: boolean;
   earningMatch: Fixture | null;
 }
@@ -231,7 +230,6 @@ function computePremierLeague(fixtures: Fixture[], attended: Set<string>): Premi
     return {
       club: club.club,
       ground: club.ground,
-      note: club.inData ? null : "not yet in the fixture list",
       visited: earningMatch !== null,
       earningMatch,
     };

@@ -115,7 +115,7 @@ describe("every attendable match ticked", () => {
     expect(badges.grounds.premierLeague.visitedCount).toBe(19);
     expect(badges.grounds.premierLeague.totalCount).toBe(20);
     const coventry = badges.grounds.premierLeague.missingClubs.find((c) => c.club === "Coventry City");
-    expect(coventry?.note).toBe("not yet in the fixture list");
+    expect(coventry?.visited).toBe(false);
   });
 
   it("allClubs lists every club, visited and missing alike", () => {

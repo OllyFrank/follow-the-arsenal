@@ -184,7 +184,7 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
                     label: `${c.club} · ${c.ground}`,
                     value: c.earningMatch
                       ? `${matchScoreLine(c.earningMatch)} · ${formatDateShort(c.earningMatch.date)}`
-                      : (c.note ?? "Not yet"),
+                      : "Not yet",
                     done: c.visited,
                   })),
                 })
