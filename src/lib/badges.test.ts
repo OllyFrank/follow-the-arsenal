@@ -75,10 +75,13 @@ describe("every attendable match ticked", () => {
     expect(badges.attendance.goalsGalore.legendary).toBe(true);
   });
 
-  it("Longevity, Home Comforts and Away Traveller all reach 'Every season'", () => {
-    expect(badges.attendance.longevity.tierLabel).toBe("Every season");
-    expect(badges.attendance.homeComforts.tierLabel).toBe("Every season");
-    expect(badges.attendance.awayTraveller.tierLabel).toBe("Every season");
+  it("Longevity, Home Comforts and Away Traveller all reach the legendary 35 tier", () => {
+    expect(badges.attendance.longevity.tierLabel).toBe("35");
+    expect(badges.attendance.longevity.legendary).toBe(true);
+    expect(badges.attendance.homeComforts.tierLabel).toBe("35");
+    expect(badges.attendance.homeComforts.legendary).toBe(true);
+    expect(badges.attendance.awayTraveller.tierLabel).toBe("35");
+    expect(badges.attendance.awayTraveller.legendary).toBe(true);
   });
 
   it("Season Sweep is awarded for 37 seasons, not 2020/21", () => {
@@ -93,7 +96,8 @@ describe("every attendable match ticked", () => {
   });
 
   it("all 27 ghost grounds, 27 passport stamps and 12 cathedrals are earned", () => {
-    expect(badges.grounds.ghostGrounds.tierLabel).toBe("10");
+    expect(badges.grounds.ghostGrounds.tierLabel).toBe("15");
+    expect(badges.grounds.ghostGrounds.legendary).toBe(true);
     expect(badges.grounds.ghostGrounds.current).toBe(27);
     expect(badges.europe.passportStamps).toHaveLength(27);
     expect(badges.europe.passportStamps.every((p) => p.unlocked)).toBe(true);

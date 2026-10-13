@@ -33,11 +33,11 @@ describe("tierColor against real badge ladders", () => {
   const attendableMatchIds = fixtures.filter((f) => !f.behindClosedDoors).map((f) => f.matchId);
   const badges = computeBadges(fixtures, groundCountryById, new Set(attendableMatchIds));
 
-  it("Ghost Grounds (3 tiers) runs Bronze, Silver, then Legendary", () => {
+  it("Ghost Grounds (4 tiers) runs Bronze, Silver, Gold, then Legendary", () => {
     const colors = badges.grounds.ghostGrounds.allTiers.map((t, i) =>
       tierColor(i, !!t.legendary),
     );
-    expect(colors).toEqual(["bronze", "silver", "legendary"]);
+    expect(colors).toEqual(["bronze", "silver", "gold", "legendary"]);
   });
 
   it("Goals Galore (8 tiers) uses every material in the ladder", () => {

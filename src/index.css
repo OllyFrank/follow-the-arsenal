@@ -3580,15 +3580,6 @@ table.stats-table .num.strong {
   color: var(--text-muted);
 }
 
-.badges-subsection-subhead {
-  font-family: var(--font-label);
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
 /* Passport cover */
 
 .passport-cover {
@@ -3860,6 +3851,10 @@ table.stats-table .num.strong {
 
   .passport-stamp:not(.passport-stamp-current) {
     display: none;
+  }
+
+  .passport-stamp-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .stadium-card.badge-tier-locked {

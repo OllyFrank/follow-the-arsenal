@@ -4,7 +4,7 @@ import type { UnlockItem } from "../../lib/badgeEngine";
 import { collectedInOrder, stampStyle } from "../../lib/badgeDisplay";
 import { formatDateShort } from "../../lib/format";
 
-const STAMPS_PER_PAGE = 14;
+const STAMPS_PER_PAGE = 12;
 
 function PassportGlobe() {
   return (

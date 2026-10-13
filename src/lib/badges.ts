@@ -26,13 +26,6 @@ export interface SeasonSweepResult {
   attendableCount: number;
 }
 
-/** Every season with at least one attendable fixture: the shared "every
- * season" denominator (37 of 38 — only 2020/21 was entirely behind closed
- * doors) used by Longevity, Home Comforts and Away Traveller alike. */
-function attendableSeasons(fixtures: Fixture[]): string[] {
-  return [...new Set(fixtures.filter(isAttendable).map((f) => f.season))].sort();
-}
-
 function groupBySeason(fixtures: Fixture[]): Map<string, Fixture[]> {
   const map = new Map<string, Fixture[]>();
   for (const f of fixtures) {
@@ -83,7 +76,6 @@ function computeGoalsGalore(fixtures: Fixture[], attended: Set<string>): BadgePr
 }
 
 function computeLongevity(fixtures: Fixture[], attended: Set<string>): BadgeProgress {
-  const everySeason = attendableSeasons(fixtures).length;
   const events = attendedFixtures(fixtures, attended)
     .slice()
     .sort(byDate)
@@ -95,7 +87,7 @@ function computeLongevity(fixtures: Fixture[], attended: Set<string>): BadgeProg
       { label: "10", threshold: 10 },
       { label: "15", threshold: 15 },
       { label: "25", threshold: 25 },
-      { label: "Every season", threshold: everySeason, legendary: true },
+      { label: "35", threshold: 35, legendary: true },
     ]),
   );
 }
@@ -108,7 +100,6 @@ function computeLongevity(fixtures: Fixture[], attended: Set<string>): BadgeProg
  * through the same cumulative tier ladder as a plain count badge. */
 function computeSeasonRequirementBadge(
   fixtures: Fixture[],
-  everySeasonTotal: number,
   tierDefs: { label: string; threshold: number }[],
   completionMatch: (seasonFixtures: Fixture[]) => Fixture | null,
 ): BadgeProgress {
@@ -121,7 +112,7 @@ function computeSeasonRequirementBadge(
   const events = completions.sort(byDate).map((fixture) => ({ fixture, weight: 1 }));
   return computeCumulativeBadge(
     events,
-    tiers([...tierDefs, { label: "Every season", threshold: everySeasonTotal, legendary: true }]),
+    tiers([...tierDefs, { label: "35", threshold: 35, legendary: true }]),
   );
 }
 
@@ -129,7 +120,6 @@ function computeHomeComforts(fixtures: Fixture[], attended: Set<string>): BadgeP
   const leagueComps = new Set(badgeReference.leagueCompetitions);
   return computeSeasonRequirementBadge(
     fixtures,
-    attendableSeasons(fixtures).length,
     [
       { label: "1", threshold: 1 },
       { label: "3", threshold: 3 },
@@ -151,7 +141,6 @@ function computeHomeComforts(fixtures: Fixture[], attended: Set<string>): BadgeP
 function computeAwayTraveller(fixtures: Fixture[], attended: Set<string>): BadgeProgress {
   return computeSeasonRequirementBadge(
     fixtures,
-    attendableSeasons(fixtures).length,
     [
       { label: "1", threshold: 1 },
       { label: "3", threshold: 3 },
@@ -280,7 +269,8 @@ function computeGhostGrounds(fixtures: Fixture[], attended: Set<string>): BadgeP
     tiers([
       { label: "1", threshold: 1 },
       { label: "5", threshold: 5 },
-      { label: "10", threshold: 10, legendary: true },
+      { label: "10", threshold: 10 },
+      { label: "15", threshold: 15, legendary: true },
     ]),
   );
 }

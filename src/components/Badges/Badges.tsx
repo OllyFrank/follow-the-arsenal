@@ -181,7 +181,7 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
                   rule: `Visit the home ground of every club in the ${badgeReference.premierLeague.season} Premier League.`,
                   rows: badges.grounds.premierLeague.allClubs.map((c) => ({
                     key: c.club,
-                    label: c.club,
+                    label: `${c.club} · ${c.ground}`,
                     value: c.earningMatch
                       ? `${matchScoreLine(c.earningMatch)} · ${formatDateShort(c.earningMatch.date)}`
                       : (c.note ?? "Not yet"),
@@ -272,33 +272,26 @@ export function Badges({ fixtures, grounds, attendedMatchIds }: Props) {
                   }
                 />
               ))}
+              {lockedCathedrals.map((c) => (
+                <StadiumCard
+                  key={c.item.groundId}
+                  item={c.item}
+                  country={groundCountryById.get(c.item.groundId) ?? ""}
+                  earningMatch={null}
+                  onOpenDetail={() =>
+                    setDetail({
+                      kind: "simple",
+                      category: "Europe & countries",
+                      name: c.item.ground,
+                      rule: "A card for each of Europe's great stadiums you've been to, in any competition.",
+                      rows: [
+                        { key: c.item.groundId, label: "Not yet visited", value: "Tick a match there to collect it.", done: false },
+                      ],
+                    })
+                  }
+                />
+              ))}
             </div>
-            {lockedCathedrals.length > 0 && (
-              <>
-                <div className="badges-subsection-subhead">Spaces still to fill &middot; {lockedCathedrals.length}</div>
-                <div className="badge-grid">
-                  {lockedCathedrals.map((c) => (
-                    <StadiumCard
-                      key={c.item.groundId}
-                      item={c.item}
-                      country={groundCountryById.get(c.item.groundId) ?? ""}
-                      earningMatch={null}
-                      onOpenDetail={() =>
-                        setDetail({
-                          kind: "simple",
-                          category: "Europe & countries",
-                          name: c.item.ground,
-                          rule: "A card for each of Europe's great stadiums you've been to, in any competition.",
-                          rows: [
-                            { key: c.item.groundId, label: "Not yet visited", value: "Tick a match there to collect it.", done: false },
-                          ],
-                        })
-                      }
-                    />
-                  ))}
-                </div>
-              </>
-            )}
           </div>
         </LogbookPage>
 

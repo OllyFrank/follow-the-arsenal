@@ -4,6 +4,7 @@
 // Fixtures and Stats tabs always show the full name. Conventional
 // shorthand (as used in football score tickers), not slang.
 export const TEAM_SHORT_NAMES: Record<string, string> = {
+  "Bayern Munich": "Bayern",
   "Athletic Bilbao": "Ath Bilbao",
   "Vorskla Poltava": "Vorskla",
   "Atletico Madrid": "Atletico",

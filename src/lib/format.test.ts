@@ -58,6 +58,16 @@ describe("matchScoreLine", () => {
     });
     expect(matchScoreLine(fixture)).toBe("Arsenal 1-0 Wolves");
   });
+
+  it("shortens Bayern Munich so a cathedral card's match line stays one line", () => {
+    const fixture = makeFixture({
+      homeTeam: "Bayern Munich",
+      awayTeam: "Arsenal",
+      arsenalGoals: 2,
+      opponentGoals: 0,
+    });
+    expect(matchScoreLine(fixture)).toBe("Bayern 0-2 Arsenal");
+  });
 });
 
 describe("formatFixtureScoreLine", () => {
